@@ -4,9 +4,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
-    const isCustomDomain = process.env.GITHUB_PAGES_CUSTOM_DOMAIN === 'true';
     return {
-      base: isCustomDomain ? '/' : '/Aesthetix-Studio/',
+      base: '/',
       server: {
         port: 3000,
         host: '0.0.0.0',
