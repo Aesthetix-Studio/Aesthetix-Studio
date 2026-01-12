@@ -143,8 +143,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <h4 className="font-bold text-slate-900 mb-4">Get in Touch</h4>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li>hello@aesthetix.studio</li>
-                <li>+1 (555) 123-4567</li>
-                <li>101 Design Ave, Suite 400<br/>San Francisco, CA</li>
+                <li><a href="tel:+918499908716">+91 8499908716</a></li>
+                <li>Falaknuma<br/>Hyderabad, IN</li>
               </ul>
             </div>
           </div>

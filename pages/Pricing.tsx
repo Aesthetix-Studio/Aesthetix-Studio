@@ -8,7 +8,7 @@ const Pricing = () => {
   const plans = [
     {
       name: 'Starter',
-      price: '$4,500',
+      price: '₹4,500',
       description: 'Perfect for small businesses needing a high-quality landing page.',
       features: ['Custom Design (Figma)', 'Responsive Development', 'CMS Integration', 'Basic SEO Setup', '1 Revision Round'],
       cta: 'Get Started',
@@ -16,7 +16,7 @@ const Pricing = () => {
     },
     {
       name: 'Growth',
-      price: '$8,500',
+      price: '₹8,500',
       description: 'Multi-page corporate site with blog and lead generation tools.',
       features: ['5-Page Custom Website', 'Advanced SEO & Analytics', 'Newsletter Integration', 'Speed Optimization', '3 Revision Rounds'],
       cta: 'Most Popular',
@@ -24,7 +24,7 @@ const Pricing = () => {
     },
     {
       name: 'Pro',
-      price: '$15,000+',
+      price: '₹15,000+',
       description: 'Complex web applications, e-commerce, or enterprise portals.',
       features: ['Web Application (React/Next.js)', 'Backend Integration', 'Custom User Auth', 'Payment Processing', 'Priority Support'],
       cta: 'Get Proposal',
@@ -48,7 +48,7 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {plans.map((plan) => (
-            <div key={plan.name} className={`relative bg-white rounded-2xl p-8 border ${plan.popular ? 'border-indigo-600 ring-2 ring-indigo-600/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}>
+            <div key={plan.name} className={`relative bg-white rounded-2xl p-8 border ₹{plan.popular ? 'border-indigo-600 ring-2 ring-indigo-600/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}>
               {plan.popular && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                   Best Value
