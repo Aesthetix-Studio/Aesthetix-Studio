@@ -9,6 +9,9 @@ import Work from './pages/Work';
 import Pricing from './pages/Pricing';
 import Proposal from './pages/Proposal';
 import Blog from './pages/Blog';
+import About from './pages/About';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
 import SEO from './components/SEO';
@@ -48,8 +51,9 @@ const AnimatedRoutes = () => {
         <Route path="/trial" element={<PageTransition><Proposal /></PageTransition>} />
         <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
         <Route path="/blog/:slug" element={<PageTransition><Placeholder title="Blog Post" /></PageTransition>} />
-        <Route path="/about" element={<PageTransition><Placeholder title="About Us" /></PageTransition>} />
-        <Route path="/contact" element={<PageTransition><Placeholder title="Contact" /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+        <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
         <Route path="/admin" element={<PageTransition><Admin /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>

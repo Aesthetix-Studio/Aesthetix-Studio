@@ -13,8 +13,8 @@ export const Button: React.FC<{
   const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-primary text-white hover:bg-slate-800 focus:ring-slate-900 shadow-lg shadow-slate-900/20",
-    secondary: "bg-accent text-white hover:bg-indigo-700 focus:ring-indigo-600 shadow-lg shadow-indigo-600/20",
+    primary: "bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-900 shadow-lg shadow-slate-900/20",
+    secondary: "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-600 shadow-lg shadow-indigo-600/20 active:bg-indigo-800",
     outline: "border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 focus:ring-slate-200"
   };
 

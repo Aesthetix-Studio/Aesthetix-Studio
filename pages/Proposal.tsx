@@ -10,6 +10,7 @@ const ProposalForm = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [files, setFiles] = useState<FileList | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,30 +27,34 @@ const ProposalForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFiles(e.target.files);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const newProposal: Proposal = {
-      id: Math.random().toString(36).substr(2, 9),
-      ...formData,
-      submittedAt: new Date().toISOString(),
-      status: ProposalStatus.PENDING,
-      projectType: formData.projectType as ProjectType, // simple casting for demo
-      budget: formData.budget as BudgetRange
-    };
-
-    // Simulate API call
-    await new Promise(r => setTimeout(r, 1000));
-    saveProposal(newProposal);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
     
-    // Simulate PDF Gen
-    await generatePDF(newProposal);
-
+    try {
+      const response = await fetch('https://formspree.io/f/xbddjlyp', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setSuccess(true);
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
+    
     setIsSubmitting(false);
-    setSuccess(true);
-    
-    // In a real app, navigate to a specific success page, but here we show state
   };
 
   if (success) {
@@ -165,16 +170,27 @@ const ProposalForm = () => {
             />
           </div>
 
-          {/* File Upload Placeholder */}
-          <div className="mb-8">
+          <div className="mb-8 relative">
             <label className="block text-sm font-medium text-slate-700 mb-1">Attachments (Design Brief, Assets)</label>
-            <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:bg-slate-50 transition-colors cursor-pointer">
+            <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:bg-slate-50 transition-colors">
               <Upload className="mx-auto h-10 w-10 text-slate-400 mb-2" />
               <p className="text-sm text-slate-500">
-                <span className="font-medium text-accent">Click to upload</span> or drag and drop
+                <span className="font-medium text-indigo-600">Click to upload</span> or drag and drop
               </p>
               <p className="text-xs text-slate-400 mt-1">PDF, PNG, JPG up to 10MB</p>
-              <input type="file" className="hidden" /> 
+              <input 
+                type="file" 
+                name="files"
+                multiple
+                accept=".pdf,.png,.jpg,.jpeg"
+                onChange={handleFileChange}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+              />
+              {files && (
+                <p className="text-sm text-green-600 mt-2">
+                  {files.length} file(s) selected
+                </p>
+              )}
             </div>
           </div>
 

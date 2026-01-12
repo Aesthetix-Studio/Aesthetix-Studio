@@ -21,9 +21,9 @@ const ServiceDetail = () => {
       />
 
       {/* Hero */}
-      <div className="bg-primary text-white py-20">
+      <div className="bg-slate-900 text-white py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">{service.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">{service.title}</h1>
           <p className="text-slate-300 text-xl">{service.description}</p>
         </div>
       </div>
@@ -32,7 +32,7 @@ const ServiceDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">What We Deliver</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">What We Deliver</h2>
             <p className="text-slate-600 text-lg leading-relaxed mb-8">
               We take a systematic approach to {service.title.toLowerCase()}. 
               Our team integrates seamlessly with your workflow to ensure transparency and speed without sacrificing quality.
@@ -56,13 +56,13 @@ const ServiceDetail = () => {
           
           <div className="space-y-8">
              <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-4">Why Aesthetix?</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">Why Aesthetix?</h3>
                 <p className="text-slate-600 mb-4">Unlike traditional agencies, we treat every project like a software product. We engineer for scalability from day one.</p>
-                <Link to="/work" className="text-accent font-medium hover:underline">See our previous work &rarr;</Link>
+                <Link to="/work" className="text-indigo-600 font-medium hover:underline">See our previous work &rarr;</Link>
              </div>
              
              <div className="bg-indigo-600 p-8 rounded-2xl text-white">
-                <h3 className="font-bold text-white mb-4">Need a Custom Quote?</h3>
+                <h3 className="text-xl font-bold text-white mb-4">Need a Custom Quote?</h3>
                 <p className="text-indigo-100 mb-6">Every business is unique. Let's discuss your specific requirements.</p>
                 <Link to="/contact">
                   <Button variant="outline" className="text-white border-white hover:bg-white hover:text-indigo-600">Contact Sales</Button>

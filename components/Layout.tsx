@@ -40,12 +40,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex items-center group">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-2 group-hover:scale-105 transition-transform">
-                  <span className="text-white font-serif font-bold text-xl">A</span>
+                <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mr-3 group-hover:scale-105 transition-transform shadow-lg">
+                  <span className="text-white font-bold text-lg">A</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="font-serif font-bold text-lg leading-tight tracking-tight">Aesthetix</span>
-                    <span className="text-[10px] text-slate-500 uppercase tracking-widest">Studio</span>
+                    <span className="font-bold text-xl leading-tight tracking-tight text-slate-900">Aesthetix</span>
+                    <span className="text-xs text-slate-500 uppercase tracking-wider font-medium">Studio</span>
                 </div>
               </Link>
             </div>
@@ -57,7 +57,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <NavLink to="/pricing">Pricing</NavLink>
               <NavLink to="/blog">Blog</NavLink>
               <NavLink to="/about">About</NavLink>
-              <Link to="/trial" className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
+              <Link to="/trial" className="bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors flex items-center gap-2">
                 Start Trial
                 <ArrowRight size={14} />
               </Link>
@@ -84,7 +84,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <NavLink to="/pricing" mobile>Pricing</NavLink>
               <NavLink to="/blog" mobile>Blog</NavLink>
               <NavLink to="/about" mobile>About</NavLink>
-              <Link to="/trial" className="block w-full text-center mt-4 bg-primary text-white px-4 py-2 rounded-md text-base font-medium hover:bg-slate-800">
+              <Link to="/trial" className="block w-full text-center mt-4 bg-slate-900 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-slate-800">
                 Start Free Trial
               </Link>
             </div>
@@ -103,10 +103,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center mb-4">
-                <div className="w-6 h-6 bg-primary rounded flex items-center justify-center mr-2">
-                  <span className="text-white font-serif font-bold text-sm">A</span>
+                <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mr-3 shadow-md">
+                  <span className="text-white font-bold text-sm">A</span>
                 </div>
-                <span className="font-serif font-bold text-md">Aesthetix</span>
+                <span className="font-bold text-lg text-slate-900">Aesthetix</span>
               </div>
               <p className="text-slate-500 text-sm leading-relaxed">
                 Beautifully engineered websites that convert. We combine aesthetic precision with full-stack power.

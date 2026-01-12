@@ -48,9 +48,9 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {plans.map((plan) => (
-            <div key={plan.name} className={`relative bg-white rounded-2xl p-8 border ${plan.popular ? 'border-accent ring-2 ring-accent/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}>
+            <div key={plan.name} className={`relative bg-white rounded-2xl p-8 border ${plan.popular ? 'border-indigo-600 ring-2 ring-indigo-600/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}>
               {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                   Best Value
                 </div>
               )}
@@ -80,7 +80,7 @@ const Pricing = () => {
         </div>
 
         {/* Trial Section */}
-        <div className="bg-primary rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+        <div className="bg-slate-900 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
           <div className="relative z-10">
             <h2 className="text-3xl font-bold text-white mb-4">Not sure yet? Try us risk-free.</h2>
             <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-lg">

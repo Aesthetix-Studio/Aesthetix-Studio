@@ -51,6 +51,7 @@ const Services = () => {
                      src={`https://picsum.photos/600/400?random=${index + 10}`} 
                      alt={service.title}
                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                     loading="lazy"
                    />
                 </div>
               </div>

@@ -7,10 +7,10 @@ export enum ProjectType {
 }
 
 export enum BudgetRange {
-  SMALL = '$5k - $10k',
-  MEDIUM = '$10k - $25k',
-  LARGE = '$25k - $50k',
-  ENTERPRISE = '$50k+'
+  SMALL = '₹5k - ₹10k',
+  MEDIUM = '₹10k - ₹25k',
+  LARGE = '₹25k - ₹50k',
+  ENTERPRISE = '₹50k+'
 }
 
 export enum ProposalStatus {
