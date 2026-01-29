@@ -24,14 +24,14 @@ const Services = () => {
           {SERVICES.map((service, index) => {
             const Icon = getIcon(service.iconName);
             return (
-              <div key={service.id} className={`flex flex-col md:flex-row items-center gap-8 p-8 bg-white rounded-2xl shadow-sm border border-slate-100 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+              <div key={service.id} className={`flex flex-col md:flex-row items-center gap-6 sm:gap-8 p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                 <div className="flex-1 space-y-4">
                   <div className="w-12 h-12 bg-indigo-50 text-accent rounded-xl flex items-center justify-center">
                     <Icon size={24} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900">{service.title}</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed">{service.description}</p>
-                  <ul className="grid grid-cols-2 gap-2 text-sm text-slate-500">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900">{service.title}</h3>
+                  <p className="text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed">{service.description}</p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm sm:text-base text-slate-500">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-accent"></div>
@@ -40,7 +40,7 @@ const Services = () => {
                     ))}
                   </ul>
                   <div className="pt-4">
-                    <Link to={`/services/${service.slug}`} className="inline-flex items-center font-medium text-accent hover:gap-2 transition-all">
+                    <Link to={`/services/${service.slug}`} className="inline-flex items-center font-medium text-accent hover:gap-2 transition-all text-sm sm:text-base">
                       View Details <ArrowRight size={16} className="ml-1" />
                     </Link>
                   </div>

@@ -48,22 +48,22 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {plans.map((plan) => (
-            <div key={plan.name} className={`relative bg-white rounded-2xl p-8 border ₹{plan.popular ? 'border-indigo-600 ring-2 ring-indigo-600/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}>
+            <div key={plan.name} className={`relative bg-white rounded-2xl p-6 sm:p-8 border ${plan.popular ? 'border-indigo-600 ring-2 ring-indigo-600/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}>
               {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-3 sm:px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                   Best Value
                 </div>
               )}
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
               <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-extrabold text-slate-900">{plan.price}</span>
+                <span className="text-3xl sm:text-4xl font-extrabold text-slate-900">{plan.price}</span>
                 {plan.price.includes('+') && <span className="text-slate-500 text-sm font-normal">starting at</span>}
               </div>
-              <p className="text-slate-500 text-sm mb-8">{plan.description}</p>
+              <p className="text-slate-500 text-sm sm:text-base mb-8">{plan.description}</p>
               
               <ul className="space-y-4 mb-8">
                 {plan.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-600">
+                  <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-600">
                     <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
                     {feat}
                   </li>
@@ -80,10 +80,10 @@ const Pricing = () => {
         </div>
 
         {/* Trial Section */}
-        <div className="bg-slate-900 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+        <div className="bg-slate-900 rounded-3xl p-6 sm:p-8 md:p-16 text-center relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold text-white mb-4">Not sure yet? Try us risk-free.</h2>
-            <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-lg">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Not sure yet? Try us risk-free.</h2>
+            <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-base sm:text-lg md:text-xl leading-relaxed">
               We offer a free pilot program for qualified startups. Get a homepage prototype or functional spec document in 48 hours.
             </p>
             <Link to="/trial">

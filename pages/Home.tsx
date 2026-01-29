@@ -33,7 +33,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight"
           >
             Beautifully Engineered <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-indigo-600">Websites That Convert</span>
@@ -42,7 +42,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-4 max-w-2xl mx-auto text-xl text-slate-600 mb-10"
+            className="mt-4 max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed"
           >
             Aesthetix Studio combines world-class design with robust engineering. 
             We build scalable, high-performance digital experiences for modern brands.
@@ -87,13 +87,13 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="p-8 bg-slate-50 rounded-2xl border border-slate-100"
+              className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-100"
             >
               <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
                 <Zap size={24} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Speed & Performance</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3">Speed & Performance</h3>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 We engineer for sub-second load times. Core Web Vitals are our primary metric, ensuring Google loves your site as much as your users do.
               </p>
             </motion.div>
@@ -102,13 +102,13 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="p-8 bg-slate-50 rounded-2xl border border-slate-100"
+              className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-100"
             >
               <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
                 <Code size={24} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Clean Architecture</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3">Clean Architecture</h3>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 Built on React, TypeScript, and Spring Boot. Our codebases are modular, testable, and designed to scale with your business.
               </p>
             </motion.div>
@@ -117,13 +117,13 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="p-8 bg-slate-50 rounded-2xl border border-slate-100"
+              className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-100"
             >
               <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6">
                 <Shield size={24} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Enterprise Security</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3">Enterprise Security</h3>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 Security isn't an afterthought. We implement industry-standard practices from day one to protect your data and your users.
               </p>
             </motion.div>
@@ -151,11 +151,11 @@ const Home = () => {
                   viewport={{ once: true }}
                   whileHover={{ y: -5 }}
                 >
-                  <Link to={`/services/${service.slug}`} className="group block p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
+                  <Link to={`/services/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
                     <Icon className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform" size={32} />
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-                    <p className="text-slate-500 text-sm mb-4">{service.description}</p>
-                    <span className="text-indigo-600 font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
+                    <p className="text-slate-500 text-sm sm:text-base mb-4">{service.description}</p>
+                    <span className="text-indigo-600 font-medium text-sm sm:text-base flex items-center gap-1 group-hover:gap-2 transition-all">
                       Learn more <ArrowRight size={14} />
                     </span>
                   </Link>
@@ -178,8 +178,8 @@ const Home = () => {
         <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"></div>
 
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-6">Ready to elevate your digital presence?</h2>
-          <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to elevate your digital presence?</h2>
+          <p className="text-slate-300 text-base sm:text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
             Join forward-thinking companies who trust Aesthetix to build their most critical digital products.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
