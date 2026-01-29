@@ -8,6 +8,7 @@ import ServiceDetail from './pages/ServiceDetail';
 import Work from './pages/Work';
 import Pricing from './pages/Pricing';
 import Proposal from './pages/Proposal';
+import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import About from './pages/About';
 import Privacy from './pages/Privacy';
@@ -48,6 +49,7 @@ const AnimatedRoutes = () => {
         <Route path="/work/:slug" element={<PageTransition><Placeholder title="Case Study Details" /></PageTransition>} />
         <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
         <Route path="/proposal" element={<PageTransition><Proposal /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/trial" element={<PageTransition><Proposal /></PageTransition>} />
         <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
         <Route path="/blog/:slug" element={<PageTransition><Placeholder title="Blog Post" /></PageTransition>} />

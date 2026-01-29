@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     title: 'Nova Fintech Dashboard',
     category: 'Web Application',
     description: 'A real-time financial analytics dashboard for institutional investors.',
-    image: 'https://picsum.photos/800/600?random=1',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
     tags: ['React', 'D3.js', 'Spring Boot'],
     challenge: 'Visualizing millions of data points with sub-second latency while maintaining a clean, accessible UI.',
     solution: 'We utilized WebSockets for real-time data and D3.js for custom GPU-accelerated charts, wrapped in a highly modular React architecture.',
@@ -82,7 +82,7 @@ export const PROJECTS: Project[] = [
     title: 'LUX Fashion E-Commerce',
     category: 'E-Commerce',
     description: 'A headless e-commerce experience for a high-end sustainable fashion brand.',
-    image: 'https://picsum.photos/800/600?random=2',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
     tags: ['Next.js', 'Shopify Plus', 'Tailwind'],
     challenge: 'Migrating from a monolithic legacy platform to a modern headless stack without losing SEO ranking.',
     solution: 'Implemented a static-generated architecture using Next.js, optimizing core web vitals and implementing a robust redirect strategy.',
@@ -94,7 +94,7 @@ export const PROJECTS: Project[] = [
     title: 'MediScan AI Interface',
     category: 'Prototype',
     description: 'Interface design for an AI-powered medical imaging diagnostic tool.',
-    image: 'https://picsum.photos/800/600?random=3',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
     tags: ['Figma', 'Python', 'Medical'],
     challenge: 'Creating a trustworthy and efficient interface for radiologists who need to process images rapidly.',
     solution: 'Conducted deep user research with doctors to create a high-contrast, keyboard-driven interface prototype validated before development.',
@@ -111,7 +111,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Design',
     date: 'Oct 12, 2024',
     readTime: '5 min read',
-    image: 'https://picsum.photos/600/400?random=4'
+    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
   },
   {
     id: '2',
@@ -121,7 +121,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Engineering',
     date: 'Nov 03, 2024',
     readTime: '8 min read',
-    image: 'https://picsum.photos/600/400?random=5'
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
   },
   {
     id: '3',
@@ -131,7 +131,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Marketing',
     date: 'Nov 15, 2024',
     readTime: '4 min read',
-    image: 'https://picsum.photos/600/400?random=6'
+    image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
   }
 ];
 

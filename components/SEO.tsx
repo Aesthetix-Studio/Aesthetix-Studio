@@ -11,7 +11,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({ 
   title, 
   description, 
-  image = 'https://picsum.photos/1200/630?random=seo', // Default fallback image
+  image = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop&crop=center&auto=format&q=80', // Default fallback image
   url = window.location.href,
   type = 'website'
 }) => {

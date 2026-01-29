@@ -5,6 +5,28 @@ import { SectionHeader } from '../components/UI';
 import { SERVICES, getIcon } from '../constants';
 import SEO from '../components/SEO';
 
+// Helper function to get service-specific images
+const getServiceImage = (slug: string): string => {
+  const serviceImages: Record<string, string> = {
+    // Website Design - UI/UX design workspace
+    'website-design': 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    // Prototyping - Figma/design tools interface
+    'prototyping-figma': 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    // Web Development - Code on screen
+    'web-development': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    // Maintenance - Server/monitoring dashboard
+    'maintenance': 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    // SEO Marketing - Analytics dashboard
+    'seo-marketing': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    // Content Writing - Writing/blogging workspace
+    'content-writing': 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    // Social Management - Social media interface
+    'social-management': 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+  };
+  
+  return serviceImages[slug] || serviceImages['web-development'];
+};
+
 const Services = () => {
   return (
     <div className="pt-12 pb-24">
@@ -46,12 +68,17 @@ const Services = () => {
                   </div>
                 </div>
                 <div className="flex-1 w-full h-64 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
-                   {/* Placeholder for service illustration */}
+                   {/* Service-specific professional images */}
                    <img 
-                     src={`https://picsum.photos/600/400?random=${index + 10}`} 
-                     alt={service.title}
+                     src={getServiceImage(service.slug)} 
+                     alt={`${service.title} - Professional ${service.title.toLowerCase()} services illustration`}
                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                      loading="lazy"
+                     onError={(e) => {
+                       // Fallback to a default image if the service image fails to load
+                       const target = e.target as HTMLImageElement;
+                       target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80';
+                     }}
                    />
                 </div>
               </div>
