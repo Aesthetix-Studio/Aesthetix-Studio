@@ -8,15 +8,15 @@ import SEO from '../components/SEO';
 // Helper function to get service-specific images
 const getServiceImage = (slug: string): string => {
   const serviceImages: Record<string, string> = {
-    'ui-ux-design': '/images/services/ui-ux-design.png',
+    'ui-ux-design': '/images/services/website-design.jpg',
     'web-development': '/images/services/web-development.png',
     'react-development': '/images/services/react-development.png',
-    'custom-web-applications': '/images/services/custom-web-applications.png',
+    'custom-web-applications': '/images/services/web-development.png',
     'maintenance-support': '/images/services/maintenance-support.png',
     'seo-friendly-websites': '/images/services/seo-friendly-websites.png'
   };
 
-  return serviceImages[slug] || '/images/services/web-development.jpg';
+  return serviceImages[slug] || '/images/services/web-development.png';
 };
 
 const Services = () => {
@@ -60,11 +60,10 @@ const Services = () => {
                   </div>
                 </div>
                 <div className="flex-1 w-full h-64 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
-                   {/* Service-specific professional images */}
                    <img 
                      src={getServiceImage(service.slug)} 
                      alt={`${service.title} - Professional ${service.title.toLowerCase()} services illustration`}
-                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                     className="w-full h-full object-cover scale-[1.04] hover:scale-110 transition-transform duration-500"
                      loading="lazy"
                      onError={(e) => {
                        // Fallback to a default image if the service image fails to load
