@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aesthetix.studio/sitemap.xml
+Sitemap: https://www.aesthetixstudio.com/sitemap.xml

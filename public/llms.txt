@@ -1,0 +1,17 @@
+# Aesthetix Studio
+
+> Aesthetix Studio builds beautifully engineered websites, scalable web applications, and modern digital experiences.
+
+We are a digital agency specializing in UI/UX design, modern front-end development (React, Vite, Next.js), and back-end integration. Our mission is to transform your online presence with robust, fast, and accessible web solutions.
+
+## Services
+- Web Development
+- Web Applications
+- UI/UX Design
+- Digital Strategy
+
+## Links
+- Homepage: https://www.aesthetixstudio.com/
+- Contact: https://www.aesthetixstudio.com/contact
+- Work/Portfolio: https://www.aesthetixstudio.com/work
+- About: https://www.aesthetixstudio.com/about
