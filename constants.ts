@@ -158,7 +158,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'SEO',
     date: 'April 20, 2025',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    image: '/images/services/seo-friendly-websites.png',
     relatedServiceSlug: 'seo-friendly-websites'
   },
   {
@@ -169,7 +169,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Performance',
     date: 'Apr 28, 2025',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    image: '/images/services/web-development.png',
     relatedServiceSlug: 'web-development'
   },
   {
@@ -180,7 +180,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Design',
     date: 'May 05, 2025',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    image: '/images/services/ui-ux-design.png',
     relatedServiceSlug: 'ui-ux-design'
   }
 ];
@@ -201,3 +201,5 @@ export const getIcon = (name: string) => {
   };
   return icons[name] || Box;
 };
+
+
