@@ -90,8 +90,8 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {SERVICES.slice(0, 3).map((service, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {SERVICES.slice(0, 4).map((service, index) => {
               const Icon = getIcon(service.iconName);
               return (
                 <motion.div
@@ -182,16 +182,58 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials - TRUST BOOST */}
+      {/* Our Process Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="Evidence of Success"
-            subtitle="Measurable business impact from the startups we've helped scale."
+            title="Our Process"
+            subtitle="Five straightforward steps from discovery to launch"
             center
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+            {[
+              { number: '01', title: 'Discovery', desc: 'Understand your goals, audience, and technical requirements' },
+              { number: '02', title: 'Design', desc: 'Create wireframes, prototypes, and high-fidelity designs' },
+              { number: '03', title: 'Development', desc: 'Build scalable, SEO-friendly code with best practices' },
+              { number: '04', title: 'Optimization', desc: 'Optimize performance, SEO, and conversion metrics' },
+              { number: '05', title: 'Launch', desc: 'Deploy, monitor, and provide ongoing support' }
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center relative"
+              >
+                <div className="text-5xl font-bold text-indigo-100 mb-4">{step.number}</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{step.desc}</p>
+                {index < 4 && (
+                  <div className="hidden md:block absolute top-12 -right-4 text-indigo-200">
+                    <ArrowRight size={20} />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials - TRUST BOOST */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Evidence of Success</h2>
+              <p className="text-slate-600 text-lg">Real results from the startups and businesses we've helped scale.</p>
+            </div>
+            <Link to="/contact" className="hidden md:block">
+              <Button variant="outline">Get in Touch <ArrowRight size={16} className="ml-2" /></Button>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {TESTIMONIALS.slice(0, 3).map((t, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
@@ -220,6 +262,11 @@ const Home = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link to="/contact">
+              <Button variant="primary" className="md:hidden">Get in Touch</Button>
+            </Link>
           </div>
         </div>
       </section>

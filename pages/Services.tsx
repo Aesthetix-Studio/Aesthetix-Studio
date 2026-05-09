@@ -10,12 +10,12 @@ const getServiceImage = (slug: string): string => {
   const serviceImages: Record<string, string> = {
     'ui-ux-design': '/images/services/website-design.jpg',
     'web-development': '/images/services/web-development.jpg',
-    'react-development': '/images/services/web-development.jpg',
-    'custom-web-applications': '/images/services/web-development.jpg',
-    'website-maintenance': '/images/services/tech-support.jpg',
+    'react-development': '/images/services/react-development.jpg',
+    'custom-web-applications': '/images/services/custom-web-app.jpg',
+    'website-maintenance': '/images/services/maintenance.jpg',
     'seo-friendly-websites': '/images/services/seo-marketing.jpg'
   };
-  
+
   return serviceImages[slug] || '/images/services/web-development.jpg';
 };
 
