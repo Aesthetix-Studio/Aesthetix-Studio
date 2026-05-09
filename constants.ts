@@ -11,6 +11,7 @@ export const SERVICES: Service[] = [
     slug: 'ui-ux-design',
     title: 'UI/UX Design Studio',
     description: 'High-converting, aesthetic UI/UX design tailored to your brand identity.',
+    image: '/images/services/website-design.jpg',
     iconName: 'Layout',
     features: ['User Research', 'Wireframing', 'High-Fidelity Mockups', 'Design Systems']
   },
@@ -19,6 +20,7 @@ export const SERVICES: Service[] = [
     slug: 'web-development',
     title: 'Web Development Agency',
     description: 'Robust, scalable frontend and backend engineering using modern stacks.',
+    image: '/images/services/web-development.png',
     iconName: 'Code',
     features: ['React & TypeScript', 'Spring Boot / Python', 'CMS Integration', 'API Development']
   },
@@ -27,6 +29,7 @@ export const SERVICES: Service[] = [
     slug: 'react-development',
     title: 'React Development Company',
     description: 'Specialized high-performance React and Next.js development for modern web apps.',
+    image: '/images/services/react-development.png',
     iconName: 'Layers',
     features: ['Single Page Applications', 'Server-Side Rendering', 'Micro-frontends', 'State Management']
   },
@@ -35,6 +38,7 @@ export const SERVICES: Service[] = [
     slug: 'custom-web-applications',
     title: 'Custom Web Applications',
     description: 'Complex SaaS platforms and internal tools engineered for scale.',
+    image: '/images/services/web-development.png',
     iconName: 'Database',
     features: ['SaaS Development', 'Cloud Architecture', 'Database Design', 'Third-Party Integrations']
   },
@@ -43,6 +47,7 @@ export const SERVICES: Service[] = [
     slug: 'maintenance-support',
     title: 'Website Maintenance Services',
     description: 'Keep your digital assets secure, up-to-date, and performing optimally.',
+    image: '/images/services/maintenance-support.png',
     iconName: 'Activity',
     features: ['Security Updates', 'Performance Monitoring', 'Content Updates', 'Bug Fixes']
   },
@@ -51,6 +56,7 @@ export const SERVICES: Service[] = [
     slug: 'seo-friendly-websites',
     title: 'SEO Website Development',
     description: 'Websites engineered from the ground up to rank on Google and capture organic traffic.',
+    image: '/images/services/seo-friendly-websites.png',
     iconName: 'Search',
     features: ['Technical Audit', 'Keyword Strategy', 'On-Page Optimization', 'Core Web Vitals']
   }

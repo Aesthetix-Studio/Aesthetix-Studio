@@ -5,20 +5,6 @@ import { SectionHeader } from '../components/UI';
 import { SERVICES, getIcon } from '../constants';
 import SEO from '../components/SEO';
 
-// Helper function to get service-specific images
-const getServiceImage = (slug: string): string => {
-  const serviceImages: Record<string, string> = {
-    'ui-ux-design': '/images/services/ui-ux-design.png',
-    'web-development': '/images/services/web-development.png',
-    'react-development': '/images/services/react-development.png',
-    'custom-web-applications': '/images/services/custom-web-applications.png',
-    'maintenance-support': '/images/services/maintenance-support.png',
-    'seo-friendly-websites': '/images/services/seo-friendly-websites.png'
-  };
-
-  return serviceImages[slug] || '/images/services/web-development.png';
-};
-
 const Services = () => {
   return (
     <div className="pt-12 pb-24">
@@ -61,14 +47,13 @@ const Services = () => {
                 </div>
                 <div className="flex-1 w-full h-64 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
                    <img 
-                     src={getServiceImage(service.slug)} 
+                     src={service.image} 
                      alt={`${service.title} - Professional ${service.title.toLowerCase()} services illustration`}
                      className="w-full h-full object-cover scale-[1.04] hover:scale-110 transition-transform duration-500"
                      loading="lazy"
                      onError={(e) => {
-                       // Fallback to a default image if the service image fails to load
                        const target = e.target as HTMLImageElement;
-                       target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80';
+                       target.src = '/images/services/web-development.png';
                      }}
                    />
                 </div>

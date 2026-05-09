@@ -40,6 +40,7 @@ export interface Service {
   slug: string;
   title: string;
   description: string;
+  image: string;
   iconName: string;
   features: string[];
 }
