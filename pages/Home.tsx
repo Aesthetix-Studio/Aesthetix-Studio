@@ -154,7 +154,7 @@ const Home = () => {
                   <Link to={`/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
                     <Icon className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform" size={32} />
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-                    <p className="text-slate-600 text-sm sm:text-base mb-4">{service.description}</p>
+                    <p className="text-slate-600 text-sm mb-4 line-clamp-2">{service.description}</p>
                     <span className="text-indigo-600 font-medium text-sm sm:text-base flex items-center gap-1 group-hover:gap-2 transition-all">
                       Learn more <ArrowRight size={14} />
                     </span>
