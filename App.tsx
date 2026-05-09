@@ -17,6 +17,7 @@ import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
 import SEO from './components/SEO';
 import WorkDetail from './pages/WorkDetail';
+import BlogPostDetail from './pages/BlogPostDetail';
 import PageTransition from './components/PageTransition';
 
 // Scroll to top on route change
@@ -60,7 +61,7 @@ const AnimatedRoutes = () => {
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/trial" element={<PageTransition><Proposal /></PageTransition>} />
         <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
-        <Route path="/blog/:slug" element={<PageTransition><Placeholder title="Blog Post" /></PageTransition>} />
+        <Route path="/blog/:slug" element={<PageTransition><BlogPostDetail /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
         <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />

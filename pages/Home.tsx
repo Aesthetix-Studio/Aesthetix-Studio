@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Code, Zap, Shield } from 'lucide-react';
+import { ArrowRight, Code, Zap, Shield, BarChart, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button, SectionHeader } from '../components/UI';
-import { SERVICES, TECH_STACK, TESTIMONIALS, getIcon } from '../constants';
+import { SERVICES, TECH_STACK, TESTIMONIALS, PROJECTS, getIcon } from '../constants';
 import SEO from '../components/SEO';
 
 const Home = () => {
@@ -44,8 +44,7 @@ const Home = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-4 max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed"
           >
-            Aesthetix Studio is a web design and development agency helping startups and businesses across India build 
-            high-performance, SEO-friendly websites using React, Vite, and modern web technologies.
+            Helping startups and businesses build high-performance, SEO-friendly websites using React, Vite, and modern web technologies.
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -68,7 +67,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-6">Powering experiences with modern tech</p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-             {TECH_STACK.map((tech) => (
+             {TECH_STACK.slice(0, 6).map((tech) => (
                <div key={tech.name} className="flex items-center gap-2 group">
                  <tech.icon size={24} className="text-slate-800 group-hover:text-indigo-600" />
                  <span className="font-semibold text-slate-700">{tech.name}</span>
@@ -78,69 +77,21 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Value Props */}
+      {/* Services Preview - SHORTER */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-100"
-            >
-              <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                <Zap size={24} />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3">Speed & Performance</h3>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                We engineer for sub-second load times. Core Web Vitals are our primary metric, ensuring Google loves your site as much as your users do.
-              </p>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-100"
-            >
-              <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
-                <Code size={24} />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3">Clean Architecture</h3>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Built on React, TypeScript, and Spring Boot. Our codebases are modular, testable, and designed to scale with your business.
-              </p>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-100"
-            >
-              <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6">
-                <Shield size={24} />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3">Enterprise Security</h3>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Security isn't an afterthought. We implement industry-standard practices from day one to protect your data and your users.
-              </p>
-            </motion.div>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Core Expertise</h2>
+              <p className="text-slate-600 text-lg">Precision engineering meets design excellence. We build products that rank, convert, and scale.</p>
+            </div>
+            <Link to="/services">
+              <Button variant="outline" className="hidden md:flex">View All Services <ArrowRight size={16} className="ml-2" /></Button>
+            </Link>
           </div>
-        </div>
-      </section>
 
-      {/* Services Preview */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader 
-            title="Our Expertise" 
-            subtitle="From initial prototype to global deployment, we cover the entire digital lifecycle."
-            center
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {SERVICES.slice(0, 6).map((service, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {SERVICES.slice(0, 3).map((service, index) => {
               const Icon = getIcon(service.iconName);
               return (
                 <motion.div
@@ -149,21 +100,22 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
                 >
-                  <Link to={`/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
-                    <Icon className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform" size={32} />
-                    <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h4>
-                    <p className="text-slate-600 text-sm mb-4 line-clamp-2">{service.description}</p>
-                    <span className="text-indigo-600 font-medium text-sm sm:text-base flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Learn more <ArrowRight size={14} />
+                  <Link to={`/${service.slug}`} className="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-xl transition-all h-full">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                      <Icon size={24} />
+                    </div>
+                    <h4 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h4>
+                    <p className="text-slate-600 text-sm mb-6 line-clamp-2">{service.description}</p>
+                    <span className="text-indigo-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Explore Service <ArrowRight size={14} />
                     </span>
                   </Link>
                 </motion.div>
               );
             })}
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 md:hidden">
             <Link to="/services">
               <Button variant="primary">View All Services</Button>
             </Link>
@@ -171,12 +123,71 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials / Social Proof */}
+      {/* Featured Work - NEW SECTION */}
+      <section className="py-24 bg-slate-900 text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">Featured Work</h2>
+              <p className="text-slate-400 text-lg">Tangible results delivered through rigorous engineering and design.</p>
+            </div>
+            <Link to="/work">
+              <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">View Case Studies <ArrowRight size={16} className="ml-2" /></Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {PROJECTS.slice(0, 2).map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="group cursor-pointer"
+              >
+                <Link to={`/work/${project.slug}`}>
+                  <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-8">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                       <span className="bg-white text-slate-900 px-6 py-3 rounded-full font-bold shadow-xl flex items-center gap-2">
+                         View Case Study <ArrowRight size={16} />
+                       </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                      <span className="text-indigo-400 font-bold uppercase tracking-widest text-xs mb-2 block">{project.category}</span>
+                      <h3 className="text-2xl md:text-3xl font-bold mb-2 group-hover:text-indigo-400 transition-colors">{project.title}</h3>
+                    </div>
+                    {project.metrics && (
+                      <div className="flex gap-4">
+                        {project.metrics.slice(0, 2).map(m => (
+                          <div key={m.label} className="text-right">
+                            <div className="text-xl font-bold text-white">{m.value}</div>
+                            <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">{m.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials - TRUST BOOST */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="What Our Clients Say"
-            subtitle="Measurable results from the startups and enterprises we've helped scale."
+            title="Evidence of Success"
+            subtitle="Measurable business impact from the startups we've helped scale."
             center
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -213,23 +224,43 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Value Props - REDUCED DENSITY */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+            {[
+              { icon: Zap, title: 'Lighthouse 90+', desc: 'Speed is a feature. We optimize for Core Web Vitals to ensure sub-second load times and peak SEO rankings.' },
+              { icon: Shield, title: 'Bank-Grade Security', desc: 'From JWT authentication to encrypted databases, we implement enterprise-standard security by default.' },
+              { icon: BarChart, title: 'ROI Focused', desc: 'We don\'t just build beautiful things; we build high-converting assets that drive measurable business results.' }
+            ].map(prop => (
+              <div key={prop.title} className="space-y-4">
+                <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center justify-center mx-auto md:mx-0 text-indigo-600">
+                  <prop.icon size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">{prop.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{prop.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Location / Trust signal */}
-      <section className="py-10 bg-slate-50 border-y border-slate-100">
+      <section className="py-12 bg-white border-y border-slate-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-slate-500 text-base">
-            🇮🇳 <strong className="text-slate-700">Based in India</strong> — helping startups and businesses across India, the Middle East, and globally build high-performance, SEO-friendly websites.
+          <p className="text-slate-500 text-sm">
+            🇮🇳 <strong className="text-slate-700">Engineering Headquarters: India</strong> — Serving founders and enterprises globally with high-performance, SEO-dominant digital products.
           </p>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section - MINIMAL */}
       <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Frequently Asked Questions"
-            subtitle="Everything you need to know about working with Aesthetix Studio."
-            center
-          />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Quick Questions</h2>
+            <p className="text-slate-500">Everything you need to know about working with us.</p>
+          </div>
           <div className="space-y-4">
             {[
               { q: 'What makes Aesthetix Studio different?', a: 'We combine design-thinking with senior software engineering. Every project is treated like a production product with proper architecture, code reviews, and performance optimization.' },
@@ -237,11 +268,11 @@ const Home = () => {
               { q: 'How do I get a custom proposal?', a: 'Click the "Request Proposal" button to share your project details, and our team will get back to you with a tailored strategy and estimate within 24 hours.' }
             ].map((faq, i) => (
               <details key={i} className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
-                <summary className="flex items-center justify-between p-6 cursor-pointer text-slate-900 font-semibold text-lg hover:bg-slate-100 transition-colors">
+                <summary className="flex items-center justify-between p-6 cursor-pointer text-slate-900 font-semibold hover:bg-slate-100 transition-colors">
                   {faq.q}
                   <span className="ml-4 text-indigo-500 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
                 </summary>
-                <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed">
                   {faq.a}
                 </div>
               </details>
@@ -252,21 +283,17 @@ const Home = () => {
 
       {/* CTA Section */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-         {/* Abstract shapes */}
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"></div>
-
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to elevate your digital presence?</h2>
-          <p className="text-slate-300 text-base sm:text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            Join forward-thinking companies who trust Aesthetix to build their most critical digital products.
+          <h2 className="text-3xl sm:text-5xl font-bold mb-6 tracking-tight">Ready to build something <br/> exceptional?</h2>
+          <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
+            Join the forward-thinking brands who trust Aesthetix to scale their most critical digital infrastructure.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/proposal">
-               <Button variant="secondary" size="lg">Book a Free Strategy Call</Button>
+               <Button variant="secondary" size="lg">Request Custom Proposal</Button>
             </Link>
             <Link to="/contact">
-               <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10 hover:text-white">Launch Faster With Aesthetix</Button>
+               <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10">Book Strategy Call</Button>
             </Link>
           </div>
         </div>

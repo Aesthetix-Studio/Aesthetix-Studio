@@ -54,7 +54,13 @@ export interface Project {
   tags: string[];
   challenge: string;
   solution: string;
+  process?: string;
   results: string[];
+  metrics?: {
+    label: string;
+    value: string;
+  }[];
+  businessImpact?: string[];
 }
 
 export interface BlogPost {
