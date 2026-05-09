@@ -8,12 +8,12 @@ import SEO from '../components/SEO';
 // Helper function to get service-specific images
 const getServiceImage = (slug: string): string => {
   const serviceImages: Record<string, string> = {
-    'ui-ux-design': '/images/services/website-design.jpg',
-    'web-development': '/images/services/web-development.jpg',
-    'react-development': '/images/services/react-development.jpg',
-    'custom-web-applications': '/images/services/custom-web-app.jpg',
-    'maintenance-support': '/images/services/maintenance.jpg',
-    'seo-friendly-websites': '/images/services/seo-marketing.jpg'
+    'ui-ux-design': '/images/services/ui-ux-design.png',
+    'web-development': '/images/services/web-development.png',
+    'react-development': '/images/services/react-development.png',
+    'custom-web-applications': '/images/services/custom-web-applications.png',
+    'maintenance-support': '/images/services/maintenance-support.png',
+    'seo-friendly-websites': '/images/services/seo-friendly-websites.png'
   };
 
   return serviceImages[slug] || '/images/services/web-development.jpg';
