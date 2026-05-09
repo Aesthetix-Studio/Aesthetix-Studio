@@ -31,7 +31,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: '4',
-    slug: 'custom-web-applications',
+    slug: 'custom-web-apps',
     title: 'Custom Web Applications',
     description: 'Complex SaaS platforms and internal tools engineered for scale.',
     iconName: 'Database',
@@ -39,7 +39,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: '5',
-    slug: 'website-maintenance',
+    slug: 'maintenance-support',
     title: 'Website Maintenance Services',
     description: 'Keep your digital assets secure, up-to-date, and performing optimally.',
     iconName: 'Activity',
@@ -47,7 +47,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: '6',
-    slug: 'seo-friendly-websites',
+    slug: 'seo-websites',
     title: 'SEO Website Development',
     description: 'Websites engineered from the ground up to rank on Google and capture organic traffic.',
     iconName: 'Search',

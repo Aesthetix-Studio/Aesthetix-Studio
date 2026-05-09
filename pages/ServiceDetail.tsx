@@ -98,7 +98,7 @@ const SERVICE_CONTENT: Record<string, {
     relatedBlogSlugs: ['how-we-build-scalable-react-applications', 'vite-vs-nextjs-for-seo'],
     relatedProjectSlugs: ['fintech-dashboard']
   },
-  'custom-web-applications': {
+  'custom-web-apps': {
     seoTitle: 'Custom Web Application Development India | Aesthetix Studio',
     seoDescription: 'Custom web application and SaaS development company in India. We build complex platforms, internal tools, and data-driven applications engineered for scale.',
     headline: 'Custom Web Application Development',
@@ -125,7 +125,7 @@ const SERVICE_CONTENT: Record<string, {
     relatedBlogSlugs: ['how-we-build-scalable-react-applications'],
     relatedProjectSlugs: ['fintech-dashboard']
   },
-  'website-maintenance': {
+  'maintenance-support': {
     seoTitle: 'Website Maintenance Services India | Aesthetix Studio',
     seoDescription: 'Reliable website maintenance and support services in India. Security updates, performance monitoring, content updates, and bug fixes to keep your site running optimally.',
     headline: 'Website Maintenance & Support Services',
@@ -152,7 +152,7 @@ const SERVICE_CONTENT: Record<string, {
     relatedBlogSlugs: ['core-web-vitals-explained'],
     relatedProjectSlugs: ['lux-ecommerce']
   },
-  'seo-friendly-websites': {
+  'seo-websites': {
     seoTitle: 'SEO-Friendly Website Development India | Aesthetix Studio',
     seoDescription: 'We build SEO-optimized websites from the ground up. Technical SEO, structured data, Core Web Vitals optimization, and keyword strategy baked into every project.',
     headline: 'SEO-Friendly Website Development',

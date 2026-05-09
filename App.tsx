@@ -50,9 +50,9 @@ const AnimatedRoutes = () => {
         <Route path="/web-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/react-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/ui-ux-design" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/seo-friendly-websites" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/custom-web-applications" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/website-maintenance" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/seo-websites" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/custom-web-apps" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/maintenance-support" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/work" element={<PageTransition><Work /></PageTransition>} />
         <Route path="/work/:slug" element={<PageTransition><WorkDetail /></PageTransition>} />
         <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />

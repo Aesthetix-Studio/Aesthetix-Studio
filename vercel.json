@@ -3,9 +3,9 @@
     { "source": "/web-development", "destination": "/web-development.html" },
     { "source": "/ui-ux-design", "destination": "/ui-ux-design.html" },
     { "source": "/react-development", "destination": "/react-development.html" },
-    { "source": "/custom-web-applications", "destination": "/custom-web-applications.html" },
-    { "source": "/website-maintenance", "destination": "/website-maintenance.html" },
-    { "source": "/seo-friendly-websites", "destination": "/seo-friendly-websites.html" },
+    { "source": "/custom-web-apps", "destination": "/custom-web-apps.html" },
+    { "source": "/maintenance-support", "destination": "/maintenance-support.html" },
+    { "source": "/seo-websites", "destination": "/seo-websites.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
