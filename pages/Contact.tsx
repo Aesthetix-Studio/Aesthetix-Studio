@@ -108,7 +108,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium text-slate-900 mb-1">Phone</h4>
                     <p className="text-slate-600 text-sm">+91 (555) 123-4567</p>
-                    <p className="text-slate-500 text-xs mt-1">Mon-Fri 9AM-6PM IST</p>
+                    <p className="text-slate-600 text-xs mt-1">Mon-Fri 9AM-6PM IST</p>
                   </div>
                 </div>
                 
@@ -119,7 +119,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium text-slate-900 mb-1">Email</h4>
                     <p className="text-slate-600 text-sm">sales@aesthetixstudio.com</p>
-                    <p className="text-slate-500 text-xs mt-1">We respond within 24 hours</p>
+                    <p className="text-slate-600 text-xs mt-1">We respond within 24 hours</p>
                   </div>
                 </div>
                 
@@ -130,7 +130,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium text-slate-900 mb-1">Office</h4>
                     <p className="text-slate-600 text-sm">Mumbai, Maharashtra</p>
-                    <p className="text-slate-500 text-xs mt-1">Remote-first team</p>
+                    <p className="text-slate-600 text-xs mt-1">Remote-first team</p>
                   </div>
                 </div>
               </div>
@@ -249,11 +249,11 @@ const Contact = () => {
               <div className="mb-8 relative">
                 <label className="block text-sm sm:text-base font-medium text-slate-700 mb-2">Attachments (Optional)</label>
                 <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:bg-slate-50 transition-colors">
-                  <Upload className="mx-auto h-10 w-10 text-slate-400 mb-2" />
-                  <p className="text-sm text-slate-500">
+                  <Upload className="mx-auto h-10 w-10 text-slate-500 mb-2" />
+                  <p className="text-sm text-slate-600">
                     <span className="font-medium text-indigo-600">Click to upload</span> or drag and drop
                   </p>
-                  <p className="text-xs text-slate-400 mt-1">Design briefs, wireframes, brand assets (PDF, PNG, JPG up to 10MB)</p>
+                  <p className="text-xs text-slate-500 mt-1">Design briefs, wireframes, brand assets (PDF, PNG, JPG up to 10MB)</p>
                   <input 
                     type="file" 
                     name="files"
@@ -271,7 +271,7 @@ const Contact = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
-                <p className="text-xs text-slate-500 max-w-xs">
+                <p className="text-xs text-slate-600 max-w-xs">
                   By submitting this form, you agree to our <Link to="/privacy" className="underline">Privacy Policy</Link>. Your information is secure and will only be used to contact you about your project.
                 </p>
                 <Button type="submit" size="lg" disabled={isSubmitting}>

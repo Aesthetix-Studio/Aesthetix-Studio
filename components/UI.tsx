@@ -67,7 +67,7 @@ export const Select: React.FC<React.SelectHTMLAttributes<HTMLSelectElement> & { 
 export const SectionHeader: React.FC<{ title: string; subtitle?: string; center?: boolean }> = ({ title, subtitle, center }) => (
   <div className={`mb-12 ${center ? 'text-center' : ''}`}>
     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4 leading-tight">{title}</h2>
-    {subtitle && <p className="text-base sm:text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
+    {subtitle && <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
   </div>
 );
 

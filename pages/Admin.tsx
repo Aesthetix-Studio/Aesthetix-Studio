@@ -23,7 +23,7 @@ const Admin = () => {
       <div className="min-h-[60vh] flex items-center justify-center bg-slate-50">
         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 w-full max-w-md text-center">
           <h2 className="text-2xl font-bold mb-6">Admin Login</h2>
-          <p className="text-slate-500 mb-6 text-sm">For demo purposes, just click login.</p>
+          <p className="text-slate-600 mb-6 text-sm">For demo purposes, just click login.</p>
           <Button onClick={() => setIsLoggedIn(true)} className="w-full">Login to Dashboard</Button>
         </div>
       </div>
@@ -54,7 +54,7 @@ const Admin = () => {
               <tbody className="divide-y divide-slate-100">
                 {proposals.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="p-8 text-center text-slate-500">No proposals received yet.</td>
+                    <td colSpan={6} className="p-8 text-center text-slate-600">No proposals received yet.</td>
                   </tr>
                 ) : (
                   proposals.map(p => (
@@ -62,7 +62,7 @@ const Admin = () => {
                       <td className="p-4 text-sm text-slate-600">{new Date(p.submittedAt).toLocaleDateString()}</td>
                       <td className="p-4 text-sm">
                         <div className="font-medium text-slate-900">{p.name}</div>
-                        <div className="text-slate-500 text-xs">{p.email}</div>
+                        <div className="text-slate-600 text-xs">{p.email}</div>
                       </td>
                       <td className="p-4 text-sm text-slate-600">{p.projectType}</td>
                       <td className="p-4 text-sm text-slate-600">{p.budget}</td>

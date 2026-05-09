@@ -53,7 +53,7 @@ const Services = () => {
                   </div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900">{service.title}</h3>
                   <p className="text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed">{service.description}</p>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm sm:text-base text-slate-500">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm sm:text-base text-slate-600">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-accent"></div>

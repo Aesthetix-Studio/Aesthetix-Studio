@@ -12,7 +12,7 @@ const Privacy = () => {
       <div className="max-w-4xl mx-auto px-4">
         <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-slate-100">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Privacy Policy</h1>
-          <p className="text-slate-500 mb-12 text-lg">Last updated: {new Date().getFullYear()}</p>
+          <p className="text-slate-600 mb-12 text-lg">Last updated: {new Date().getFullYear()}</p>
           
           <div className="prose prose-lg max-w-none text-slate-700 space-y-8">
             <div>

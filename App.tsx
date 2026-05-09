@@ -32,7 +32,7 @@ const Placeholder = ({ title }: { title: string }) => (
   <div className="py-32 text-center">
     <SEO title={title} description={`${title} - Coming soon to Aesthetix Studio.`} />
     <h1 className="text-3xl font-bold text-slate-900 mb-4">{title}</h1>
-    <p className="text-slate-500">This page is under construction for the demo.</p>
+    <p className="text-slate-600">This page is under construction for the demo.</p>
   </div>
 );
 

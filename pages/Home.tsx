@@ -66,7 +66,7 @@ const Home = () => {
       {/* Trust Strip */}
       <section className="py-10 border-y border-slate-100 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6">Powering experiences with modern tech</p>
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-6">Powering experiences with modern tech</p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
              {TECH_STACK.map((tech) => (
                <div key={tech.name} className="flex items-center gap-2 group">
@@ -154,7 +154,7 @@ const Home = () => {
                   <Link to={`/services/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
                     <Icon className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform" size={32} />
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-                    <p className="text-slate-500 text-sm sm:text-base mb-4">{service.description}</p>
+                    <p className="text-slate-600 text-sm sm:text-base mb-4">{service.description}</p>
                     <span className="text-indigo-600 font-medium text-sm sm:text-base flex items-center gap-1 group-hover:gap-2 transition-all">
                       Learn more <ArrowRight size={14} />
                     </span>

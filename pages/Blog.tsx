@@ -29,7 +29,7 @@ const Blog = () => {
                   className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="flex items-center gap-4 text-xs text-slate-500 mb-3">
+              <div className="flex items-center gap-4 text-xs text-slate-600 mb-3">
                 <span className="font-bold text-accent uppercase tracking-wider">{post.category}</span>
                 <span>&bull;</span>
                 <span>{post.date}</span>

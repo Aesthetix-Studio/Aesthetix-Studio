@@ -173,11 +173,11 @@ const ProposalForm = () => {
           <div className="mb-8 relative">
             <label className="block text-sm font-medium text-slate-700 mb-1">Attachments (Design Brief, Assets)</label>
             <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:bg-slate-50 transition-colors">
-              <Upload className="mx-auto h-10 w-10 text-slate-400 mb-2" />
-              <p className="text-sm text-slate-500">
+              <Upload className="mx-auto h-10 w-10 text-slate-500 mb-2" />
+              <p className="text-sm text-slate-600">
                 <span className="font-medium text-indigo-600">Click to upload</span> or drag and drop
               </p>
-              <p className="text-xs text-slate-400 mt-1">PDF, PNG, JPG up to 10MB</p>
+              <p className="text-xs text-slate-500 mt-1">PDF, PNG, JPG up to 10MB</p>
               <input 
                 type="file" 
                 name="files"
@@ -195,7 +195,7 @@ const ProposalForm = () => {
           </div>
 
           <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-            <p className="text-xs text-slate-500 max-w-xs">
+            <p className="text-xs text-slate-600 max-w-xs">
               By submitting this form, you agree to our <Link to="/privacy" className="underline">Privacy Policy</Link>. Your data is secure.
             </p>
             <Button type="submit" size="lg" disabled={isSubmitting}>

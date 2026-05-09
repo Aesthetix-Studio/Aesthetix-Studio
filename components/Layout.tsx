@@ -45,7 +45,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </div>
                 <div className="flex flex-col">
                     <span className="font-bold text-xl leading-tight tracking-tight text-slate-900">Aesthetix</span>
-                    <span className="text-xs text-slate-500 uppercase tracking-wider font-medium">Studio</span>
+                    <span className="text-xs text-slate-600 uppercase tracking-wider font-medium">Studio</span>
                 </div>
               </Link>
             </div>
@@ -68,6 +68,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-slate-600 hover:text-slate-900 p-2"
+                aria-label="Toggle mobile menu"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -108,7 +109,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </div>
                 <span className="font-bold text-lg text-slate-900">Aesthetix</span>
               </div>
-              <p className="text-slate-500 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 Beautifully engineered websites that convert. We combine aesthetic precision with full-stack power.
               </p>
               <div className="mt-6 flex space-x-4">
@@ -149,7 +150,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400">
+          <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
             <p>&copy; {new Date().getFullYear()} Aesthetix Studio. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link to="/privacy" className="hover:text-slate-600">Privacy Policy</Link>

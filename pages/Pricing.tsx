@@ -57,9 +57,9 @@ const Pricing = () => {
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
               <div className="flex items-baseline gap-1 mb-4">
                 <span className="text-3xl sm:text-4xl font-extrabold text-slate-900">{plan.price}</span>
-                {plan.price.includes('+') && <span className="text-slate-500 text-sm font-normal">starting at</span>}
+                {plan.price.includes('+') && <span className="text-slate-600 text-sm font-normal">starting at</span>}
               </div>
-              <p className="text-slate-500 text-sm sm:text-base mb-8">{plan.description}</p>
+              <p className="text-slate-600 text-sm sm:text-base mb-8">{plan.description}</p>
               
               <ul className="space-y-4 mb-8">
                 {plan.features.map((feat, idx) => (
