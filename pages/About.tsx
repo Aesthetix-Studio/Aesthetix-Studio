@@ -224,7 +224,7 @@ const About = () => {
             <Link to="/proposal">
               <Button variant="secondary" size="lg">Book a Free Strategy Call</Button>
             </Link>
-            <Link to="/work">
+            <Link to="/projects">
               <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10 hover:text-white">
                 View Our Work <ArrowRight size={16} className="inline ml-2" />
               </Button>

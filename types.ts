@@ -73,4 +73,5 @@ export interface BlogPost {
   date: string;
   readTime: string;
   image: string;
+  relatedServiceSlug?: string;
 }

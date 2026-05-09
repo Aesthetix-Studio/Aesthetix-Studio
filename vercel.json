@@ -1,11 +1,12 @@
 {
+  "redirects": [
+    { "source": "/work", "destination": "/projects", "permanent": true },
+    { "source": "/work/:slug", "destination": "/projects/:slug", "permanent": true },
+    { "source": "/case-studies", "destination": "/projects", "permanent": true },
+    { "source": "/seo-websites", "destination": "/seo-friendly-websites", "permanent": true },
+    { "source": "/custom-web-apps", "destination": "/custom-web-applications", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/web-development", "destination": "/web-development.html" },
-    { "source": "/ui-ux-design", "destination": "/ui-ux-design.html" },
-    { "source": "/react-development", "destination": "/react-development.html" },
-    { "source": "/custom-web-apps", "destination": "/custom-web-apps.html" },
-    { "source": "/maintenance-support", "destination": "/maintenance-support.html" },
-    { "source": "/seo-websites", "destination": "/seo-websites.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

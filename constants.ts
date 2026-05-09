@@ -1,7 +1,8 @@
 import { Service, Project, BlogPost, Testimonial, TechStack } from './types';
 import { 
   Layout, Figma, Code, Activity, Search, PenTool, Share2, 
-  Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive 
+  Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive,
+  Zap, Shield
 } from 'lucide-react';
 
 export const SERVICES: Service[] = [
@@ -31,7 +32,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: '4',
-    slug: 'custom-web-apps',
+    slug: 'custom-web-applications',
     title: 'Custom Web Applications',
     description: 'Complex SaaS platforms and internal tools engineered for scale.',
     iconName: 'Database',
@@ -47,7 +48,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: '6',
-    slug: 'seo-websites',
+    slug: 'seo-friendly-websites',
     title: 'SEO Website Development',
     description: 'Websites engineered from the ground up to rank on Google and capture organic traffic.',
     iconName: 'Search',
@@ -158,7 +159,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'April 20, 2025',
     readTime: '8 min read',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
-    relatedServiceSlug: 'seo-websites'
+    relatedServiceSlug: 'seo-friendly-websites'
   },
   {
     id: '2',

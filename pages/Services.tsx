@@ -12,7 +12,7 @@ const getServiceImage = (slug: string): string => {
     'web-development': '/images/services/web-development.jpg',
     'react-development': '/images/services/react-development.jpg',
     'custom-web-applications': '/images/services/custom-web-app.jpg',
-    'website-maintenance': '/images/services/maintenance.jpg',
+    'maintenance-support': '/images/services/maintenance.jpg',
     'seo-friendly-websites': '/images/services/seo-marketing.jpg'
   };
 

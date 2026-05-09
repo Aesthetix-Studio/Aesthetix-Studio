@@ -6,14 +6,18 @@ interface SEOProps {
   image?: string;
   url?: string;
   type?: string;
+  schema?: object | object[];
 }
 
-const SEO: React.FC<SEOProps> = ({ 
-  title, 
-  description, 
+const SITE_URL = 'https://www.aesthetixstudio.com';
+
+const SEO: React.FC<SEOProps> = ({
+  title,
+  description,
   image = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop&crop=center&auto=format&q=80', // Default fallback image
-  url = window.location.href,
-  type = 'website'
+  url,
+  type = 'website',
+  schema
 }) => {
   useEffect(() => {
     // Update Title
@@ -36,7 +40,9 @@ const SEO: React.FC<SEOProps> = ({
 
     // Open Graph / Facebook
     updateMeta('og:type', type, 'property');
-    updateMeta('og:url', url, 'property');
+    const canonicalUrl = url || `${SITE_URL}${window.location.pathname}`;
+
+    updateMeta('og:url', canonicalUrl, 'property');
     updateMeta('og:title', title, 'property');
     updateMeta('og:description', description, 'property');
     updateMeta('og:image', image, 'property');
@@ -44,7 +50,7 @@ const SEO: React.FC<SEOProps> = ({
 
     // Twitter
     updateMeta('twitter:card', 'summary_large_image');
-    updateMeta('twitter:url', url);
+    updateMeta('twitter:url', canonicalUrl);
     updateMeta('twitter:title', title);
     updateMeta('twitter:description', description);
     updateMeta('twitter:image', image);
@@ -56,9 +62,27 @@ const SEO: React.FC<SEOProps> = ({
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', url);
+    canonical.setAttribute('href', canonicalUrl);
 
-  }, [title, description, image, url, type]);
+    // JSON-LD Schema Markup
+    if (schema) {
+      let schemaScript = document.querySelector('script[data-seo-schema]') as HTMLScriptElement;
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.setAttribute('type', 'application/ld+json');
+        schemaScript.setAttribute('data-seo-schema', 'true');
+        document.head.appendChild(schemaScript);
+      }
+      const schemas = Array.isArray(schema) ? schema : [schema];
+      schemaScript.textContent = JSON.stringify(schemas.length === 1 ? schemas[0] : {
+        '@context': 'https://schema.org',
+        '@graph': schemas.map(({ '@context': _context, ...schemaItem }: any) => schemaItem),
+      });
+    } else {
+      document.querySelector('script[data-seo-schema]')?.remove();
+    }
+
+  }, [title, description, image, url, type, schema]);
 
   return null;
 };

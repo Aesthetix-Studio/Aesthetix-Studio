@@ -53,7 +53,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center space-x-8">
               <NavLink to="/services">Services</NavLink>
-              <NavLink to="/work">Work</NavLink>
+              <NavLink to="/projects">Projects</NavLink>
               <NavLink to="/pricing">Pricing</NavLink>
               <NavLink to="/blog">Blog</NavLink>
               <NavLink to="/about">About</NavLink>
@@ -81,7 +81,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="md:hidden bg-white border-b border-slate-100">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <NavLink to="/services" mobile>Services</NavLink>
-              <NavLink to="/work" mobile>Work</NavLink>
+              <NavLink to="/projects" mobile>Projects</NavLink>
               <NavLink to="/pricing" mobile>Pricing</NavLink>
               <NavLink to="/blog" mobile>Blog</NavLink>
               <NavLink to="/about" mobile>About</NavLink>
@@ -123,7 +123,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div>
               <h4 className="font-bold text-slate-900 mb-4">Studio</h4>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link to="/work" className="hover:text-accent">Case Studies</Link></li>
+                <li><Link to="/projects" className="hover:text-accent">Case Studies</Link></li>
                 <li><Link to="/about" className="hover:text-accent">About Us</Link></li>
                 <li><Link to="/careers" className="hover:text-accent">Careers</Link></li>
                 <li><Link to="/admin" className="hover:text-accent">Admin Login</Link></li>
@@ -135,8 +135,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <ul className="space-y-2 text-sm text-slate-600">
                 <li><Link to="/ui-ux-design" className="hover:text-accent">UI/UX Design</Link></li>
                 <li><Link to="/web-development" className="hover:text-accent">Web Development</Link></li>
-                <li><Link to="/seo-websites" className="hover:text-accent">SEO Services</Link></li>
-                <li><Link to="/custom-web-apps" className="hover:text-accent">Custom Web Apps</Link></li>
+                <li><Link to="/seo-friendly-websites" className="hover:text-accent">SEO Services</Link></li>
+                <li><Link to="/custom-web-applications" className="hover:text-accent">Custom Web Apps</Link></li>
                 <li><Link to="/proposal" className="hover:text-accent">Request Proposal</Link></li>
               </ul>
             </div>

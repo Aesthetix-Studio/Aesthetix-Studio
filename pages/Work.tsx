@@ -15,14 +15,14 @@ const Work = () => {
   return (
     <div className="py-20">
       <SEO 
-        title="Selected Work" 
-        description="Explore our portfolio of high-performance websites, web applications, and e-commerce platforms built with modern technologies."
+        title="Web Design & Development Case Studies | Aesthetix Studio"
+        description="Explore Aesthetix Studio case studies with project problems, solutions, technology stacks, and measurable results from React, SEO, SaaS, and UI/UX work."
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader 
-          title="Selected Work" 
-          subtitle="A showcase of our finest digital engineering and design projects."
+          title="Projects & Case Studies"
+          subtitle="Real problems, production solutions, and measurable outcomes."
           center
         />
 
@@ -46,7 +46,7 @@ const Work = () => {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map(project => (
-            <Link key={project.id} to={`/work/${project.slug}`} className="group block">
+            <Link key={project.id} to={`/projects/${project.slug}`} className="group block">
               <div className="relative overflow-hidden rounded-xl mb-4 shadow-sm border border-slate-100">
                 <img 
                   src={project.image} 

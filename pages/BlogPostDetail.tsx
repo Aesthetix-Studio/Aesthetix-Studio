@@ -3,6 +3,7 @@ import { ArrowLeft, Clock, Calendar, User, Share2 } from 'lucide-react';
 import { Button } from '../components/UI';
 import { BLOG_POSTS } from '../constants';
 import SEO from '../components/SEO';
+import { generateArticleSchema } from '../utils/schemaMarkup';
 
 const BlogPostDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,9 +15,18 @@ const BlogPostDetail = () => {
 
   return (
     <div className="pb-24">
-      <SEO 
-        title={`${post.title} | Blog | Aesthetix Studio`} 
+      <SEO
+        title={`${post.title} | Blog | Aesthetix Studio`}
         description={post.excerpt}
+        image={post.image}
+        schema={generateArticleSchema(
+          post.title,
+          post.excerpt,
+          post.date,
+          post.date,
+          post.image,
+          'Aesthetix Studio'
+        )}
       />
 
       {/* Hero */}

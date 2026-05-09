@@ -10,7 +10,7 @@ const WorkDetail = () => {
   const project = PROJECTS.find(p => p.slug === slug);
 
   if (!project) {
-    return <Navigate to="/work" replace />;
+    return <Navigate to="/projects" replace />;
   }
 
   return (
@@ -24,7 +24,7 @@ const WorkDetail = () => {
       <div className="bg-slate-900 text-white pt-24 pb-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:24px_24px] -z-0"></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <Link to="/work" className="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-medium mb-8 transition-colors group">
+          <Link to="/projects" className="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-medium mb-8 transition-colors group">
             <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" /> Back to Case Studies
           </Link>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">

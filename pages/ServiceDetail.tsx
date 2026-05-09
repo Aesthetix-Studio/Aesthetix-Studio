@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useLocation, Link, Navigate } from 'react-router-dom';
-import { ArrowRight, Check, ChevronRight, ArrowLeft, Zap, Shield, Code, Layout, BarChart, Smartphone, Monitor } from 'lucide-react';
+import { ArrowRight, Check, ChevronRight } from 'lucide-react';
 import { Button, SectionHeader } from '../components/UI';
 import { SERVICES, BLOG_POSTS, PROJECTS, getIcon } from '../constants';
 import SEO from '../components/SEO';
+import { generateBreadcrumbSchema, generateFAQSchema, generateServiceSchema } from '../utils/schemaMarkup';
 
 // Rich per-service content for dedicated landing pages
 const SERVICE_CONTENT: Record<string, {
@@ -99,7 +100,7 @@ const SERVICE_CONTENT: Record<string, {
     relatedBlogSlugs: ['how-we-build-scalable-react-applications', 'vite-vs-nextjs-for-seo'],
     relatedProjectSlugs: ['fintech-dashboard']
   },
-  'custom-web-apps': {
+  'custom-web-applications': {
     seoTitle: 'Custom Web Application Development India | Aesthetix Studio',
     seoDescription: 'Custom web application and SaaS development company in India. We build complex platforms, internal tools, and data-driven applications engineered for scale.',
     headline: 'Custom Web Application Development',
@@ -153,7 +154,7 @@ const SERVICE_CONTENT: Record<string, {
     relatedBlogSlugs: ['core-web-vitals-explained'],
     relatedProjectSlugs: ['lux-ecommerce']
   },
-  'seo-websites': {
+  'seo-friendly-websites': {
     seoTitle: 'SEO-Friendly Website Development India | Aesthetix Studio',
     seoDescription: 'We build SEO-optimized websites from the ground up. Technical SEO, structured data, Core Web Vitals optimization, and keyword strategy baked into every project.',
     headline: 'SEO-Friendly Website Development',
@@ -188,7 +189,12 @@ const ServiceDetail = () => {
   
   // If no slug param (root level route), extract from pathname
   const slug = paramSlug || pathname.split('/').pop();
-  const service = SERVICES.find(s => s.slug === slug);
+  const legacySlugMap: Record<string, string> = {
+    'seo-websites': 'seo-friendly-websites',
+    'custom-web-apps': 'custom-web-applications',
+  };
+  const normalizedSlug = slug ? legacySlugMap[slug] || slug : slug;
+  const service = SERVICES.find(s => s.slug === normalizedSlug);
 
   if (!service) {
     return <Navigate to="/services" replace />;
@@ -200,31 +206,31 @@ const ServiceDetail = () => {
   const otherServices = SERVICES.filter(s => s.slug !== service.slug).slice(0, 3);
   const Icon = getIcon(service.iconName);
 
-  // Generate FAQ schema for this page
-  const faqSchema = content ? {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': content.faqs.map(faq => ({
-      '@type': 'Question',
-      'name': faq.q,
-      'acceptedAnswer': { '@type': 'Answer', 'text': faq.a }
+  // Generate Service and FAQ schemas
+  const serviceSchema = generateServiceSchema(
+    service.title,
+    service.description
+  );
+
+  const faqSchema = content ? generateFAQSchema(
+    content.faqs.map(faq => ({
+      question: faq.q,
+      answer: faq.a
     }))
-  } : null;
+  ) : null;
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://www.aesthetixstudio.com/' },
+    { name: 'Services', url: 'https://www.aesthetixstudio.com/services' },
+    { name: service.title, url: `https://www.aesthetixstudio.com/${service.slug}` },
+  ]);
 
   return (
     <div>
       <SEO
         title={content?.seoTitle || service.title}
         description={content?.seoDescription || service.description}
+        schema={faqSchema ? [serviceSchema, faqSchema, breadcrumbSchema] : [serviceSchema, breadcrumbSchema]}
       />
-
-      {/* Inject FAQ Schema */}
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
 
       {/* Breadcrumb */}
       <div className="bg-slate-50 border-b border-slate-100 py-3">
@@ -354,7 +360,7 @@ const ServiceDetail = () => {
                 <div>
                   <h2 className="text-2xl font-bold text-slate-900 mb-6">Related Case Studies</h2>
                   {relatedProjects.map(project => (
-                    <Link key={project.slug} to={`/work/${project.slug}`} className="block group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <Link key={project.slug} to={`/projects/${project.slug}`} className="block group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
                       <div className="aspect-video overflow-hidden">
                         <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
@@ -417,7 +423,7 @@ const ServiceDetail = () => {
                 <h2 className="text-3xl md:text-5xl font-bold mb-4">Case Studies</h2>
                 <p className="text-slate-400 text-lg">Real-world examples of how we've applied our {service.title} expertise.</p>
               </div>
-              <Link to="/work">
+              <Link to="/projects">
                 <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">View All Work <ArrowRight size={16} className="ml-2" /></Button>
               </Link>
             </div>
@@ -431,7 +437,7 @@ const ServiceDetail = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <Link to={`/work/${project.slug}`} className="group block">
+                  <Link to={`/projects/${project.slug}`} className="group block">
                     <div className="aspect-video rounded-3xl overflow-hidden mb-6">
                       <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>

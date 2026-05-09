@@ -1,17 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Zap, Shield, BarChart, CheckCircle } from 'lucide-react';
+import { ArrowRight, Zap, Shield, BarChart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button, SectionHeader } from '../components/UI';
 import { SERVICES, TECH_STACK, TESTIMONIALS, PROJECTS, getIcon } from '../constants';
 import SEO from '../components/SEO';
+import { generateFAQSchema, generateOrganizationSchema } from '../utils/schemaMarkup';
 
 const Home = () => {
+  const faqs = [
+    { q: 'Do you build SEO-friendly websites?', a: 'Yes. SEO is planned into the architecture with semantic HTML, metadata, schema markup, sitemap configuration, Core Web Vitals optimization, and internal linking.' },
+    { q: 'Which technologies do you use?', a: 'We primarily build with React, TypeScript, Next.js, Vite, Tailwind CSS, and modern backend APIs depending on project requirements.' },
+    { q: 'How long does development take?', a: 'A focused website build usually takes 4 to 8 weeks. Custom applications and SaaS platforms often take 8 to 16 weeks depending on complexity.' },
+    { q: 'Do you provide maintenance?', a: 'Yes. We provide ongoing support for security updates, dependency maintenance, performance monitoring, content updates, and bug fixes.' }
+  ];
+
   return (
     <div>
       <SEO 
-        title="Web Design & Development Agency India | Aesthetix Studio" 
+        title="Web Design & Development Agency | Aesthetix Studio" 
         description="Aesthetix Studio is a premier web design and development agency in India. We specialize in high-performance React websites, UI/UX design, and custom web applications with sub-second load times."
+        schema={[
+          generateOrganizationSchema(),
+          generateFAQSchema(faqs.map(faq => ({ question: faq.q, answer: faq.a })))
+        ]}
       />
       
       {/* Hero Section */}
@@ -131,7 +143,7 @@ const Home = () => {
               <h2 className="text-3xl md:text-5xl font-bold mb-4">Featured Work</h2>
               <p className="text-slate-400 text-lg">Tangible results delivered through rigorous engineering and design.</p>
             </div>
-            <Link to="/work">
+            <Link to="/projects">
               <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">View Case Studies <ArrowRight size={16} className="ml-2" /></Button>
             </Link>
           </div>
@@ -146,7 +158,7 @@ const Home = () => {
                 viewport={{ once: true }}
                 className="group cursor-pointer"
               >
-                <Link to={`/work/${project.slug}`}>
+                <Link to={`/projects/${project.slug}`}>
                   <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-8">
                     <img 
                       src={project.image} 
@@ -309,11 +321,7 @@ const Home = () => {
             <p className="text-slate-500">Everything you need to know about working with us.</p>
           </div>
           <div className="space-y-4">
-            {[
-              { q: 'What makes Aesthetix Studio different?', a: 'We combine design-thinking with senior software engineering. Every project is treated like a production product with proper architecture, code reviews, and performance optimization.' },
-              { q: 'Do you work with global clients?', a: 'Yes. Based in India, we serve startups and established businesses across the USA, UK, Middle East, and Asia using seamless async communication.' },
-              { q: 'How do I get a custom proposal?', a: 'Click the "Request Proposal" button to share your project details, and our team will get back to you with a tailored strategy and estimate within 24 hours.' }
-            ].map((faq, i) => (
+            {faqs.map((faq, i) => (
               <details key={i} className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
                 <summary className="flex items-center justify-between p-6 cursor-pointer text-slate-900 font-semibold hover:bg-slate-100 transition-colors">
                   {faq.q}

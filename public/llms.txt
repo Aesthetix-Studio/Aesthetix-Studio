@@ -13,5 +13,5 @@ We are a digital agency specializing in UI/UX design, modern front-end developme
 ## Links
 - Homepage: https://www.aesthetixstudio.com/
 - Contact: https://www.aesthetixstudio.com/contact
-- Work/Portfolio: https://www.aesthetixstudio.com/work
+- Projects/Case Studies: https://www.aesthetixstudio.com/projects
 - About: https://www.aesthetixstudio.com/about

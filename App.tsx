@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -51,11 +51,17 @@ const AnimatedRoutes = () => {
         <Route path="/web-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/react-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/ui-ux-design" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/seo-websites" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/custom-web-apps" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/seo-friendly-websites" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/custom-web-applications" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        {/* Legacy service aliases */}
+        <Route path="/seo-websites" element={<Navigate to="/seo-friendly-websites" replace />} />
+        <Route path="/custom-web-apps" element={<Navigate to="/custom-web-applications" replace />} />
         <Route path="/maintenance-support" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/work" element={<PageTransition><Work /></PageTransition>} />
-        <Route path="/work/:slug" element={<PageTransition><WorkDetail /></PageTransition>} />
+        <Route path="/projects" element={<PageTransition><Work /></PageTransition>} />
+        <Route path="/projects/:slug" element={<PageTransition><WorkDetail /></PageTransition>} />
+        {/* Legacy project aliases */}
+        <Route path="/work" element={<Navigate to="/projects" replace />} />
+        <Route path="/work/:slug" element={<Navigate to={`/projects/${location.pathname.split('/').pop()}`} replace />} />
         <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
         <Route path="/proposal" element={<PageTransition><Proposal /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
@@ -66,7 +72,7 @@ const AnimatedRoutes = () => {
         <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
         <Route path="/admin" element={<PageTransition><Admin /></PageTransition>} />
-        <Route path="/case-studies" element={<PageTransition><Work /></PageTransition>} />
+        <Route path="/case-studies" element={<Navigate to="/projects" replace />} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
