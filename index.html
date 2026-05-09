@@ -70,6 +70,8 @@
     <style>
       body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
       h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; }
+      /* Hide SEO fallback content from users — crawlers still read it */
+      #root > div:first-child { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     </style>
   </head>
   <body>
