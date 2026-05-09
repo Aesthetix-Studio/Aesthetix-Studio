@@ -53,7 +53,7 @@ const Services = () => {
                      loading="lazy"
                      onError={(e) => {
                        const target = e.target as HTMLImageElement;
-                       target.src = '/images/services/web-development.png';
+                       target.src = '/images/services/web-development.png?v=service-20260509';
                      }}
                    />
                 </div>

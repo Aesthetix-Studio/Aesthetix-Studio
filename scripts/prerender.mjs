@@ -97,6 +97,27 @@ const blogPosts = [
     h1: 'SaaS Landing Page Best Practices',
     body: 'Effective SaaS landing pages combine clear positioning, product proof, fast performance, credible case studies, and low-friction conversion paths.',
   },
+  {
+    slug: 'vite-vs-nextjs-for-seo',
+    title: 'Vite vs Next.js for SEO | Aesthetix Studio',
+    description: 'A practical comparison of Vite, Next.js, prerendering, and server rendering for businesses that need speed and search visibility.',
+    h1: 'Vite vs Next.js for SEO',
+    body: 'Choosing between Vite and Next.js depends on indexing needs, rendering strategy, content scale, and how much dynamic behavior the site requires.',
+  },
+  {
+    slug: 'why-website-speed-impacts-revenue',
+    title: 'Why Website Speed Impacts Revenue | Aesthetix Studio',
+    description: 'How slow websites increase acquisition costs, reduce trust, and lower conversion rates, plus how performance becomes business value.',
+    h1: 'Why Website Speed Impacts Revenue',
+    body: 'Website speed affects paid acquisition efficiency, organic rankings, user trust, bounce rate, conversion rate, and lifetime value.',
+  },
+  {
+    slug: 'ui-ux-mistakes-that-hurt-conversion',
+    title: 'UI UX Mistakes That Hurt Conversion | Aesthetix Studio',
+    description: 'Common design mistakes that make websites look polished but fail to convert, from weak hierarchy to unclear calls to action.',
+    h1: 'UI UX Mistakes That Hurt Conversion',
+    body: 'Conversion-focused UI UX depends on clear hierarchy, readable copy, visible proof, fast interaction, accessible forms, and low-friction calls to action.',
+  },
 ];
 
 const faqs = [

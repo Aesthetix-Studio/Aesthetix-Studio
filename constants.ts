@@ -11,7 +11,7 @@ export const SERVICES: Service[] = [
     slug: 'ui-ux-design',
     title: 'UI/UX Design Studio',
     description: 'High-converting, aesthetic UI/UX design tailored to your brand identity.',
-    image: '/images/services/website-design.jpg',
+    image: '/images/services/prototyping.jpg?v=service-20260509',
     iconName: 'Layout',
     features: ['User Research', 'Wireframing', 'High-Fidelity Mockups', 'Design Systems']
   },
@@ -20,7 +20,7 @@ export const SERVICES: Service[] = [
     slug: 'web-development',
     title: 'Web Development Agency',
     description: 'Robust, scalable frontend and backend engineering using modern stacks.',
-    image: '/images/services/web-development.png',
+    image: '/images/services/web-development.png?v=service-20260509',
     iconName: 'Code',
     features: ['React & TypeScript', 'Spring Boot / Python', 'CMS Integration', 'API Development']
   },
@@ -29,7 +29,7 @@ export const SERVICES: Service[] = [
     slug: 'react-development',
     title: 'React Development Company',
     description: 'Specialized high-performance React and Next.js development for modern web apps.',
-    image: '/images/services/react-development.png',
+    image: '/images/services/website-design.jpg?v=service-20260509',
     iconName: 'Layers',
     features: ['Single Page Applications', 'Server-Side Rendering', 'Micro-frontends', 'State Management']
   },
@@ -38,7 +38,7 @@ export const SERVICES: Service[] = [
     slug: 'custom-web-applications',
     title: 'Custom Web Applications',
     description: 'Complex SaaS platforms and internal tools engineered for scale.',
-    image: '/images/services/web-development.png',
+    image: '/images/services/custom-web-applications.png?v=service-20260509',
     iconName: 'Database',
     features: ['SaaS Development', 'Cloud Architecture', 'Database Design', 'Third-Party Integrations']
   },
@@ -47,7 +47,7 @@ export const SERVICES: Service[] = [
     slug: 'maintenance-support',
     title: 'Website Maintenance Services',
     description: 'Keep your digital assets secure, up-to-date, and performing optimally.',
-    image: '/images/services/maintenance-support.png',
+    image: '/images/services/maintenance-support.png?v=service-20260509',
     iconName: 'Activity',
     features: ['Security Updates', 'Performance Monitoring', 'Content Updates', 'Bug Fixes']
   },
@@ -56,7 +56,7 @@ export const SERVICES: Service[] = [
     slug: 'seo-friendly-websites',
     title: 'SEO Website Development',
     description: 'Websites engineered from the ground up to rank on Google and capture organic traffic.',
-    image: '/images/services/seo-friendly-websites.png',
+    image: '/images/services/seo-friendly-websites.png?v=service-20260509',
     iconName: 'Search',
     features: ['Technical Audit', 'Keyword Strategy', 'On-Page Optimization', 'Core Web Vitals']
   }
@@ -81,7 +81,8 @@ export const PROJECTS: Project[] = [
     ],
     results: ['40% increase in user session time', 'Reduced data load time by 85%', 'Zero downtime during high-volatility events'],
     businessImpact: ['Secured 15 new institutional contracts', 'Reduced customer support tickets by 30%', 'Recognized as Top 3 Fintech UI 2023'],
-    gallery: ['/images/work/fintech-dashboard.png']
+    gallery: ['/images/work/fintech-dashboard.png'],
+    relatedServices: ['react-development', 'custom-web-applications', 'web-development']
   },
   {
     id: '2',
@@ -101,7 +102,8 @@ export const PROJECTS: Project[] = [
     ],
     results: ['Page speed score increased from 45 to 98', 'Zero loss in organic traffic during migration', 'Perfect Core Web Vitals'],
     businessImpact: ['150% increase in mobile revenue', 'Bounce rate dropped from 72% to 28%', 'Lowered customer acquisition cost by 18%'],
-    gallery: ['/images/work/lux-ecommerce.png']
+    gallery: ['/images/work/lux-ecommerce.png'],
+    relatedServices: ['web-development', 'seo-friendly-websites', 'ui-ux-design']
   },
   {
     id: '3',
@@ -121,7 +123,8 @@ export const PROJECTS: Project[] = [
     ],
     results: ['Validated core workflow with 10 senior doctors', 'Secured $2M Series A funding based on the prototype', 'Reduced future dev time by 3 months'],
     businessImpact: ['Shortened time-to-diagnosis by 50%', 'Investor-ready product in record time', 'Highly scalable design system created'],
-    gallery: ['/images/work/health-ai.png']
+    gallery: ['/images/work/health-ai.png'],
+    relatedServices: ['ui-ux-design', 'react-development', 'custom-web-applications']
   }
 ];
 
@@ -164,7 +167,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'SEO',
     date: 'April 20, 2025',
     readTime: '8 min read',
-    image: '/images/services/seo-friendly-websites.png',
+    image: '/images/work/lux-ecommerce.png',
     relatedServiceSlug: 'seo-friendly-websites'
   },
   {
@@ -175,7 +178,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Performance',
     date: 'Apr 28, 2025',
     readTime: '6 min read',
-    image: '/images/services/web-development.png',
+    image: '/images/work/fintech-dashboard.png',
     relatedServiceSlug: 'web-development'
   },
   {
@@ -186,7 +189,40 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Design',
     date: 'May 05, 2025',
     readTime: '8 min read',
-    image: '/images/services/ui-ux-design.png',
+    image: '/images/work/health-ai.png',
+    relatedServiceSlug: 'ui-ux-design'
+  },
+  {
+    id: '4',
+    slug: 'vite-vs-nextjs-for-seo',
+    title: 'Vite vs Next.js for SEO: Which Stack Should You Choose?',
+    excerpt: 'A practical comparison of Vite, Next.js, prerendering, and server rendering for businesses that need both speed and search visibility.',
+    category: 'Technical SEO',
+    date: 'May 12, 2025',
+    readTime: '7 min read',
+    image: '/images/work/lux-ecommerce.png',
+    relatedServiceSlug: 'react-development'
+  },
+  {
+    id: '5',
+    slug: 'why-website-speed-impacts-revenue',
+    title: 'Why Website Speed Impacts Revenue More Than Most Teams Realize',
+    excerpt: 'Slow websites increase acquisition costs, reduce trust, and lower conversion rates. Here is how performance turns into measurable business value.',
+    category: 'Business',
+    date: 'May 18, 2025',
+    readTime: '6 min read',
+    image: '/images/work/fintech-dashboard.png',
+    relatedServiceSlug: 'web-development'
+  },
+  {
+    id: '6',
+    slug: 'ui-ux-mistakes-that-hurt-conversion',
+    title: 'UI UX Mistakes That Hurt Conversion on Modern Websites',
+    excerpt: 'Common design mistakes that make websites feel polished but fail to convert, from weak hierarchy to unclear calls to action.',
+    category: 'Design',
+    date: 'May 24, 2025',
+    readTime: '8 min read',
+    image: '/images/work/health-ai.png',
     relatedServiceSlug: 'ui-ux-design'
   }
 ];

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, Zap, BarChart, Settings, Rocket } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Zap, BarChart, Settings, Rocket } from 'lucide-react';
 import { Button } from '../components/UI';
-import { PROJECTS } from '../constants';
+import { PROJECTS, SERVICES, TESTIMONIALS } from '../constants';
 import SEO from '../components/SEO';
 
 const WorkDetail = () => {
@@ -12,6 +12,14 @@ const WorkDetail = () => {
   if (!project) {
     return <Navigate to="/projects" replace />;
   }
+
+  const relatedServices = SERVICES.filter(service => project.relatedServices?.includes(service.slug));
+  const testimonialProjectMap: Record<string, string> = {
+    'fintech-dashboard': 'Fintech Dashboard',
+    'lux-ecommerce': 'E-Commerce Migration',
+    'health-ai': 'AI Prototype',
+  };
+  const testimonial = TESTIMONIALS.find(item => item.project === testimonialProjectMap[project.slug]);
 
   return (
     <div className="pb-24">
@@ -70,7 +78,7 @@ const WorkDetail = () => {
             <section>
               <div className="flex items-center gap-3 text-indigo-600 font-bold uppercase tracking-widest text-sm mb-4">
                 <Settings size={18} />
-                The Challenge
+                Problem
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Understanding the Problem</h2>
               <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
@@ -81,7 +89,7 @@ const WorkDetail = () => {
             <section>
               <div className="flex items-center gap-3 text-indigo-600 font-bold uppercase tracking-widest text-sm mb-4">
                 <Zap size={18} />
-                The Solution
+                Solution
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Our Engineering Approach</h2>
               <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
@@ -99,6 +107,28 @@ const WorkDetail = () => {
                 <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
                   {project.process}
                 </p>
+              </section>
+            )}
+
+            {project.gallery && project.gallery.length > 0 && (
+              <section>
+                <div className="flex items-center gap-3 text-indigo-600 font-bold uppercase tracking-widest text-sm mb-4">
+                  <BarChart size={18} />
+                  Screenshots
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Product Screens</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {project.gallery.map((image, index) => (
+                    <div key={image} className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm">
+                      <img
+                        src={image}
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        className="w-full aspect-video object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
               </section>
             )}
           </div>
@@ -148,8 +178,44 @@ const WorkDetail = () => {
                 </ul>
               </div>
             )}
+
+            {relatedServices.length > 0 && (
+              <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-6">Related Services</h3>
+                <div className="space-y-3">
+                  {relatedServices.map(service => (
+                    <Link
+                      key={service.slug}
+                      to={`/${service.slug}`}
+                      className="group flex items-center justify-between gap-4 rounded-xl bg-slate-50 border border-slate-100 p-4 hover:border-indigo-200 hover:bg-indigo-50/40 transition-colors"
+                    >
+                      <span className="font-semibold text-slate-800 text-sm">{service.title}</span>
+                      <ArrowRight size={16} className="text-indigo-600 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
+
+        {testimonial && (
+          <div className="mb-24 bg-slate-50 rounded-[2rem] border border-slate-100 p-8 md:p-12">
+            <p className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4">Client Testimonial</p>
+            <blockquote className="text-2xl md:text-3xl font-bold text-slate-900 leading-snug mb-8">
+              "{testimonial.quote}"
+            </blockquote>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <p className="font-bold text-slate-900">{testimonial.author}</p>
+                <p className="text-sm text-slate-500">{testimonial.role}</p>
+              </div>
+              <div className="inline-flex w-fit rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-bold text-indigo-600">
+                {testimonial.results}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Closing CTA */}
         <div className="bg-slate-900 rounded-[2.5rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">

@@ -12,7 +12,8 @@ const Home = () => {
     { q: 'Do you build SEO-friendly websites?', a: 'Yes. SEO is planned into the architecture with semantic HTML, metadata, schema markup, sitemap configuration, Core Web Vitals optimization, and internal linking.' },
     { q: 'Which technologies do you use?', a: 'We primarily build with React, TypeScript, Next.js, Vite, Tailwind CSS, and modern backend APIs depending on project requirements.' },
     { q: 'How long does development take?', a: 'A focused website build usually takes 4 to 8 weeks. Custom applications and SaaS platforms often take 8 to 16 weeks depending on complexity.' },
-    { q: 'Do you provide maintenance?', a: 'Yes. We provide ongoing support for security updates, dependency maintenance, performance monitoring, content updates, and bug fixes.' }
+    { q: 'Do you provide maintenance?', a: 'Yes. We provide ongoing support for security updates, dependency maintenance, performance monitoring, content updates, and bug fixes.' },
+    { q: 'Do you work internationally?', a: 'Yes. We are based in India and work with clients across the United States, United Kingdom, Middle East, and Asia using async-friendly communication.' }
   ];
 
   return (
