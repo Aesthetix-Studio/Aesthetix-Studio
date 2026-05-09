@@ -86,7 +86,7 @@ export const PROJECTS: Project[] = [
     title: 'MediScan AI Interface',
     category: 'Prototype',
     description: 'Interface design for an AI-powered medical imaging diagnostic tool.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    image: '/images/work/health-ai.png',
     tags: ['Figma', 'Python', 'Medical'],
     challenge: 'Creating a trustworthy and efficient interface for radiologists who need to process images rapidly.',
     solution: 'Conducted deep user research with doctors to create a high-contrast, keyboard-driven interface prototype validated before development.',
