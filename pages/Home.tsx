@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <div>
       <SEO 
-        title="Design-First Web Development Studio" 
-        description="Aesthetix Studio builds beautifully engineered websites that convert. Specializing in React, Figma, and high-performance digital experiences."
+        title="Web Design & Development Agency in India | Aesthetix Studio" 
+        description="Aesthetix Studio builds high-performance websites, SaaS platforms, and modern digital experiences using React, Vite, and scalable web technologies."
       />
       
       {/* Hero Section */}
@@ -184,10 +184,10 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/proposal">
-               <Button variant="secondary" size="lg">Start Your Project</Button>
+               <Button variant="secondary" size="lg">Book a Free Strategy Call</Button>
             </Link>
             <Link to="/contact">
-               <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10 hover:text-white">Contact Sales</Button>
+               <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10 hover:text-white">Launch Faster With Aesthetix</Button>
             </Link>
           </div>
         </div>
