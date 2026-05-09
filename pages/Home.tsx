@@ -11,7 +11,7 @@ const Home = () => {
     <div>
       <SEO 
         title="Web Design & Development Agency in India | Aesthetix Studio" 
-        description="Aesthetix Studio builds high-performance websites, SaaS platforms, and modern digital experiences using React, Vite, and scalable web technologies."
+        description="Aesthetix Studio is a premier web design and development agency in India, helping startups and enterprises build high-performance digital products and scalable web architectures."
       />
       
       {/* Hero Section */}
@@ -153,7 +153,7 @@ const Home = () => {
                 >
                   <Link to={`/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
                     <Icon className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform" size={32} />
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h4>
                     <p className="text-slate-600 text-sm mb-4 line-clamp-2">{service.description}</p>
                     <span className="text-indigo-600 font-medium text-sm sm:text-base flex items-center gap-1 group-hover:gap-2 transition-all">
                       Learn more <ArrowRight size={14} />
@@ -232,12 +232,9 @@ const Home = () => {
           />
           <div className="space-y-4">
             {[
-              { q: 'What technologies do you use for web development?', a: 'We specialize in React, TypeScript, Next.js, and Vite for frontend development, with Spring Boot and Python for backend APIs. All our projects are optimized for Core Web Vitals and SEO from day one.' },
-              { q: 'How long does a typical website project take?', a: 'A standard website takes 4–8 weeks from discovery to launch. Complex SaaS applications and custom web apps may take 8–16 weeks depending on scope. We provide a detailed timeline during our free strategy call.' },
-              { q: 'Do you provide SEO optimization with your websites?', a: 'Absolutely. SEO is built into our development process — not added as an afterthought. We implement structured data, optimize Core Web Vitals, create proper heading hierarchies, and set up sitemap and robots.txt configurations.' },
-              { q: 'Do you offer website maintenance after launch?', a: 'Yes. We offer ongoing maintenance plans that include security updates, performance monitoring, content updates, and bug fixes to keep your site secure and performing optimally.' },
-              { q: 'Can you work with clients outside India?', a: 'Yes — we work with clients worldwide. Our team is experienced in async communication and we use Slack, Notion, and Figma to collaborate seamlessly across time zones.' },
-              { q: 'What makes Aesthetix Studio different from other agencies?', a: 'We combine design-thinking with software engineering discipline. Every project is treated like a software product with proper architecture, code reviews, automated testing, and documentation.' }
+              { q: 'What makes Aesthetix Studio different?', a: 'We combine design-thinking with senior software engineering. Every project is treated like a production product with proper architecture, code reviews, and performance optimization.' },
+              { q: 'Do you work with global clients?', a: 'Yes. Based in India, we serve startups and established businesses across the USA, UK, Middle East, and Asia using seamless async communication.' },
+              { q: 'How do I get a custom proposal?', a: 'Click the "Request Proposal" button to share your project details, and our team will get back to you with a tailored strategy and estimate within 24 hours.' }
             ].map((faq, i) => (
               <details key={i} className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
                 <summary className="flex items-center justify-between p-6 cursor-pointer text-slate-900 font-semibold text-lg hover:bg-slate-100 transition-colors">
