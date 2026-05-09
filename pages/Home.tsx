@@ -35,8 +35,8 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight"
           >
-            Beautifully Engineered <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-indigo-600">Websites That Convert</span>
+            Web Design & Development <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-indigo-600">Agency in India</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -44,8 +44,8 @@ const Home = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-4 max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl text-slate-600 mb-10 leading-relaxed"
           >
-            Aesthetix Studio combines world-class design with robust engineering. 
-            We build scalable, high-performance digital experiences for modern brands.
+            Aesthetix Studio is a web design and development agency helping startups and businesses across India build 
+            high-performance, SEO-friendly websites using React, Vite, and modern web technologies.
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -236,7 +236,38 @@ const Home = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            title="Frequently Asked Questions"
+            subtitle="Everything you need to know about working with Aesthetix Studio."
+            center
+          />
+          <div className="space-y-4">
+            {[
+              { q: 'What technologies do you use for web development?', a: 'We specialize in React, TypeScript, Next.js, and Vite for frontend development, with Spring Boot and Python for backend APIs. All our projects are optimized for Core Web Vitals and SEO from day one.' },
+              { q: 'How long does a typical website project take?', a: 'A standard website takes 4\u20138 weeks from discovery to launch. Complex SaaS applications and custom web apps may take 8\u201316 weeks depending on scope. We provide a detailed timeline during our free strategy call.' },
+              { q: 'Do you provide SEO optimization with your websites?', a: 'Absolutely. SEO is built into our development process \u2014 not added as an afterthought. We implement structured data, optimize Core Web Vitals, create proper heading hierarchies, and set up sitemap and robots.txt configurations.' },
+              { q: 'Do you offer website maintenance after launch?', a: 'Yes. We offer ongoing maintenance plans that include security updates, performance monitoring, content updates, and bug fixes to keep your site secure and performing optimally.' },
+              { q: 'Can you work with clients outside India?', a: 'Yes \u2014 we work with clients worldwide. Our team is experienced in async communication and we use Slack, Notion, and Figma to collaborate seamlessly across time zones.' },
+              { q: 'What makes Aesthetix Studio different from other agencies?', a: 'We combine design-thinking with software engineering discipline. Every project is treated like a software product with proper architecture, code reviews, automated testing, and documentation.' }
+            ].map((faq, i) => (
+              <details key={i} className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
+                <summary className="flex items-center justify-between p-6 cursor-pointer text-slate-900 font-semibold text-lg hover:bg-slate-100 transition-colors">
+                  {faq.q}
+                  <span className="ml-4 text-indigo-500 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
+                </summary>
+                <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* CTA Section */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
          {/* Abstract shapes */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"></div>
