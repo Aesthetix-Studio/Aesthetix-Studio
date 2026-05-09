@@ -8,8 +8,8 @@ import SEO from '../components/SEO';
 // Helper function to get service-specific images
 const getServiceImage = (slug: string): string => {
   const serviceImages: Record<string, string> = {
-    'website-design': '/images/services/web-development.jpg',
-    'prototyping-figma': '/images/services/web-development.jpg',
+    'website-design': '/images/services/website-design.jpg',
+    'prototyping-figma': '/images/services/prototyping.jpg',
     'web-development': '/images/services/web-development.jpg',
     'maintenance': '/images/services/tech-support.jpg',
     'seo-marketing': '/images/services/seo-marketing.jpg',
