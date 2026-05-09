@@ -8,13 +8,12 @@ import SEO from '../components/SEO';
 // Helper function to get service-specific images
 const getServiceImage = (slug: string): string => {
   const serviceImages: Record<string, string> = {
-    'website-design': '/images/services/website-design.jpg',
-    'prototyping-figma': '/images/services/prototyping.jpg',
+    'ui-ux-design': '/images/services/website-design.jpg',
     'web-development': '/images/services/web-development.jpg',
-    'maintenance': '/images/services/tech-support.jpg',
-    'seo-marketing': '/images/services/seo-marketing.jpg',
-    'content-writing': '/images/services/content-writing.jpg',
-    'social-management': '/images/services/social-media.jpg'
+    'react-development': '/images/services/web-development.jpg',
+    'custom-web-applications': '/images/services/web-development.jpg',
+    'website-maintenance': '/images/services/tech-support.jpg',
+    'seo-friendly-websites': '/images/services/seo-marketing.jpg'
   };
   
   return serviceImages[slug] || '/images/services/web-development.jpg';
@@ -24,8 +23,8 @@ const Services = () => {
   return (
     <div className="pt-12 pb-24">
       <SEO 
-        title="Our Services" 
-        description="Comprehensive design and web engineering solutions. From Website Design and Prototyping to SEO and Custom Development."
+        title="Web Development & UI/UX Design Services | Aesthetix Studio India"
+        description="Explore Aesthetix Studio's full range of services: UI/UX design, React web development, SEO-friendly websites, custom web applications, and website maintenance. Serving clients in India and worldwide."
       />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

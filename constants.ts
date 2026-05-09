@@ -7,59 +7,51 @@ import {
 export const SERVICES: Service[] = [
   {
     id: '1',
-    slug: 'website-design',
-    title: 'Website Design',
+    slug: 'ui-ux-design',
+    title: 'UI/UX Design Studio',
     description: 'High-converting, aesthetic UI/UX design tailored to your brand identity.',
     iconName: 'Layout',
     features: ['User Research', 'Wireframing', 'High-Fidelity Mockups', 'Design Systems']
   },
   {
     id: '2',
-    slug: 'prototyping-figma',
-    title: 'Prototyping (Figma)',
-    description: 'Interactive prototypes to validate ideas before writing a single line of code.',
-    iconName: 'Figma',
-    features: ['Clickable Prototypes', 'User Testing Setup', 'Interaction Design', 'Developer Handoff']
-  },
-  {
-    id: '3',
     slug: 'web-development',
-    title: 'Web Development',
+    title: 'Web Development Agency',
     description: 'Robust, scalable frontend and backend engineering using modern stacks.',
     iconName: 'Code',
     features: ['React & TypeScript', 'Spring Boot / Python', 'CMS Integration', 'API Development']
   },
   {
+    id: '3',
+    slug: 'react-development',
+    title: 'React Development Company',
+    description: 'Specialized high-performance React and Next.js development for modern web apps.',
+    iconName: 'Layers',
+    features: ['Single Page Applications', 'Server-Side Rendering', 'Micro-frontends', 'State Management']
+  },
+  {
     id: '4',
-    slug: 'maintenance',
-    title: 'Maintenance & Support',
+    slug: 'custom-web-applications',
+    title: 'Custom Web Applications',
+    description: 'Complex SaaS platforms and internal tools engineered for scale.',
+    iconName: 'Database',
+    features: ['SaaS Development', 'Cloud Architecture', 'Database Design', 'Third-Party Integrations']
+  },
+  {
+    id: '5',
+    slug: 'website-maintenance',
+    title: 'Website Maintenance Services',
     description: 'Keep your digital assets secure, up-to-date, and performing optimally.',
     iconName: 'Activity',
     features: ['Security Updates', 'Performance Monitoring', 'Content Updates', 'Bug Fixes']
   },
   {
-    id: '5',
-    slug: 'seo-marketing',
-    title: 'SEO & Marketing',
-    description: 'Technical SEO and content strategies to drive organic traffic.',
-    iconName: 'Search',
-    features: ['Technical Audit', 'Keyword Strategy', 'On-Page Optimization', 'Analytics']
-  },
-  {
     id: '6',
-    slug: 'content-writing',
-    title: 'Content Writing',
-    description: 'Compelling copy that speaks your brand voice and converts visitors.',
-    iconName: 'PenTool',
-    features: ['Blog Posts', 'Landing Page Copy', 'Whitepapers', 'Email Sequences']
-  },
-  {
-    id: '7',
-    slug: 'social-management',
-    title: 'Social Management',
-    description: 'Strategic social media presence to engage your community.',
-    iconName: 'Share2',
-    features: ['Content Calendar', 'Asset Creation', 'Community Engagement', 'Reporting']
+    slug: 'seo-friendly-websites',
+    title: 'SEO Website Development',
+    description: 'Websites engineered from the ground up to rank on Google and capture organic traffic.',
+    iconName: 'Search',
+    features: ['Technical Audit', 'Keyword Strategy', 'On-Page Optimization', 'Core Web Vitals']
   }
 ];
 
@@ -105,33 +97,63 @@ export const PROJECTS: Project[] = [
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: '1',
-    slug: 'future-of-web-design-2025',
-    title: 'The Future of Web Design: Trends to Watch in 2025',
-    excerpt: 'From AI-generated layouts to spatial computing interfaces, here is what is coming next.',
-    category: 'Design',
-    date: 'Oct 12, 2024',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
-  },
-  {
-    id: '2',
-    slug: 'why-react-is-still-king',
-    title: 'Why React Reigns Supreme for Enterprise Apps',
-    excerpt: 'Analyzing the ecosystem, performance, and talent pool benefits of the React stack.',
-    category: 'Engineering',
-    date: 'Nov 03, 2024',
-    readTime: '8 min read',
+    slug: 'why-react-websites-need-seo-setup',
+    title: 'Why React Websites Need Proper SEO Setup (And How to Fix It)',
+    excerpt: 'Single Page Apps are powerful, but they can be invisible to Google without the right configuration. Here is how to make your React site fully crawlable.',
+    category: 'Technical SEO',
+    date: 'Apr 20, 2025',
+    readTime: '7 min read',
     image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
   },
   {
+    id: '2',
+    slug: 'core-web-vitals-explained',
+    title: 'Core Web Vitals Explained: How Website Speed Affects Your Google Ranking',
+    excerpt: 'LCP, FID, CLS — understand what Google actually measures and how improving these scores can directly boost your organic search traffic.',
+    category: 'Performance',
+    date: 'Apr 28, 2025',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+  },
+  {
     id: '3',
-    slug: 'seo-mistakes-to-avoid',
-    title: '5 Critical SEO Mistakes Startups Make',
-    excerpt: 'Don\'t let technical debt kill your organic growth. Fix these common issues.',
-    category: 'Marketing',
-    date: 'Nov 15, 2024',
-    readTime: '4 min read',
+    slug: 'saas-landing-page-best-practices',
+    title: 'SaaS Landing Page Best Practices That Actually Drive Conversions',
+    excerpt: 'Your landing page is your best salesperson. Here are the UI/UX design patterns that top SaaS companies use to convert visitors into paying customers.',
+    category: 'Design',
+    date: 'May 05, 2025',
+    readTime: '8 min read',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+  },
+  {
+    id: '4',
+    slug: 'vite-vs-nextjs-for-seo',
+    title: 'Vite vs Next.js for SEO: Which Should You Choose in 2025?',
+    excerpt: 'Both are excellent tools, but they have very different implications for search engine visibility. Here is a thorough comparison from the perspective of a web development agency.',
+    category: 'Engineering',
+    date: 'May 09, 2025',
+    readTime: '9 min read',
+    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+  },
+  {
+    id: '5',
+    slug: 'seo-mistakes-startups-make',
+    title: '5 Critical SEO Mistakes Startups Make (And How We Fix Them)',
+    excerpt: 'From missing structured data to client-side-only rendering, these are the most damaging technical SEO errors we see when auditing startup websites.',
+    category: 'SEO',
+    date: 'May 12, 2025',
+    readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+  },
+  {
+    id: '6',
+    slug: 'how-we-build-scalable-react-applications',
+    title: 'How We Build Scalable React Applications at Aesthetix Studio',
+    excerpt: 'A behind-the-scenes look at our React development workflow — from component architecture and state management to CI/CD pipelines and cloud deployment.',
+    category: 'Engineering',
+    date: 'May 15, 2025',
+    readTime: '10 min read',
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
   }
 ];
 

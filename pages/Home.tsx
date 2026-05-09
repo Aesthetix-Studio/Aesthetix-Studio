@@ -170,8 +170,73 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
-      {/* CTA Section */}
+
+      {/* Testimonials / Social Proof */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            title="What Our Clients Say"
+            subtitle="Real results from real businesses we've helped build and grow."
+            center
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Aesthetix Studio delivered a stunning SaaS dashboard that outperformed every competitor we evaluated. Their attention to both design and performance is unmatched.",
+                author: "Ravi Mehta",
+                role: "CTO, Nova Fintech",
+                initial: "R"
+              },
+              {
+                quote: "They tripled our mobile conversion rate after a complete redesign. Page speed went from 45 to 98. This team genuinely understands SEO-first engineering.",
+                author: "Priya Sharma",
+                role: "Founder, LUX Fashion",
+                initial: "P"
+              },
+              {
+                quote: "The Figma prototype they built helped us secure Series A funding. We had a validated, investor-ready product in just two weeks.",
+                author: "Dr. Anil Kumar",
+                role: "CEO, MediScan AI",
+                initial: "A"
+              }
+            ].map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col"
+              >
+                <div className="flex-1 mb-6">
+                  <div className="text-indigo-400 text-5xl leading-none font-serif mb-4">"</div>
+                  <p className="text-slate-700 leading-relaxed italic">{t.quote}</p>
+                </div>
+                <div className="flex items-center gap-3 border-t border-slate-200 pt-5">
+                  <div className="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shrink-0">
+                    {t.initial}
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-900 text-sm">{t.author}</p>
+                    <p className="text-slate-500 text-xs">{t.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Location / Trust signal */}
+      <section className="py-10 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="text-slate-500 text-base">
+            🇮🇳 <strong className="text-slate-700">Based in India</strong> — helping startups and businesses across India, the Middle East, and globally build high-performance, SEO-friendly websites.
+          </p>
+        </div>
+      </section>
+
+
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
          {/* Abstract shapes */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"></div>

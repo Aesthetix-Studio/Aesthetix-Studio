@@ -8,10 +8,27 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Aesthetix Studio",
-      "url": "https://www.aesthetixstudio.com",
-      "logo": "https://www.aesthetixstudio.com/logo.png"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Aesthetix Studio",
+          "url": "https://www.aesthetixstudio.com",
+          "logo": "https://www.aesthetixstudio.com/logo.png",
+          "sameAs": [
+            "https://www.linkedin.com/company/aesthetix-studio",
+            "https://dribbble.com/aesthetixstudio"
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "Aesthetix Studio",
+          "description": "Web design and development agency in India building high-performance, SEO-friendly websites using React and modern web technologies.",
+          "url": "https://www.aesthetixstudio.com",
+          "image": "https://www.aesthetixstudio.com/logo.png",
+          "areaServed": ["India", "United States", "United Kingdom", "UAE"],
+          "serviceType": ["Web Design", "React Development", "UI/UX Design", "SEO", "Web Application Development"]
+        }
+      ]
     }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">

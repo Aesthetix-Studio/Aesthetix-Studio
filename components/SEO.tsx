@@ -18,7 +18,7 @@ const SEO: React.FC<SEOProps> = ({
   useEffect(() => {
     // Update Title
     const siteTitle = 'Aesthetix Studio';
-    document.title = `${title} | ${siteTitle}`;
+    document.title = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
 
     // Helper to update or create meta tags
     const updateMeta = (name: string, content: string, attribute: string = 'name') => {
