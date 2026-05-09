@@ -71,13 +71,13 @@
       body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
       h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; }
       /* Hide SEO fallback content from users — crawlers still read it */
-      #root > div:first-child { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+      .seo-fallback { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     </style>
   </head>
   <body>
     <div id="root">
       <!-- SEO Fallback Content -->
-      <div>
+      <div class="seo-fallback">
         <h1>Web Design & Development Agency in India | Aesthetix Studio</h1>
         <p>Aesthetix Studio is a premier web design agency in Mumbai and a top-tier React development company serving global clients. We build high-performance websites, SaaS platforms, and modern digital experiences.</p>
         <p>At Aesthetix Studio, our UI UX studio in India believes that great design and robust engineering go hand in hand. We specialize in building fast, accessible, and SEO-friendly websites using modern frontend development frameworks like React and Vite. Our team of experts works closely with you to understand your business goals and deliver scalable web applications that drive results. Whether you need a corporate website, an e-commerce platform, or a custom web application, we have the skills and experience to bring your vision to life. Partner with a leading website development company in Maharashtra to create a digital presence that stands out.</p>
