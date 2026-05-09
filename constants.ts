@@ -157,6 +157,30 @@ export const BLOG_POSTS: BlogPost[] = [
   }
 ];
 
+export const TESTIMONIALS = [
+  {
+    quote: "Aesthetix Studio delivered a stunning SaaS dashboard that tripled our institutional user engagement. Their attention to sub-second data visualization performance is world-class.",
+    author: "Ravi Mehta",
+    role: "CTO, Nova Fintech",
+    project: "Fintech Dashboard",
+    initial: "R"
+  },
+  {
+    quote: "They doubled our mobile conversion rate in 3 months. Page speed went from a 45 to 98 on Lighthouse. This is the only team I trust for SEO-first React development.",
+    author: "Priya Sharma",
+    role: "Founder, LUX Fashion",
+    project: "E-Commerce Re-platforming",
+    initial: "P"
+  },
+  {
+    quote: "The Figma prototype they built in 2 weeks was key to our Series A round. Investors were blown away by the clarity and depth of the user experience.",
+    author: "Dr. Anil Kumar",
+    role: "CEO, MediScan AI",
+    project: "AI Medical Interface",
+    initial: "A"
+  }
+];
+
 export const TECH_STACK = [
   { name: 'Figma', icon: Figma },
   { name: 'React', icon: Code },

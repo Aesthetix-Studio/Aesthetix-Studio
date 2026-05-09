@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, useLocation, Link, Navigate } from 'react-router-dom';
 import { ArrowRight, Check, ChevronRight } from 'lucide-react';
 import { Button } from '../components/UI';
 import { SERVICES, BLOG_POSTS, PROJECTS, getIcon } from '../constants';
@@ -182,7 +182,11 @@ const SERVICE_CONTENT: Record<string, {
 };
 
 const ServiceDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: paramSlug } = useParams<{ slug: string }>();
+  const { pathname } = useLocation();
+  
+  // If no slug param (root level route), extract from pathname
+  const slug = paramSlug || pathname.split('/').pop();
   const service = SERVICES.find(s => s.slug === slug);
 
   if (!service) {
@@ -389,7 +393,7 @@ const ServiceDetail = () => {
             {otherServices.map(s => {
               const SIcon = getIcon(s.iconName);
               return (
-                <Link key={s.slug} to={`/services/${s.slug}`} className="group block p-6 bg-white rounded-xl border border-slate-100 hover:shadow-md transition-all">
+                <Link key={s.slug} to={`/${s.slug}`} className="group block p-6 bg-white rounded-xl border border-slate-100 hover:shadow-md transition-all">
                   <SIcon className="text-indigo-600 mb-3 group-hover:scale-110 transition-transform" size={28} />
                   <h3 className="font-bold text-slate-900 mb-1">{s.title}</h3>
                   <p className="text-slate-600 text-sm mb-3">{s.description}</p>

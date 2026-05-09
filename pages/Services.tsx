@@ -54,7 +54,7 @@ const Services = () => {
                     ))}
                   </ul>
                   <div className="pt-4">
-                    <Link to={`/services/${service.slug}`} className="inline-flex items-center font-medium text-accent hover:gap-2 transition-all text-sm sm:text-base">
+                    <Link to={`/${service.slug}`} className="inline-flex items-center font-medium text-accent hover:gap-2 transition-all text-sm sm:text-base">
                       View Details <ArrowRight size={16} className="ml-1" />
                     </Link>
                   </div>

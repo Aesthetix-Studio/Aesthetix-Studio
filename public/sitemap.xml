@@ -11,34 +11,34 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.aesthetixstudio.com/services/ui-ux-design</loc>
+    <loc>https://www.aesthetixstudio.com/ui-ux-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.aesthetixstudio.com/web-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.aesthetixstudio.com/react-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.aesthetixstudio.com/custom-web-applications</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.aesthetixstudio.com/website-maintenance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.aesthetixstudio.com/services/web-development</loc>
+    <loc>https://www.aesthetixstudio.com/seo-friendly-websites</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.aesthetixstudio.com/services/react-development</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.aesthetixstudio.com/services/custom-web-applications</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.aesthetixstudio.com/services/website-maintenance</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.aesthetixstudio.com/services/seo-friendly-websites</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.aesthetixstudio.com/work</loc>

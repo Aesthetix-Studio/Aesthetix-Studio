@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, Code, Zap, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button, SectionHeader } from '../components/UI';
-import { SERVICES, TECH_STACK, getIcon } from '../constants';
+import { SERVICES, TECH_STACK, TESTIMONIALS, getIcon } from '../constants';
 import SEO from '../components/SEO';
 
 const Home = () => {
@@ -151,7 +151,7 @@ const Home = () => {
                   viewport={{ once: true }}
                   whileHover={{ y: -5 }}
                 >
-                  <Link to={`/services/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
+                  <Link to={`/${service.slug}`} className="group block p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all h-full">
                     <Icon className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform" size={32} />
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
                     <p className="text-slate-600 text-sm sm:text-base mb-4">{service.description}</p>
@@ -176,40 +176,26 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="What Our Clients Say"
-            subtitle="Real results from real businesses we've helped build and grow."
+            subtitle="Measurable results from the startups and enterprises we've helped scale."
             center
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "Aesthetix Studio delivered a stunning SaaS dashboard that outperformed every competitor we evaluated. Their attention to both design and performance is unmatched.",
-                author: "Ravi Mehta",
-                role: "CTO, Nova Fintech",
-                initial: "R"
-              },
-              {
-                quote: "They tripled our mobile conversion rate after a complete redesign. Page speed went from 45 to 98. This team genuinely understands SEO-first engineering.",
-                author: "Priya Sharma",
-                role: "Founder, LUX Fashion",
-                initial: "P"
-              },
-              {
-                quote: "The Figma prototype they built helped us secure Series A funding. We had a validated, investor-ready product in just two weeks.",
-                author: "Dr. Anil Kumar",
-                role: "CEO, MediScan AI",
-                initial: "A"
-              }
-            ].map((t, i) => (
+            {TESTIMONIALS.map((t, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col"
+                className="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col group hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex-1 mb-6">
-                  <div className="text-indigo-400 text-5xl leading-none font-serif mb-4">"</div>
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="text-indigo-400 text-5xl leading-none font-serif">"</div>
+                    <div className="px-3 py-1 bg-white border border-slate-200 rounded-full text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      {t.project}
+                    </div>
+                  </div>
                   <p className="text-slate-700 leading-relaxed italic">{t.quote}</p>
                 </div>
                 <div className="flex items-center gap-3 border-t border-slate-200 pt-5">
@@ -247,10 +233,10 @@ const Home = () => {
           <div className="space-y-4">
             {[
               { q: 'What technologies do you use for web development?', a: 'We specialize in React, TypeScript, Next.js, and Vite for frontend development, with Spring Boot and Python for backend APIs. All our projects are optimized for Core Web Vitals and SEO from day one.' },
-              { q: 'How long does a typical website project take?', a: 'A standard website takes 4\u20138 weeks from discovery to launch. Complex SaaS applications and custom web apps may take 8\u201316 weeks depending on scope. We provide a detailed timeline during our free strategy call.' },
-              { q: 'Do you provide SEO optimization with your websites?', a: 'Absolutely. SEO is built into our development process \u2014 not added as an afterthought. We implement structured data, optimize Core Web Vitals, create proper heading hierarchies, and set up sitemap and robots.txt configurations.' },
+              { q: 'How long does a typical website project take?', a: 'A standard website takes 4–8 weeks from discovery to launch. Complex SaaS applications and custom web apps may take 8–16 weeks depending on scope. We provide a detailed timeline during our free strategy call.' },
+              { q: 'Do you provide SEO optimization with your websites?', a: 'Absolutely. SEO is built into our development process — not added as an afterthought. We implement structured data, optimize Core Web Vitals, create proper heading hierarchies, and set up sitemap and robots.txt configurations.' },
               { q: 'Do you offer website maintenance after launch?', a: 'Yes. We offer ongoing maintenance plans that include security updates, performance monitoring, content updates, and bug fixes to keep your site secure and performing optimally.' },
-              { q: 'Can you work with clients outside India?', a: 'Yes \u2014 we work with clients worldwide. Our team is experienced in async communication and we use Slack, Notion, and Figma to collaborate seamlessly across time zones.' },
+              { q: 'Can you work with clients outside India?', a: 'Yes — we work with clients worldwide. Our team is experienced in async communication and we use Slack, Notion, and Figma to collaborate seamlessly across time zones.' },
               { q: 'What makes Aesthetix Studio different from other agencies?', a: 'We combine design-thinking with software engineering discipline. Every project is treated like a software product with proper architecture, code reviews, automated testing, and documentation.' }
             ].map((faq, i) => (
               <details key={i} className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">

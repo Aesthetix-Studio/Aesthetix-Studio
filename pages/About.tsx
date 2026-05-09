@@ -133,6 +133,45 @@ const About = () => {
         </div>
       </section>
 
+      {/* Founder Section */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row gap-12 items-center">
+            <div className="w-full md:w-1/3">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl bg-slate-100 border border-slate-200">
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=faces&auto=format&q=80" 
+                  alt="Abrar - Founder of Aesthetix Studio" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="flex-1 space-y-6">
+              <p className="text-sm font-bold text-indigo-600 uppercase tracking-widest">Meet the Founder</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                Abrar – Engineering for Excellence
+              </h2>
+              <div className="space-y-4 text-slate-600 text-lg leading-relaxed">
+                <p>
+                  With a background in full-stack engineering and a passion for high-performance web architecture, I started Aesthetix Studio to help businesses move beyond "template-based" web presence.
+                </p>
+                <p>
+                  In a world where attention spans are measured in milliseconds and search algorithms demand technical perfection, "good enough" isn't enough. Every site we build is an engineering project first — optimized for sub-second load times, technical SEO, and massive scalability.
+                </p>
+                <p>
+                  Based in India, I personally oversee the architecture of every project we take on, ensuring our team maintains the highest standards of code quality and design precision.
+                </p>
+              </div>
+              <div className="pt-4">
+                <Link to="/contact">
+                  <Button variant="outline">Connect on LinkedIn</Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Our Process */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

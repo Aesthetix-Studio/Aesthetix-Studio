@@ -46,6 +46,13 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/services/:slug" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        {/* Root-level service pages for SEO — shorter URLs rank better */}
+        <Route path="/web-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/react-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/ui-ux-design" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/seo-friendly-websites" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/custom-web-applications" element={<PageTransition><ServiceDetail /></PageTransition>} />
+        <Route path="/website-maintenance" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/work" element={<PageTransition><Work /></PageTransition>} />
         <Route path="/work/:slug" element={<PageTransition><WorkDetail /></PageTransition>} />
         <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
@@ -58,6 +65,7 @@ const AnimatedRoutes = () => {
         <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
         <Route path="/admin" element={<PageTransition><Admin /></PageTransition>} />
+        <Route path="/case-studies" element={<PageTransition><Work /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>

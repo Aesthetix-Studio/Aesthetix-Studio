@@ -123,7 +123,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div>
               <h4 className="font-bold text-slate-900 mb-4">Studio</h4>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link to="/work" className="hover:text-accent">Portfolio</Link></li>
+                <li><Link to="/work" className="hover:text-accent">Case Studies</Link></li>
                 <li><Link to="/about" className="hover:text-accent">About Us</Link></li>
                 <li><Link to="/careers" className="hover:text-accent">Careers</Link></li>
                 <li><Link to="/admin" className="hover:text-accent">Admin Login</Link></li>
@@ -133,9 +133,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div>
               <h4 className="font-bold text-slate-900 mb-4">Services</h4>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link to="/services/website-design" className="hover:text-accent">Web Design</Link></li>
-                <li><Link to="/services/web-development" className="hover:text-accent">Development</Link></li>
-                <li><Link to="/services/seo-marketing" className="hover:text-accent">SEO & Marketing</Link></li>
+                <li><Link to="/ui-ux-design" className="hover:text-accent">UI/UX Design</Link></li>
+                <li><Link to="/web-development" className="hover:text-accent">Web Development</Link></li>
+                <li><Link to="/seo-friendly-websites" className="hover:text-accent">SEO Services</Link></li>
+                <li><Link to="/custom-web-applications" className="hover:text-accent">Custom Web Apps</Link></li>
                 <li><Link to="/proposal" className="hover:text-accent">Request Proposal</Link></li>
               </ul>
             </div>
