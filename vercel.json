@@ -1,5 +1,11 @@
 {
   "rewrites": [
+    { "source": "/web-development", "destination": "/web-development.html" },
+    { "source": "/ui-ux-design", "destination": "/ui-ux-design.html" },
+    { "source": "/react-development", "destination": "/react-development.html" },
+    { "source": "/custom-web-applications", "destination": "/custom-web-applications.html" },
+    { "source": "/website-maintenance", "destination": "/website-maintenance.html" },
+    { "source": "/seo-friendly-websites", "destination": "/seo-friendly-websites.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
