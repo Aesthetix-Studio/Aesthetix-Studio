@@ -1,6 +1,6 @@
-import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Calendar, User, Share2 } from 'lucide-react';
+import { Button } from '../components/UI';
 import { BLOG_POSTS } from '../constants';
 import SEO from '../components/SEO';
 
@@ -92,6 +92,19 @@ const BlogPostDetail = () => {
             </p>
           </div>
         </div>
+
+        {/* Related Service - INTERNAL LINKING */}
+        {post.relatedServiceSlug && (
+          <div className="mt-16 p-8 bg-slate-50 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-md">
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Need help with this?</h3>
+              <p className="text-slate-600 text-sm">Explore our specialized {post.category} services designed for high-growth startups and enterprises.</p>
+            </div>
+            <Link to={`/${post.relatedServiceSlug}`}>
+              <Button variant="primary">Explore {post.category} Services</Button>
+            </Link>
+          </div>
+        )}
 
         {/* Share / Footer */}
         <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-8">

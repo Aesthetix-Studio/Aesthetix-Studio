@@ -61,6 +61,7 @@ export interface Project {
     value: string;
   }[];
   businessImpact?: string[];
+  gallery?: string[];
 }
 
 export interface BlogPost {

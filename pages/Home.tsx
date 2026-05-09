@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <div>
       <SEO 
-        title="Web Design & Development Agency in India | Aesthetix Studio" 
-        description="Aesthetix Studio is a premier web design and development agency in India, helping startups and enterprises build high-performance digital products and scalable web architectures."
+        title="Web Design & Development Agency India | Aesthetix Studio" 
+        description="Aesthetix Studio is a premier web design and development agency in India. We specialize in high-performance React websites, UI/UX design, and custom web applications with sub-second load times."
       />
       
       {/* Hero Section */}

@@ -1,4 +1,4 @@
-import { Service, Project, BlogPost, ProjectType, BudgetRange } from './types';
+import { Service, Project, BlogPost, Testimonial, TechStack } from './types';
 import { 
   Layout, Figma, Code, Activity, Search, PenTool, Share2, 
   Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive 
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
     title: 'Nova Fintech Dashboard',
     category: 'Web Application',
     description: 'A real-time financial analytics dashboard for institutional investors.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    image: '/images/work/fintech-dashboard.png',
     tags: ['React', 'D3.js', 'Spring Boot', 'WebSockets'],
     challenge: 'The client needed to visualize millions of market data points with sub-second latency. Their legacy dashboard was slow, causing institutional traders to miss critical market movements.',
     solution: 'We architected a real-time streaming layer using WebSockets and a GPU-accelerated visualization engine built on D3.js. The frontend was built with a highly optimized React component tree to prevent unnecessary re-renders.',
@@ -73,7 +73,8 @@ export const PROJECTS: Project[] = [
       { label: 'Lighthouse', value: '99' }
     ],
     results: ['40% increase in user session time', 'Reduced data load time by 85%', 'Zero downtime during high-volatility events'],
-    businessImpact: ['Secured 15 new institutional contracts', 'Reduced customer support tickets by 30%', 'Recognized as Top 3 Fintech UI 2023']
+    businessImpact: ['Secured 15 new institutional contracts', 'Reduced customer support tickets by 30%', 'Recognized as Top 3 Fintech UI 2023'],
+    gallery: ['/images/work/fintech-dashboard.png']
   },
   {
     id: '2',
@@ -81,7 +82,7 @@ export const PROJECTS: Project[] = [
     title: 'LUX Fashion E-Commerce',
     category: 'E-Commerce',
     description: 'A headless e-commerce experience for a high-end sustainable fashion brand.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center&auto=format&q=80',
+    image: '/images/work/lux-ecommerce.png',
     tags: ['Next.js', 'Shopify Plus', 'Tailwind', 'Framermotion'],
     challenge: 'A sustainable fashion brand was losing 60% of mobile traffic due to 5-second load times on their legacy Shopify theme. They needed a premium, fast, and SEO-dominant experience.',
     solution: 'We moved them to a headless architecture using Next.js for the frontend and Shopify Plus for the backend. We implemented ISR (Incremental Static Regeneration) for lightning-fast product pages.',
@@ -92,7 +93,8 @@ export const PROJECTS: Project[] = [
       { label: 'SEO Score', value: '100' }
     ],
     results: ['Page speed score increased from 45 to 98', 'Zero loss in organic traffic during migration', 'Perfect Core Web Vitals'],
-    businessImpact: ['150% increase in mobile revenue', 'Bounce rate dropped from 72% to 28%', 'Lowered customer acquisition cost by 18%']
+    businessImpact: ['150% increase in mobile revenue', 'Bounce rate dropped from 72% to 28%', 'Lowered customer acquisition cost by 18%'],
+    gallery: ['/images/work/lux-ecommerce.png']
   },
   {
     id: '3',
@@ -111,7 +113,38 @@ export const PROJECTS: Project[] = [
       { label: 'Prototyping', value: '14 Days' }
     ],
     results: ['Validated core workflow with 10 senior doctors', 'Secured $2M Series A funding based on the prototype', 'Reduced future dev time by 3 months'],
-    businessImpact: ['Shortened time-to-diagnosis by 50%', 'Investor-ready product in record time', 'Highly scalable design system created']
+    businessImpact: ['Shortened time-to-diagnosis by 50%', 'Investor-ready product in record time', 'Highly scalable design system created'],
+    gallery: ['/images/work/health-ai.png']
+  }
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: '1',
+    author: 'Sarah Chen',
+    role: 'CEO at Nova Finance',
+    initial: 'S',
+    project: 'Fintech Dashboard',
+    quote: 'Aesthetix Studio delivered a highly optimized dashboard that significantly improved our institutional user retention. The sub-200ms latency they achieved was a game-changer for our trading team.',
+    results: '40% increase in session duration'
+  },
+  {
+    id: '2',
+    author: 'Marcus Thorne',
+    role: 'Founder of LUX Fashion',
+    initial: 'M',
+    project: 'E-Commerce Migration',
+    quote: 'The headless migration was seamless. Our mobile conversion rate tripled within two months of launch, and we saw zero drop in our organic search rankings. Their technical SEO expertise is world-class.',
+    results: '210% increase in conversions'
+  },
+  {
+    id: '3',
+    author: 'Dr. Elena Rossi',
+    role: 'Product Lead at MediScan',
+    initial: 'E',
+    project: 'AI Prototype',
+    quote: 'The prototype Aesthetix built helped us secure our Series A funding in record time. They understood the medical workflow immediately and translated complex requirements into an intuitive interface.',
+    results: 'Secured $2M Series A funding'
   }
 ];
 
@@ -119,12 +152,13 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: '1',
     slug: 'why-react-websites-need-seo-setup',
-    title: 'Why React Websites Need Proper SEO Setup (And How to Fix It)',
-    excerpt: 'Single Page Apps are powerful, but they can be invisible to Google without the right configuration. Here is how to make your React site fully crawlable.',
-    category: 'Technical SEO',
-    date: 'Apr 20, 2025',
-    readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+    title: 'Why Most React Websites Fail at SEO (and how to fix it)',
+    excerpt: 'Many agencies build beautiful React sites that are invisible to Google. Learn the technical architectural shifts required to make SPAs rank like static sites.',
+    category: 'SEO',
+    date: 'April 20, 2025',
+    readTime: '8 min read',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    relatedServiceSlug: 'seo-websites'
   },
   {
     id: '2',
@@ -134,7 +168,8 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Performance',
     date: 'Apr 28, 2025',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    relatedServiceSlug: 'web-development'
   },
   {
     id: '3',
@@ -144,81 +179,24 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Design',
     date: 'May 05, 2025',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
-  },
-  {
-    id: '4',
-    slug: 'vite-vs-nextjs-for-seo',
-    title: 'Vite vs Next.js for SEO: Which Should You Choose in 2025?',
-    excerpt: 'Both are excellent tools, but they have very different implications for search engine visibility. Here is a thorough comparison from the perspective of a web development agency.',
-    category: 'Engineering',
-    date: 'May 09, 2025',
-    readTime: '9 min read',
-    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
-  },
-  {
-    id: '5',
-    slug: 'seo-mistakes-startups-make',
-    title: '5 Critical SEO Mistakes Startups Make (And How We Fix Them)',
-    excerpt: 'From missing structured data to client-side-only rendering, these are the most damaging technical SEO errors we see when auditing startup websites.',
-    category: 'SEO',
-    date: 'May 12, 2025',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
-  },
-  {
-    id: '6',
-    slug: 'how-we-build-scalable-react-applications',
-    title: 'How We Build Scalable React Applications at Aesthetix Studio',
-    excerpt: 'A behind-the-scenes look at our React development workflow — from component architecture and state management to CI/CD pipelines and cloud deployment.',
-    category: 'Engineering',
-    date: 'May 15, 2025',
-    readTime: '10 min read',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&crop=center&auto=format&q=80'
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop&crop=center&auto=format&q=80',
+    relatedServiceSlug: 'ui-ux-design'
   }
 ];
 
-export const TESTIMONIALS = [
-  {
-    quote: "Aesthetix Studio delivered a stunning SaaS dashboard that tripled our institutional user engagement. Their attention to sub-second data visualization performance is world-class.",
-    author: "Ravi Mehta",
-    role: "CTO, Nova Fintech",
-    project: "Fintech Dashboard",
-    initial: "R"
-  },
-  {
-    quote: "They doubled our mobile conversion rate in 3 months. Page speed went from a 45 to 98 on Lighthouse. This is the only team I trust for SEO-first React development.",
-    author: "Priya Sharma",
-    role: "Founder, LUX Fashion",
-    project: "E-Commerce Re-platforming",
-    initial: "P"
-  },
-  {
-    quote: "The Figma prototype they built in 2 weeks was key to our Series A round. Investors were blown away by the clarity and depth of the user experience.",
-    author: "Dr. Anil Kumar",
-    role: "CEO, MediScan AI",
-    project: "AI Medical Interface",
-    initial: "A"
-  }
-];
-
-export const TECH_STACK = [
+export const TECH_STACK: TechStack[] = [
+  { name: 'React', icon: Layers },
+  { name: 'TypeScript', icon: Code },
+  { name: 'Next.js', icon: Globe },
+  { name: 'Vite', icon: Zap },
   { name: 'Figma', icon: Figma },
-  { name: 'React', icon: Code },
-  { name: 'Angular', icon: Layers },
-  { name: 'Java Spring', icon: Server },
-  { name: 'Python', icon: BarChart }, // Using BarChart for Data/Python
-  { name: 'Oracle', icon: Database },
-  { name: 'MySQL', icon: HardDrive },
-  { name: 'Blender', icon: Box }, 
+  { name: 'Tailwind', icon: Layout }
 ];
 
-// Helper to mimic icon component lookup
 export const getIcon = (name: string) => {
-  const icons: any = {
-    Layout, Figma, Code, Activity, Search, PenTool, Share2,
-    Monitor, Smartphone, Database, BarChart, Globe, Box,
-    Server, Layers, HardDrive
+  const icons: Record<string, any> = {
+    Layout, Figma, Code, Activity, Search, PenTool, Share2, 
+    Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive, Zap, Shield
   };
-  return icons[name] || Code;
+  return icons[name] || Box;
 };

@@ -1,7 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useParams, useLocation, Link, Navigate } from 'react-router-dom';
-import { ArrowRight, Check, ChevronRight } from 'lucide-react';
-import { Button } from '../components/UI';
+import { ArrowRight, Check, ChevronRight, ArrowLeft, Zap, Shield, Code, Layout, BarChart, Smartphone, Monitor } from 'lucide-react';
+import { Button, SectionHeader } from '../components/UI';
 import { SERVICES, BLOG_POSTS, PROJECTS, getIcon } from '../constants';
 import SEO from '../components/SEO';
 
@@ -407,19 +408,56 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-slate-900 text-white">
+      {/* Related Projects - INTERNAL LINKING BOOST */}
+      {content?.relatedProjectSlugs && (
+        <section className="py-24 bg-slate-900 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+              <div className="max-w-2xl">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">Case Studies</h2>
+                <p className="text-slate-400 text-lg">Real-world examples of how we've applied our {service.title} expertise.</p>
+              </div>
+              <Link to="/work">
+                <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">View All Work <ArrowRight size={16} className="ml-2" /></Button>
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {PROJECTS.filter(p => content.relatedProjectSlugs.includes(p.slug)).map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Link to={`/work/${project.slug}`} className="group block">
+                    <div className="aspect-video rounded-3xl overflow-hidden mb-6">
+                      <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2 group-hover:text-indigo-400 transition-colors">{project.title}</h3>
+                    <p className="text-slate-400 line-clamp-2">{project.description}</p>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Final CTA */}
+      <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
-          <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
-            Let us discuss your project requirements. Book a free strategy call and get a custom proposal within 48 hours.
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Need expert {service.title}?</h2>
+          <p className="text-slate-600 text-xl mb-10 leading-relaxed">
+            Let's discuss your project and how Aesthetix Studio can help you achieve your business goals with sub-second load times and production-grade engineering.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/proposal">
-              <Button variant="secondary" size="lg">Book a Free Strategy Call</Button>
+              <Button variant="primary" size="lg">Request Custom Proposal</Button>
             </Link>
             <Link to="/contact">
-              <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10 hover:text-white">Contact Us</Button>
+              <Button variant="outline" size="lg">Book a Strategy Call</Button>
             </Link>
           </div>
         </div>
