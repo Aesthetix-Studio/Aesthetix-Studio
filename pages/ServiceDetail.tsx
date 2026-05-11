@@ -19,6 +19,33 @@ const SERVICE_CONTENT: Record<string, {
   relatedBlogSlugs: string[];
   relatedProjectSlugs: string[];
 }> = {
+  'ai-solutions-integration': {
+    seoTitle: 'AI Solutions & Integration Services India | Aesthetix Studio',
+    seoDescription: 'Production-ready AI systems including machine learning, NLP, computer vision, and intelligent automation. Expert AI development and deployment services in India.',
+    headline: 'AI Solutions & Integration Services',
+    intro: 'We build production-ready AI systems that solve real business problems. From machine learning models and NLP pipelines to computer vision applications and intelligent automation, our AI solutions are engineered for scale, performance, and measurable impact. Based in India, we combine modern AI technologies with full-stack engineering expertise.',
+    benefits: [
+      'Deploy production-grade AI models with optimized inference pipelines',
+      'Integrate NLP capabilities for chatbots, search, and document processing',
+      'Build computer vision systems for image classification and object detection',
+      'Automate workflows with intelligent decision-making systems',
+      'Scale AI applications with cloud-native architecture and APIs'
+    ],
+    process: [
+      { title: 'Problem Analysis', description: 'We identify the right AI approach for your use case — whether it\'s NLP, computer vision, or predictive modeling.' },
+      { title: 'Model Development', description: 'Training, fine-tuning, or integrating pre-trained models optimized for your specific requirements.' },
+      { title: 'API & Integration', description: 'Building scalable APIs with FastAPI or similar frameworks for seamless integration with your existing systems.' },
+      { title: 'Deployment & Monitoring', description: 'Cloud deployment with performance monitoring, error tracking, and continuous optimization.' }
+    ],
+    faqs: [
+      { q: 'What types of AI solutions do you build?', a: 'We specialize in NLP systems (chatbots, semantic search, document processing), computer vision (OCR, image classification, object detection), and machine learning applications (recommendation engines, predictive analytics, intelligent automation).' },
+      { q: 'Do you train custom AI models?', a: 'Yes. We can train custom models from scratch or fine-tune existing models (like GPT, BERT, or YOLO) for your specific use case and data.' },
+      { q: 'What technologies do you use for AI development?', a: 'Our AI stack includes Python, PyTorch, TensorFlow, Transformers, OpenCV, FastAPI, LangChain, and cloud platforms like AWS or GCP for deployment.' },
+      { q: 'Can you integrate AI into our existing web application?', a: 'Absolutely. We build AI-powered APIs that integrate seamlessly with React, Next.js, or any modern web stack, providing real-time intelligent features to your users.' }
+    ],
+    relatedBlogSlugs: [],
+    relatedProjectSlugs: ['intellidocs-ai']
+  },
   'ui-ux-design': {
     seoTitle: 'UI/UX Design Services India | Aesthetix Studio',
     seoDescription: 'Professional UI/UX design studio in India. We create high-converting user interfaces and seamless user experiences for web and mobile apps using Figma and modern design systems.',
