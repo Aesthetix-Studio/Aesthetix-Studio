@@ -204,6 +204,17 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    id: '0',
+    slug: 'how-we-build-ai-powered-web-applications',
+    title: 'How We Build AI-Powered Web Applications',
+    excerpt: 'A technical deep-dive into our architecture, stack, and deployment strategy for building production-ready AI-powered web applications that scale.',
+    category: 'AI Engineering',
+    date: 'May 30, 2025',
+    readTime: '10 min read',
+    image: '/images/work/intellidocs-ai.png',
+    relatedServiceSlug: 'ai-solutions-integration'
+  },
+  {
     id: '1',
     slug: 'why-react-websites-need-seo-setup',
     title: 'Why Most React Websites Fail at SEO (and how to fix it)',
@@ -275,9 +286,11 @@ export const TECH_STACK: TechStack[] = [
   { name: 'React', icon: Layers },
   { name: 'TypeScript', icon: Code },
   { name: 'Next.js', icon: Globe },
-  { name: 'Vite', icon: Zap },
-  { name: 'Figma', icon: Figma },
-  { name: 'Tailwind', icon: Layout }
+  { name: 'Tailwind', icon: Layout },
+  { name: 'PyTorch', icon: Zap },
+  { name: 'FastAPI', icon: Server },
+  { name: 'OpenCV', icon: Brain },
+  { name: 'Figma', icon: Figma }
 ];
 
 export const getIcon = (name: string) => {
