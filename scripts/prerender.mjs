@@ -8,6 +8,13 @@ const defaultImage = `${siteUrl}/images/work/fintech-dashboard.png`;
 
 const services = [
   {
+    path: '/ai-solutions-integration',
+    title: 'AI Solutions & Integration Services India | Aesthetix Studio',
+    description: 'Production-ready AI systems including machine learning, NLP, computer vision, and intelligent automation. Expert AI development and deployment services in India.',
+    h1: 'AI Solutions & Integration Services',
+    body: 'Aesthetix Studio builds production-ready AI systems with machine learning, NLP pipelines, computer vision applications, intelligent automation, AI APIs, and cloud deployment.',
+  },
+  {
     path: '/web-development',
     title: 'Web Development Agency India | Aesthetix Studio',
     description: 'Full-stack web development agency in India building fast, scalable, SEO-friendly websites with React, TypeScript, and modern backend technologies.',
