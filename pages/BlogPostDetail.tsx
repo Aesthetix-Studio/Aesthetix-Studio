@@ -82,7 +82,7 @@ const BlogPostDetail = () => {
               {content.sections.map((section, index) => (
                 <section key={index}>
                   <h2 className="text-3xl font-bold text-slate-900 mb-6">{section.heading}</h2>
-                  <div className="space-y-4 whitespace-pre-line">{section.content}</div>
+                  <div className="space-y-4" dangerouslySetInnerHTML={{ __html: section.content.replace(/\n/g, '<br />') }} />
                 </section>
               ))}
             </div>
