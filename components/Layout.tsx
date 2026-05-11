@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { Logo } from './Logo';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,13 +41,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex items-center group">
-                <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mr-3 group-hover:scale-105 transition-transform shadow-lg">
-                  <span className="text-white font-bold text-lg">A</span>
-                </div>
-                <div className="flex flex-col">
-                    <span className="font-bold text-xl leading-tight tracking-tight text-slate-900">Aesthetix</span>
-                    <span className="text-xs text-slate-600 uppercase tracking-wider font-medium">Studio</span>
-                </div>
+                <Logo variant="primary" className="h-10 w-auto" />
               </Link>
             </div>
 
@@ -104,9 +99,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mr-3 shadow-md">
-                  <span className="text-white font-bold text-sm">A</span>
-                </div>
+                <Logo variant="icon" className="h-8 w-8 mr-3" />
                 <span className="font-bold text-lg text-slate-900">Aesthetix</span>
               </div>
               <p className="text-slate-600 text-sm leading-relaxed">

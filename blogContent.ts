@@ -12,7 +12,7 @@ export const BLOG_CONTENT: Record<string, BlogContent> = {
         heading: 'Introduction',
         content: `AI-powered web applications are no longer futuristic concepts—they're production systems solving real business problems today. From intelligent document processing to semantic search and recommendation engines, AI is transforming how users interact with web platforms.
 
-At Aesthetix Studio, we've built multiple AI-powered systems that combine modern frontend frameworks with scalable AI inference pipelines. This article breaks down our architecture, technology choices, and deployment strategies for building production-ready AI applications.`
+At Aesthetix Studio, we've built multiple <a href="/ai-solutions-integration" class="text-indigo-600 font-semibold hover:underline">AI-powered systems</a> that combine modern frontend frameworks with scalable AI inference pipelines. This article breaks down our architecture, technology choices, and deployment strategies for building production-ready AI applications.`
       },
       {
         heading: 'The Challenges of Building AI-Powered Web Apps',
@@ -32,7 +32,7 @@ At Aesthetix Studio, we've built multiple AI-powered systems that combine modern
         heading: 'Our Technology Stack',
         content: `We've standardized on a stack that balances performance, developer experience, and production reliability:
 
-<strong>Frontend</strong>: React with TypeScript for type-safe component development, and Tailwind CSS for rapid UI development. We use Vite for fast builds and hot module replacement during development.
+<strong>Frontend</strong>: <a href="/react-development" class="text-indigo-600 font-semibold hover:underline">React with TypeScript</a> for type-safe component development, and Tailwind CSS for rapid UI development. We use Vite for fast builds and hot module replacement during development.
 
 <strong>Backend</strong>: FastAPI (Python) for building high-performance APIs with automatic OpenAPI documentation and async request handling. FastAPI's native async support makes it ideal for AI workloads.
 
@@ -80,11 +80,13 @@ These optimizations allow us to deliver AI-powered features that feel as fast as
         heading: 'Conclusion: AI as a Competitive Advantage',
         content: `AI-powered web applications are becoming table stakes for competitive digital products. Whether it's intelligent search, automated document processing, or personalized recommendations, AI capabilities directly impact user satisfaction and business metrics.
 
-At Aesthetix Studio, we combine modern web engineering with production AI deployment to build systems that are fast, scalable, and reliable. Our approach focuses on practical implementation rather than theoretical possibilities—every AI feature we build is designed to solve a real user problem with measurable impact.
+At Aesthetix Studio, we combine <a href="/web-development" class="text-indigo-600 font-semibold hover:underline">modern web engineering</a> with production AI deployment to build systems that are fast, scalable, and reliable. Our approach focuses on practical implementation rather than theoretical possibilities—every AI feature we build is designed to solve a real user problem with measurable impact.
 
-The key to successful AI integration is treating it as an engineering challenge, not just a data science problem. Architecture, optimization, and user experience matter as much as model accuracy.
+The key to successful AI integration is treating it as an engineering challenge, not just a data science problem. Architecture, optimization, and <a href="/ui-ux-design" class="text-indigo-600 font-semibold hover:underline">user experience</a> matter as much as model accuracy.
 
-**Ready to build an AI-powered application?** [Contact us](/contact) to discuss your project and explore how intelligent systems can transform your business. We'd love to help you navigate the technical and strategic decisions involved in bringing AI capabilities to production.`
+See our <a href="/projects/intellidocs-ai" class="text-indigo-600 font-semibold hover:underline">IntelliDocs AI case study</a> for a real-world example of these principles in action.
+
+<strong>Ready to build an AI-powered application?</strong> <a href="/contact" class="text-indigo-600 font-semibold hover:underline">Contact us</a> to discuss your project and explore how intelligent systems can transform your business. We'd love to help you navigate the technical and strategic decisions involved in bringing AI capabilities to production.`
       }
     ]
   }
