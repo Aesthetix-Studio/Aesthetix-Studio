@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { SectionHeader } from '../components/UI';
+
 import { SERVICES, getIcon } from '../constants';
 import SEO from '../components/SEO';
 
@@ -14,11 +14,10 @@ const Services = () => {
       />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader 
-          title="Our Services" 
-          subtitle="Comprehensive design and engineering solutions tailored for growth."
-          center
-        />
+        <div className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-6">Services</h1>
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">Modern web solutions built for performance, scalability, and growth.</p>
+        </div>
         
         <div className="grid gap-8">
           {SERVICES.map((service, index) => {
@@ -40,8 +39,8 @@ const Services = () => {
                     ))}
                   </ul>
                   <div className="pt-4">
-                    <Link to={`/${service.slug}`} className="inline-flex items-center font-medium text-accent hover:gap-2 transition-all text-sm sm:text-base">
-                      View Details <ArrowRight size={16} className="ml-1" />
+                    <Link to={`/${service.slug}`} className="inline-flex items-center gap-1 font-medium text-accent hover:gap-2 transition-all text-sm sm:text-base">
+                      Learn More <ArrowRight size={16} />
                     </Link>
                   </div>
                 </div>

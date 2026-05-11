@@ -9,6 +9,7 @@ export const SERVICES: Service[] = [
   {
     id: '1',
     slug: 'ui-ux-design',
+    image: '/images/services/ui-ux-design.png',
     title: 'UI/UX Design Studio',
     description: 'High-converting, aesthetic UI/UX design tailored to your brand identity.',
     image: '/images/services/prototyping.jpg?v=service-20260509',
@@ -18,6 +19,7 @@ export const SERVICES: Service[] = [
   {
     id: '2',
     slug: 'web-development',
+    image: '/images/services/web-development.png',
     title: 'Web Development Agency',
     description: 'Robust, scalable frontend and backend engineering using modern stacks.',
     image: '/images/services/web-development.png?v=service-20260509',
@@ -27,6 +29,7 @@ export const SERVICES: Service[] = [
   {
     id: '3',
     slug: 'react-development',
+    image: '/images/services/react-development.png',
     title: 'React Development Company',
     description: 'Specialized high-performance React and Next.js development for modern web apps.',
     image: '/images/services/website-design.jpg?v=service-20260509',
@@ -36,6 +39,7 @@ export const SERVICES: Service[] = [
   {
     id: '4',
     slug: 'custom-web-applications',
+    image: '/images/services/custom-web-applications.png',
     title: 'Custom Web Applications',
     description: 'Complex SaaS platforms and internal tools engineered for scale.',
     image: '/images/services/custom-web-applications.png?v=service-20260509',
@@ -45,6 +49,7 @@ export const SERVICES: Service[] = [
   {
     id: '5',
     slug: 'maintenance-support',
+    image: '/images/services/maintenance-support.png',
     title: 'Website Maintenance Services',
     description: 'Keep your digital assets secure, up-to-date, and performing optimally.',
     image: '/images/services/maintenance-support.png?v=service-20260509',
@@ -54,6 +59,7 @@ export const SERVICES: Service[] = [
   {
     id: '6',
     slug: 'seo-friendly-websites',
+    image: '/images/services/seo-friendly-websites.png',
     title: 'SEO Website Development',
     description: 'Websites engineered from the ground up to rank on Google and capture organic traffic.',
     image: '/images/services/seo-friendly-websites.png?v=service-20260509',
@@ -243,5 +249,6 @@ export const getIcon = (name: string) => {
   };
   return icons[name] || Box;
 };
+
 
 
