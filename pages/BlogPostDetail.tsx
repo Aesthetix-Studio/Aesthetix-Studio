@@ -2,12 +2,14 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Calendar, User, Share2 } from 'lucide-react';
 import { Button } from '../components/UI';
 import { BLOG_POSTS } from '../constants';
+import { BLOG_CONTENT } from '../blogContent';
 import SEO from '../components/SEO';
 import { generateArticleSchema } from '../utils/schemaMarkup';
 
 const BlogPostDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = BLOG_POSTS.find(p => p.slug === slug);
+  const content = slug ? BLOG_CONTENT[slug] : null;
 
   if (!post) {
     return <Navigate to="/blog" replace />;
@@ -75,32 +77,43 @@ const BlogPostDetail = () => {
             {post.excerpt}
           </p>
           
-          <div className="text-slate-800 leading-relaxed space-y-8">
-            <p>
-              In today's hyper-competitive digital landscape, building a website is only half the battle. At Aesthetix Studio, we believe that the true value of a digital product lies in its ability to be discovered, used, and scaled efficiently. 
-            </p>
-            
-            <h2 className="text-3xl font-bold text-slate-900 mt-12 mb-6">The Engineering Perspective</h2>
-            <p>
-              Whether we're talking about technical SEO or application performance, the underlying architecture is what determines success. We focus on sub-second response times, proper semantic HTML structure, and schema metadata that search engines crave.
-            </p>
-            
-            <p>
-              Our internal workflow treats every blog post, every service page, and every client project with the same level of engineering discipline. We use modern tools like Vite for fast builds and React for interactive components, ensuring that your users never have to wait for content to load.
-            </p>
+          {content ? (
+            <div className="text-slate-800 leading-relaxed space-y-12">
+              {content.sections.map((section, index) => (
+                <section key={index}>
+                  <h2 className="text-3xl font-bold text-slate-900 mb-6">{section.heading}</h2>
+                  <div className="space-y-4 whitespace-pre-line">{section.content}</div>
+                </section>
+              ))}
+            </div>
+          ) : (
+            <div className="text-slate-800 leading-relaxed space-y-8">
+              <p>
+                In today's hyper-competitive digital landscape, building a website is only half the battle. At Aesthetix Studio, we believe that the true value of a digital product lies in its ability to be discovered, used, and scaled efficiently. 
+              </p>
+              
+              <h2 className="text-3xl font-bold text-slate-900 mt-12 mb-6">The Engineering Perspective</h2>
+              <p>
+                Whether we're talking about technical SEO or application performance, the underlying architecture is what determines success. We focus on sub-second response times, proper semantic HTML structure, and schema metadata that search engines crave.
+              </p>
+              
+              <p>
+                Our internal workflow treats every blog post, every service page, and every client project with the same level of engineering discipline. We use modern tools like Vite for fast builds and React for interactive components, ensuring that your users never have to wait for content to load.
+              </p>
 
-            <div className="bg-indigo-600 rounded-2xl p-8 text-white my-12 shadow-xl shadow-indigo-100">
-              <h3 className="text-xl font-bold mb-4">Key Takeaway</h3>
-              <p className="text-indigo-100 mb-0">
-                Don't sacrifice speed for design. With modern web technologies, you can have a visually stunning interface that also ranks #1 on Google. It's about how you engineer the bridge between aesthetic and performance.
+              <div className="bg-indigo-600 rounded-2xl p-8 text-white my-12 shadow-xl shadow-indigo-100">
+                <h3 className="text-xl font-bold mb-4">Key Takeaway</h3>
+                <p className="text-indigo-100 mb-0">
+                  Don't sacrifice speed for design. With modern web technologies, you can have a visually stunning interface that also ranks #1 on Google. It's about how you engineer the bridge between aesthetic and performance.
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold text-slate-900 mt-12 mb-6">Moving Forward</h2>
+              <p>
+                As we continue to evolve our own platform, we'll share more insights into how we handle React performance, Next.js migrations, and large-scale technical SEO audits. Stay tuned for deeper technical deep-dives and business strategy insights.
               </p>
             </div>
-
-            <h2 className="text-3xl font-bold text-slate-900 mt-12 mb-6">Moving Forward</h2>
-            <p>
-              As we continue to evolve our own platform, we'll share more insights into how we handle React performance, Next.js migrations, and large-scale technical SEO audits. Stay tuned for deeper technical deep-dives and business strategy insights.
-            </p>
-          </div>
+          )}
         </div>
 
         {/* Related Service - INTERNAL LINKING */}
