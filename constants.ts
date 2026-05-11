@@ -86,19 +86,26 @@ export const PROJECTS: Project[] = [
     description: 'An intelligent document processing system designed to automate extraction, analysis, and organization of unstructured documents using AI technologies.',
     image: '/images/work/intellidocs-ai.png',
     tags: ['Python', 'FastAPI', 'OpenCV', 'Transformers', 'React', 'NLP'],
-    challenge: 'Manual document processing is slow, error-prone, and difficult to scale. Organizations struggle to extract insights from large volumes of unstructured documents, leading to inefficiencies and missed opportunities.',
-    solution: 'We developed an AI-powered document intelligence system combining OCR, NLP, and semantic search. The system uses computer vision for text extraction, transformer models for summarization, and vector embeddings for intelligent document retrieval.',
-    process: 'We architected a scalable pipeline with FastAPI for the backend, integrated Tesseract OCR and OpenCV for document processing, implemented transformer-based summarization, and built a vector search layer using FAISS. The frontend dashboard was built with React for real-time document management.',
+    challenge: 'Manual document processing is slow, error-prone, and difficult to scale. Organizations struggle to extract insights from large volumes of unstructured documents, leading to inefficiencies and missed opportunities. Traditional OCR solutions lack semantic understanding, making it difficult to classify, search, and summarize documents intelligently.',
+    solution: 'We developed an AI-powered document intelligence system combining OCR, NLP, and semantic search. The system uses computer vision for text extraction, transformer models for summarization, and vector embeddings for intelligent document retrieval. The architecture includes a FastAPI backend for scalable inference, a React dashboard for real-time document management, and a vector database for semantic search capabilities.',
+    process: 'We architected a scalable pipeline with FastAPI for the backend, integrated Tesseract OCR and OpenCV for document processing, implemented transformer-based summarization using Hugging Face models, and built a vector search layer using FAISS for semantic retrieval. The frontend dashboard was built with React and TypeScript for real-time document management. We optimized the inference pipeline to handle concurrent requests with asynchronous processing, reducing latency to under 2 seconds per document.',
     metrics: [
       { label: 'OCR Accuracy', value: '94%' },
       { label: 'Processing Speed', value: '< 2s' },
       { label: 'API Response', value: '< 300ms' }
     ],
-    results: ['Real-time OCR text extraction', 'AI-generated document summaries', 'Semantic search with 92% relevance', 'Scalable API-based architecture'],
-    businessImpact: ['Automated document workflows', 'Reduced manual processing time by 80%', 'Intelligent document classification and tagging'],
+    results: ['Real-time OCR text extraction with 94% accuracy', 'AI-generated document summaries using transformer models', 'Semantic search with 92% relevance using vector embeddings', 'Scalable API-based architecture handling concurrent requests', 'Asynchronous inference pipeline for optimized throughput'],
+    businessImpact: ['Automated document workflows reducing manual effort', 'Reduced manual processing time by 80%', 'Intelligent document classification and tagging', 'Searchable document repository with semantic understanding', 'Production-ready API for integration with existing systems'],
     gallery: ['/images/work/intellidocs-ai.png'],
     relatedServices: ['ai-solutions-integration', 'custom-web-applications', 'react-development'],
-    projectType: 'Internal R&D Project'
+    projectType: 'Internal R&D Project',
+    technicalChallenges: [
+      'Implemented asynchronous inference pipelines to reduce processing latency and handle concurrent document uploads',
+      'Optimized transformer model inference using quantization and batching techniques to achieve sub-2-second processing times',
+      'Built a vector search layer with FAISS for semantic document retrieval, enabling intelligent search beyond keyword matching',
+      'Designed a scalable API architecture with FastAPI that handles rate limiting, error recovery, and graceful degradation',
+      'Integrated multiple AI models (OCR, NLP, embeddings) into a unified pipeline with consistent error handling and monitoring'
+    ]
   },
   {
     id: '1',

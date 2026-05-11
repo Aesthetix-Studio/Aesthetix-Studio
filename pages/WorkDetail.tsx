@@ -110,6 +110,26 @@ const WorkDetail = () => {
               </section>
             )}
 
+            {project.technicalChallenges && project.technicalChallenges.length > 0 && (
+              <section>
+                <div className="flex items-center gap-3 text-indigo-600 font-bold uppercase tracking-widest text-sm mb-4">
+                  <Settings size={18} />
+                  Technical Challenges
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Engineering Deep Dive</h2>
+                <ul className="space-y-4">
+                  {project.technicalChallenges.map((challenge, idx) => (
+                    <li key={idx} className="flex items-start gap-4 p-5 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm shrink-0">
+                        {idx + 1}
+                      </div>
+                      <p className="text-slate-700 leading-relaxed">{challenge}</p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             {project.gallery && project.gallery.length > 0 && (
               <section>
                 <div className="flex items-center gap-3 text-indigo-600 font-bold uppercase tracking-widest text-sm mb-4">

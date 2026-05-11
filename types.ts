@@ -65,6 +65,7 @@ export interface Project {
   gallery?: string[];
   relatedServices?: string[];
   projectType?: string;
+  technicalChallenges?: string[];
 }
 
 export interface BlogPost {
