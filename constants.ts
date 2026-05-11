@@ -7,6 +7,15 @@ import {
 
 export const SERVICES: Service[] = [
   {
+    id: '0',
+    slug: 'ai-solutions-integration',
+    image: '/images/services/ai-solutions.png',
+    title: 'AI Solutions & Integration',
+    description: 'Production-ready AI systems including machine learning, NLP, computer vision, intelligent automation, and AI-powered web applications.',
+    iconName: 'Zap',
+    features: ['Machine Learning', 'NLP Systems', 'Computer Vision', 'AI Deployment', 'AI APIs', 'Intelligent Automation']
+  },
+  {
     id: '1',
     slug: 'ui-ux-design',
     image: '/images/services/ui-ux-design.png',
