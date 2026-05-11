@@ -76,16 +76,18 @@ const Home = () => {
       </section>
 
       {/* Trust Strip */}
-      <section className="py-10 border-y border-slate-100 bg-white">
+      <section className="py-10 border-y border-slate-100 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-6">Powering experiences with modern tech</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-             {TECH_STACK.slice(0, 6).map((tech) => (
-               <div key={tech.name} className="flex items-center gap-2 group">
-                 <tech.icon size={24} className="text-slate-800 group-hover:text-indigo-600" />
-                 <span className="font-semibold text-slate-700">{tech.name}</span>
-               </div>
-             ))}
+          <div className="relative">
+            <div className="flex animate-marquee gap-16">
+              {[...TECH_STACK, ...TECH_STACK].map((tech, index) => (
+                <div key={index} className="flex items-center gap-2 group shrink-0 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+                  <tech.icon size={24} className="text-slate-800 group-hover:text-indigo-600" />
+                  <span className="font-semibold text-slate-700">{tech.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
