@@ -48,6 +48,7 @@ const AnimatedRoutes = () => {
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/services/:slug" element={<PageTransition><ServiceDetail /></PageTransition>} />
         {/* Root-level service pages for SEO — shorter URLs rank better */}
+        <Route path="/ai-solutions-integration" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/web-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/react-development" element={<PageTransition><ServiceDetail /></PageTransition>} />
         <Route path="/ui-ux-design" element={<PageTransition><ServiceDetail /></PageTransition>} />

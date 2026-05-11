@@ -2,7 +2,7 @@ import { Service, Project, BlogPost, Testimonial, TechStack } from './types';
 import { 
   Layout, Figma, Code, Activity, Search, PenTool, Share2, 
   Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive,
-  Zap, Shield
+  Zap, Shield, Cpu, Brain
 } from 'lucide-react';
 
 export const SERVICES: Service[] = [
@@ -12,7 +12,7 @@ export const SERVICES: Service[] = [
     image: '/images/services/ai-solutions.png',
     title: 'AI Solutions & Integration',
     description: 'Production-ready AI systems including machine learning, NLP, computer vision, intelligent automation, and AI-powered web applications.',
-    iconName: 'Zap',
+    iconName: 'Brain',
     features: ['Machine Learning', 'NLP Systems', 'Computer Vision', 'AI Deployment', 'AI APIs', 'Intelligent Automation']
   },
   {
@@ -276,7 +276,7 @@ export const TECH_STACK: TechStack[] = [
 export const getIcon = (name: string) => {
   const icons: Record<string, any> = {
     Layout, Figma, Code, Activity, Search, PenTool, Share2, 
-    Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive, Zap, Shield
+    Monitor, Smartphone, Database, BarChart, Globe, Box, Server, Layers, HardDrive, Zap, Shield, Cpu, Brain
   };
   return icons[name] || Box;
 };
