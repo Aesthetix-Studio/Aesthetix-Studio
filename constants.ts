@@ -79,6 +79,28 @@ export const SERVICES: Service[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: '0',
+    slug: 'intellidocs-ai',
+    title: 'IntelliDocs AI',
+    category: 'AI System',
+    description: 'An intelligent document processing system designed to automate extraction, analysis, and organization of unstructured documents using AI technologies.',
+    image: '/images/work/intellidocs-ai.png',
+    tags: ['Python', 'FastAPI', 'OpenCV', 'Transformers', 'React', 'NLP'],
+    challenge: 'Manual document processing is slow, error-prone, and difficult to scale. Organizations struggle to extract insights from large volumes of unstructured documents, leading to inefficiencies and missed opportunities.',
+    solution: 'We developed an AI-powered document intelligence system combining OCR, NLP, and semantic search. The system uses computer vision for text extraction, transformer models for summarization, and vector embeddings for intelligent document retrieval.',
+    process: 'We architected a scalable pipeline with FastAPI for the backend, integrated Tesseract OCR and OpenCV for document processing, implemented transformer-based summarization, and built a vector search layer using FAISS. The frontend dashboard was built with React for real-time document management.',
+    metrics: [
+      { label: 'OCR Accuracy', value: '94%' },
+      { label: 'Processing Speed', value: '< 2s' },
+      { label: 'API Response', value: '< 300ms' }
+    ],
+    results: ['Real-time OCR text extraction', 'AI-generated document summaries', 'Semantic search with 92% relevance', 'Scalable API-based architecture'],
+    businessImpact: ['Automated document workflows', 'Reduced manual processing time by 80%', 'Intelligent document classification and tagging'],
+    gallery: ['/images/work/intellidocs-ai.png'],
+    relatedServices: ['ai-solutions-integration', 'custom-web-applications', 'react-development'],
+    projectType: 'Internal R&D Project'
+  },
+  {
     id: '1',
     slug: 'fintech-dashboard',
     title: 'Nova Fintech Dashboard',

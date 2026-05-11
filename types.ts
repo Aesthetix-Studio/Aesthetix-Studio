@@ -64,6 +64,7 @@ export interface Project {
   businessImpact?: string[];
   gallery?: string[];
   relatedServices?: string[];
+  projectType?: string;
 }
 
 export interface BlogPost {
@@ -76,4 +77,19 @@ export interface BlogPost {
   readTime: string;
   image: string;
   relatedServiceSlug?: string;
+}
+
+export interface Testimonial {
+  id: string;
+  author: string;
+  role: string;
+  initial: string;
+  project: string;
+  quote: string;
+  results: string;
+}
+
+export interface TechStack {
+  name: string;
+  icon: any;
 }
