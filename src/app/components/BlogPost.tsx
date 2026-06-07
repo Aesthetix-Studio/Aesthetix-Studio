@@ -1,24 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
 import { marked } from "marked";
+import { MARKDOWN_CSS } from "./markdown-styles";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
-
-const MARKDOWN_CSS = `
-  .markdown-content h2 { font-size: 24px; font-weight: 600; color: #fff; margin: 40px 0 16px; }
-  .markdown-content h3 { font-size: 20px; font-weight: 600; color: #fff; margin: 32px 0 12px; }
-  .markdown-content p { margin: 0 0 20px; }
-  .markdown-content a { color: #aaa; text-decoration: underline; }
-  .markdown-content ul, .markdown-content ol { margin: 0 0 20px; padding-left: 24px; }
-  .markdown-content li { margin: 0 0 8px; }
-  .markdown-content blockquote { border-left: 3px solid #333; padding-left: 16px; color: #888; margin: 0 0 20px; font-style: italic; }
-  .markdown-content code { background: #1a1a1a; padding: 2px 6px; border-radius: 3px; font-size: 14px; font-family: monospace; }
-  .markdown-content pre { background: #1a1a1a; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 0 0 20px; }
-  .markdown-content pre code { background: none; padding: 0; }
-  .markdown-content img { max-width: 100%; border-radius: 6px; margin: 0 0 20px; }
-  .markdown-content hr { border: none; border-top: 1px solid #333; margin: 32px 0; }
-  .markdown-content strong { color: #fff; }
-`;
 
 interface Post {
   id: string; title: string; slug: string; excerpt: string | null;

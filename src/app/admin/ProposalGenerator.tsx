@@ -1,19 +1,11 @@
 import { useState } from "react";
 import { adminHeaders } from "./AdminLayout";
+import { adminStyles as s } from "./admin-styles";
+import { useCopyToClipboard } from "./use-copy-clipboard";
 import { marked } from "marked";
+import { MARKDOWN_CSS } from "../components/markdown-styles";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
-
-const MARKDOWN_CSS = `
-  .proposal-content h1 { font-size: 24px; font-weight: 600; color: #fff; margin: 32px 0 12px; }
-  .proposal-content h2 { font-size: 20px; font-weight: 600; color: #fff; margin: 28px 0 10px; }
-  .proposal-content h3 { font-size: 16px; font-weight: 600; color: #fff; margin: 20px 0 8px; }
-  .proposal-content p { margin: 0 0 14px; }
-  .proposal-content ul, .proposal-content ol { margin: 0 0 14px; padding-left: 20px; }
-  .proposal-content li { margin: 0 0 6px; }
-  .proposal-content strong { color: #fff; }
-  .proposal-content code { background: #1a1a1a; padding: 2px 5px; border-radius: 3px; font-size: 13px; }
-`;
 
 export function ProposalGenerator() {
   const [form, setForm] = useState({
@@ -23,13 +15,7 @@ export function ProposalGenerator() {
   const [proposal, setProposal] = useState("");
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState("");
-  const [copied, setCopied] = useState(false);
-
-  function copyToClipboard() {
-    navigator.clipboard.writeText(proposal);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
+  const { copied, copy: copyToClipboard } = useCopyToClipboard();
 
   async function generate(e: React.FormEvent) {
     e.preventDefault();
@@ -101,13 +87,13 @@ export function ProposalGenerator() {
         <div style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "24px 28px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>Generated Proposal</h2>
-            <button onClick={copyToClipboard} style={s.ghost}>
+            <button onClick={() => copyToClipboard(proposal)} style={s.ghost}>
               {copied ? "Copied!" : "Copy to clipboard"}
             </button>
           </div>
           <style>{MARKDOWN_CSS}</style>
           <div
-            className="proposal-content"
+            className="markdown-content"
             style={{ color: "#ccc", fontSize: 14, lineHeight: 1.8 }}
             dangerouslySetInnerHTML={{ __html: marked.parse(proposal) as string }}
           />
@@ -117,9 +103,3 @@ export function ProposalGenerator() {
   );
 }
 
-const s: Record<string, React.CSSProperties> = {
-  primary: { background: "#fff", color: "#000", border: "none", padding: "10px 20px", borderRadius: 4, fontSize: 13, fontWeight: 600, cursor: "pointer" },
-  ghost: { background: "none", color: "#aaa", border: "1px solid #333", padding: "6px 14px", borderRadius: 4, fontSize: 12, cursor: "pointer" },
-  label: { display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "#aaa" },
-  input: { background: "#1a1a1a", border: "1px solid #333", color: "#fff", padding: "8px 12px", fontSize: 14, borderRadius: 4, outline: "none" },
-};

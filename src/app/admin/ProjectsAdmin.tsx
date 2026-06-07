@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { adminHeaders } from "./AdminLayout";
+import { adminStyles as s } from "./admin-styles";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
 
@@ -107,10 +108,3 @@ export function ProjectsAdmin() {
   );
 }
 
-const s: Record<string, React.CSSProperties> = {
-  primary: { background: "#fff", color: "#000", border: "none", padding: "8px 18px", borderRadius: 4, fontSize: 13, cursor: "pointer" },
-  ghost: { background: "none", color: "#aaa", border: "1px solid #333", padding: "8px 14px", borderRadius: 4, fontSize: 13, cursor: "pointer" },
-  danger: { background: "none", color: "#f87171", border: "1px solid #333", padding: "8px 14px", borderRadius: 4, fontSize: 13, cursor: "pointer" },
-  label: { display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "#aaa" },
-  input: { background: "#1a1a1a", border: "1px solid #333", color: "#fff", padding: "8px 12px", fontSize: 14, borderRadius: 4, outline: "none" },
-};
