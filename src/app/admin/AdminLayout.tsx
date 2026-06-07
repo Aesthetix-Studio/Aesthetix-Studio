@@ -76,6 +76,7 @@ export function AdminLayout() {
         <NavLink to="/admin/blog" style={navStyle}>Blog</NavLink>
         <NavLink to="/admin/case-studies" style={navStyle}>Case Studies</NavLink>
         <NavLink to="/admin/proposals" style={navStyle}>Proposals</NavLink>
+        <NavLink to="/admin/brief-analyzer" style={navStyle}>Brief Analyzer</NavLink>
         <button onClick={logout} style={styles.logoutBtn}>Logout</button>
       </aside>
       <main style={styles.content}>

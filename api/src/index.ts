@@ -372,6 +372,60 @@ Be specific, avoid fluff, and write like an expert practitioner — not a conten
 				return json({ draft: response.response });
 			}
 
+			// AI Design Brief Analyzer (auth required + rate limited)
+			if (pathname === "/api/admin/analyze-brief" && method === "POST") {
+				const denied = await requireAuth(request, env);
+				if (denied) return denied;
+				const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+				const { allowed, timeLeft } = await checkRateLimit(ip, env.DB, { limit: 10, period: 60 * 60 * 1000, lockout: 60 * 60 * 1000, prefix: "ai:" });
+				if (!allowed) return json({ error: `AI rate limit exceeded. Try again in ${Math.ceil(timeLeft! / 1000 / 60)} minutes.` }, 429);
+
+				const { clientName, websiteUrl, brandDescription, competitors, goals, budget, timeline } = await request.json() as any;
+				if (!brandDescription) return json({ error: "Brand description is required" }, 400);
+
+				const prompt = `You are a senior strategist at Aesthetix Studio, a premium digital agency. Analyze this design brief and generate a structured project analysis:
+
+Client: ${clientName || "Not specified"}
+Website: ${websiteUrl || "Not specified"}
+Brand: ${brandDescription}
+Competitors: ${competitors || "Not specified"}
+Goals: ${goals || "Not specified"}
+Budget: ${budget || "Not specified"}
+Timeline: ${timeline || "Not specified"}
+
+Generate a structured analysis with:
+
+## Project Summary
+2-3 sentence executive summary of the project scope and opportunity.
+
+## Key Features
+Numbered list of 6-10 specific features/deliverables the project should include.
+
+## Technical Scope
+Break down into:
+- Frontend requirements
+- Backend/API needs
+- Infrastructure considerations
+- Third-party integrations
+
+## Recommended Approach
+Suggested methodology and technology stack.
+
+## Risk Assessment
+2-3 potential challenges and mitigation strategies.
+
+## Estimated Timeline
+Phase-by-phase breakdown with suggested durations.
+
+Format as clean markdown. Be specific, actionable, and professional.`;
+
+				const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+					messages: [{ role: "user", content: prompt }],
+				});
+
+				return json({ analysis: response.response });
+			}
+
 			return json({ error: "Not Found" }, 404);
 		} catch (e: any) {
 			return json({ error: e.message ?? "Internal Server Error" }, 500);
