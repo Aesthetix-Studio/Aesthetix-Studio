@@ -2,15 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { GrainOverlay } from "./components/grain";
 import { Nav } from "./components/nav";
 import { Hero } from "./components/hero";
-import { Manifesto } from "./components/manifesto";
+import { MarqueeSection } from "./components/marquee";
 import { Work } from "./components/work";
 import { Process } from "./components/process";
-import { Practice } from "./components/practice";
+import { Testimonials } from "./components/testimonials";
 import { CTASection } from "./components/cta-section";
 import { Footer } from "./components/footer";
-import { Blog } from "./components/blog";
 import { BlogPost } from "./components/BlogPost";
-import { LeadMagnets } from "./components/lead-magnets";
 import { AdminLayout } from "./admin/AdminLayout";
 import { LeadsDashboard } from "./admin/LeadsDashboard";
 import { ProjectsAdmin } from "./admin/ProjectsAdmin";
@@ -18,6 +16,8 @@ import { BlogAdmin } from "./admin/BlogAdmin";
 import { CaseStudiesAdmin } from "./admin/CaseStudiesAdmin";
 import { ProposalGenerator } from "./admin/ProposalGenerator";
 import { BriefAnalyzer } from "./admin/BriefAnalyzer";
+import { AboutPage } from "./components/about";
+import { JournalPage } from "./components/journal";
 import { ServicePage } from "./components/ServicePage";
 import { NotFound } from "./components/NotFound";
 
@@ -28,12 +28,10 @@ function Landing() {
       <Nav />
       <main>
         <Hero />
-        <Manifesto />
+        <MarqueeSection />
         <Work />
         <Process />
-        <Practice />
-        <LeadMagnets />
-        <Blog />
+        <Testimonials />
         <CTASection />
       </main>
       <Footer />
@@ -46,6 +44,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/journal" element={<JournalPage />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/admin" element={<AdminLayout />}>
