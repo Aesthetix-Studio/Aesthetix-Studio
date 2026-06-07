@@ -60,13 +60,13 @@ async function requireAuth(request: Request, env: Env): Promise<Response | null>
 
 // ── D1-backed rate limiter ───────────────────────────────────────────────────
 
-async function checkRateLimit(ip: string, db: D1Database): Promise<{ allowed: boolean, timeLeft?: number }> {
-	const LIMIT = 5, PERIOD = 15 * 60 * 1000, LOCKOUT = 15 * 60 * 1000;
+async function checkRateLimit(ip: string, db: D1Database, opts: { limit: number, period: number, lockout: number, prefix?: string }): Promise<{ allowed: boolean, timeLeft?: number }> {
+	const key = opts.prefix ? `${opts.prefix}${ip}` : ip;
 	const now = Date.now();
 
 	const row = await db.prepare(
 		"SELECT count, last_attempt, locked_until FROM login_attempts WHERE ip = ?"
-	).bind(ip).first<{ count: number, last_attempt: number, locked_until: number }>();
+	).bind(key).first<{ count: number, last_attempt: number, locked_until: number }>();
 
 	const rec = row ?? { count: 0, last_attempt: 0, locked_until: 0 };
 
@@ -74,16 +74,16 @@ async function checkRateLimit(ip: string, db: D1Database): Promise<{ allowed: bo
 		return { allowed: false, timeLeft: rec.locked_until - now };
 	}
 
-	const count = (now - rec.last_attempt > PERIOD) ? 1 : rec.count + 1;
-	const locked_until = count > LIMIT ? now + LOCKOUT : 0;
-	const finalCount = count > LIMIT ? 0 : count;
+	const count = (now - rec.last_attempt > opts.period) ? 1 : rec.count + 1;
+	const locked_until = count > opts.limit ? now + opts.lockout : 0;
+	const finalCount = count > opts.limit ? 0 : count;
 
 	await db.prepare(
 		"INSERT INTO login_attempts (ip, count, last_attempt, locked_until) VALUES (?,?,?,?) " +
 		"ON CONFLICT(ip) DO UPDATE SET count=excluded.count, last_attempt=excluded.last_attempt, locked_until=excluded.locked_until"
-	).bind(ip, finalCount, now, locked_until).run();
+	).bind(key, finalCount, now, locked_until).run();
 
-	if (locked_until > 0) return { allowed: false, timeLeft: LOCKOUT };
+	if (locked_until > 0) return { allowed: false, timeLeft: opts.lockout };
 	return { allowed: true };
 }
 
@@ -100,7 +100,7 @@ export default {
 			// Login
 			if (pathname === "/admin/login" && method === "POST") {
 				const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-				const { allowed, timeLeft } = await checkRateLimit(ip, env.DB);
+				const { allowed, timeLeft } = await checkRateLimit(ip, env.DB, { limit: 5, period: 15 * 60 * 1000, lockout: 15 * 60 * 1000 });
 
 				if (!allowed) {
 					return json({ error: `Too many login attempts. Please try again in ${Math.ceil(timeLeft! / 1000 / 60)} minutes.` }, 429);
@@ -303,10 +303,13 @@ export default {
 				return json(results);
 			}
 
-			// AI Proposal Generator (auth required)
+			// AI Proposal Generator (auth required + rate limited)
 			if (pathname === "/api/admin/generate-proposal" && method === "POST") {
 				const denied = await requireAuth(request, env);
 				if (denied) return denied;
+				const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+				const { allowed, timeLeft } = await checkRateLimit(ip, env.DB, { limit: 10, period: 60 * 60 * 1000, lockout: 60 * 60 * 1000, prefix: "ai:" });
+				if (!allowed) return json({ error: `AI rate limit exceeded. Try again in ${Math.ceil(timeLeft! / 1000 / 60)} minutes.` }, 429);
 				const { clientName, projectType, requirements, budget, timeline } = await request.json() as any;
 				if (!clientName || !projectType || !requirements) return json({ error: "Client name, project type, and requirements are required" }, 400);
 
@@ -336,10 +339,13 @@ Format as clean markdown. Be specific, professional, and compelling.`;
 				return json({ proposal: response.response });
 			}
 
-			// AI Content Assistant (auth required)
+			// AI Content Assistant (auth required + rate limited)
 			if (pathname === "/api/admin/generate-draft" && method === "POST") {
 				const denied = await requireAuth(request, env);
 				if (denied) return denied;
+				const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+				const { allowed: aiAllowed, timeLeft: aiTimeLeft } = await checkRateLimit(ip, env.DB, { limit: 10, period: 60 * 60 * 1000, lockout: 60 * 60 * 1000, prefix: "ai:" });
+				if (!aiAllowed) return json({ error: `AI rate limit exceeded. Try again in ${Math.ceil(aiTimeLeft! / 1000 / 60)} minutes.` }, 429);
 				const { topic, tone, length } = await request.json() as any;
 				if (!topic) return json({ error: "Topic is required" }, 400);
 
