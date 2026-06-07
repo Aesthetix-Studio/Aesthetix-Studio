@@ -336,6 +336,36 @@ Format as clean markdown. Be specific, professional, and compelling.`;
 				return json({ proposal: response.response });
 			}
 
+			// AI Content Assistant (auth required)
+			if (pathname === "/api/admin/generate-draft" && method === "POST") {
+				const denied = await requireAuth(request, env);
+				if (denied) return denied;
+				const { topic, tone, length } = await request.json() as any;
+				if (!topic) return json({ error: "Topic is required" }, 400);
+
+				const prompt = `You are a content strategist and writer for Aesthetix Studio, a premium digital agency specializing in UI/UX design, web development, and AI solutions. Write a blog post draft about: ${topic}
+
+Tone: ${tone || "professional yet approachable"}
+Length: ${length || "medium"} (short = 400 words, medium = 800 words, long = 1200 words)
+
+Write in markdown format with:
+- A compelling title
+- An engaging introduction hook
+- Clear sections with h2/h3 headings
+- Practical insights and actionable advice
+- A conclusion with a call to action
+
+Include a 1-2 sentence excerpt at the very beginning (separated by ---) that can be used as a meta description.
+
+Be specific, avoid fluff, and write like an expert practitioner — not a content mill.`;
+
+				const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+					messages: [{ role: "user", content: prompt }],
+				});
+
+				return json({ draft: response.response });
+			}
+
 			return json({ error: "Not Found" }, 404);
 		} catch (e: any) {
 			return json({ error: e.message ?? "Internal Server Error" }, 500);
