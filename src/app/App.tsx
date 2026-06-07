@@ -10,6 +10,7 @@ import { CTASection } from "./components/cta-section";
 import { Footer } from "./components/footer";
 import { Blog } from "./components/blog";
 import { BlogPost } from "./components/BlogPost";
+import { LeadMagnets } from "./components/lead-magnets";
 import { AdminLayout } from "./admin/AdminLayout";
 import { LeadsDashboard } from "./admin/LeadsDashboard";
 import { ProjectsAdmin } from "./admin/ProjectsAdmin";
@@ -29,6 +30,7 @@ function Landing() {
         <Work />
         <Process />
         <Practice />
+        <LeadMagnets />
         <Blog />
         <CTASection />
       </main>
