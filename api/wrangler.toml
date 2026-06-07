@@ -1,0 +1,13 @@
+name = "aesthetix-api"
+main = "src/index.ts"
+compatibility_date = "2026-06-07"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "aesthetix-db"
+database_id = "f8450f22-b5f4-41d1-b971-93705ecc954b"
+
+# Set the admin password secret via:
+#   cd api && npx wrangler secret put ADMIN_PASSWORD
+# Then enter your chosen password at the prompt.
+# The frontend reads VITE_ADMIN_PASSWORD from .env.local (never commit that file).
