@@ -1,0 +1,33 @@
+# Aesthetix Studio
+
+> Web design agency in Hyderabad specializing in UI/UX design, React development, Figma to React conversion, landing page design, and SaaS website development.
+
+Aesthetix Studio is a web design agency in Hyderabad, India. We help ambitious companies build high-performance digital products through UI/UX design, React development, Figma to React conversion, landing page design, and SaaS website development. We work with luxury brands, fintech platforms, health & wellness brands, and SaaS startups in India and worldwide.
+
+## Services
+
+- [UI/UX Design Agency](https://aesthetixstudio.com/services/ui-ux-design): Conversion-focused UI/UX design for web apps, SaaS platforms, and enterprise products. User research, wireframing, visual design systems, and usability testing.
+- [React Development Company](https://aesthetixstudio.com/services/web-development): Figma to React development, custom web applications, and SaaS website development using React, Vite, TypeScript, and Cloudflare Workers.
+- [AI Solutions](https://aesthetixstudio.com/services/ai-solutions): Practical AI integration — content generation, intelligent automation, predictive analytics, and custom model integration.
+- [SEO & Growth](https://aesthetixstudio.com/services/seo): Technical SEO, Core Web Vitals optimization, schema markup, content strategy, and analytics dashboards.
+
+## Process
+
+Our process follows four phases: Discovery → Strategy → Design → Validate. We emphasize editorial restraint, performance-first engineering, and measurable outcomes.
+
+## Tech Stack
+
+- **Frontend:** React, Vite, TypeScript, Tailwind CSS
+- **Backend:** Cloudflare Workers, D1 (SQLite), Workers AI
+- **Deployment:** Vercel (frontend), Cloudflare (API)
+- **AI:** Cloudflare Workers AI with Llama 3.1 8B Instruct model
+- **Authentication:** JWT (HS256) with D1-backed rate limiting
+
+## About
+
+Aesthetix Studio is a web design agency in Hyderabad led by Mohd Abrar Ali Khan, an M.Tech AI & Data Science graduate. The practice focuses on UI/UX design, React development, Figma to React conversion, landing page design, and SaaS website development — serving clients in Hyderabad, India, and worldwide.
+
+## Optional
+
+- [Blog](https://aesthetixstudio.com/journal): Thoughts on design, strategy, and building brands that last.
+- [Case Studies](https://aesthetixstudio.com): Detailed breakdowns of client projects, challenges, and measurable results.

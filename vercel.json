@@ -2,5 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/((?!robots|sitemap|llm|favicon|og-image).*)", "destination": "/index.html" }
+  ]
 }

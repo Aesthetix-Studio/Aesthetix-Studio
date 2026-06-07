@@ -18,13 +18,14 @@ interface ServiceData {
   process: { step: string; title: string; description: string }[];
   outcomes: string[];
   ctaText: string;
+  faqs: { question: string; answer: string }[];
 }
 
 const SERVICES: Record<string, ServiceData> = {
   "ui-ux-design": {
-    title: "UI/UX Design",
+    title: "UI/UX Design Agency in Hyderabad",
     subtitle: "Design that converts.",
-    description: "We craft intuitive, conversion-focused interfaces that turn visitors into clients. Every pixel serves a purpose — from information architecture to micro-interactions, our design system ensures your digital presence feels cohesive and intentional.",
+    description: "We craft intuitive, conversion-focused interfaces that turn visitors into clients. As a UI/UX design agency in Hyderabad, India, every pixel serves a purpose — from information architecture to micro-interactions, our design system ensures your digital presence feels cohesive and intentional.",
     capabilities: [
       "User research & persona development",
       "Information architecture",
@@ -48,11 +49,17 @@ const SERVICES: Record<string, ServiceData> = {
       "95+ Lighthouse accessibility scores",
     ],
     ctaText: "Start your design project",
+    faqs: [
+      { question: "How much does UI/UX design cost in Hyderabad?", answer: "UI/UX design projects typically start at $5,000 for a focused scope and range up to $25,000+ for comprehensive design systems. The exact cost depends on the complexity, number of screens, and research requirements." },
+      { question: "How long does a UI/UX design project take?", answer: "A typical UI/UX design project takes 4-8 weeks from discovery to final deliverables. Complex projects with extensive user research may take 8-12 weeks." },
+      { question: "Do you provide design-to-code handoff?", answer: "Yes, we provide complete design-to-code handoff including Figma files with developer specs, design tokens, and component documentation." },
+      { question: "What industries do you serve?", answer: "We serve SaaS, fintech, health & wellness, e-commerce, and luxury brands. Our design approach is industry-agnostic but focuses on conversion and user experience." },
+    ],
   },
   "web-development": {
-    title: "Web Development",
+    title: "React Development Company in Hyderabad",
     subtitle: "Performance is a feature.",
-    description: "We build fast, modern web applications using cutting-edge frameworks and Cloudflare's global edge network. Our stack is designed for speed, security, and scalability — because every millisecond counts.",
+    description: "We build fast, modern web applications using cutting-edge frameworks and Cloudflare's global edge network. As a React development company in Hyderabad, India, our stack is designed for speed, security, and scalability — Figma to React, SaaS platforms, and landing pages.",
     capabilities: [
       "React / Next.js development",
       "Cloudflare Workers & Pages",
@@ -76,11 +83,17 @@ const SERVICES: Record<string, ServiceData> = {
       "Lighthouse scores consistently 95+",
     ],
     ctaText: "Build something fast",
+    faqs: [
+      { question: "How much does React development cost in Hyderabad?", answer: "React development projects start at $8,000 for a focused MVP and range up to $50,000+ for full-scale SaaS platforms. We provide transparent pricing after an initial discovery call." },
+      { question: "Do you offer Figma to React conversion?", answer: "Yes, Figma to React conversion is one of our core services. We pixel-perfectly implement your designs using React, TypeScript, and Tailwind CSS with clean, maintainable code." },
+      { question: "What tech stack do you use?", answer: "We use React, Vite, TypeScript, Tailwind CSS, and Cloudflare Workers for optimal performance. We also work with Next.js, headless CMS platforms, and custom APIs." },
+      { question: "How long does a React project take?", answer: "A typical React project takes 6-12 weeks depending on complexity. MVPs can be delivered in 4-6 weeks, while full SaaS platforms may take 3-4 months." },
+    ],
   },
   "ai-solutions": {
-    title: "AI Solutions",
+    title: "AI Solutions Agency in Hyderabad",
     subtitle: "Intelligence, engineered.",
-    description: "We integrate practical AI into your business workflows — not hype, but measurable impact. From content generation to intelligent automation, we build AI systems that save time and generate revenue.",
+    description: "We integrate practical AI into your business workflows — not hype, but measurable impact. Based in Hyderabad, India, from content generation to intelligent automation, we build AI systems that save time and generate revenue.",
     capabilities: [
       "AI-powered content generation",
       "Intelligent document processing",
@@ -104,11 +117,17 @@ const SERVICES: Record<string, ServiceData> = {
       "Intelligent lead qualification",
     ],
     ctaText: "Explore AI for your business",
+    faqs: [
+      { question: "How much do AI solutions cost in Hyderabad?", answer: "AI solution costs vary based on complexity. Simple integrations start at $5,000, while custom AI systems range from $15,000-$50,000+. We provide detailed estimates after assessing your requirements." },
+      { question: "Do you build custom AI models?", answer: "We primarily integrate existing AI models (OpenAI, Claude, custom fine-tuned models) into business workflows. For custom model training, we partner with specialized ML engineers." },
+      { question: "What ROI can I expect from AI integration?", answer: "Most clients see 3-5x ROI within 6-12 months through reduced manual work, faster content production, and improved decision-making. We track and report measurable outcomes." },
+      { question: "Do you provide ongoing AI support?", answer: "Yes, we offer maintenance and optimization packages to ensure your AI systems continue performing as your data and needs evolve." },
+    ],
   },
   "seo": {
-    title: "SEO & Growth",
+    title: "SEO & Growth Agency in Hyderabad",
     subtitle: "Be found. Be chosen.",
-    description: "Technical SEO and content strategy that drives organic traffic. We build sites that search engines love and users can't ignore — from schema markup to content clusters.",
+    description: "Technical SEO and content strategy that drives organic traffic. As an SEO agency in Hyderabad, India, we build sites that search engines love and users can't ignore — from schema markup to content clusters.",
     capabilities: [
       "Technical SEO auditing",
       "Core Web Vitals optimization",
@@ -132,6 +151,12 @@ const SERVICES: Record<string, ServiceData> = {
       "Measurable ROI on every content piece",
     ],
     ctaText: "Grow your organic presence",
+    faqs: [
+      { question: "How much do SEO services cost in Hyderabad?", answer: "SEO services start at $1,500/month for technical SEO and content strategy. Comprehensive packages including content creation and link building range from $3,000-$5,000/month." },
+      { question: "How long does SEO take to show results?", answer: "Technical SEO improvements can show results in 2-4 weeks. Content and authority building typically takes 3-6 months for significant ranking improvements. SEO is a long-term investment." },
+      { question: "Do you offer local SEO for Hyderabad businesses?", answer: "Yes, we specialize in local SEO including Google Business Profile optimization, local citations, and location-specific content strategy for Hyderabad and India." },
+      { question: "What tools do you use for SEO?", answer: "We use Google Search Console, Ahrefs, Screaming Frog, Core Web Vitals tools, and custom analytics dashboards to track and optimize your SEO performance." },
+    ],
   },
 };
 
@@ -177,6 +202,30 @@ export function ServicePage() {
     <div style={{ backgroundColor: "#080808", minHeight: "100vh", overflowX: "hidden" }}>
       <GrainOverlay />
       <Nav />
+
+      {/* FAQ Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": service.faqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      }) }} />
+      {/* Breadcrumb Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aesthetixstudio.com" },
+          { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://aesthetixstudio.com/#services" },
+          { "@type": "ListItem", "position": 3, "name": service.title }
+        ]
+      }) }} />
 
       {/* Hero */}
       <section style={styles.hero}>
