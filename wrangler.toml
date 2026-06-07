@@ -1,0 +1,10 @@
+# Cloudflare Wrangler Configuration for Aesthetix Studio
+
+name = "aesthetix-api"
+main = "src/index.ts"
+compatibility_date = "2026-06-07"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "aesthetix-db"
+database_id = "f8450f22-b5f4-41d1-b971-93705ecc954b"
