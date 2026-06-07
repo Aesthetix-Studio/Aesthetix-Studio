@@ -334,9 +334,12 @@ Format as clean markdown. Be specific, professional, and compelling.`;
 
 				const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
 					messages: [{ role: "user", content: prompt }],
+					stream: true,
 				});
 
-				return json({ proposal: response.response });
+				return new Response(response, {
+					headers: { "Content-Type": "text/event-stream", ...cors },
+				});
 			}
 
 			// AI Content Assistant (auth required + rate limited)
@@ -367,9 +370,12 @@ Be specific, avoid fluff, and write like an expert practitioner — not a conten
 
 				const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
 					messages: [{ role: "user", content: prompt }],
+					stream: true,
 				});
 
-				return json({ draft: response.response });
+				return new Response(response, {
+					headers: { "Content-Type": "text/event-stream", ...cors },
+				});
 			}
 
 			// AI Design Brief Analyzer (auth required + rate limited)
@@ -421,9 +427,12 @@ Format as clean markdown. Be specific, actionable, and professional.`;
 
 				const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
 					messages: [{ role: "user", content: prompt }],
+					stream: true,
 				});
 
-				return json({ analysis: response.response });
+				return new Response(response, {
+					headers: { "Content-Type": "text/event-stream", ...cors },
+				});
 			}
 
 			return json({ error: "Not Found" }, 404);

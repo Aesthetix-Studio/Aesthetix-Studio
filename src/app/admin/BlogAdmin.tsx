@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { adminHeaders } from "./AdminLayout";
 import { adminStyles as s } from "./admin-styles";
+import { useStreamResponse } from "./use-stream-response";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
 
@@ -24,8 +25,7 @@ export function BlogAdmin() {
   const [aiTopic, setAiTopic] = useState("");
   const [aiTone, setAiTone] = useState("professional yet approachable");
   const [aiLength, setAiLength] = useState("medium");
-  const [generating, setGenerating] = useState(false);
-  const [aiError, setAiError] = useState("");
+  const { text: streamText, streaming, error: aiError, startStream, cancel, setError: setAiError } = useStreamResponse();
 
   async function load() {
     const r = await fetch(`${API}/api/admin/posts`, { headers: adminHeaders() });
@@ -147,17 +147,21 @@ export function BlogAdmin() {
               </label>
             </div>
             {aiError && <p style={{ color: "#f87171", fontSize: 12, margin: 0 }}>{aiError}</p>}
+            {streaming && (
+              <><style>{`@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }`}</style>
+              <div style={{ background: "#0a0a0a", border: "1px solid #1f1f1f", borderRadius: 6, padding: 16, maxHeight: 200, overflow: "auto" }}>
+                <pre style={{ margin: 0, color: "#ccc", fontSize: 12, lineHeight: 1.6, whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{streamText || "Starting generation..."}{streamText && <span style={{ animation: "blink 1s infinite" }}>▎</span>}</pre>
+              </div>
+              </>)}
             <div style={{ display: "flex", gap: 8 }}>
               <button onClick={async () => {
                 if (!aiTopic.trim()) return;
-                setGenerating(true); setAiError("");
                 try {
-                  const r = await fetch(`${API}/api/admin/generate-draft`, {
-                    method: "POST", headers: adminHeaders(),
-                    body: JSON.stringify({ topic: aiTopic, tone: aiTone, length: aiLength }),
-                  });
-                  if (!r.ok) throw new Error((await r.json()).error || "Failed");
-                  const { draft } = await r.json();
+                  const draft = await startStream(
+                    `${API}/api/admin/generate-draft`,
+                    { topic: aiTopic, tone: aiTone, length: aiLength },
+                    adminHeaders(),
+                  );
                   const lines = draft.split("\n");
                   const title = lines.find((l: string) => l.startsWith("# "))?.replace(/^# /, "") || aiTopic;
                   const excerptSep = draft.indexOf("---");
@@ -165,12 +169,16 @@ export function BlogAdmin() {
                   const content = excerptSep > 0 ? draft.slice(excerptSep + 3).trim() : draft;
                   setEditing({ ...EMPTY, title, excerpt, content, published: 0 });
                   setShowAI(false);
-                } catch (e: any) { setAiError(e.message); }
-                setGenerating(false);
-              }} disabled={generating || !aiTopic.trim()} style={s.primary}>
-                {generating ? "Generating…" : "Generate Draft"}
+                } catch { /* error handled by hook */ }
+              }} disabled={streaming || !aiTopic.trim()} style={s.primary}>
+                {streaming ? "Generating…" : "Generate Draft"}
               </button>
-              <button onClick={() => setShowAI(false)} style={s.ghost}>Cancel</button>
+              {streaming && (
+                <button onClick={cancel} style={s.danger}>Stop</button>
+              )}
+              {!streaming && (
+                <button onClick={() => setShowAI(false)} style={s.ghost}>Cancel</button>
+              )}
             </div>
           </div>
         </div>

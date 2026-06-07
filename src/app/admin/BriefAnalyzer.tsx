@@ -2,6 +2,7 @@ import { useState } from "react";
 import { adminHeaders } from "./AdminLayout";
 import { adminStyles as s } from "./admin-styles";
 import { useCopyToClipboard } from "./use-copy-clipboard";
+import { useStreamResponse } from "./use-stream-response";
 import { marked } from "marked";
 import { MARKDOWN_CSS } from "../components/markdown-styles";
 
@@ -12,32 +13,14 @@ export function BriefAnalyzer() {
     clientName: "", websiteUrl: "", brandDescription: "",
     competitors: "", goals: "", budget: "", timeline: "",
   });
-  const [analysis, setAnalysis] = useState("");
-  const [analyzing, setAnalyzing] = useState(false);
-  const [error, setError] = useState("");
+  const { text: analysis, streaming, error, startStream, cancel } = useStreamResponse();
   const { copied, copy: copyToClipboard } = useCopyToClipboard();
 
   async function analyze(e: React.FormEvent) {
     e.preventDefault();
-    setAnalyzing(true);
-    setError("");
-    setAnalysis("");
     try {
-      const res = await fetch(`${API}/api/admin/analyze-brief`, {
-        method: "POST",
-        headers: adminHeaders(),
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to analyze brief");
-      }
-      const { analysis: a } = await res.json();
-      setAnalysis(a);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-    }
-    setAnalyzing(false);
+      await startStream(`${API}/api/admin/analyze-brief`, form, adminHeaders());
+    } catch { /* error handled by hook */ }
   }
 
   return (
@@ -86,20 +69,32 @@ export function BriefAnalyzer() {
             <input value={form.timeline} placeholder="8-12 weeks" onChange={e => setForm({ ...form, timeline: e.target.value })} style={s.input} />
           </label>
         </div>
-        <button type="submit" disabled={analyzing} style={s.primary}>
-          {analyzing ? "Analyzing..." : "Analyze Brief"}
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" disabled={streaming} style={{ ...s.primary, flex: 1 }}>
+            {streaming ? "Analyzing..." : "Analyze Brief"}
+          </button>
+          {streaming && (
+            <button type="button" onClick={cancel} style={s.danger}>
+              Stop
+            </button>
+          )}
+        </div>
       </form>
 
       {error && <p style={{ color: "#f87171", fontSize: 13, marginBottom: 16 }}>{error}</p>}
+      <style>{`@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }`}</style>
+      {streaming && !analysis && <p style={{ color: "#C4A46B", fontSize: 13, marginBottom: 16 }}>Starting analysis...</p>}
 
-      {analysis && (
+      {(analysis || streaming) && (
         <div style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "24px 28px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>Brief Analysis</h2>
-            <button onClick={() => copyToClipboard(analysis)} style={s.ghost}>
-              {copied ? "Copied!" : "Copy to clipboard"}
-            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              {streaming && <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#C4A46B", animation: "pulse 1s infinite" }} />}
+              <button onClick={() => copyToClipboard(analysis)} style={s.ghost}>
+                {copied ? "Copied!" : "Copy to clipboard"}
+              </button>
+            </div>
           </div>
           <style>{MARKDOWN_CSS}</style>
           <div

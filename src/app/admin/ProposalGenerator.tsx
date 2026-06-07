@@ -2,6 +2,7 @@ import { useState } from "react";
 import { adminHeaders } from "./AdminLayout";
 import { adminStyles as s } from "./admin-styles";
 import { useCopyToClipboard } from "./use-copy-clipboard";
+import { useStreamResponse } from "./use-stream-response";
 import { marked } from "marked";
 import { MARKDOWN_CSS } from "../components/markdown-styles";
 
@@ -12,32 +13,14 @@ export function ProposalGenerator() {
     clientName: "", projectType: "", requirements: "",
     budget: "", timeline: "",
   });
-  const [proposal, setProposal] = useState("");
-  const [generating, setGenerating] = useState(false);
-  const [error, setError] = useState("");
+  const { text: proposal, streaming, error, startStream, cancel } = useStreamResponse();
   const { copied, copy: copyToClipboard } = useCopyToClipboard();
 
   async function generate(e: React.FormEvent) {
     e.preventDefault();
-    setGenerating(true);
-    setError("");
-    setProposal("");
     try {
-      const res = await fetch(`${API}/api/admin/generate-proposal`, {
-        method: "POST",
-        headers: adminHeaders(),
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to generate proposal");
-      }
-      const { proposal: p } = await res.json();
-      setProposal(p);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-    }
-    setGenerating(false);
+      await startStream(`${API}/api/admin/generate-proposal`, form, adminHeaders());
+    } catch { /* error handled by hook */ }
   }
 
   return (
@@ -76,20 +59,32 @@ export function ProposalGenerator() {
             <input value={form.timeline} placeholder="8-12 weeks" onChange={e => setForm({ ...form, timeline: e.target.value })} style={s.input} />
           </label>
         </div>
-        <button type="submit" disabled={generating} style={s.primary}>
-          {generating ? "Generating..." : "Generate Proposal"}
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" disabled={streaming} style={{ ...s.primary, flex: 1 }}>
+            {streaming ? "Generating..." : "Generate Proposal"}
+          </button>
+          {streaming && (
+            <button type="button" onClick={cancel} style={s.danger}>
+              Stop
+            </button>
+          )}
+        </div>
       </form>
 
       {error && <p style={{ color: "#f87171", fontSize: 13, marginBottom: 16 }}>{error}</p>}
+      <style>{`@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }`}</style>
+      {streaming && !proposal && <p style={{ color: "#C4A46B", fontSize: 13, marginBottom: 16 }}>Starting generation...</p>}
 
-      {proposal && (
+      {(proposal || streaming) && (
         <div style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "24px 28px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>Generated Proposal</h2>
-            <button onClick={() => copyToClipboard(proposal)} style={s.ghost}>
-              {copied ? "Copied!" : "Copy to clipboard"}
-            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              {streaming && <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#C4A46B", animation: "pulse 1s infinite" }} />}
+              <button onClick={() => copyToClipboard(proposal)} style={s.ghost}>
+                {copied ? "Copied!" : "Copy to clipboard"}
+              </button>
+            </div>
           </div>
           <style>{MARKDOWN_CSS}</style>
           <div
