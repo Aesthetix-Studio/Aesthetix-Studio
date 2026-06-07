@@ -120,7 +120,7 @@ export function BlogAdmin() {
         </div>
       </div>
       {showAI && (
-        <div style={{ background: "#111", border: "1px solid rgba(196,164,107,0.25)", borderRadius: 6, padding: 20, marginBottom: 20 }}>
+        <div style={{ background: "#111", border: "1px solid rgba(196,164,107,0.25)", borderRadius: 0, padding: 20, marginBottom: 20 }}>
           <h3 style={{ fontSize: 14, fontWeight: 600, margin: "0 0 14px", color: "#C4A46B" }}>AI Content Assistant</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <input required placeholder="Blog topic (e.g. 'Why UI/UX matters for SaaS startups')" value={aiTopic}
@@ -149,7 +149,7 @@ export function BlogAdmin() {
             {aiError && <p style={{ color: "#f87171", fontSize: 12, margin: 0 }}>{aiError}</p>}
             {streaming && (
               <><style>{`@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }`}</style>
-              <div style={{ background: "#0a0a0a", border: "1px solid #1f1f1f", borderRadius: 6, padding: 16, maxHeight: 200, overflow: "auto" }}>
+              <div style={{ background: "#0a0a0a", border: "1px solid #1f1f1f", borderRadius: 0, padding: 16, maxHeight: 200, overflow: "auto" }}>
                 <pre style={{ margin: 0, color: "#ccc", fontSize: 12, lineHeight: 1.6, whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{streamText || "Starting generation..."}{streamText && <span style={{ animation: "blink 1s infinite" }}>▎</span>}</pre>
               </div>
               </>)}
@@ -186,7 +186,7 @@ export function BlogAdmin() {
       {posts.length === 0 && <p style={{ color: "#666" }}>No posts yet.</p>}
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {posts.map(p => (
-          <div key={p.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div key={p.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <p style={{ margin: 0, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                 {p.title}

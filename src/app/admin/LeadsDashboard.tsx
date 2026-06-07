@@ -46,7 +46,7 @@ export function LeadsDashboard() {
     <div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
         {stats.map(s => (
-          <div key={s.label} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "16px 20px" }}>
+          <div key={s.label} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "16px 20px" }}>
             <p style={{ margin: 0, fontSize: 12, color: "#666", textTransform: "uppercase", letterSpacing: 1 }}>{s.label}</p>
             <p style={{ margin: "8px 0 0", fontSize: 28, fontWeight: 600, color: s.color }}>{s.value}</p>
           </div>
@@ -66,7 +66,7 @@ export function LeadsDashboard() {
       {visible.length === 0 && <p style={{ color: "#666" }}>No leads yet.</p>}
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {visible.map(lead => (
-          <div key={lead.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "16px 20px" }}>
+          <div key={lead.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "16px 20px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 8 }}>
               <div>
                 <p style={{ margin: 0, fontWeight: 600 }}>{lead.name} <span style={{ color: "#666", fontWeight: 400 }}>— {lead.email}</span></p>

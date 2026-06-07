@@ -121,7 +121,7 @@ export function LeadMagnets() {
               style={{
                 background: activeMagnet === magnet.id ? "#141414" : "#0d0d0d",
                 border: `1px solid ${activeMagnet === magnet.id ? "rgba(196,164,107,0.3)" : "rgba(255,255,255,0.06)"}`,
-                borderRadius: "8px", padding: "32px 28px",
+                borderRadius: 0, padding: "32px 28px",
                 transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
               }}
               onMouseEnter={e => {
@@ -163,7 +163,7 @@ export function LeadMagnets() {
             style={{
               marginTop: "48px", background: "#0d0d0d",
               border: "1px solid rgba(196,164,107,0.2)",
-              borderRadius: "8px", padding: "36px 32px",
+              borderRadius: 0, padding: "36px 32px",
               maxWidth: "480px",
             }}
           >

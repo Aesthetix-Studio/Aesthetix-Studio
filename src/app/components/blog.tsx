@@ -58,7 +58,7 @@ const styles: Record<string, React.CSSProperties> = {
   heading: { fontSize: 32, fontWeight: 600, color: "#fff", margin: "0 0 8px", letterSpacing: -0.5 },
   sub: { color: "#666", fontSize: 16, margin: "0 0 48px" },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24 },
-  card: { background: "#111", border: "1px solid #1f1f1f", borderRadius: 8, overflow: "hidden", transition: "border-color 0.2s" },
+  card: { background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, overflow: "hidden", transition: "border-color 0.2s" },
   imageWrap: { aspectRatio: "16/9", overflow: "hidden", background: "#1a1a1a" },
   image: { width: "100%", height: "100%", objectFit: "cover" },
   cardContent: { padding: "20px 24px 24px" },

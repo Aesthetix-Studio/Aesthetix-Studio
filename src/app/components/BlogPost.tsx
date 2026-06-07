@@ -75,6 +75,6 @@ const styles: Record<string, React.CSSProperties> = {
   date: { display: "block", fontSize: 12, color: "#555", textTransform: "uppercase" as const, letterSpacing: 1, marginBottom: 12 },
   title: { fontSize: 36, fontWeight: 600, color: "#fff", margin: "0 0 12px", lineHeight: 1.2, letterSpacing: -0.5 },
   excerpt: { fontSize: 18, color: "#888", margin: "0 0 32px", lineHeight: 1.5 },
-  cover: { width: "100%", borderRadius: 8, marginBottom: 40 },
+  cover: { width: "100%", borderRadius: 0, marginBottom: 40 },
   content: { color: "#ccc", fontSize: 16, lineHeight: 1.8 },
 };

@@ -86,7 +86,7 @@ export function BriefAnalyzer() {
       {streaming && !analysis && <p style={{ color: "#C4A46B", fontSize: 13, marginBottom: 16 }}>Starting analysis...</p>}
 
       {(analysis || streaming) && (
-        <div style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "24px 28px" }}>
+        <div style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "24px 28px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>Brief Analysis</h2>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

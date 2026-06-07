@@ -128,7 +128,7 @@ export function CaseStudiesAdmin() {
       {items.length === 0 && <p style={{ color: "#666" }}>No case studies yet.</p>}
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {items.map(item => (
-          <div key={item.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div key={item.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <p style={{ margin: 0, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                 {item.client}

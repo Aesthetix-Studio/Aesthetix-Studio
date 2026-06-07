@@ -92,7 +92,7 @@ export function ProjectsAdmin() {
       {projects.length === 0 && <p style={{ color: "#666" }}>No projects yet.</p>}
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {projects.map(p => (
-          <div key={p.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 6, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div key={p.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div>
               <p style={{ margin: 0, fontWeight: 600 }}>{p.title} {p.is_featured ? <span style={{ fontSize: 11, color: "#f59e0b" }}>★ featured</span> : null}</p>
               <p style={{ margin: "2px 0 0", color: "#666", fontSize: 13 }}>{p.slug} · {p.category} · {p.year}</p>
