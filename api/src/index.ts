@@ -2,6 +2,7 @@ export interface Env {
 	DB: D1Database;
 	ADMIN_PASSWORD: string;
 	JWT_SECRET: string;
+	AI: Ai;
 }
 
 const cors = {
@@ -300,6 +301,39 @@ export default {
 					"SELECT * FROM case_studies ORDER BY created_at DESC"
 				).all();
 				return json(results);
+			}
+
+			// AI Proposal Generator (auth required)
+			if (pathname === "/api/admin/generate-proposal" && method === "POST") {
+				const denied = await requireAuth(request, env);
+				if (denied) return denied;
+				const { clientName, projectType, requirements, budget, timeline } = await request.json() as any;
+				if (!clientName || !projectType || !requirements) return json({ error: "Client name, project type, and requirements are required" }, 400);
+
+				const prompt = `You are a senior project manager at Aesthetix Studio, a premium digital agency. Generate a professional project proposal based on these details:
+
+Client: ${clientName}
+Project Type: ${projectType}
+Requirements: ${requirements}
+Budget: ${budget || "Not specified"}
+Timeline: ${timeline || "Not specified"}
+
+Generate a structured proposal with:
+1. Executive Summary (2-3 sentences)
+2. Project Scope (detailed breakdown)
+3. Proposed Solution (approach and methodology)
+4. Milestones (4-6 phases with deliverables)
+5. Timeline (suggested weeks per phase)
+6. Investment (budget breakdown by phase)
+7. Why Aesthetix Studio (value proposition)
+
+Format as clean markdown. Be specific, professional, and compelling.`;
+
+				const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+					messages: [{ role: "user", content: prompt }],
+				});
+
+				return json({ proposal: response.response });
 			}
 
 			return json({ error: "Not Found" }, 404);

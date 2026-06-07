@@ -7,6 +7,9 @@ binding = "DB"
 database_name = "aesthetix-db"
 database_id = "f8450f22-b5f4-41d1-b971-93705ecc954b"
 
+[ai]
+binding = "AI"
+
 # Set the admin password secret via:
 #   cd api && npx wrangler secret put ADMIN_PASSWORD
 # Then enter your chosen password at the prompt.
