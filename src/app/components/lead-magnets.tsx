@@ -1,37 +1,34 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { Zap, Target, BarChart3, type LucideIcon } from "lucide-react";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
 
 interface Magnet {
   id: string;
-  icon: string;
+  icon: LucideIcon;
   title: string;
   description: string;
-  fields: string[];
 }
 
 const MAGNETS: Magnet[] = [
   {
     id: "website-audit",
-    icon: "⚡",
+    icon: Zap,
     title: "Free Website Audit",
     description: "Get a comprehensive analysis of your website's performance, accessibility, and SEO health.",
-    fields: ["name", "email", "website"],
   },
   {
     id: "ux-review",
-    icon: "🎯",
+    icon: Target,
     title: "Free UX Review",
     description: "Receive expert feedback on your user experience, conversion paths, and design effectiveness.",
-    fields: ["name", "email", "website"],
   },
   {
     id: "seo-audit",
-    icon: "📊",
+    icon: BarChart3,
     title: "Free SEO Audit",
     description: "Discover technical SEO issues, content gaps, and opportunities to rank higher on Google.",
-    fields: ["name", "email", "website"],
   },
 ];
 
@@ -138,7 +135,7 @@ export function LeadMagnets() {
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              <span style={{ fontSize: "28px", display: "block", marginBottom: "20px" }}>{magnet.icon}</span>
+              <magnet.icon size={28} strokeWidth={1.5} color="#C4A46B" style={{ display: "block", marginBottom: "20px" }} />
               <h3 style={{
                 fontFamily: "'Inter', sans-serif", fontSize: "17px", fontWeight: 600,
                 color: "#F0EBE0", margin: "0 0 10px",
