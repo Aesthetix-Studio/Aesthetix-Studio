@@ -217,46 +217,40 @@ export function Footer() {
             © 2026 Aesthetix Studio. All rights reserved.
           </span>
           <div style={{ display: "flex", gap: "16px" }}>
-            <a
-              href="#"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "9px",
-                fontWeight: 400,
-                color: "rgba(240,235,224,0.18)",
-                textDecoration: "none",
-                letterSpacing: "0.04em",
-                transition: "color 0.2s ease",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
-              }
-            >
+            <Link href="/privacy" style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "9px",
+              fontWeight: 400,
+              color: "rgba(240,235,224,0.18)",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
+            }>
               Privacy
-            </a>
-            <a
-              href="#"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "9px",
-                fontWeight: 400,
-                color: "rgba(240,235,224,0.18)",
-                textDecoration: "none",
-                letterSpacing: "0.04em",
-                transition: "color 0.2s ease",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
-              }
-            >
+            </Link>
+            <Link href="/terms" style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "9px",
+              fontWeight: 400,
+              color: "rgba(240,235,224,0.18)",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
+            }>
               Terms
-            </a>
+            </Link>
           </div>
         </div>
         <span
