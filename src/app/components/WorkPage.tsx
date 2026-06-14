@@ -8,6 +8,11 @@ import { Footer } from "./footer";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
 
+interface ProjectTheme {
+  bg: string;
+  accent: string;
+}
+
 interface Project {
   id: string;
   name: string;
@@ -19,7 +24,13 @@ interface Project {
   image: string | null;
   details: string[];
   is_featured: number;
+  theme: ProjectTheme | null;
 }
+
+const DEFAULT_THEME: ProjectTheme = {
+  bg: "linear-gradient(145deg, #0E0C1A 0%, #181428 50%, #0A0814 100%)",
+  accent: "rgba(120,100,200,0.1)",
+};
 
 const FALLBACK_PROJECTS: Project[] = [
   {
@@ -33,6 +44,7 @@ const FALLBACK_PROJECTS: Project[] = [
     image: null,
     details: ["Brand Identity", "Digital Platform", "Motion"],
     is_featured: 1,
+    theme: { bg: "linear-gradient(145deg, #0E0C1A 0%, #181428 50%, #0A0814 100%)", accent: "rgba(120,100,200,0.1)" },
   },
   {
     id: "proj_kyoto_02",
@@ -45,6 +57,7 @@ const FALLBACK_PROJECTS: Project[] = [
     image: null,
     details: ["Identity System", "Campaign"],
     is_featured: 0,
+    theme: { bg: "linear-gradient(145deg, #100A08 0%, #1C1410 100%)", accent: "rgba(196,164,107,0.08)" },
   },
   {
     id: "proj_solaris_03",
@@ -57,6 +70,7 @@ const FALLBACK_PROJECTS: Project[] = [
     image: null,
     details: ["Brand Strategy", "Product Design"],
     is_featured: 0,
+    theme: { bg: "linear-gradient(145deg, #080C08 0%, #0C1810 100%)", accent: "rgba(100,150,120,0.08)" },
   },
   {
     id: "proj_vantage_04",
@@ -69,15 +83,11 @@ const FALLBACK_PROJECTS: Project[] = [
     image: null,
     details: ["Design System", "Component Library"],
     is_featured: 1,
+    theme: { bg: "linear-gradient(145deg, #0A0810 0%, #14081A 100%)", accent: "rgba(180,130,190,0.08)" },
   },
 ];
 
-const CARD_CONFIGS = [
-  { bg: "linear-gradient(145deg, #0E0C1A 0%, #181428 50%, #0A0814 100%)", accent: "rgba(120,100,200,0.1)", large: true },
-  { bg: "linear-gradient(145deg, #100A08 0%, #1C1410 100%)", accent: "rgba(196,164,107,0.08)", large: false },
-  { bg: "linear-gradient(145deg, #080C08 0%, #0C1810 100%)", accent: "rgba(100,150,120,0.08)", large: false },
-  { bg: "linear-gradient(145deg, #0A0810 0%, #14081A 100%)", accent: "rgba(180,130,190,0.08)", large: true },
-];
+
 
 /* ─── Project Card (matching work.tsx design) ─── */
 
@@ -115,7 +125,7 @@ function ProjectCard({
     mouseY.set(y);
   };
 
-  const config = CARD_CONFIGS[index % CARD_CONFIGS.length];
+  const theme = project.theme || DEFAULT_THEME;
   const displayIndex = String(index + 1).padStart(2, "0");
 
   return (
@@ -127,7 +137,7 @@ function ProjectCard({
       whileHover={{ y: -4 }}
       className={`relative overflow-hidden col-span-12 ${large ? "md:col-span-7" : "md:col-span-5"}`}
       style={{
-        background: config.bg,
+        background: theme.bg,
         minHeight: large ? "500px" : "460px",
         border: "1px solid rgba(255,255,255,0.06)",
         cursor: "pointer",
@@ -143,7 +153,7 @@ function ProjectCard({
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(600px circle at ${gradientPos.x}% ${gradientPos.y}%, ${config.accent}, transparent 40%)`,
+          background: `radial-gradient(600px circle at ${gradientPos.x}% ${gradientPos.y}%, ${theme.accent}, transparent 40%)`,
           opacity: hovered ? 1 : 0,
           transition: "opacity 0.5s ease",
         }}
@@ -366,11 +376,9 @@ export function WorkPage() {
       : displayProjects.filter((p) => (p.details || []).includes(activeFilter));
 
   // Compute the "large" flag for each card — swap sizes in second pair like work.tsx
-  const getLarge = (i: number, project: Project): boolean => {
-    const config = CARD_CONFIGS[i % CARD_CONFIGS.length];
-    // First pair uses config.large, second pair swaps
+  const getLarge = (i: number): boolean => {
     const pairIndex = Math.floor(i / 2);
-    return pairIndex % 2 === 0 ? config.large : !config.large;
+    return pairIndex % 2 === 0 ? i % 2 === 0 : i % 2 !== 0;
   };
 
   return (
@@ -538,7 +546,7 @@ export function WorkPage() {
                 key={project.id}
                 project={project}
                 index={i}
-                large={getLarge(i, project)}
+                large={getLarge(i)}
               />
             ))}
           </div>

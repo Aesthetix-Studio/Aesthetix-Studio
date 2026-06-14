@@ -122,6 +122,7 @@ export default {
 				return json(results.map(p => ({
 					...p,
 					details: (() => { try { return JSON.parse(p.details as string); } catch { return []; } })(),
+					theme: (() => { try { return p.theme ? JSON.parse(p.theme as string) : null; } catch { return null; } })(),
 				})));
 			}
 
@@ -147,6 +148,7 @@ export default {
 					return json({
 						...project,
 						details: (() => { try { return JSON.parse(project.details as string); } catch { return []; } })(),
+						theme: (() => { try { return project.theme ? JSON.parse(project.theme as string) : null; } catch { return null; } })(),
 					});
 				}
 				const denied = await requireAuth(request, env);
