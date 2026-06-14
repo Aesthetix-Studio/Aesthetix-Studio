@@ -212,7 +212,7 @@ export function Hero() {
 
       {/* Enhanced stats bar */}
       <motion.div
-        className="flex border-t"
+        className="flex flex-wrap border-t"
         style={{
           borderColor: "rgba(255,255,255,0.08)",
           background: "rgba(0,0,0,0.2)",

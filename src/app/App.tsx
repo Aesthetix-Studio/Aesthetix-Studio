@@ -18,6 +18,8 @@ import DashboardPage from "./admin/dashboard/page";
 import { AboutPage } from "./components/about";
 import { JournalPage } from "./components/journal";
 import { ServicePage } from "./components/ServicePage";
+import { WorkPage } from "./components/WorkPage";
+import { CaseStudiesPage } from "./components/CaseStudiesPage";
 import { NotFound } from "./components/NotFound";
 
 function Landing() {
@@ -43,6 +45,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/work" element={<WorkPage />} />
+        <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/journal" element={<JournalPage />} />
         <Route path="/blog/:slug" element={<BlogPost />} />

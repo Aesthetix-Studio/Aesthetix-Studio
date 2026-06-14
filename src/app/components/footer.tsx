@@ -9,10 +9,11 @@ const SOCIAL_LINKS = [
 ];
 
 const NAV_LINKS = [
-  { label: "Work", href: "/#work", isRoute: false },
+  { label: "Work", href: "/work", isRoute: true },
   { label: "Process", href: "/#process", isRoute: false },
   { label: "About", href: "/about", isRoute: true },
   { label: "Journal", href: "/journal", isRoute: true },
+  { label: "Case Studies", href: "/case-studies", isRoute: true },
   { label: "Contact", href: "/#contact", isRoute: false },
 ];
 

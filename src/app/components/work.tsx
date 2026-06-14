@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useMotionValue, useMotionValueEvent, useSpring } from "motion/react";
+import { Link } from "react-router";
 
 const PROJECTS = [
   {
@@ -389,35 +390,36 @@ export function Work() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <motion.a
-          href="#"
-          whileHover={{ x: 4 }}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "11px",
-            fontWeight: 400,
-            letterSpacing: "0.08em",
-            color: "rgba(240,235,224,0.38)",
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            transition: "color 0.3s ease",
-            paddingBottom: "2px",
-            borderBottom: "1px solid transparent",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#C4A46B";
-            e.currentTarget.style.borderBottomColor = "rgba(196,164,107,0.3)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "rgba(240,235,224,0.38)";
-            e.currentTarget.style.borderBottomColor = "transparent";
-          }}
-        >
-          <span>View all work</span>
-          <span style={{ fontSize: "13px" }}>→</span>
-        </motion.a>
+        <motion.div whileHover={{ x: 4 }}>
+          <Link
+            to="/work"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "11px",
+              fontWeight: 400,
+              letterSpacing: "0.08em",
+              color: "rgba(240,235,224,0.38)",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              transition: "color 0.3s ease",
+              paddingBottom: "2px",
+              borderBottom: "1px solid transparent",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#C4A46B";
+              e.currentTarget.style.borderBottomColor = "rgba(196,164,107,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "rgba(240,235,224,0.38)";
+              e.currentTarget.style.borderBottomColor = "transparent";
+            }}
+          >
+            <span>View all work</span>
+            <span style={{ fontSize: "13px" }}>→</span>
+          </Link>
+        </motion.div>
       </motion.div>
     </section>
   );
