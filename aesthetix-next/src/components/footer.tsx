@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "motion/react";
-import { Link } from "react-router";
+import Link from "next/link";
 
 const SOCIAL_LINKS = [
   { label: "X / Twitter", href: "#" },
@@ -275,3 +275,4 @@ export function Footer() {
     </footer>
   );
 }
+

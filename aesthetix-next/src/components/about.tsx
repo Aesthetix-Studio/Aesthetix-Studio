@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { GrainOverlay } from "./grain";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
@@ -370,3 +370,4 @@ export function AboutPage() {
     </div>
   );
 }
+

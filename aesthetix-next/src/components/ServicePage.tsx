@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 function useDocumentTitle(title: string) {
   useEffect(() => { document.title = `${title} | Aesthetix Studio`; }, [title]);
 }
-import { useParams, Link } from "react-router";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { GrainOverlay } from "./grain";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
@@ -161,8 +162,9 @@ const SERVICES: Record<string, ServiceData> = {
   },
 };
 
-export function ServicePage() {
-  const { slug } = useParams<{ slug: string }>();
+export function ServicePage({ initialSlug }: { initialSlug?: string }) {
+  const params = useParams<{ slug: string }>();
+  const slug = params?.slug || initialSlug;
   const service = SERVICES[slug ?? ""];
 
   useDocumentTitle(service?.title ?? "Service");
@@ -171,7 +173,7 @@ export function ServicePage() {
     return (
       <div style={styles.notFound}>
         <p style={{ color: "#555" }}>Service not found.</p>
-        <Link to="/" style={styles.back}>← Back to home</Link>
+        <Link href="/" style={styles.back}>← Back to home</Link>
       </div>
     );
   }
@@ -231,7 +233,7 @@ export function ServicePage() {
       {/* Hero */}
       <section style={styles.hero}>
         <div style={styles.container}>
-          <Link to="/" style={styles.back}>← Back</Link>
+          <Link href="/" style={styles.back}>← Back</Link>
           <p style={styles.subtitle}>{service.subtitle}</p>
           <h1 style={styles.title}>{service.title}</h1>
           <p style={styles.description}>{service.description}</p>
@@ -332,3 +334,4 @@ const styles: Record<string, React.CSSProperties> = {
   input: { background: "#1a1a1a", border: "1px solid #333", color: "#fff", padding: "12px 16px", fontSize: 14, borderRadius: 4, outline: "none", fontFamily: "'Inter', sans-serif" },
   btn: { background: "#F0EBE0", color: "#080808", border: "none", padding: "12px 24px", fontSize: 14, fontWeight: 500, borderRadius: 4, cursor: "pointer", fontFamily: "'Inter', sans-serif" },
 };
+

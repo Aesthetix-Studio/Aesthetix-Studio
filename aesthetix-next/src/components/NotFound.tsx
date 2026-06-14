@@ -1,5 +1,5 @@
 "use client";
-import { Link } from "react-router";
+import Link from "next/link";
 
 export function NotFound() {
   return (
@@ -8,8 +8,8 @@ export function NotFound() {
       <h1 style={styles.title}>Page not found</h1>
       <p style={styles.desc}>The page you're looking for doesn't exist or has been moved.</p>
       <div style={styles.links}>
-        <Link to="/" style={styles.primary}>Back to home</Link>
-        <Link to="/admin" style={styles.ghost}>Admin</Link>
+        <Link href="/" style={styles.primary}>Back to home</Link>
+        <Link href="/admin" style={styles.ghost}>Admin</Link>
       </div>
     </div>
   );
@@ -45,3 +45,4 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "10px 24px", borderRadius: 4, textDecoration: "none",
   },
 };
+

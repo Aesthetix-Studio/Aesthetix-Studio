@@ -1,30 +1,33 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { marked } from "marked";
 import { MARKDOWN_CSS } from "./markdown-styles";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
 
-interface Post {
+export interface Post {
   id: string; title: string; slug: string; excerpt: string | null;
   content: string; cover_image: string | null;
   seo_title: string | null; seo_description: string | null;
   created_at: string; updated_at: string;
 }
 
-export function BlogPost() {
-  const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
+export function BlogPost({ initialPost, initialSlug }: { initialPost?: Post, initialSlug?: string }) {
+  const params = useParams<{ slug: string }>();
+  const slug = params?.slug || initialSlug;
+  const [post, setPost] = useState<Post | null>(initialPost || null);
+  const [loading, setLoading] = useState(!initialPost);
 
   useEffect(() => {
+    if (initialPost || !slug) return;
     fetch(`${API}/api/posts/${slug}`)
       .then(r => { if (!r.ok) throw new Error(); return r.json(); })
       .then(setPost)
       .catch(() => setPost(null))
       .finally(() => setLoading(false));
-  }, [slug]);
+  }, [slug, initialPost]);
 
   if (loading) {
     return (
@@ -38,7 +41,7 @@ export function BlogPost() {
     return (
       <div style={styles.wrap}>
         <p style={{ color: "#555" }}>Post not found.</p>
-        <Link to="/" style={styles.back}>← Back to home</Link>
+        <Link href="/" style={styles.back}>← Back to home</Link>
       </div>
     );
   }
@@ -47,7 +50,7 @@ export function BlogPost() {
     <article style={styles.article}>
       <style>{MARKDOWN_CSS}</style>
       <div style={styles.container}>
-        <Link to="/" style={styles.back}>← Back</Link>
+        <Link href="/" style={styles.back}>← Back</Link>
         <time style={styles.date}>
           {new Date(post.created_at).toLocaleDateString("en-US", {
             month: "long", day: "numeric", year: "numeric"
@@ -79,3 +82,4 @@ const styles: Record<string, React.CSSProperties> = {
   cover: { width: "100%", borderRadius: 0, marginBottom: 40 },
   content: { color: "#ccc", fontSize: 16, lineHeight: 1.8 },
 };
+

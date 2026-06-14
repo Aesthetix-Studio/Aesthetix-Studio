@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Link, useLocation } from "react-router";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const NAV_HEIGHT = 72;
 
@@ -24,8 +25,8 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(null);
   const [currentSection, setCurrentSection] = useState<string | null>(null);
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   const { scrollY } = useScroll();
   const navOpacity = useTransform(scrollY, [0, 100], [1, 0.96]);
@@ -52,13 +53,13 @@ export function Nav() {
 
   useEffect(() => {
     setScrolled(window.scrollY > 60);
-  }, [location.pathname]);
+  }, [pathname]);
 
   const renderLink = (link: (typeof NAV_LINKS)[0], i: number) => {
     const isActive =
       activeLink === link.label ||
       (isHome && !link.isRoute && currentSection === link.href.replace("#", ""));
-    const routeActive = link.isRoute && location.pathname === link.href;
+    const routeActive = link.isRoute && pathname === link.href;
 
     const baseStyle: React.CSSProperties = {
       fontFamily: "'Inter', sans-serif",
@@ -231,3 +232,4 @@ export function Nav() {
     </motion.nav>
   );
 }
+

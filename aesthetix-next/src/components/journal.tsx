@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { GrainOverlay } from "./grain";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
 
-interface Post {
+export interface Post {
   id: string;
   title: string;
   slug: string;
@@ -44,11 +44,12 @@ const FALLBACK_POSTS: Post[] = [
   },
 ];
 
-export function JournalPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+export function JournalPage({ initialPosts }: { initialPosts?: Post[] }) {
+  const [posts, setPosts] = useState<Post[]>(initialPosts || []);
+  const [loading, setLoading] = useState(!initialPosts);
 
   useEffect(() => {
+    if (initialPosts) return;
     fetch(`${API}/api/posts`)
       .then((r) => {
         if (!r.ok) throw new Error();
@@ -57,7 +58,7 @@ export function JournalPage() {
       .then((data) => setPosts(Array.isArray(data) ? data : []))
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+  }, [initialPosts]);
 
   const displayPosts = posts.length > 0 ? posts : loading ? [] : FALLBACK_POSTS;
 
@@ -282,3 +283,4 @@ export function JournalPage() {
     </div>
   );
 }
+
