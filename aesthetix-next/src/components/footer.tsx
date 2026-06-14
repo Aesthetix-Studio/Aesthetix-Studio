@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -226,12 +227,12 @@ export function Footer() {
               letterSpacing: "0.04em",
               transition: "color 0.2s ease",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
-            }>
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
+              }>
               Privacy
             </Link>
             <Link href="/terms" style={{
@@ -243,12 +244,12 @@ export function Footer() {
               letterSpacing: "0.04em",
               transition: "color 0.2s ease",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
-            }>
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "rgba(240,235,224,0.4)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "rgba(240,235,224,0.18)")
+              }>
               Terms
             </Link>
           </div>
