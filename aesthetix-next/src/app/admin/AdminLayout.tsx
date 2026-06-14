@@ -20,9 +20,16 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [checking, setChecking] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  const [cooldown, setCooldown] = useState(0);
 
   async function login(e: React.FormEvent) {
     e.preventDefault();
+    // Prevent login if a cooldown is active
+    if (cooldown > 0) {
+      setError(`Please wait ${cooldown} seconds before trying again.`);
+      return;
+    }
     setChecking(true);
     setError(""); // clear previous errors
     // Prevent rapid re‑submits; button is already disabled while checking.
@@ -34,14 +41,20 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         body: JSON.stringify({ password: input }),
       });
       if (res.status === 429) {
-        // Server is rate‑limiting. Respect Retry‑After if provided.
-        const retryAfter = res.headers.get("Retry-After");
-        const waitSec = retryAfter ? parseInt(retryAfter, 10) : 5; // default 5 s
-        setError(`Too many attempts. Please wait ${waitSec} seconds.`);
-        setTimeout(() => setError(""), waitSec * 1000);
+        // Server is rate‑limiting. Increment attempts and apply exponential backoff.
+        const newAttempts = loginAttempts + 1;
+        setLoginAttempts(newAttempts);
+        const base = 5; // base wait seconds
+        const waitSec = Math.min(60, Math.pow(2, newAttempts - 1) * base);
+        setCooldown(waitSec);
+        setError(`Too many attempts. Please wait ${waitSec} seconds.`);
+        // Reset cooldown after timeout
+        setTimeout(() => setCooldown(0), waitSec * 1000);
         return;
       }
-      // Successful login, extract token from response JSON
+      // Successful login – reset attempts and cooldown
+      setLoginAttempts(0);
+      setCooldown(0);
       const { token: t } = await res.json();
       sessionStorage.setItem("admin_token", t);
       setToken(t);
