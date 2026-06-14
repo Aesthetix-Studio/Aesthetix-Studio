@@ -1,16 +1,30 @@
 "use client";
 import { useEffect, useState } from "react";
 import { adminHeaders } from "./AdminLayout";
+import { adminStyles as s } from "./admin-styles";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
-
-const STATUS_COLORS: Record<string, string> = {
-  new: "#3b82f6", contacted: "#f59e0b", closed: "#22c55e",
-};
 
 interface Lead {
   id: string; name: string; email: string; company: string | null;
   budget: string | null; project_details: string | null; status: string; created_at: string;
+}
+
+const STATUS_STYLE: Record<string, { bg: string; text: string }> = {
+  new: { bg: "rgba(196,164,107,0.1)", text: "#C4A46B" },
+  contacted: { bg: "rgba(74,222,128,0.08)", text: "#4ade80" },
+  closed: { bg: "rgba(255,255,255,0.05)", text: "rgba(240,235,224,0.5)" },
+};
+
+function StatusBadge({ status }: { status: string }) {
+  const colors = STATUS_STYLE[status] || { bg: "rgba(255,255,255,0.05)", text: "rgba(240,235,224,0.4)" };
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", padding: "3px 10px",
+      background: colors.bg, color: colors.text, fontSize: "10px", fontWeight: 500,
+      letterSpacing: "0.06em", textTransform: "uppercase", fontFamily: "'Inter', sans-serif",
+    }}>{status}</span>
+  );
 }
 
 export function LeadsDashboard() {
@@ -30,59 +44,101 @@ export function LeadsDashboard() {
   }
 
   const visible = filter === "all" ? leads : leads.filter(l => l.status === filter);
-
   const totalLeads = leads.length;
   const qualifiedLeads = leads.filter(l => l.status === "contacted").length;
   const wonLeads = leads.filter(l => l.status === "closed").length;
   const conversionRate = totalLeads > 0 ? Math.round((wonLeads / totalLeads) * 100) : 0;
-
-  const stats = [
-    { label: "Total Leads", value: totalLeads, color: "#fff" },
-    { label: "Qualified", value: qualifiedLeads, color: "#f59e0b" },
-    { label: "Won", value: wonLeads, color: "#22c55e" },
-    { label: "Conversion", value: `${conversionRate}%`, color: "#3b82f6" },
-  ];
+  const newLeads = leads.filter(l => l.status === "new").length;
 
   return (
     <div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
-        {stats.map(s => (
-          <div key={s.label} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "16px 20px" }}>
-            <p style={{ margin: 0, fontSize: 12, color: "#666", textTransform: "uppercase", letterSpacing: 1 }}>{s.label}</p>
-            <p style={{ margin: "8px 0 0", fontSize: 28, fontWeight: 600, color: s.color }}>{s.value}</p>
+      {/* Section title */}
+      <div style={{ marginBottom: 32 }}>
+        <h1 style={{
+          fontFamily: "'Instrument Serif', serif", fontSize: "24px", fontStyle: "italic",
+          color: "#F0EBE0", letterSpacing: "-0.02em", margin: 0, marginBottom: "4px",
+        }}>Inquiries</h1>
+        <p style={{ fontSize: "12px", color: "rgba(240,235,224,0.35)", fontFamily: "'Inter', sans-serif" }}>
+          {totalLeads} total · {newLeads} new · {qualifiedLeads} qualified · {wonLeads} won
+        </p>
+      </div>
+
+      {/* Stats grid */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)", marginBottom: 32 }}>
+        {[
+          { label: "Total Leads", value: String(totalLeads), sub: "all time", accent: true },
+          { label: "New", value: String(newLeads), sub: "awaiting response" },
+          { label: "Won", value: String(wonLeads), sub: "successfully closed" },
+          { label: "Conversion", value: `${conversionRate}%`, sub: "close rate" },
+        ].map((stat, i) => (
+          <div key={stat.label} style={{
+            background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.07)",
+            padding: "24px", position: "relative", overflow: "hidden",
+          }}>
+            {stat.accent && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, rgba(196,164,107,0.8), rgba(196,164,107,0.1))" }} />}
+            <div style={{ fontSize: "10px", fontWeight: 500, color: "rgba(240,235,224,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Inter', sans-serif", marginBottom: "16px" }}>{stat.label}</div>
+            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: "36px", color: "#F0EBE0", fontStyle: "italic", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: "10px" }}>{stat.value}</div>
+            <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.35)", fontFamily: "'Inter', sans-serif" }}>{stat.sub}</div>
           </div>
         ))}
       </div>
+
+      {/* Filter tabs */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-        <h1 style={{ fontSize: 20, fontWeight: 600, margin: 0 }}>Leads ({leads.length})</h1>
-        <div style={{ display: "flex", gap: 8 }}>
-          {["all", "new", "contacted", "closed"].map(s => (
-            <button key={s} onClick={() => setFilter(s)} style={{
-              background: filter === s ? "#fff" : "#1a1a1a", color: filter === s ? "#000" : "#aaa",
-              border: "1px solid #333", borderRadius: 4, padding: "4px 12px", fontSize: 13, cursor: "pointer"
-            }}>{s}</button>
+        <div style={{ display: "flex", gap: "8px" }}>
+          {["all", "new", "contacted", "closed"].map(f => (
+            <button key={f} onClick={() => setFilter(f)} style={{
+              padding: "6px 14px",
+              background: filter === f ? "rgba(196,164,107,0.15)" : "rgba(255,255,255,0.04)",
+              border: filter === f ? "1px solid rgba(196,164,107,0.3)" : "1px solid rgba(255,255,255,0.07)",
+              cursor: "pointer", fontSize: "10px",
+              color: filter === f ? "#C4A46B" : "rgba(240,235,224,0.4)",
+              fontFamily: "'Inter', sans-serif", letterSpacing: "0.04em",
+              textTransform: "uppercase", transition: "all 0.2s ease",
+            }}>{f}</button>
           ))}
         </div>
       </div>
-      {visible.length === 0 && <p style={{ color: "#666" }}>No leads yet.</p>}
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {visible.map(lead => (
-          <div key={lead.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "16px 20px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 8 }}>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600 }}>{lead.name} <span style={{ color: "#666", fontWeight: 400 }}>— {lead.email}</span></p>
-                {lead.company && <p style={{ margin: "4px 0 0", color: "#aaa", fontSize: 13 }}>{lead.company}{lead.budget ? ` · ${lead.budget}` : ""}</p>}
-                {lead.project_details && <p style={{ margin: "8px 0 0", color: "#888", fontSize: 13 }}>{lead.project_details}</p>}
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-                <span style={{ fontSize: 11, color: "#555" }}>{new Date(lead.created_at).toLocaleDateString()}</span>
-                <select value={lead.status ?? "new"} onChange={e => updateStatus(lead.id, e.target.value)}
-                  style={{ background: "#0d0d0d", color: STATUS_COLORS[lead.status] ?? "#fff", border: "1px solid #333", borderRadius: 4, padding: "4px 8px", fontSize: 13, cursor: "pointer" }}>
-                  <option value="new">new</option>
-                  <option value="contacted">contacted</option>
-                  <option value="closed">closed</option>
-                </select>
-              </div>
+
+      {visible.length === 0 && (
+        <p style={{ color: "rgba(240,235,224,0.25)", fontFamily: "'Inter', sans-serif", fontSize: "13px" }}>No leads yet.</p>
+      )}
+
+      {/* Lead list */}
+      <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        {/* Header */}
+        <div style={{
+          display: "grid", gridTemplateColumns: "2fr 1fr 1fr 120px 100px",
+          padding: "12px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", gap: "16px",
+        }}>
+          {["Contact", "Company", "Budget", "Date", "Status"].map(col => (
+            <div key={col} style={{ fontSize: "9px", fontWeight: 500, color: "rgba(240,235,224,0.3)", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Inter', sans-serif" }}>{col}</div>
+          ))}
+        </div>
+
+        {/* Rows */}
+        {visible.map((lead, i) => (
+          <div key={lead.id} style={{
+            display: "grid", gridTemplateColumns: "2fr 1fr 1fr 120px 100px",
+            padding: "16px 24px", borderBottom: i < visible.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
+            alignItems: "center", gap: "16px", transition: "background 0.2s ease",
+          }}
+            onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.02)"}
+            onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+          >
+            <div>
+              <div style={{ fontSize: "13px", fontFamily: "'Instrument Serif', serif", fontStyle: "italic", color: "rgba(240,235,224,0.85)", marginBottom: "2px" }}>{lead.name}</div>
+              <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.3)", fontFamily: "'Inter', sans-serif" }}>{lead.email}</div>
+            </div>
+            <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.4)", fontFamily: "'Inter', sans-serif" }}>{lead.company || "—"}</div>
+            <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.4)", fontFamily: "'Inter', sans-serif" }}>{lead.budget || "—"}</div>
+            <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.35)", fontFamily: "'Inter', sans-serif" }}>{new Date(lead.created_at).toLocaleDateString()}</div>
+            <div>
+              <select value={lead.status ?? "new"} onChange={e => updateStatus(lead.id, e.target.value)} style={s.select}>
+                <option value="new">new</option>
+                <option value="contacted">contacted</option>
+                <option value="closed">closed</option>
+              </select>
             </div>
           </div>
         ))}
@@ -90,4 +146,3 @@ export function LeadsDashboard() {
     </div>
   );
 }
-

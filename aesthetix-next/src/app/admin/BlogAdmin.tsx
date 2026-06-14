@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { adminHeaders } from "./AdminLayout";
 import { adminStyles as s } from "./admin-styles";
-import { useStreamResponse } from "./use-stream-response";
+import { ConfirmDialog } from "./ConfirmDialog";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
@@ -22,11 +22,7 @@ export function BlogAdmin() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [editing, setEditing] = useState<(Omit<Post, "id" | "created_at" | "updated_at"> & { id?: string }) | null>(null);
   const [saving, setSaving] = useState(false);
-  const [showAI, setShowAI] = useState(false);
-  const [aiTopic, setAiTopic] = useState("");
-  const [aiTone, setAiTone] = useState("professional yet approachable");
-  const [aiLength, setAiLength] = useState("medium");
-  const { text: streamText, streaming, error: aiError, startStream, cancel, setError: setAiError } = useStreamResponse();
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   async function load() {
     const r = await fetch(`${API}/api/admin/posts`, { headers: adminHeaders() });
@@ -49,9 +45,10 @@ export function BlogAdmin() {
     } finally { setSaving(false); }
   }
 
-  async function del(slug: string) {
-    if (!confirm(`Delete "${slug}"?`)) return;
-    await fetch(`${API}/api/posts/${slug}`, { method: "DELETE", headers: adminHeaders() });
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    await fetch(`${API}/api/posts/${deleteTarget}`, { method: "DELETE", headers: adminHeaders() });
+    setDeleteTarget(null);
     await load();
   }
 
@@ -68,144 +65,130 @@ export function BlogAdmin() {
     await load();
   }
 
+  /* ─── Edit / Create Form ──────────────────────── */
+
   if (editing !== null) {
     return (
       <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 32 }}>
           <button onClick={() => setEditing(null)} style={s.ghost}>← Back</button>
-          <h1 style={{ fontSize: 20, fontWeight: 600, margin: 0 }}>{editing.id ? "Edit" : "New"} Post</h1>
+          <h1 style={{
+            fontFamily: "'Instrument Serif', serif", fontSize: "24px", fontStyle: "italic",
+            color: "#F0EBE0", letterSpacing: "-0.02em", margin: 0,
+          }}>{editing.id ? "Edit" : "New"} Post</h1>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 14, maxWidth: 640 }}>
-          {(["title", "slug", "excerpt", "cover_image", "seo_title", "seo_description"] as const).map(field => (
-            <label key={field} style={s.label}>
-              {field.replace(/_/g, " ")}
-              <input
-                value={(editing as any)[field] ?? ""}
-                onChange={e => setEditing({ ...editing, [field]: e.target.value })}
-                style={s.input}
+
+        <div style={{
+          background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.07)",
+          padding: "32px", maxWidth: 680, position: "relative", overflow: "hidden",
+        }}>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, rgba(196,164,107,0.5), transparent)" }} />
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            {(["title", "slug", "excerpt", "cover_image", "seo_title", "seo_description"] as const).map(field => (
+              <label key={field} style={s.label}>
+                {field.replace(/_/g, " ")}
+                <input
+                  value={(editing as any)[field] ?? ""}
+                  onChange={e => setEditing({ ...editing, [field]: e.target.value })}
+                  style={s.input}
+                />
+              </label>
+            ))}
+            <label style={s.label}>
+              content
+              <textarea
+                value={editing.content}
+                onChange={e => setEditing({ ...editing, content: e.target.value })}
+                style={{ ...s.input, minHeight: 280, fontFamily: "monospace", fontSize: 13, resize: "vertical" }}
               />
             </label>
-          ))}
-          <label style={s.label}>
-            content
-            <textarea
-              value={editing.content}
-              onChange={e => setEditing({ ...editing, content: e.target.value })}
-              style={{ ...s.input, minHeight: 280, fontFamily: "monospace", fontSize: 13, resize: "vertical" }}
-            />
-          </label>
-          <label style={{ ...s.label, flexDirection: "row", alignItems: "center", gap: 8 }}>
-            <input
-              type="checkbox"
-              checked={Boolean(editing.published)}
-              onChange={e => setEditing({ ...editing, published: e.target.checked ? 1 : 0 })}
-            />
-            Published
-          </label>
-          <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-            <button onClick={save} disabled={saving} style={s.primary}>{saving ? "Saving…" : "Save"}</button>
-            <button onClick={() => setEditing(null)} style={s.ghost}>Cancel</button>
+            <label style={{ ...s.label, flexDirection: "row", alignItems: "center", gap: 8 }}>
+              <input
+                type="checkbox"
+                checked={Boolean(editing.published)}
+                onChange={e => setEditing({ ...editing, published: e.target.checked ? 1 : 0 })}
+              />
+              Published
+            </label>
+            <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
+              <button onClick={save} disabled={saving} style={s.primary}>{saving ? "Saving…" : "Save"}</button>
+              <button onClick={() => setEditing(null)} style={s.ghost}>Cancel</button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 
+  /* ─── List View ───────────────────────────────── */
+
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-        <h1 style={{ fontSize: 20, fontWeight: 600, margin: 0 }}>Blog Posts ({posts.length})</h1>
-        <div style={{ display: "flex", gap: 8 }}>
-          <button onClick={() => setShowAI(!showAI)} style={s.accent}>✨ Generate with AI</button>
-          <button onClick={() => setEditing({ ...EMPTY })} style={s.primary}>+ New Post</button>
+      <ConfirmDialog
+        open={deleteTarget !== null}
+        title="Delete post?"
+        message={`This will permanently delete "${deleteTarget}" and cannot be undone.`}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
+
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32 }}>
+        <div>
+          <h1 style={{
+            fontFamily: "'Instrument Serif', serif", fontSize: "24px", fontStyle: "italic",
+            color: "#F0EBE0", letterSpacing: "-0.02em", margin: 0, marginBottom: "4px",
+          }}>Journal</h1>
+          <p style={{ fontSize: "12px", color: "rgba(240,235,224,0.35)", fontFamily: "'Inter', sans-serif" }}>
+            {posts.length} total · {posts.filter(p => p.published).length} published · {posts.filter(p => !p.published).length} drafts
+          </p>
         </div>
+        <button onClick={() => setEditing({ ...EMPTY })} style={s.primary}>+ New Post</button>
       </div>
-      {showAI && (
-        <div style={{ background: "#111", border: "1px solid rgba(196,164,107,0.25)", borderRadius: 0, padding: 20, marginBottom: 20 }}>
-          <h3 style={{ fontSize: 14, fontWeight: 600, margin: "0 0 14px", color: "#C4A46B" }}>AI Content Assistant</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <input required placeholder="Blog topic (e.g. 'Why UI/UX matters for SaaS startups')" value={aiTopic}
-              onChange={e => setAiTopic(e.target.value)} style={s.input} />
-            <div style={{ display: "flex", gap: 12 }}>
-              <label style={{ ...s.label, flex: 1 }}>
-                Tone
-                <select value={aiTone} onChange={e => setAiTone(e.target.value)}
-                  style={s.select}>
-                  <option>professional yet approachable</option>
-                  <option>technical and authoritative</option>
-                  <option>casual and conversational</option>
-                  <option>bold and provocative</option>
-                </select>
-              </label>
-              <label style={{ ...s.label, flex: 1 }}>
-                Length
-                <select value={aiLength} onChange={e => setAiLength(e.target.value)}
-                  style={s.select}>
-                  <option value="short">Short (~400 words)</option>
-                  <option value="medium">Medium (~800 words)</option>
-                  <option value="long">Long (~1200 words)</option>
-                </select>
-              </label>
-            </div>
-            {aiError && <p style={{ color: "#f87171", fontSize: 12, margin: 0 }}>{aiError}</p>}
-            {streaming && (
-              <><style>{`@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }`}</style>
-              <div style={{ background: "#0a0a0a", border: "1px solid #1f1f1f", borderRadius: 0, padding: 16, maxHeight: 200, overflow: "auto" }}>
-                <pre style={{ margin: 0, color: "#ccc", fontSize: 12, lineHeight: 1.6, whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{streamText || "Starting generation..."}{streamText && <span style={{ animation: "blink 1s infinite" }}>▎</span>}</pre>
-              </div>
-              </>)}
-            <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={async () => {
-                if (!aiTopic.trim()) return;
-                try {
-                  const draft = await startStream(
-                    `${API}/api/admin/generate-draft`,
-                    { topic: aiTopic, tone: aiTone, length: aiLength },
-                    adminHeaders(),
-                  );
-                  const lines = draft.split("\n");
-                  const title = lines.find((l: string) => l.startsWith("# "))?.replace(/^# /, "") || aiTopic;
-                  const excerptSep = draft.indexOf("---");
-                  const excerpt = excerptSep > 0 ? draft.slice(0, excerptSep).trim() : "";
-                  const content = excerptSep > 0 ? draft.slice(excerptSep + 3).trim() : draft;
-                  setEditing({ ...EMPTY, title, excerpt, content, published: 0 });
-                  setShowAI(false);
-                } catch { /* error handled by hook */ }
-              }} disabled={streaming || !aiTopic.trim()} style={s.primary}>
-                {streaming ? "Generating…" : "Generate Draft"}
-              </button>
-              {streaming && (
-                <button onClick={cancel} style={s.danger}>Stop</button>
-              )}
-              {!streaming && (
-                <button onClick={() => setShowAI(false)} style={s.ghost}>Cancel</button>
-              )}
-            </div>
-          </div>
-        </div>
+
+      {posts.length === 0 && (
+        <p style={{ color: "rgba(240,235,224,0.25)", fontFamily: "'Inter', sans-serif", fontSize: "13px" }}>No posts yet.</p>
       )}
-      {posts.length === 0 && <p style={{ color: "#666" }}>No posts yet.</p>}
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        {posts.map(p => (
-          <div key={p.id} style={{ background: "#111", border: "1px solid #1f1f1f", borderRadius: 0, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <p style={{ margin: 0, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                {p.title}
-                <span style={{
-                  fontSize: 11, marginLeft: 8,
-                  color: p.published ? "#22c55e" : "#f59e0b",
-                }}>{p.published ? "published" : "draft"}</span>
-              </p>
-              <p style={{ margin: "2px 0 0", color: "#666", fontSize: 13 }}>
-                /{p.slug} · {new Date(p.created_at).toLocaleDateString()}
-              </p>
+
+      <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div style={{
+          display: "grid", gridTemplateColumns: "3fr 1fr 100px 120px",
+          padding: "12px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", gap: "16px",
+        }}>
+          {["Title", "Slug", "Status", ""].map(col => (
+            <div key={col} style={{ fontSize: "9px", fontWeight: 500, color: "rgba(240,235,224,0.3)", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Inter', sans-serif" }}>{col}</div>
+          ))}
+        </div>
+
+        {posts.map((p, i) => (
+          <div key={p.id} style={{
+            display: "grid", gridTemplateColumns: "3fr 1fr 100px 120px",
+            padding: "16px 24px", borderBottom: i < posts.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
+            alignItems: "center", gap: "16px", transition: "background 0.2s ease",
+          }}
+            onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.02)"}
+            onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+          >
+            <div>
+              <div style={{ fontSize: "13px", fontFamily: "'Instrument Serif', serif", fontStyle: "italic", color: "rgba(240,235,224,0.85)", marginBottom: "2px" }}>{p.title}</div>
+              <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.3)", fontFamily: "'Inter', sans-serif" }}>{new Date(p.created_at).toLocaleDateString()}</div>
             </div>
-            <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+            <div style={{ fontSize: "11px", color: "rgba(240,235,224,0.3)", fontFamily: "'Inter', sans-serif" }}>/{p.slug}</div>
+            <div>
+              <span style={{
+                display: "inline-flex", alignItems: "center", padding: "3px 10px",
+                background: p.published ? "rgba(74,222,128,0.08)" : "rgba(255,255,255,0.04)",
+                color: p.published ? "#4ade80" : "rgba(240,235,224,0.35)",
+                fontSize: "10px", fontWeight: 500, letterSpacing: "0.06em",
+                textTransform: "uppercase", fontFamily: "'Inter', sans-serif",
+              }}>{p.published ? "Published" : "Draft"}</span>
+            </div>
+            <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
               <button onClick={() => togglePublished(p)} style={s.ghost}>
                 {p.published ? "Unpublish" : "Publish"}
               </button>
               <button onClick={() => setEditing({ ...p })} style={s.ghost}>Edit</button>
-              <button onClick={() => del(p.slug)} style={s.danger}>Delete</button>
+              <button onClick={() => setDeleteTarget(p.slug)} style={s.danger}>Delete</button>
             </div>
           </div>
         ))}
@@ -213,5 +196,3 @@ export function BlogAdmin() {
     </div>
   );
 }
-
-
