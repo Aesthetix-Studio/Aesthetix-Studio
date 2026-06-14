@@ -42,3 +42,7 @@ CREATE TABLE payments (
     method VARCHAR(50),
     CONSTRAINT fk_invoice_payment FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE CASCADE
 );
+CREATE INDEX idx_clients_email ON clients(email);
+CREATE INDEX idx_projects_client_id ON projects(client_id);
+CREATE INDEX idx_invoices_project_id ON invoices(project_id);
+CREATE INDEX idx_payments_invoice_id ON payments(invoice_id);
