@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView, useMotionValue, useMotionValueEvent, useSpring } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router";
 import { GrainOverlay } from "./grain";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
@@ -136,6 +137,8 @@ function ProjectCard({
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
     >
+      {/* Clickable overlay link */}
+      <Link to={`/work/${project.slug}`} style={{ position: "absolute", inset: 0, zIndex: 5 }} aria-label={`View ${project.name}`} />
       {/* Animated accent overlay — follows cursor */}
       <motion.div
         className="absolute inset-0 pointer-events-none"

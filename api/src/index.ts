@@ -138,9 +138,19 @@ export default {
 
 			const slugMatch = pathname.match(/^\/api\/projects\/([^/]+)$/);
 			if (slugMatch) {
+				const slug = slugMatch[1];
+				if (method === "GET") {
+					const project = await env.DB.prepare(
+						"SELECT * FROM projects WHERE slug = ?"
+					).bind(slug).first();
+					if (!project) return json({ error: "Project not found" }, 404);
+					return json({
+						...project,
+						details: (() => { try { return JSON.parse(project.details as string); } catch { return []; } })(),
+					});
+				}
 				const denied = await requireAuth(request, env);
 				if (denied) return denied;
-				const slug = slugMatch[1];
 				if (method === "PUT") {
 					const b: any = await request.json();
 					await env.DB.prepare(

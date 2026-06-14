@@ -20,6 +20,7 @@ import { JournalPage } from "./components/journal";
 import { ServicePage } from "./components/ServicePage";
 import { WorkPage } from "./components/WorkPage";
 import { CaseStudiesPage } from "./components/CaseStudiesPage";
+import { ProjectDetailPage } from "./components/ProjectDetailPage";
 import { NotFound } from "./components/NotFound";
 
 function Landing() {
@@ -46,6 +47,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/work" element={<WorkPage />} />
+        <Route path="/work/:slug" element={<ProjectDetailPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/journal" element={<JournalPage />} />
