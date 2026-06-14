@@ -209,7 +209,7 @@ function ChartTooltipContent({
               )}
             >
               {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index, item.payload)
+                formatter(item.value, item.name, item, index, item.payload) as React.ReactNode
               ) : (
                 <>
                   {itemConfig?.icon ? (
@@ -266,13 +266,9 @@ function ChartTooltipContent({
 
 const ChartLegend = RechartsPrimitive.Legend;
 
-function ChartLegendContent({
-  className,
-  hideIcon = false,
-  payload,
-  verticalAlign = "bottom",
-  nameKey,
-}: React.ComponentProps<"div"> & {
+type ChartLegendContentProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'payload' | 'verticalAlign'> & {
+  className?: string;
+  hideIcon?: boolean;
   payload?: Array<{
     value?: any;
     color?: string;
@@ -281,9 +277,16 @@ function ChartLegendContent({
     [key: string]: any;
   }>;
   verticalAlign?: "top" | "middle" | "bottom";
-  hideIcon?: boolean;
   nameKey?: string;
-}) {
+};
+
+function ChartLegendContent({
+  className,
+  hideIcon = false,
+  payload,
+  verticalAlign = "bottom",
+  nameKey,
+}: ChartLegendContentProps) {
   const { config } = useChart();
 
   if (!payload?.length) {
