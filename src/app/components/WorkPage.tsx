@@ -138,7 +138,7 @@ function ProjectCard({
       onMouseMove={handleMouseMove}
     >
       {/* Clickable overlay link */}
-      <Link to={`/work/${project.slug}`} style={{ position: "absolute", inset: 0, zIndex: 5 }} aria-label={`View ${project.name}`} />
+      <Link to={`/work/${project.slug}`} style={{ position: "absolute", inset: 0, zIndex: 1 }} aria-label={`View ${project.name}`} />
       {/* Animated accent overlay — follows cursor */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -266,7 +266,7 @@ function ProjectCard({
             marginTop: hovered ? "20px" : "0px",
           }}
           transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
-          style={{ overflow: "hidden" }}
+          style={{ overflow: "hidden", position: "relative", zIndex: 6 }}
         >
           {project.summary && (
             <p
