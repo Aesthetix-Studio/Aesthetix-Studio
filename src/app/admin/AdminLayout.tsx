@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router";
 import {
   LayoutDashboard,
@@ -10,6 +10,8 @@ import {
   Bell,
   Search,
   ChevronRight,
+  Menu,
+  X,
 } from "lucide-react";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
@@ -38,9 +40,24 @@ const SECTION_LABELS: Record<string, string> = {
   "/admin/case-studies": "Case Studies",
 };
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < breakpoint : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    setIsMobile(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 export function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useIsMobile();
   const [token, setToken] = useState(sessionStorage.getItem("admin_token") ?? "");
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
@@ -48,6 +65,22 @@ export function AdminLayout() {
   const [loginAttempts, setLoginAttempts] = useState(0);
   const [cooldown, setCooldown] = useState(0);
   const [focused, setFocused] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
+
+  // Lock body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (sidebarOpen && isMobile) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [sidebarOpen, isMobile]);
 
   async function login(e: React.FormEvent) {
     e.preventDefault();
@@ -132,69 +165,146 @@ export function AdminLayout() {
 
   const currentLabel = SECTION_LABELS[location.pathname] || "Admin";
 
+  /* ─── Sidebar Content (shared between desktop & mobile) ─── */
+  const sidebarContent = (
+    <>
+      <div style={{ padding: "28px 24px 24px", borderBottom: "1px solid rgba(255,255,255,0.05)", display: "flex", alignItems: "center", gap: "10px" }}>
+        <a href="/" style={{ textDecoration: "none" }}>
+          <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: "22px", color: "#F0EBE0", fontStyle: "italic", letterSpacing: "-0.02em" }}>Æ</span>
+        </a>
+        <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.1)" }} />
+        <div>
+          <div style={{ fontSize: "10px", fontWeight: 500, color: "rgba(240,235,224,0.7)", letterSpacing: "0.04em" }}>Aesthetix</div>
+          <div style={{ fontSize: "8px", color: "rgba(240,235,224,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Studio Admin</div>
+        </div>
+      </div>
+      <nav style={{ flex: 1, padding: "16px 12px", display: "flex", flexDirection: "column", gap: "2px" }}>
+        {NAV_ITEMS.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink key={item.to} to={item.to} onClick={() => setSidebarOpen(false)} style={({ isActive }) => ({ display: "flex", alignItems: "center", gap: "10px", padding: "9px 12px", background: isActive ? "rgba(196,164,107,0.08)" : "transparent", border: isActive ? "1px solid rgba(196,164,107,0.15)" : "1px solid transparent", color: isActive ? "#C4A46B" : "rgba(240,235,224,0.4)", fontSize: "12px", fontWeight: isActive ? 500 : 400, letterSpacing: "0.02em", fontFamily: "'Inter', sans-serif", transition: "all 0.2s ease", textDecoration: "none", width: "100%" })}>
+              <Icon size={14} strokeWidth={1.5} />
+              <span style={{ flex: 1 }}>{item.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+      <div style={{ padding: "16px 12px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 12px", marginBottom: "4px" }}>
+          <div style={{ width: "28px", height: "28px", background: "linear-gradient(135deg, rgba(196,164,107,0.3), rgba(196,164,107,0.1))", border: "1px solid rgba(196,164,107,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 600, color: "#C4A46B", fontFamily: "'Inter', sans-serif", flexShrink: 0 }}>AS</div>
+          <div style={{ flex: 1, overflow: "hidden" }}>
+            <div style={{ fontSize: "11px", fontWeight: 500, color: "rgba(240,235,224,0.8)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Admin</div>
+            <div style={{ fontSize: "9px", color: "rgba(240,235,224,0.25)", letterSpacing: "0.04em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>hello@aesthetixstudio.com</div>
+          </div>
+        </div>
+        <button onClick={logout} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "9px 12px", background: "transparent", border: "1px solid transparent", cursor: "pointer", color: "rgba(240,235,224,0.3)", fontSize: "12px", fontFamily: "'Inter', sans-serif", transition: "all 0.2s ease", width: "100%" }} onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.background = "rgba(239,68,68,0.05)"; e.currentTarget.style.borderColor = "rgba(239,68,68,0.1)"; }} onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(240,235,224,0.3)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "transparent"; }}>
+          <LogOut size={14} strokeWidth={1.5} />
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </>
+  );
+
   return (
     <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#080808", fontFamily: "'Inter', sans-serif" }}>
       {/* Grain */}
       <div style={{ position: "fixed", inset: 0, opacity: 0.025, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundRepeat: "repeat", backgroundSize: "128px 128px", pointerEvents: "none", zIndex: 0 }} />
 
-      {/* Sidebar */}
-      <div style={{ width: "228px", minWidth: "228px", height: "100vh", backgroundColor: "#0A0A0A", borderRight: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", padding: "0", position: "sticky", top: 0, fontFamily: "'Inter', sans-serif" }}>
-        <div style={{ padding: "28px 24px 24px", borderBottom: "1px solid rgba(255,255,255,0.05)", display: "flex", alignItems: "center", gap: "10px" }}>
-          <a href="/" style={{ textDecoration: "none" }}>
-            <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: "22px", color: "#F0EBE0", fontStyle: "italic", letterSpacing: "-0.02em" }}>Æ</span>
-          </a>
-          <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.1)" }} />
-          <div>
-            <div style={{ fontSize: "10px", fontWeight: 500, color: "rgba(240,235,224,0.7)", letterSpacing: "0.04em" }}>Aesthetix</div>
-            <div style={{ fontSize: "8px", color: "rgba(240,235,224,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Studio Admin</div>
-          </div>
+      {/* Desktop Sidebar — hidden on mobile */}
+      {!isMobile && (
+        <div style={{ width: "228px", minWidth: "228px", height: "100vh", backgroundColor: "#0A0A0A", borderRight: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", padding: "0", position: "sticky", top: 0, fontFamily: "'Inter', sans-serif" }}>
+          {sidebarContent}
         </div>
-        <nav style={{ flex: 1, padding: "16px 12px", display: "flex", flexDirection: "column", gap: "2px" }}>
-          {NAV_ITEMS.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink key={item.to} to={item.to} style={({ isActive }) => ({ display: "flex", alignItems: "center", gap: "10px", padding: "9px 12px", background: isActive ? "rgba(196,164,107,0.08)" : "transparent", border: isActive ? "1px solid rgba(196,164,107,0.15)" : "1px solid transparent", color: isActive ? "#C4A46B" : "rgba(240,235,224,0.4)", fontSize: "12px", fontWeight: isActive ? 500 : 400, letterSpacing: "0.02em", fontFamily: "'Inter', sans-serif", transition: "all 0.2s ease", textDecoration: "none", width: "100%" })}>
-                <Icon size={14} strokeWidth={1.5} />
-                <span style={{ flex: 1 }}>{item.label}</span>
-              </NavLink>
-            );
-          })}
-        </nav>
-        <div style={{ padding: "16px 12px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 12px", marginBottom: "4px" }}>
-            <div style={{ width: "28px", height: "28px", background: "linear-gradient(135deg, rgba(196,164,107,0.3), rgba(196,164,107,0.1))", border: "1px solid rgba(196,164,107,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 600, color: "#C4A46B", fontFamily: "'Inter', sans-serif", flexShrink: 0 }}>AS</div>
-            <div style={{ flex: 1, overflow: "hidden" }}>
-              <div style={{ fontSize: "11px", fontWeight: 500, color: "rgba(240,235,224,0.8)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Admin</div>
-              <div style={{ fontSize: "9px", color: "rgba(240,235,224,0.25)", letterSpacing: "0.04em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>hello@aesthetixstudio.com</div>
+      )}
+
+      {/* Mobile Sidebar Overlay */}
+      {isMobile && sidebarOpen && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 40 }} onClick={() => setSidebarOpen(false)}>
+          {/* Backdrop */}
+          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }} />
+          {/* Sidebar panel */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              width: "260px",
+              backgroundColor: "#0A0A0A",
+              borderRight: "1px solid rgba(255,255,255,0.06)",
+              display: "flex",
+              flexDirection: "column",
+              fontFamily: "'Inter', sans-serif",
+              transform: "translateX(0)",
+              transition: "transform 0.3s cubic-bezier(0.16,1,0.3,1)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <div style={{ position: "absolute", top: "20px", right: "16px", zIndex: 10 }}>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "rgba(240,235,224,0.4)",
+                  padding: "4px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <X size={18} strokeWidth={1.5} />
+              </button>
             </div>
+            {sidebarContent}
           </div>
-          <button onClick={logout} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "9px 12px", background: "transparent", border: "1px solid transparent", cursor: "pointer", color: "rgba(240,235,224,0.3)", fontSize: "12px", fontFamily: "'Inter', sans-serif", transition: "all 0.2s ease", width: "100%" }} onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.background = "rgba(239,68,68,0.05)"; e.currentTarget.style.borderColor = "rgba(239,68,68,0.1)"; }} onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(240,235,224,0.3)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "transparent"; }}>
-            <LogOut size={14} strokeWidth={1.5} />
-            <span>Sign Out</span>
-          </button>
         </div>
-      </div>
+      )}
 
       {/* Main Content */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "auto", position: "relative", zIndex: 1 }}>
-        <div style={{ height: "60px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", backgroundColor: "#080808", position: "sticky", top: 0, zIndex: 10 }}>
+        {/* Top Bar */}
+        <div style={{ height: "60px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "0 16px" : "0 32px", backgroundColor: "#080808", position: "sticky", top: 0, zIndex: 10 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {/* Hamburger — mobile only */}
+            {isMobile && (
+              <button
+                onClick={() => setSidebarOpen(true)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "rgba(240,235,224,0.6)",
+                  padding: "6px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: "4px",
+                }}
+              >
+                <Menu size={18} strokeWidth={1.5} />
+              </button>
+            )}
             <span style={{ fontSize: "11px", color: "rgba(240,235,224,0.25)", fontFamily: "'Inter', sans-serif", letterSpacing: "0.04em" }}>Aesthetix Studio</span>
             <ChevronRight size={12} color="rgba(240,235,224,0.2)" />
             <span style={{ fontSize: "11px", color: "rgba(240,235,224,0.7)", fontFamily: "'Inter', sans-serif", fontWeight: 500, letterSpacing: "0.04em" }}>{currentLabel}</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", padding: "6px 14px", width: "200px" }}>
-              <Search size={12} color="rgba(240,235,224,0.3)" />
-              <input placeholder="Search..." style={{ background: "none", border: "none", outline: "none", fontSize: "12px", color: "rgba(240,235,224,0.6)", fontFamily: "'Inter', sans-serif", width: "100%", caretColor: "#C4A46B" }} />
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: isMobile ? "8px" : "16px" }}>
+            {!isMobile && (
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", padding: "6px 14px", width: "200px" }}>
+                <Search size={12} color="rgba(240,235,224,0.3)" />
+                <input placeholder="Search..." style={{ background: "none", border: "none", outline: "none", fontSize: "12px", color: "rgba(240,235,224,0.6)", fontFamily: "'Inter', sans-serif", width: "100%", caretColor: "#C4A46B" }} />
+              </div>
+            )}
             <button style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", width: "34px", height: "34px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", color: "rgba(240,235,224,0.5)" }}>
               <Bell size={13} />
               <div style={{ position: "absolute", top: "6px", right: "6px", width: "6px", height: "6px", background: "#C4A46B", borderRadius: "50%" }} />
             </button>
           </div>
         </div>
-        <main style={{ flex: 1, padding: "36px 40px", overflowY: "auto" }}>
+        <main style={{ flex: 1, padding: isMobile ? "20px 16px" : "36px 40px", overflowY: "auto" }}>
           <Outlet />
         </main>
       </div>
