@@ -24,14 +24,24 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   async function login(e: React.FormEvent) {
     e.preventDefault();
     setChecking(true);
-    setError("");
+    setError(""); // clear previous errors
+    // Prevent rapid re‑submits; button is already disabled while checking.
+    // If a previous 429 set a timeout, the UI will show the message until cleared.
     try {
       const res = await fetch(`${API}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: input }),
       });
-      if (!res.ok) { setError("Wrong password"); return; }
+      if (res.status === 429) {
+        // Server is rate‑limiting. Respect Retry‑After if provided.
+        const retryAfter = res.headers.get("Retry-After");
+        const waitSec = retryAfter ? parseInt(retryAfter, 10) : 5; // default 5 s
+        setError(`Too many attempts. Please wait ${waitSec} seconds.`);
+        setTimeout(() => setError(""), waitSec * 1000);
+        return;
+      }
+      // Successful login, extract token from response JSON
       const { token: t } = await res.json();
       sessionStorage.setItem("admin_token", t);
       setToken(t);
