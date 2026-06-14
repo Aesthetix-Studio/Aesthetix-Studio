@@ -14,8 +14,7 @@ import { LeadsDashboard } from "./admin/LeadsDashboard";
 import { ProjectsAdmin } from "./admin/ProjectsAdmin";
 import { BlogAdmin } from "./admin/BlogAdmin";
 import { CaseStudiesAdmin } from "./admin/CaseStudiesAdmin";
-import { ProposalGenerator } from "./admin/ProposalGenerator";
-import { BriefAnalyzer } from "./admin/BriefAnalyzer";
+import DashboardPage from "./admin/dashboard/page";
 import { AboutPage } from "./components/about";
 import { JournalPage } from "./components/journal";
 import { ServicePage } from "./components/ServicePage";
@@ -49,13 +48,12 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Navigate to="/admin/leads" replace />} />
+          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
           <Route path="leads" element={<LeadsDashboard />} />
           <Route path="projects" element={<ProjectsAdmin />} />
           <Route path="blog" element={<BlogAdmin />} />
           <Route path="case-studies" element={<CaseStudiesAdmin />} />
-          <Route path="proposals" element={<ProposalGenerator />} />
-          <Route path="brief-analyzer" element={<BriefAnalyzer />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
