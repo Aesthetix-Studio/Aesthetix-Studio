@@ -8,6 +8,16 @@ import { cn } from "./utils";
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;
 
+interface TooltipPayloadItem {
+  name?: string;
+  value?: number | string;
+  dataKey?: string;
+  color?: string;
+  fill?: string;
+  payload?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
 export type ChartConfig = {
   [k in string]: {
     label?: React.ReactNode;
@@ -118,8 +128,14 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<"div"> & {
+}: React.ComponentProps<"div"> & {
+    active?: boolean;
+    payload?: TooltipPayloadItem[];
+    label?: string;
+    labelClassName?: string;
+    labelFormatter?: (label: unknown, payload: TooltipPayloadItem[]) => React.ReactNode;
+    formatter?: (value: unknown, name: unknown, item: TooltipPayloadItem, index: number, payload: unknown) => React.ReactNode;
+    color?: string;
     hideLabel?: boolean;
     hideIndicator?: boolean;
     indicator?: "line" | "dot" | "dashed";
@@ -182,11 +198,11 @@ function ChartTooltipContent({
         {payload.map((item, index) => {
           const key = `${nameKey || item.name || item.dataKey || "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
-          const indicatorColor = color || item.payload.fill || item.color;
+          const indicatorColor = color || (item.payload as Record<string, unknown>)?.fill as string || item.color;
 
           return (
             <div
-              key={item.dataKey}
+              key={item.dataKey || index}
               className={cn(
                 "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                 indicator === "dot" && "items-center",
@@ -234,7 +250,7 @@ function ChartTooltipContent({
                     </div>
                     {item.value && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {item.value.toLocaleString()}
+                        {typeof item.value === 'number' ? item.value.toLocaleString() : String(item.value)}
                       </span>
                     )}
                   </div>
@@ -256,11 +272,18 @@ function ChartLegendContent({
   payload,
   verticalAlign = "bottom",
   nameKey,
-}: React.ComponentProps<"div"> &
-  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-    hideIcon?: boolean;
-    nameKey?: string;
-  }) {
+}: React.ComponentProps<"div"> & {
+  payload?: Array<{
+    value?: any;
+    color?: string;
+    dataKey?: string | number;
+    payload?: any;
+    [key: string]: any;
+  }>;
+  verticalAlign?: "top" | "middle" | "bottom";
+  hideIcon?: boolean;
+  nameKey?: string;
+}) {
   const { config } = useChart();
 
   if (!payload?.length) {

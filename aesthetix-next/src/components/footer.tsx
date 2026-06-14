@@ -37,7 +37,7 @@ export function Footer() {
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-12">
         <div style={{ maxWidth: "280px" }}>
           <Link
-            to="/"
+            href="/"
             style={{
               textDecoration: "none",
               display: "inline-block",
@@ -98,7 +98,7 @@ export function Footer() {
                     whileHover={{ x: 4 }}
                   >
                     <Link
-                      to={link.href}
+                      href={link.href}
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "12px",

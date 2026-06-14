@@ -5,7 +5,7 @@ import { adminStyles as s } from "./admin-styles";
 import { useCopyToClipboard } from "./use-copy-clipboard";
 import { useStreamResponse } from "./use-stream-response";
 import { marked } from "marked";
-import { MARKDOWN_CSS } from "../components/markdown-styles";
+import { MARKDOWN_CSS } from "@/components/markdown-styles";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 

@@ -335,7 +335,7 @@ export function AboutPage() {
               project gets the focus it deserves.
             </p>
             <Link
-              to="/"
+              href="/"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "12px",

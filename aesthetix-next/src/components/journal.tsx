@@ -254,7 +254,7 @@ export function JournalPage({ initialPosts }: { initialPosts?: Post[] }) {
                     </p>
                   )}
                   <Link
-                    to={`/blog/${post.slug}`}
+                    href={`/blog/${post.slug}`}
                     style={{
                       fontFamily: "'Inter', sans-serif",
                       fontSize: "11px",

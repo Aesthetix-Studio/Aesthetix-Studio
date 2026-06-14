@@ -1,20 +1,22 @@
 "use client";
-import { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router";
+import { useState, ReactNode } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 export function getToken() {
-  return sessionStorage.getItem("admin_token") ?? "";
+  return typeof window !== 'undefined' ? sessionStorage.getItem("admin_token") ?? "" : "";
 }
 
 export function adminHeaders() {
   return { "Content-Type": "application/json", "Authorization": `Bearer ${getToken()}` };
 }
 
-export function AdminLayout() {
-  const navigate = useNavigate();
-  const [token, setToken] = useState(sessionStorage.getItem("admin_token") ?? "");
+export default function AdminLayout({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [token, setToken] = useState(typeof window !== 'undefined' ? sessionStorage.getItem("admin_token") ?? "" : "");
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [checking, setChecking] = useState(false);
@@ -33,7 +35,7 @@ export function AdminLayout() {
       const { token: t } = await res.json();
       sessionStorage.setItem("admin_token", t);
       setToken(t);
-      navigate("/admin/leads");
+      router.push("/admin/leads");
     } catch {
       setError("Network error");
     } finally {
@@ -68,27 +70,32 @@ export function AdminLayout() {
     setToken("");
   }
 
+  const navLink = (path: string, label: string) => {
+    const isActive = pathname === path;
+    return (
+      <Link href={path} style={{ ...styles.navLink, ...(isActive ? styles.navActive : {}) }}>
+        {label}
+      </Link>
+    );
+  };
+
   return (
     <div style={styles.shell}>
       <aside style={styles.sidebar}>
         <p style={styles.logo}>Aesthetix</p>
-        <NavLink to="/admin/leads" style={navStyle}>Leads</NavLink>
-        <NavLink to="/admin/projects" style={navStyle}>Projects</NavLink>
-        <NavLink to="/admin/blog" style={navStyle}>Blog</NavLink>
-        <NavLink to="/admin/case-studies" style={navStyle}>Case Studies</NavLink>
-        <NavLink to="/admin/proposals" style={navStyle}>Proposals</NavLink>
-        <NavLink to="/admin/brief-analyzer" style={navStyle}>Brief Analyzer</NavLink>
+        {navLink("/admin/leads", "Leads")}
+        {navLink("/admin/projects", "Projects")}
+        {navLink("/admin/blog", "Blog")}
+        {navLink("/admin/case-studies", "Case Studies")}
+        {navLink("/admin/proposals", "Proposals")}
+        {navLink("/admin/brief-analyzer", "Brief Analyzer")}
         <button onClick={logout} style={styles.logoutBtn}>Logout</button>
       </aside>
       <main style={styles.content}>
-        <Outlet />
+        {children}
       </main>
     </div>
   );
-}
-
-function navStyle({ isActive }: { isActive: boolean }) {
-  return { ...styles.navLink, ...(isActive ? styles.navActive : {}) };
 }
 
 const styles: Record<string, React.CSSProperties> = {

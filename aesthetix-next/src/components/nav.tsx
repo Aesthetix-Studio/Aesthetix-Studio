@@ -100,7 +100,7 @@ export function Nav() {
       return (
         <Link
           key={link.label}
-          to={link.href}
+          href={link.href}
           style={baseStyle}
           onMouseEnter={handleHover}
           onMouseLeave={handleLeave}
@@ -155,7 +155,7 @@ export function Nav() {
     >
       {/* Logo */}
       <Link
-        to="/"
+        href="/"
         style={{
           textDecoration: "none",
         }}
