@@ -65,3 +65,4 @@ export function useStreamResponse() {
 
   return { text, streaming, error, startStream, cancel, setText, setError };
 }
+

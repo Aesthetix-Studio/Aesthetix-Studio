@@ -4,7 +4,7 @@ import { adminHeaders } from "./AdminLayout";
 import { adminStyles as s } from "./admin-styles";
 import { useStreamResponse } from "./use-stream-response";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 interface Post {
   id: string; title: string; slug: string; excerpt: string | null;
@@ -213,4 +213,5 @@ export function BlogAdmin() {
     </div>
   );
 }
+
 

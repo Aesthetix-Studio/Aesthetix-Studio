@@ -222,3 +222,4 @@ export function Testimonials() {
     </section>
   );
 }
+

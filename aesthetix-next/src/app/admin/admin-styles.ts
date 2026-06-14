@@ -9,3 +9,4 @@ export const adminStyles: Record<string, React.CSSProperties> = {
   label: { display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: "#aaa" },
   input: { background: "#1a1a1a", border: "1px solid #333", color: "#fff", padding: "8px 12px", fontSize: 14, borderRadius: 4, outline: "none" },
 };
+

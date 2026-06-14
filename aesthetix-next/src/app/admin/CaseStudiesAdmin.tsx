@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { adminHeaders } from "./AdminLayout";
 import { adminStyles as s } from "./admin-styles";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 interface CaseStudy {
   id: string; client: string; slug: string; challenge: string;
@@ -154,4 +154,5 @@ export function CaseStudiesAdmin() {
     </div>
   );
 }
+
 

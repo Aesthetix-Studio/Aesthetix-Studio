@@ -6,7 +6,7 @@ import { GrainOverlay } from "./grain";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 export interface Post {
   id: string;
@@ -283,4 +283,5 @@ export function JournalPage({ initialPosts }: { initialPosts?: Post[] }) {
     </div>
   );
 }
+
 

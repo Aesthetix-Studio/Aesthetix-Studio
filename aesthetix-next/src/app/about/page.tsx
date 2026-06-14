@@ -1,4 +1,4 @@
-import { About } from "@/components/about";
+import { AboutPage } from "@/components/about";
 
 export const metadata = {
   title: "About Us | Aesthetix Studio",
@@ -6,5 +6,6 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <About />;
+  return <AboutPage />;
 }
+

@@ -10,7 +10,7 @@ import { GrainOverlay } from "./grain";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 interface ServiceData {
   title: string;
@@ -334,4 +334,5 @@ const styles: Record<string, React.CSSProperties> = {
   input: { background: "#1a1a1a", border: "1px solid #333", color: "#fff", padding: "12px 16px", fontSize: 14, borderRadius: 4, outline: "none", fontFamily: "'Inter', sans-serif" },
   btn: { background: "#F0EBE0", color: "#080808", border: "none", padding: "12px 24px", fontSize: 14, fontWeight: 500, borderRadius: 4, cursor: "pointer", fontFamily: "'Inter', sans-serif" },
 };
+
 

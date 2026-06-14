@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 export function getToken() {
   return sessionStorage.getItem("admin_token") ?? "";
@@ -105,3 +105,4 @@ const styles: Record<string, React.CSSProperties> = {
   logoutBtn: { marginTop: "auto", background: "none", border: "1px solid #333", color: "#666", cursor: "pointer", padding: "8px 12px", fontSize: 12, borderRadius: 4, textAlign: "left" },
   content: { flex: 1, padding: 32, color: "#fff", overflowY: "auto" },
 };
+

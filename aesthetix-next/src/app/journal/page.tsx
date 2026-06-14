@@ -20,3 +20,4 @@ export default async function Page() {
 
   return <JournalPage initialPosts={posts.length > 0 ? posts : undefined} />;
 }
+

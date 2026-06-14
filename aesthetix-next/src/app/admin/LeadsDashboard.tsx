@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { adminHeaders } from "./AdminLayout";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 const STATUS_COLORS: Record<string, string> = {
   new: "#3b82f6", contacted: "#f59e0b", closed: "#22c55e",
@@ -90,3 +90,4 @@ export function LeadsDashboard() {
     </div>
   );
 }
+

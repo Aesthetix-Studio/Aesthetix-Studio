@@ -7,7 +7,7 @@ import { useStreamResponse } from "./use-stream-response";
 import { marked } from "marked";
 import { MARKDOWN_CSS } from "../components/markdown-styles";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 export function BriefAnalyzer() {
   const [form, setForm] = useState({
@@ -108,4 +108,5 @@ export function BriefAnalyzer() {
     </div>
   );
 }
+
 

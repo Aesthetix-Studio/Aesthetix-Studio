@@ -5,7 +5,7 @@ import Link from "next/link";
 import { marked } from "marked";
 import { MARKDOWN_CSS } from "./markdown-styles";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8787";
 
 export interface Post {
   id: string; title: string; slug: string; excerpt: string | null;
@@ -82,4 +82,5 @@ const styles: Record<string, React.CSSProperties> = {
   cover: { width: "100%", borderRadius: 0, marginBottom: 40 },
   content: { color: "#ccc", fontSize: 16, lineHeight: 1.8 },
 };
+
 

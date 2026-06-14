@@ -14,3 +14,4 @@ export const MARKDOWN_CSS = `
   .markdown-content hr { border: none; border-top: 1px solid #333; margin: 28px 0; }
   .markdown-content strong { color: #fff; }
 `;
+
