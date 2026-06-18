@@ -1,16 +1,40 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 
+const API = import.meta.env.VITE_API_URL || "http://localhost:8787";
+
 export function CTASection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.25 });
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) setSubmitted(true);
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail || submitting) return;
+    setSubmitting(true);
+    setError("");
+    try {
+      const response = await fetch(`${API}/api/leads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: normalizedEmail,
+          name: normalizedEmail.split("@")[0],
+          project_details: "Homepage CTA inquiry",
+        }),
+      });
+      if (!response.ok) throw new Error("Lead submission failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -152,6 +176,7 @@ export function CTASection() {
                 onBlur={() => setIsFocused(false)}
                 placeholder="your@company.com"
                 required
+                disabled={submitting}
                 animate={{
                   borderColor: isFocused
                     ? "rgba(196,164,107,0.5)"
@@ -174,6 +199,7 @@ export function CTASection() {
               />
               <motion.button
                 type="submit"
+                disabled={submitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 style={{
@@ -186,7 +212,8 @@ export function CTASection() {
                   fontWeight: 600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  cursor: "pointer",
+                  cursor: submitting ? "wait" : "pointer",
+                  opacity: submitting ? 0.72 : 1,
                   whiteSpace: "nowrap",
                   transition: "all 0.3s cubic-bezier(0.19,1,0.22,1)",
                   flexShrink: 0,
@@ -202,7 +229,7 @@ export function CTASection() {
                   e.currentTarget.style.color = "#080808";
                 }}
               >
-                Send Brief
+                {submitting ? "Sending..." : "Send Brief"}
               </motion.button>
             </form>
           ) : (
@@ -250,6 +277,22 @@ export function CTASection() {
                 Expect a response within 48 hours.
               </p>
             </motion.div>
+          )}
+          {error && (
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "12px",
+                fontWeight: 300,
+                color: "#C4A46B",
+                marginTop: "14px",
+              }}
+            >
+              {error}{" "}
+              <a href="mailto:studio@aesthetix.co" style={{ color: "#F0EBE0" }}>
+                studio@aesthetix.co
+              </a>
+            </p>
           )}
         </motion.div>
 

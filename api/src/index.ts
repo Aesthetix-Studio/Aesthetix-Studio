@@ -130,10 +130,11 @@ export default {
 				const denied = await requireAuth(request, env);
 				if (denied) return denied;
 				const b: any = await request.json();
+				if (!b.name || !b.slug || !b.category || !b.summary) return json({ error: "Name, slug, category, and summary are required" }, 400);
 				const id = crypto.randomUUID();
 				await env.DB.prepare(
-					"INSERT INTO projects (id, title, slug, category, summary, result, year, image, details, is_featured) VALUES (?,?,?,?,?,?,?,?,?,?)"
-				).bind(id, b.title, b.slug, b.category ?? null, b.summary ?? null, b.result ?? null, b.year ?? null, b.image ?? null, JSON.stringify(b.details ?? []), b.is_featured ? 1 : 0).run();
+					"INSERT INTO projects (id, name, slug, category, summary, result, year, image, details, is_featured) VALUES (?,?,?,?,?,?,?,?,?,?)"
+				).bind(id, b.name, b.slug, b.category, b.summary, b.result ?? null, b.year ?? null, b.image ?? "", JSON.stringify(b.details ?? []), b.is_featured ? 1 : 0).run();
 				return json({ success: true, id }, 201);
 			}
 
@@ -155,9 +156,10 @@ export default {
 				if (denied) return denied;
 				if (method === "PUT") {
 					const b: any = await request.json();
+					if (!b.name || !b.category || !b.summary) return json({ error: "Name, category, and summary are required" }, 400);
 					await env.DB.prepare(
-						"UPDATE projects SET title=?, category=?, summary=?, result=?, year=?, image=?, details=?, is_featured=? WHERE slug=?"
-					).bind(b.title, b.category ?? null, b.summary ?? null, b.result ?? null, b.year ?? null, b.image ?? null, JSON.stringify(b.details ?? []), b.is_featured ? 1 : 0, slug).run();
+						"UPDATE projects SET name=?, category=?, summary=?, result=?, year=?, image=?, details=?, is_featured=?, updated_at=datetime('now') WHERE slug=?"
+					).bind(b.name, b.category, b.summary, b.result ?? null, b.year ?? null, b.image ?? "", JSON.stringify(b.details ?? []), b.is_featured ? 1 : 0, slug).run();
 					return json({ success: true });
 				}
 				if (method === "DELETE") {
@@ -349,7 +351,7 @@ Format as clean markdown. Be specific, professional, and compelling.`;
 					stream: true,
 				});
 
-				return new Response(response, {
+				return new Response(response as BodyInit, {
 					headers: { "Content-Type": "text/event-stream", ...cors },
 				});
 			}
@@ -385,7 +387,7 @@ Be specific, avoid fluff, and write like an expert practitioner — not a conten
 					stream: true,
 				});
 
-				return new Response(response, {
+				return new Response(response as BodyInit, {
 					headers: { "Content-Type": "text/event-stream", ...cors },
 				});
 			}
@@ -442,7 +444,7 @@ Format as clean markdown. Be specific, actionable, and professional.`;
 					stream: true,
 				});
 
-				return new Response(response, {
+				return new Response(response as BodyInit, {
 					headers: { "Content-Type": "text/event-stream", ...cors },
 				});
 			}
