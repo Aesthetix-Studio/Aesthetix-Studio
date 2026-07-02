@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Loader2 } from "lucide-react";
+import SEO from "../components/SEO";
+import { createOrder, openRazorpayCheckout, verifyPayment } from "../lib/razorpay";
 
 const plans = [
-  { name:"Starter", price:"₹25,000", sub:"project", desc:"For early-stage founders needing a strong foundation.", features:["Brand identity kit","5-page website","Basic SEO setup","2 revision rounds","3-week delivery","Style guide PDF"], cta:"Get Started", pop:false, href:"/inquiry" },
-  { name:"Growth", price:"₹75,000", sub:"project", desc:"Complete brand and web for teams ready to scale.", features:["Full brand system","Custom website (8 pages)","SEO + analytics","Motion assets","4 revision rounds","6-week delivery","Design handoff","30-day support"], cta:"Start Project", pop:true, href:"/discovery-call" },
-  { name:"Enterprise", price:"Custom", sub:"engagement", desc:"Dedicated team for complex multi-channel work.", features:["End-to-end design system","Product UI/UX","Ongoing retainer available","Priority delivery","Dedicated PM","Unlimited revisions"], cta:"Contact Sales", pop:false, href:"/contact" },
+  { name:"Starter", price:"₹25,000", priceAmount:2500000, sub:"project", desc:"For early-stage founders needing a strong foundation.", features:["Brand identity kit","5-page website","Basic SEO setup","2 revision rounds","3-week delivery","Style guide PDF"], cta:"Get Started", pop:false, href:"/inquiry" },
+  { name:"Growth", price:"₹75,000", priceAmount:7500000, sub:"project", desc:"Complete brand and web for teams ready to scale.", features:["Full brand system","Custom website (8 pages)","SEO + analytics","Motion assets","4 revision rounds","6-week delivery","Design handoff","30-day support"], cta:"Start Project", pop:true, href:"/discovery-call" },
+  { name:"Enterprise", price:"Custom", priceAmount:0, sub:"engagement", desc:"Dedicated team for complex multi-channel work.", features:["End-to-end design system","Product UI/UX","Ongoing retainer available","Priority delivery","Dedicated PM","Unlimited revisions"], cta:"Contact Sales", pop:false, href:"/contact" },
 ];
 
 const addons = [
@@ -14,8 +17,39 @@ const addons = [
 ];
 
 export default function Pricing() {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handleCheckout = async (plan: typeof plans[0]) => {
+    if (plan.priceAmount === 0) return;
+    setLoadingPlan(plan.name);
+    try {
+      const order = await createOrder(plan.priceAmount, { plan: plan.name.toLowerCase() });
+      openRazorpayCheckout({
+        orderId: order.orderId,
+        amount: order.amount,
+        currency: order.currency,
+        key: order.keyId,
+        name: "Aesthetix Studio",
+        description: `${plan.name} Plan — ${plan.price}`,
+        onSuccess: async (response) => {
+          await verifyPayment(response);
+          window.location.href = "/thank-you";
+        },
+        onDismiss: () => setLoadingPlan(null),
+      });
+    } catch (err) {
+      console.error("Checkout error:", err);
+      setLoadingPlan(null);
+    }
+  };
+
   return (
     <div className="bg-background">
+      <SEO
+        title="Pricing"
+        description="Simple, transparent pricing for brand identity, web design, and development. Fixed-price projects with everything included upfront."
+        url="/pricing"
+      />
       <section className="border-b border-border py-16 px-5 sm:px-8 text-center">
         <div className="max-w-2xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>Pricing</p>
@@ -45,9 +79,20 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <Link to={p.href} className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl no-underline transition-colors ${p.pop ? "bg-brand text-white hover:bg-brand-hover" : "bg-secondary text-foreground hover:bg-secondary/70 border border-border"}`} style={{ fontSize:"13px", fontWeight:600 }}>
-                  {p.cta} <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                {p.priceAmount > 0 ? (
+                  <button
+                    onClick={() => handleCheckout(p)}
+                    disabled={loadingPlan !== null}
+                    className={`flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl transition-colors ${p.pop ? "bg-brand text-white hover:bg-brand-hover" : "bg-secondary text-foreground hover:bg-secondary/70 border border-border"}`}
+                    style={{ fontSize:"13px", fontWeight:600 }}
+                  >
+                    {loadingPlan === p.name ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <>{p.cta} <ArrowRight className="w-3.5 h-3.5" /></>}
+                  </button>
+                ) : (
+                  <Link to={p.href} className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl no-underline transition-colors ${p.pop ? "bg-brand text-white hover:bg-brand-hover" : "bg-secondary text-foreground hover:bg-secondary/70 border border-border"}`} style={{ fontSize:"13px", fontWeight:600 }}>
+                    {p.cta} <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
               </div>
             </div>
           ))}

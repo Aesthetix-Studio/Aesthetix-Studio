@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { mockInvoices, statusColors } from "../../lib/data";
-import { Download, CreditCard } from "lucide-react";
+import { Download, CreditCard, Loader2 } from "lucide-react";
+import { createInvoiceOrder, openRazorpayCheckout, verifyPayment } from "../../lib/razorpay";
 
 export default function PortalInvoices() {
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+
   const total = "₹18,00,000";
   const paid = "₹10,00,000";
   const outstanding = "₹8,00,000";
@@ -11,6 +15,29 @@ export default function PortalInvoices() {
     { label: "Total Paid", value: paid, color: "#16A34A" },
     { label: "Outstanding", value: outstanding, color: "#F59E0B" },
   ];
+
+  const handlePay = async (invId: string) => {
+    setLoadingId(invId);
+    try {
+      const order = await createInvoiceOrder(invId);
+      openRazorpayCheckout({
+        orderId: order.orderId,
+        amount: order.amount,
+        currency: order.currency,
+        key: order.keyId,
+        name: "Aesthetix Studio",
+        description: `Payment for invoice ${invId}`,
+        onSuccess: async (response) => {
+          await verifyPayment({ ...response, invoiceId: invId });
+          window.location.reload();
+        },
+        onDismiss: () => setLoadingId(null),
+      });
+    } catch (err) {
+      console.error("Payment error:", err);
+      setLoadingId(null);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -87,11 +114,13 @@ export default function PortalInvoices() {
                   <td className="px-4 py-3">
                     {inv.status === "Pending" || inv.status === "Overdue" ? (
                       <button
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white transition-all hover:opacity-90"
+                        onClick={() => handlePay(inv.id)}
+                        disabled={loadingId !== null}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white transition-all hover:opacity-90 disabled:opacity-50"
                         style={{ background: "var(--brand)", fontSize: "12px", fontWeight: 500 }}
                       >
-                        <CreditCard className="w-3.5 h-3.5" />
-                        Pay now
+                        {loadingId === inv.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CreditCard className="w-3.5 h-3.5" />}
+                        {loadingId === inv.id ? "Processing..." : "Pay now"}
                       </button>
                     ) : (
                       <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-muted-foreground hover:text-foreground transition-colors" style={{ fontSize: "12px" }}>

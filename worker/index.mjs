@@ -259,6 +259,123 @@ export default {
       });
     }
 
+    if (request.method === "POST" && url.pathname.startsWith("/api/invoices/") && url.pathname.endsWith("/order")) {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const parts = url.pathname.split("/");
+      const id = parts[parts.length - 2];
+      if (!id) return json({ ok: false, error: "Missing invoice id" }, { status: 400 });
+
+      const invoice = await env.DB.prepare(
+        `SELECT id, client, project, amount_cents, status FROM invoices WHERE id = ?`
+      ).bind(id).first();
+
+      if (!invoice) return json({ ok: false, error: "Invoice not found" }, { status: 404 });
+      if (invoice.status === "Paid") return json({ ok: false, error: "Invoice already paid" }, { status: 400 });
+
+      const razorpayKeyId = env.RAZORPAY_KEY_ID;
+      const razorpayKeySecret = env.RAZORPAY_KEY_SECRET;
+      if (!razorpayKeyId || !razorpayKeySecret) {
+        return json({ ok: false, error: "Razorpay is not configured" }, { status: 500 });
+      }
+
+      const authHeader = "Basic " + btoa(`${razorpayKeyId}:${razorpayKeySecret}`);
+      const orderResponse = await fetch("https://api.razorpay.com/v1/orders", {
+        method: "POST",
+        headers: {
+          "Authorization": authHeader,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: invoice.amount_cents,
+          currency: "INR",
+          receipt: `inv_${invoice.id}`,
+          notes: { invoiceId: invoice.id, client: invoice.client, project: invoice.project },
+        }),
+      });
+
+      if (!orderResponse.ok) {
+        const error = await orderResponse.text();
+        return json({ ok: false, error: "Failed to create Razorpay order", details: error }, { status: 502 });
+      }
+
+      const order = await orderResponse.json();
+      return json({ ok: true, orderId: order.id, amount: order.amount, currency: order.currency, keyId: razorpayKeyId });
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/orders") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const body = await readJson(request);
+      const { amount, currency = "INR", plan, receipt } = body ?? {};
+      if (!amount || amount <= 0) return json({ ok: false, error: "Invalid amount" }, { status: 400 });
+
+      const razorpayKeyId = env.RAZORPAY_KEY_ID;
+      const razorpayKeySecret = env.RAZORPAY_KEY_SECRET;
+      if (!razorpayKeyId || !razorpayKeySecret) {
+        return json({ ok: false, error: "Razorpay is not configured" }, { status: 500 });
+      }
+
+      const authHeader = "Basic " + btoa(`${razorpayKeyId}:${razorpayKeySecret}`);
+      const orderResponse = await fetch("https://api.razorpay.com/v1/orders", {
+        method: "POST",
+        headers: {
+          "Authorization": authHeader,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount,
+          currency,
+          receipt: receipt || `order_${crypto.randomUUID().slice(0, 8)}`,
+          notes: { plan: plan ?? "custom", userId: auth.payload.sub ?? "" },
+        }),
+      });
+
+      if (!orderResponse.ok) {
+        const error = await orderResponse.text();
+        return json({ ok: false, error: "Failed to create order", details: error }, { status: 502 });
+      }
+
+      const order = await orderResponse.json();
+      return json({ ok: true, orderId: order.id, amount: order.amount, currency: order.currency, keyId: razorpayKeyId });
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/payments/verify") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const body = await readJson(request);
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature, invoiceId } = body ?? {};
+      if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+        return json({ ok: false, error: "Missing payment verification fields" }, { status: 400 });
+      }
+
+      const razorpayKeySecret = env.RAZORPAY_KEY_SECRET;
+      if (!razorpayKeySecret) {
+        return json({ ok: false, error: "Razorpay is not configured" }, { status: 500 });
+      }
+
+      const crypto = await import("crypto");
+      const expectedSignature = crypto
+        .createHmac("sha256", razorpayKeySecret)
+        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+        .digest("hex");
+
+      if (expectedSignature !== razorpay_signature) {
+        return json({ ok: false, error: "Invalid payment signature" }, { status: 400 });
+      }
+
+      if (invoiceId) {
+        await env.DB.prepare(
+          `UPDATE invoices SET status = 'Paid', razorpay_order_id = ?, razorpay_payment_id = ? WHERE id = ?`
+        ).bind(razorpay_order_id, razorpay_payment_id, invoiceId).run();
+      }
+
+      return json({ ok: true, message: "Payment verified successfully", paymentId: razorpay_payment_id });
+    }
+
     if (request.method === "POST" && url.pathname.startsWith("/api/invoices/") && url.pathname.endsWith("/pay")) {
       const auth = await protectedRequest();
       if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });

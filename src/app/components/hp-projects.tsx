@@ -7,94 +7,116 @@ import { AXButton } from "./ds-buttons";
 const projects = [
   {
     id: 1,
-    slug: "luminary",
-    title: "Luminary Financial",
-    category: "Brand Identity + Web Design",
-    description: "Full brand overhaul and conversion-optimized website for a Series A fintech startup. 3× increase in qualified inbound leads within 60 days of launch.",
-    tags: ["Fintech", "SaaS", "Conversion"],
-    gradient: "from-violet-600 via-purple-700 to-blue-700",
+    slug: "physiocore",
+    title: "PhysioCore",
+    category: "Healthcare Web Design",
+    description: "Modern physiotherapy platform designed to build trust and book appointments. Clean, professional landing page with calming aesthetics.",
+    tags: ["Healthcare", "Landing Page"],
+    image: "/projects/physiocore.png",
+    gradient: "from-teal-500 via-cyan-600 to-blue-700",
     span: "col-span-1 sm:col-span-2",
     height: "h-72 sm:h-80",
     year: "2025",
-    result: "+3× leads",
+    result: "Live",
+    url: "https://aesthetix-studio.github.io/PhysioCore/",
   },
   {
     id: 2,
-    slug: "verdant",
-    title: "Verdant Foods Co.",
-    category: "Brand Identity",
-    description: "Premium CPG brand identity for a sustainable food startup entering national retail.",
-    tags: ["F&B", "Packaging"],
+    slug: "review-harvest",
+    title: "Review Harvest",
+    category: "SaaS Platform",
+    description: "Intelligent review management platform for modern businesses. Automates review collection and smart feedback routing.",
+    tags: ["SaaS", "Product"],
+    image: "/projects/review-harvest.png",
     gradient: "from-emerald-500 to-green-700",
     span: "col-span-1",
     height: "h-72 sm:h-80",
     year: "2025",
-    result: "Retail-ready",
+    result: "10k+ businesses",
+    url: "https://review-harvest-2.vercel.app/",
   },
   {
     id: 3,
-    slug: "solari",
-    title: "Solari Energy",
-    category: "Web Design + SEO",
-    description: "New website and SEO strategy for a B2B renewable energy consultancy.",
-    tags: ["Energy", "B2B", "SEO"],
-    gradient: "from-amber-400 via-orange-500 to-rose-500",
+    slug: "aurelia",
+    title: "Aurelia",
+    category: "Creative Portfolio",
+    description: "Awwwards-style portfolio that pushes the boundaries of web creativity with smooth animations and immersive experiences.",
+    tags: ["Portfolio", "Creative"],
+    image: "/projects/aurelia.png",
+    gradient: "from-fuchsia-500 via-purple-600 to-violet-700",
     span: "col-span-1",
     height: "h-64",
     year: "2025",
-    result: "+148% organic",
+    result: "Awwwards Style",
+    url: "https://aesthetix-studio.github.io/Aurelia/",
   },
   {
     id: 4,
-    slug: "nexus",
-    title: "Nexus Protocol",
-    category: "Product Design",
-    description: "Complex analytics dashboard for a crypto data platform — designed for power users.",
-    tags: ["Web3", "Dashboard"],
-    gradient: "from-slate-700 via-zinc-800 to-neutral-900",
+    slug: "luxe-tech",
+    title: "LuxeTech",
+    category: "E-Commerce Assets",
+    description: "Premium ecommerce UI components, cart patterns, checkout flows, and design systems for modern commerce teams.",
+    tags: ["E-Commerce", "Design System"],
+    image: "/projects/luxe-tech.png",
+    gradient: "from-amber-600 via-yellow-700 to-amber-800",
     span: "col-span-1",
     height: "h-64",
-    year: "2024",
-    result: "10k+ users",
+    year: "2025",
+    result: "Commerce Kit",
+    url: "https://luxe-tech-taupe.vercel.app/",
   },
   {
     id: 5,
-    slug: "helix",
-    title: "Helix Medical",
-    category: "Brand + Web + SEO",
-    description: "End-to-end digital presence for a boutique telehealth startup — from logo to 5-page site.",
-    tags: ["Health", "Startup"],
-    gradient: "from-pink-500 via-rose-500 to-purple-600",
+    slug: "minimal",
+    title: "Mono Studio",
+    category: "Design Agency",
+    description: "Minimal design agency site that strips everything down to essentials. Radical simplicity where whitespace does the talking.",
+    tags: ["Branding", "Minimal"],
+    image: "/screenshots/minimal.png",
+    gradient: "from-neutral-400 via-neutral-500 to-neutral-600",
     span: "col-span-1",
     height: "h-64",
-    year: "2024",
-    result: "Sold in 18mo",
+    year: "2025",
+    result: "+3× leads",
   },
   {
     id: 6,
-    slug: "orbit",
-    title: "Orbit Analytics",
-    category: "Web Development",
-    description: "Custom dashboard and data visualization built in React with real-time chart components.",
-    tags: ["Analytics", "SaaS"],
-    gradient: "from-cyan-500 via-blue-500 to-indigo-600",
+    slug: "premium-saas",
+    title: "ClimateBridge",
+    category: "Sustainability SaaS",
+    description: "Enterprise carbon tracking platform that turns complex emissions data into clear, actionable decisions.",
+    tags: ["SaaS", "ESG"],
+    image: "/screenshots/premium-saas.png",
+    gradient: "from-emerald-500 via-green-600 to-teal-700",
     span: "col-span-1",
     height: "h-64",
-    year: "2024",
-    result: "98 Perf score",
+    year: "2025",
+    result: "-32% emissions",
   },
 ];
 
-function ProjectCard({ slug, title, category, description, tags, gradient, span, height, year, result }: typeof projects[0]) {
+function ProjectCard({ slug, title, category, description, tags, image, gradient, span, height, year, result, url }: typeof projects[0]) {
   return (
-    <Link to={`/portfolio/${slug}`} className="no-underline">
+    <Link to={url || `/portfolio/${slug}`} className="no-underline" target={url ? "_blank" : undefined} rel={url ? "noopener noreferrer" : undefined}>
       <motion.div
         whileHover={{ y: -4 }}
         transition={{ duration: 0.2 }}
         className={cn("group relative rounded-2xl overflow-hidden border border-border cursor-pointer", span)}
       >
         {/* Image/gradient area */}
-        <div className={cn("relative bg-gradient-to-br overflow-hidden", gradient, height)}>
+        <div className={cn("relative overflow-hidden", height)}>
+          {image && (
+            <img
+              src={image}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+            />
+          )}
+          <div className={cn("absolute inset-0 bg-gradient-to-br", gradient)} />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
 
           {/* Result badge */}

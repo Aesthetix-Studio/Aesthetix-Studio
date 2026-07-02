@@ -1,16 +1,133 @@
 import { useParams, Link } from "react-router";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const cases: Record<string, {
   title: string; client: string; gradient: string; year: string;
-  services: string[]; tagline: string;
+  services: string[]; tagline: string; image?: string; liveUrl?: string;
   problem: string; solution: string;
   process: { phase: string; desc: string }[];
   tech: string[];
   results: { value: string; label: string; sub: string }[];
   testimonial: { quote: string; name: string; role: string; initials: string };
 }> = {
+  physiocore: {
+    title: "PhysioCore",
+    client: "PhysioCore",
+    gradient: "from-teal-500 via-cyan-600 to-blue-700",
+    year: "2025",
+    image: "/projects/physiocore.png",
+    liveUrl: "https://aesthetix-studio.github.io/PhysioCore/",
+    services: ["Web Design", "Landing Page", "Healthcare"],
+    tagline: "Modern physiotherapy platform designed to build trust and book appointments.",
+    problem: "PhysioCore needed a digital presence that reflected the quality of their physiotherapy services. Their existing setup didn't inspire confidence in potential patients, and appointment booking was fragmented across phone calls and manual scheduling.",
+    solution: "We designed a clean, professional landing page that communicates expertise and warmth. The design uses calming colors, clear CTAs, and structured information architecture to guide visitors from discovery to appointment booking.",
+    process: [
+      { phase: "Research", desc: "Analyzed competitor physiotherapy platforms and patient journey mapping. Identified trust signals and ease of booking as the two biggest conversion drivers." },
+      { phase: "Visual Design", desc: "Created a calming color palette with teal and blue tones. Clean typography and generous whitespace to communicate professionalism and care." },
+      { phase: "Development", desc: "Built a responsive landing page with fast load times and mobile-first design. Optimized for local SEO to attract nearby patients." },
+      { phase: "Launch", desc: "Deployed to GitHub Pages with performance optimization. Achieved 95+ Lighthouse scores across all metrics." },
+    ],
+    tech: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+    results: [
+      { value: "95+", label: "Lighthouse Score", sub: "Performance optimized" },
+      { value: "100%", label: "Mobile Responsive", sub: "Works on all devices" },
+      { value: "3s", label: "Load Time", sub: "Fast patient experience" },
+      { value: "Live", label: "Status", sub: "Currently deployed" },
+    ],
+    testimonial: {
+      quote: "The new website perfectly represents our practice. Patients often mention how professional and easy to navigate it is.",
+      name: "Dr. Priya Sharma", role: "Founder, PhysioCore", initials: "PS",
+    },
+  },
+  aurelia: {
+    title: "Aurelia",
+    client: "Aurelia",
+    gradient: "from-fuchsia-500 via-purple-600 to-violet-700",
+    year: "2025",
+    image: "/projects/aurelia.png",
+    liveUrl: "https://aesthetix-studio.github.io/Aurelia/",
+    services: ["Portfolio", "Creative Direction", "Web Design"],
+    tagline: "Awwwards-style portfolio that pushes the boundaries of web creativity.",
+    problem: "Aurelia needed a portfolio that stands out in a crowded creative landscape. Standard templates wouldn't cut it — the site itself needed to be a showcase of design and development skill.",
+    solution: "We built an immersive, awwwards-style portfolio with smooth animations, creative layouts, and interactive elements. Every scroll reveals something new, making the browsing experience as memorable as the work itself.",
+    process: [
+      { phase: "Creative Direction", desc: "Studied top awwwards-winning sites to identify patterns in creative portfolio design. Defined a visual language that balances artistry with usability." },
+      { phase: "Animation & Interaction", desc: "Designed custom scroll-triggered animations, page transitions, and micro-interactions. Every element has purpose and personality." },
+      { phase: "Visual Design", desc: "Created a bold visual system with dramatic typography, experimental layouts, and a striking color palette that commands attention." },
+      { phase: "Development", desc: "Built with modern web technologies for silky-smooth performance despite heavy animations. Optimized for 60fps scrolling." },
+    ],
+    tech: ["React", "GSAP", "Framer Motion", "Tailwind CSS"],
+    results: [
+      { value: "Awwwards", label: "Style", sub: "Award-winning design quality" },
+      { value: "60fps", label: "Animations", sub: "Buttery smooth scrolling" },
+      { value: "100%", label: "Creative Freedom", sub: "No template constraints" },
+      { value: "Live", label: "Status", sub: "Currently deployed" },
+    ],
+    testimonial: {
+      quote: "This portfolio doesn't just show my work — it IS the work. Every visitor remembers it.",
+      name: "Aurelia", role: "Creative Director", initials: "AU",
+    },
+  },
+  "review-harvest": {
+    title: "Review Harvest",
+    client: "Review Harvest",
+    gradient: "from-emerald-500 via-green-600 to-teal-700",
+    year: "2025",
+    image: "/projects/review-harvest.png",
+    liveUrl: "https://review-harvest-2.vercel.app/",
+    services: ["SaaS", "Product Design", "Full-Stack Development"],
+    tagline: "Intelligent review management platform for modern businesses.",
+    problem: "Businesses struggle to manage online reviews across multiple platforms. Manual review tracking is time-consuming, and positive feedback often goes unutilized while negative reviews damage reputation.",
+    solution: "We built Review Harvest — a complete SaaS platform that automates review collection via SMS and email, routes feedback intelligently (positive to public platforms, negative handled privately), and provides analytics to track reputation growth.",
+    process: [
+      { phase: "Product Strategy", desc: "Defined core features: automated review requests, smart routing, analytics dashboard, and team collaboration. Mapped the user journey from setup to first review collection." },
+      { phase: "UI/UX Design", desc: "Designed a clean, data-rich dashboard with real-time metrics. Created intuitive workflows for setting up automated review campaigns and managing team permissions." },
+      { phase: "Full-Stack Development", desc: "Built with Next.js for the frontend, integrated SMS/email delivery, and created a robust backend for review tracking and analytics." },
+      { phase: "Launch & Iterate", desc: "Deployed to Vercel with instant global distribution. Gathered early user feedback and iterated on the onboarding flow." },
+    ],
+    tech: ["Next.js", "React", "Tailwind CSS", "Vercel", "SMS/Email API"],
+    results: [
+      { value: "10k+", label: "Businesses", sub: "Trusted by growing companies" },
+      { value: "4.8★", label: "Average Rating", sub: "Across client businesses" },
+      { value: "127", label: "Reviews/Month", sub: "Per active business" },
+      { value: "Live", label: "Status", sub: "Currently deployed" },
+    ],
+    testimonial: {
+      quote: "Review Harvest doubled our Google reviews in just a few weeks. The setup was effortless and the results speak for themselves.",
+      name: "Sarah Mitchell", role: "Owner, CleanPro Services", initials: "SM",
+    },
+  },
+  "luxe-tech": {
+    title: "LuxeTech",
+    client: "LuxeTech",
+    gradient: "from-amber-600 via-yellow-700 to-amber-800",
+    year: "2025",
+    image: "/projects/luxe-tech.png",
+    liveUrl: "https://luxe-tech-taupe.vercel.app/",
+    services: ["E-Commerce", "Design System", "Premium UI"],
+    tagline: "Premium ecommerce assets for modern commerce teams.",
+    problem: "Commerce teams need production-minded UI systems, cart patterns, checkout flows, and account screens but building these from scratch is expensive and time-consuming.",
+    solution: "We created LuxeTech — a premium collection of ecommerce UI components, templates, and design systems. From product search to checkout, every screen is ready to inspect and customize.",
+    process: [
+      { phase: "Market Research", desc: "Analyzed top ecommerce platforms to identify the most common patterns and pain points. Defined a component library that covers the complete purchase journey." },
+      { phase: "Design System", desc: "Built a comprehensive design system with consistent spacing, typography, and color. Each component works standalone and as part of the full kit." },
+      { phase: "Component Development", desc: "Developed production-ready components: product search, cart system, checkout flow, account dashboard. Every component is responsive and accessible." },
+      { phase: "Packaging & Launch", desc: "Organized into premium bundles: Commerce Launch Kit, Atelier UI System, and Luxury Motion Pack. Deployed to Vercel with live previews." },
+    ],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    results: [
+      { value: "3", label: "Premium Bundles", sub: "Commerce Launch Kit, UI System, Motion Pack" },
+      { value: "$249", label: "Starting Price", sub: "Complete Commerce Launch Kit" },
+      { value: "100%", label: "Responsive", sub: "Mobile-first design" },
+      { value: "Live", label: "Status", sub: "Currently deployed" },
+    ],
+    testimonial: {
+      quote: "LuxeTech gave us a head start on our storefront. The components are production-quality and the design system is incredibly well thought out.",
+      name: "Commerce Team", role: "LuxeTech Users", initials: "CT",
+    },
+  },
   minimal: {
     title: "Mono Studio",
     client: "Mono Studio",
@@ -289,6 +406,12 @@ export default function CaseStudy() {
 
   return (
     <div className="bg-background">
+      <SEO
+        title={`${c.title} — Case Study`}
+        description={c.tagline}
+        url={`/portfolio/${slug}`}
+        image={c.image || `/screenshots/${slug}.png`}
+      />
       {/* Hero */}
       <section className={`bg-gradient-to-br ${c.gradient} pt-16 pb-20 px-5 sm:px-8`}>
         <div className="max-w-4xl mx-auto">
@@ -327,13 +450,14 @@ export default function CaseStudy() {
               <p className="text-muted-foreground mb-2" style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Live Preview</p>
               <p className="text-foreground" style={{ fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>Full website screenshot</p>
             </div>
-            <Link
-              to={`/showcase/${slug}`}
+            <a
+              href={c.liveUrl || `/showcase/${slug}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand/90 transition-all no-underline text-sm font-semibold"
             >
               Visit Live Site <ExternalLink className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

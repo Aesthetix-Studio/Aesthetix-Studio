@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight, Monitor, Code2, SearchCheck, Layers, Check } from "lucide-react";
 import { motion } from "motion/react";
+import SEO, { serviceSchema } from "../components/SEO";
 
 const services = [
   { slug:"website-design", icon:Monitor, title:"Website Design", tagline:"Sites that convert browsers into buyers", desc:"We design high-converting websites that balance beauty with function. Every page is crafted with your audience's intent in mind — not just aesthetics.", features:["UX wireframes & information architecture","Full visual design in Figma","Responsive across all devices","Conversion rate optimization","Interactive prototype","Developer handoff file"], from:"₹40,000", bgColor:"#F2F0FF", iconColor:"#6150F6" },
@@ -12,6 +13,12 @@ const services = [
 export default function Services() {
   return (
     <div className="bg-background">
+      <SEO
+        title="Services"
+        description="Website design, web development, SEO, and brand identity services. We build brands that convert for startups and growing businesses."
+        url="/services"
+        structuredData={serviceSchema}
+      />
       <section className="border-b border-border py-16 px-5 sm:px-8">
         <div className="max-w-6xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>Services</p>

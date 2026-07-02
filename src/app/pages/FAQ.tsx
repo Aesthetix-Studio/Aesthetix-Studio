@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
+import SEO, { faqSchema } from "../components/SEO";
 
 const categories = [
   { name:"Working with Us", faqs:[
@@ -42,9 +43,17 @@ function FAQItem({ q, a }: { q:string; a:string }) {
   );
 }
 
+const allFaqs = categories.flatMap(c => c.faqs);
+
 export default function FAQ() {
   return (
     <div className="bg-background">
+      <SEO
+        title="FAQ"
+        description="Frequently asked questions about our design process, pricing, timelines, and how we work with clients."
+        url="/faq"
+        structuredData={faqSchema(allFaqs)}
+      />
       <section className="border-b border-border py-16 px-5 sm:px-8">
         <div className="max-w-3xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>FAQ</p>

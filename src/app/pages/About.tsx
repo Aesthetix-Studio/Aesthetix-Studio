@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const team = [
   { name:"Anna Reeves", role:"Lead Designer & Co-founder", bio:"10 years in brand and product design. Previously at Figma and Stripe. Obsessed with type and the space between things.", initials:"AR", color:"#6150F6" },
@@ -19,6 +20,11 @@ const values = [
 export default function About() {
   return (
     <div className="bg-background">
+      <SEO
+        title="About"
+        description="Learn about Aesthetix Studio — a design, development, and branding agency focused on delivering measurable results."
+        url="/about"
+      />
       <section className="py-20 px-5 sm:px-8 border-b border-border">
         <div className="max-w-4xl mx-auto">
           <p className="text-muted-foreground mb-4" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>About</p>

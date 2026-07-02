@@ -2,26 +2,32 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const projects = [
-  { slug:"minimal", title:"Mono Studio", category:"Design Agency", tags:["Branding","Minimal","Identity"], year:"2025", gradient:"from-neutral-400 via-neutral-500 to-neutral-600", result:"+3× leads", featured:true },
-  { slug:"editorial", title:"The Chronicle", category:"Publishing", tags:["Editorial","Journalism","Subscription"], year:"2025", gradient:"from-neutral-800 via-neutral-900 to-black", result:"12M readers", featured:false },
-  { slug:"premium-saas", title:"ClimateBridge", category:"Sustainability SaaS", tags:["Carbon Tracking","ESG","Compliance"], year:"2025", gradient:"from-emerald-500 via-green-600 to-teal-700", result:"-32% avg. emissions", featured:true },
-  { slug:"creative-studio", title:"Saffron Kitchen", category:"Restaurant", tags:["Indian","Fine Dining","Bangalore"], year:"2025", gradient:"from-amber-700 via-orange-600 to-red-700", result:"4.8★ rating", featured:false },
-  { slug:"enterprise", title:"Meridian Systems", category:"Enterprise Tech", tags:["Enterprise","Cloud","B2B"], year:"2024", gradient:"from-blue-600 via-blue-700 to-indigo-800", result:"SOC 2 certified", featured:false },
-  { slug:"luxury", title:"Maison Aurélien", category:"Luxury Goods", tags:["Luxury","Fragrance","Horology"], year:"2024", gradient:"from-amber-600 via-yellow-700 to-amber-800", result:"Relais & Châteaux", featured:true },
-  { slug:"startup", title:"Launchpad", category:"Startup Studio", tags:["Startup","MVP","Product"], year:"2024", gradient:"from-violet-600 via-purple-700 to-fuchsia-700", result:"50k downloads", featured:false },
-  { slug:"modern-tech", title:"Resonance Records", category:"Music Label", tags:["Music","Artist Management","Publishing"], year:"2024", gradient:"from-purple-700 via-violet-600 to-pink-600", result:"2B+ streams", featured:false },
-  { slug:"brutalist", title:"Pulse Fitness", category:"Gym & Wellness", tags:["Fitness","Training","Recovery"], year:"2024", gradient:"from-red-600 via-red-500 to-orange-500", result:"50k sessions/mo", featured:false },
-  { slug:"high-end-portfolio", title:"Atelier Noir", category:"Fashion Photography", tags:["Editorial","Campaign","Fine Art"], year:"2024", gradient:"from-neutral-500 via-stone-600 to-neutral-700", result:"Vogue feature", featured:false },
+  { slug:"physiocore", title:"PhysioCore", category:"Healthcare", tags:["Health","Web Design","Landing Page"], year:"2025", image:"/projects/physiocore.png", gradient:"from-teal-500 via-cyan-600 to-blue-700", result:"Live", featured:true, url:"https://aesthetix-studio.github.io/PhysioCore/" },
+  { slug:"aurelia", title:"Aurelia", category:"Portfolio", tags:["Portfolio","Awwwards","Creative"], year:"2025", image:"/projects/aurelia.png", gradient:"from-fuchsia-500 via-purple-600 to-violet-700", result:"Awwwards Style", featured:true, url:"https://aesthetix-studio.github.io/Aurelia/" },
+  { slug:"review-harvest", title:"Review Harvest", category:"SaaS", tags:["SaaS","Review Management","Product"], year:"2025", image:"/projects/review-harvest.png", gradient:"from-emerald-500 via-green-600 to-teal-700", result:"10k+ businesses", featured:true, url:"https://review-harvest-2.vercel.app/" },
+  { slug:"luxe-tech", title:"LuxeTech", category:"E-Commerce", tags:["E-Commerce","Design System","Premium"], year:"2025", image:"/projects/luxe-tech.png", gradient:"from-amber-600 via-yellow-700 to-amber-800", result:"Commerce Kit", featured:false, url:"https://luxe-tech-taupe.vercel.app/" },
+  { slug:"minimal", title:"Mono Studio", category:"Design Agency", tags:["Branding","Minimal","Identity"], year:"2025", image:"/screenshots/minimal.png", gradient:"from-neutral-400 via-neutral-500 to-neutral-600", result:"+3× leads", featured:false },
+  { slug:"editorial", title:"The Chronicle", category:"Publishing", tags:["Editorial","Journalism","Subscription"], year:"2025", image:"/screenshots/editorial.png", gradient:"from-neutral-800 via-neutral-900 to-black", result:"12M readers", featured:false },
+  { slug:"premium-saas", title:"ClimateBridge", category:"Sustainability SaaS", tags:["Carbon Tracking","ESG","Compliance"], year:"2025", image:"/screenshots/premium-saas.png", gradient:"from-emerald-500 via-green-600 to-teal-700", result:"-32% emissions", featured:false },
+  { slug:"luxury", title:"Maison Aurélien", category:"Luxury Goods", tags:["Luxury","Fragrance","Horology"], year:"2024", image:"/screenshots/luxury.png", gradient:"from-amber-600 via-yellow-700 to-amber-800", result:"Relais & Châteaux", featured:false },
+  { slug:"startup", title:"Launchpad", category:"Startup Studio", tags:["Startup","MVP","Product"], year:"2024", image:"/screenshots/startup.png", gradient:"from-violet-600 via-purple-700 to-fuchsia-700", result:"50k downloads", featured:false },
+  { slug:"modern-tech", title:"Resonance Records", category:"Music Label", tags:["Music","Artist Management","Publishing"], year:"2024", image:"/screenshots/modern-tech.png", gradient:"from-purple-700 via-violet-600 to-pink-600", result:"2B+ streams", featured:false },
 ];
-const filters = ["All","Branding","Web Design","Development","SaaS","Product"];
+const filters = ["All","Branding","Web Design","Development","SaaS","Product","Healthcare","Portfolio","E-Commerce"];
 
 export default function Portfolio() {
   const [active, setActive] = useState("All");
   const filtered = active === "All" ? projects : projects.filter(p => p.tags.some(t => t.toLowerCase().includes(active.toLowerCase())));
   return (
     <div className="bg-background">
+      <SEO
+        title="Portfolio"
+        description="Explore our work — web design, brand identity, and development projects for startups and growing businesses."
+        url="/portfolio"
+      />
       <section className="border-b border-border py-16 px-5 sm:px-8">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <div>
@@ -43,9 +49,25 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((p, i) => (
             <motion.div key={p.slug} layout initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.3, delay:i*0.06 }}>
-              <Link to={`/portfolio/${p.slug}`} className="block group no-underline">
-                <div className={`bg-gradient-to-br ${p.gradient} rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
+              <Link to={p.url || `/portfolio/${p.slug}`} className="block group no-underline" target={p.url ? "_blank" : undefined} rel={p.url ? "noopener noreferrer" : undefined}>
+                <div className="rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className={`relative ${p.featured ? "h-72" : "h-56"}`}>
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent && !parent.querySelector('.fallback-gradient')) {
+                          const div = document.createElement('div');
+                          div.className = `fallback-gradient absolute inset-0 bg-gradient-to-br ${p.gradient}`;
+                          parent.insertBefore(div, target);
+                        }
+                      }}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient}`} style={{ zIndex: -1 }} />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                     <div className="absolute top-4 right-4 bg-black/25 backdrop-blur-sm rounded-lg px-2.5 py-1">
                       <span className="text-white" style={{ fontSize:"11px", fontWeight:600 }}>{p.result}</span>

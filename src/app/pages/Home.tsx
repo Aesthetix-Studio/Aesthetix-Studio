@@ -9,10 +9,16 @@ import { HPTechIndustries } from "../components/hp-tech-industries";
 import { HPPricingPreview } from "../components/hp-pricing-preview";
 import { HPFaq } from "../components/hp-faq";
 import { HPFinalCTA } from "../components/hp-cta";
+import SEO, { organizationSchema, websiteSchema } from "../components/SEO";
 
 export default function Home() {
   return (
     <>
+      <SEO
+        title={undefined}
+        description="Aesthetix Studio — Design, development, and branding agency for startups and growing businesses. We build brands that convert."
+        structuredData={organizationSchema}
+      />
       {/* 1. Hero — positioning + dual CTA */}
       <HPHero />
 

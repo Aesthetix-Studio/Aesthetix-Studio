@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { Mail, Clock, ArrowRight, MessageSquare } from "lucide-react";
 import { submitContact } from "../lib/api";
+import SEO from "../components/SEO";
 
 const services = ["Brand Identity","Web Design","Web Development","SEO","Full Package (Brand + Web)","Design System","Other"];
 const budgets = ["₹50,000–₹1,00,000","₹1,00,000–₹2,50,000","₹2,50,000–₹5,00,000","₹5,00,000+","Not sure yet"];
@@ -60,6 +61,11 @@ export default function Contact() {
 
   return (
     <div className="bg-background">
+      <SEO
+        title="Contact"
+        description="Get in touch with Aesthetix Studio. Book a discovery call or send us a project inquiry."
+        url="/contact"
+      />
       <section className="border-b border-border py-16 px-5 sm:px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Contact</p>
