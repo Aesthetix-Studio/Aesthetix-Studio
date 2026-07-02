@@ -22,7 +22,7 @@ export default function AdminAnalytics() {
   useEffect(() => {
     Promise.all([
       fetchProjects().then((r) => r.projects).catch(() => []),
-      fetchLeads().then((r) => r.leads).catch(() => []),
+      fetchLeads().catch(() => []),
       fetchInvoices().then((r) => r.invoices).catch(() => []),
       fetchTasks().then((r) => r.tasks).catch(() => []),
     ]).then(([p, l, inv, t]) => { setProjects(p); setLeads(l); setInvoices(inv); setTasks(t); }).finally(() => setLoading(false));
