@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { Twitter, Linkedin, Github, Instagram, ArrowRight } from "lucide-react";
 import { AesthetixMark } from "./AesthetixMark";
 import { DSSection, DSSubSection } from "./ds-section";
@@ -65,14 +65,14 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
           </div>
           <div className="flex items-center gap-5">
             {[
-              { label: "Privacy", href: "/privacy-policy" },
-              { label: "Terms", href: "/terms-of-service" },
-              { label: "Cookies", href: "/cookie-policy" },
-              { label: "Accessibility", href: "/accessibility" },
+              { label: "Privacy", to: "/privacy-policy" },
+              { label: "Terms", to: "/terms-of-service" },
+              { label: "Cookies", to: "/cookie-policy" },
+              { label: "Accessibility", to: "/accessibility" },
             ].map((link) => (
-              <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors" style={{ fontSize: '12px' }}>
+              <Link key={link.label} to={link.to} className="text-muted-foreground hover:text-foreground transition-colors" style={{ fontSize: '12px' }}>
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
           <p className="text-muted-foreground" style={{ fontSize: '12px' }}>© 2026 Aesthetix Studio. All rights reserved.</p>
@@ -165,8 +165,8 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
               <ul className="space-y-1">
                 {links.map((link, i) => (
                   <li key={link}>
-                    <a
-                      href={footerLinkHrefs[group as keyof typeof footerLinkHrefs]?.[i] ?? "#"}
+                    <Link
+                      to={footerLinkHrefs[group as keyof typeof footerLinkHrefs]?.[i] ?? "/"}
                       className={cn(
                         "inline-block py-1.5 transition-colors",
                         isDark ? "text-white/40 hover:text-white/80" : "text-muted-foreground hover:text-foreground"
@@ -174,7 +174,7 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
                       style={{ fontSize: '13px' }}
                     >
                       {link}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

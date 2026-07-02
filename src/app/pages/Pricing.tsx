@@ -42,7 +42,7 @@ export default function Pricing() {
         description: `${plan.name} Plan — ${plan.price}`,
         onSuccess: async (response) => {
           await verifyPayment(response);
-          window.location.href = "/thank-you";
+          navigate("/thank-you");
         },
         onDismiss: () => setLoadingPlan(null),
       });

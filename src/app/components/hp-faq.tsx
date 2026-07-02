@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown } from "lucide-react";
 
@@ -54,13 +55,13 @@ export function HPFaq() {
             <p className="text-muted-foreground mb-6" style={{ fontSize: '15px', lineHeight: '1.65' }}>
               Still have a question? Drop us a line — we typically respond within a few hours.
             </p>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 text-brand hover:underline"
               style={{ fontSize: '13px', fontWeight: 600 }}
             >
               Send us a message →
-            </a>
+            </Link>
           </div>
 
           {/* Right: accordion */}
