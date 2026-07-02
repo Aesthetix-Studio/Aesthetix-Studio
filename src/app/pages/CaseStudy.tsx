@@ -402,7 +402,7 @@ const cases: Record<string, {
 
 export default function CaseStudy() {
   const { slug = "minimal" } = useParams();
-  const c = cases[slug] || cases.minimal;
+  const c = cases[slug] || cases["minimal"];
 
   return (
     <div className="bg-background">

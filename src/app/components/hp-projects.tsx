@@ -18,7 +18,6 @@ const projects = [
     height: "h-72 sm:h-80",
     year: "2025",
     result: "Live",
-    url: "https://aesthetix-studio.github.io/PhysioCore/",
   },
   {
     id: 2,
@@ -33,7 +32,6 @@ const projects = [
     height: "h-72 sm:h-80",
     year: "2025",
     result: "10k+ businesses",
-    url: "https://review-harvest-2.vercel.app/",
   },
   {
     id: 3,
@@ -48,7 +46,6 @@ const projects = [
     height: "h-64",
     year: "2025",
     result: "Awwwards Style",
-    url: "https://aesthetix-studio.github.io/Aurelia/",
   },
   {
     id: 4,
@@ -63,7 +60,6 @@ const projects = [
     height: "h-64",
     year: "2025",
     result: "Commerce Kit",
-    url: "https://luxe-tech-taupe.vercel.app/",
   },
   {
     id: 5,
@@ -95,9 +91,9 @@ const projects = [
   },
 ];
 
-function ProjectCard({ slug, title, category, description, tags, image, gradient, span, height, year, result, url }: typeof projects[0]) {
+function ProjectCard({ slug, title, category, description, tags, image, gradient, span, height, year, result }: typeof projects[0]) {
   return (
-    <Link to={url || `/portfolio/${slug}`} className="no-underline" target={url ? "_blank" : undefined} rel={url ? "noopener noreferrer" : undefined}>
+    <Link to={`/portfolio/${slug}`} className="no-underline">
       <motion.div
         whileHover={{ y: -4 }}
         transition={{ duration: 0.2 }}
@@ -116,7 +112,7 @@ function ProjectCard({ slug, title, category, description, tags, image, gradient
               }}
             />
           )}
-          <div className={cn("absolute inset-0 bg-gradient-to-br", gradient)} />
+          <div className={cn("absolute inset-0 bg-gradient-to-br", gradient)} style={{ zIndex: -1 }} />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
 
           {/* Result badge */}

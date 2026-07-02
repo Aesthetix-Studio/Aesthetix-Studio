@@ -5,10 +5,10 @@ import { motion } from "motion/react";
 import SEO from "../components/SEO";
 
 const projects = [
-  { slug:"physiocore", title:"PhysioCore", category:"Healthcare", tags:["Health","Web Design","Landing Page"], year:"2025", image:"/projects/physiocore-hero.png", gradient:"from-teal-500 via-cyan-600 to-blue-700", result:"Live", featured:true, url:"https://aesthetix-studio.github.io/PhysioCore/" },
-  { slug:"aurelia", title:"Aurelia", category:"Portfolio", tags:["Portfolio","Awwwards","Creative"], year:"2025", image:"/projects/aurelia-hero.png", gradient:"from-fuchsia-500 via-purple-600 to-violet-700", result:"Awwwards Style", featured:true, url:"https://aesthetix-studio.github.io/Aurelia/" },
-  { slug:"review-harvest", title:"Review Harvest", category:"SaaS", tags:["SaaS","Review Management","Product"], year:"2025", image:"/projects/review-harvest-hero.png", gradient:"from-emerald-500 via-green-600 to-teal-700", result:"10k+ businesses", featured:true, url:"https://review-harvest-2.vercel.app/" },
-  { slug:"luxe-tech", title:"LuxeTech", category:"E-Commerce", tags:["E-Commerce","Design System","Premium"], year:"2025", image:"/projects/luxe-tech-hero.png", gradient:"from-amber-600 via-yellow-700 to-amber-800", result:"Commerce Kit", featured:false, url:"https://luxe-tech-taupe.vercel.app/" },
+  { slug:"physiocore", title:"PhysioCore", category:"Healthcare", tags:["Health","Web Design","Landing Page"], year:"2025", image:"/projects/physiocore-hero.png", gradient:"from-teal-500 via-cyan-600 to-blue-700", result:"Live", featured:true },
+  { slug:"aurelia", title:"Aurelia", category:"Portfolio", tags:["Portfolio","Awwwards","Creative"], year:"2025", image:"/projects/aurelia-hero.png", gradient:"from-fuchsia-500 via-purple-600 to-violet-700", result:"Awwwards Style", featured:true },
+  { slug:"review-harvest", title:"Review Harvest", category:"SaaS", tags:["SaaS","Review Management","Product"], year:"2025", image:"/projects/review-harvest-hero.png", gradient:"from-emerald-500 via-green-600 to-teal-700", result:"10k+ businesses", featured:true },
+  { slug:"luxe-tech", title:"LuxeTech", category:"E-Commerce", tags:["E-Commerce","Design System","Premium"], year:"2025", image:"/projects/luxe-tech-hero.png", gradient:"from-amber-600 via-yellow-700 to-amber-800", result:"Commerce Kit", featured:false },
   { slug:"minimal", title:"Mono Studio", category:"Design Agency", tags:["Branding","Minimal","Identity"], year:"2025", image:"/screenshots/minimal-hero.png", gradient:"from-neutral-400 via-neutral-500 to-neutral-600", result:"+3× leads", featured:false },
   { slug:"editorial", title:"The Chronicle", category:"Publishing", tags:["Editorial","Journalism","Subscription"], year:"2025", image:"/screenshots/editorial-hero.png", gradient:"from-neutral-800 via-neutral-900 to-black", result:"12M readers", featured:false },
   { slug:"premium-saas", title:"ClimateBridge", category:"Sustainability SaaS", tags:["Carbon Tracking","ESG","Compliance"], year:"2025", image:"/screenshots/premium-saas-hero.png", gradient:"from-emerald-500 via-green-600 to-teal-700", result:"-32% emissions", featured:false },
@@ -53,7 +53,7 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((p, i) => (
             <motion.div key={p.slug} layout initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.3, delay:i*0.06 }}>
-              <Link to={p.url || `/portfolio/${p.slug}`} className="block group no-underline" target={p.url ? "_blank" : undefined} rel={p.url ? "noopener noreferrer" : undefined}>
+              <Link to={`/portfolio/${p.slug}`} className="block group no-underline">
                 <div className="rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className={`relative ${p.featured ? "h-72" : "h-56"}`}>
                     <img

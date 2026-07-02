@@ -1,3 +1,5 @@
+import { getAccessToken } from "./session";
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
 
 interface RazorpayOptions {
@@ -40,7 +42,7 @@ function loadRazorpayScript(): Promise<boolean> {
 }
 
 export async function createOrder(amount: number, options?: { currency?: string; plan?: string; receipt?: string; invoiceId?: string }) {
-  const token = localStorage.getItem("supabase_token");
+  const token = getAccessToken();
   const res = await fetch(`${API_BASE}/api/orders`, {
     method: "POST",
     headers: {
@@ -54,7 +56,7 @@ export async function createOrder(amount: number, options?: { currency?: string;
 }
 
 export async function createInvoiceOrder(invoiceId: string) {
-  const token = localStorage.getItem("supabase_token");
+  const token = getAccessToken();
   const res = await fetch(`${API_BASE}/api/invoices/${invoiceId}/order`, {
     method: "POST",
     headers: {
@@ -72,7 +74,7 @@ export async function verifyPayment(data: {
   razorpay_signature: string;
   invoiceId?: string;
 }) {
-  const token = localStorage.getItem("supabase_token");
+  const token = getAccessToken();
   const res = await fetch(`${API_BASE}/api/payments/verify`, {
     method: "POST",
     headers: {
