@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
+import { Link } from "react-router";
 import { cn } from "./ui/utils";
 import { AXButton } from "./ds-buttons";
 
@@ -100,22 +101,26 @@ export function HPHero() {
               transition={{ duration: 0.4, delay: 0.15 }}
               className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-10"
             >
-              <AXButton
-                variant="brand"
-                size="lg"
-                iconRight={<ArrowRight className="w-4 h-4" />}
-                className="w-full sm:w-auto"
-              >
-                Book Discovery Call
-              </AXButton>
-              <AXButton
-                variant="ghost"
-                size="lg"
-                iconRight={<ArrowUpRight className="w-4 h-4" />}
-                className="w-full sm:w-auto"
-              >
-                See our work
-              </AXButton>
+              <Link to="/discovery-call" className="w-full sm:w-auto">
+                <AXButton
+                  variant="brand"
+                  size="lg"
+                  iconRight={<ArrowRight className="w-4 h-4" />}
+                  className="w-full sm:w-auto"
+                >
+                  Book Discovery Call
+                </AXButton>
+              </Link>
+              <Link to="/portfolio" className="w-full sm:w-auto">
+                <AXButton
+                  variant="ghost"
+                  size="lg"
+                  iconRight={<ArrowUpRight className="w-4 h-4" />}
+                  className="w-full sm:w-auto"
+                >
+                  See our work
+                </AXButton>
+              </Link>
             </motion.div>
 
             {/* Trust stats */}

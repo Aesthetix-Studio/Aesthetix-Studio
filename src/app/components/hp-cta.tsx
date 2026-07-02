@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, Calendar, MessageSquare } from "lucide-react";
+import { Link } from "react-router";
 
 const offerings = [
   {
@@ -7,14 +8,14 @@ const offerings = [
     title: "Discovery Call",
     desc: "30 minutes. No pitch, no pressure. We talk about your goals and figure out if we're the right fit.",
     cta: "Book a call",
-    variant: "primary" as const,
+    to: "/discovery-call",
   },
   {
     icon: MessageSquare,
     title: "Send a Brief",
     desc: "Have a detailed project in mind? Send us your brief and we'll come back with a full proposal within 48 hours.",
     cta: "Submit brief",
-    variant: "secondary" as const,
+    to: "/inquiry",
   },
 ];
 
@@ -76,10 +77,11 @@ export function HPFinalCTA() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="space-y-4"
           >
-            {offerings.map(({ icon: Icon, title, desc, cta }) => (
-              <div
+            {offerings.map(({ icon: Icon, title, desc, cta, to }) => (
+              <Link
                 key={title}
-                className="group p-6 rounded-2xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/8 transition-all duration-200 cursor-pointer"
+                to={to}
+                className="group block p-6 rounded-2xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/8 transition-all duration-200 no-underline"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
@@ -94,7 +96,7 @@ export function HPFinalCTA() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
 
             <p style={{ fontSize: '12px', color: 'rgba(243,243,241,0.30)', paddingTop: '4px', textAlign: 'center' }}>
