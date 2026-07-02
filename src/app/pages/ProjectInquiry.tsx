@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { AXInput, AXTextarea, AXSelect, AXCheckbox } from "../components/ds-forms";
 import { ArrowRight } from "lucide-react";
 import { submitInquiry } from "../lib/api";
+import SEO from "../components/SEO";
 
 const steps = ["About You","Your Project","Budget & Timeline"];
 
@@ -51,6 +52,7 @@ export default function ProjectInquiry() {
   };
   return (
     <div className="bg-background">
+      <SEO title="Project Inquiry" description="Submit your project brief to Aesthetix Studio. Tell us about your goals, timeline, and budget — we'll get back to you within 24 hours." url="/inquiry" />
       <section className="border-b border-border py-14 px-5 sm:px-8">
         <div className="max-w-2xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>Project Brief</p>

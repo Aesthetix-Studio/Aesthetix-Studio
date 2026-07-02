@@ -1,7 +1,10 @@
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Twitter, Linkedin, Github, Instagram, ArrowRight } from "lucide-react";
 import { AesthetixMark } from "./AesthetixMark";
 import { DSSection, DSSubSection } from "./ds-section";
 import { cn } from "./ui/utils";
+import { subscribeNewsletter } from "../lib/api";
 
 const footerLinks = {
   Services: ["Brand Identity", "Web Design", "Product Design", "Motion & 3D", "Design Systems"],
@@ -10,11 +13,18 @@ const footerLinks = {
   Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Accessibility"],
 };
 
+const footerLinkHrefs = {
+  Services: ["/services", "/services", "/services", "/services", "/services"],
+  Company: ["/about", "/portfolio", "/blog", "/about", "/about"],
+  Resources: ["/services", "/services", "/services", "/about", "/portfolio"],
+  Legal: ["/privacy-policy", "/terms-of-service", "/cookie-policy", "/accessibility"],
+};
+
 const socialLinks = [
-  { icon: Twitter, label: "Twitter", href: "#" },
-  { icon: Linkedin, label: "LinkedIn", href: "#" },
-  { icon: Instagram, label: "Instagram", href: "#" },
-  { icon: Github, label: "GitHub", href: "#" },
+  { icon: Twitter, label: "Twitter", href: "https://twitter.com/aesthetixstudio" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/aesthetix-studio" },
+  { icon: Instagram, label: "Instagram", href: "https://instagram.com/aesthetixstudio" },
+  { icon: Github, label: "GitHub", href: "https://github.com/aesthetixstudio" },
 ];
 
 interface AXFooterProps {
@@ -24,6 +34,24 @@ interface AXFooterProps {
 export function AXFooter({ variant = "default" }: AXFooterProps) {
   const isDark = variant === "dark";
   const isMinimal = variant === "minimal";
+  const [footerEmail, setFooterEmail] = useState("");
+  const [footerLoading, setFooterLoading] = useState(false);
+  const [footerSuccess, setFooterSuccess] = useState(false);
+
+  const handleFooterSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!footerEmail) return;
+    setFooterLoading(true);
+    try {
+      await subscribeNewsletter(footerEmail);
+      setFooterSuccess(true);
+      setFooterEmail("");
+    } catch {
+      // silently fail for footer subscribe
+    } finally {
+      setFooterLoading(false);
+    }
+  };
 
   if (isMinimal) {
     return (
@@ -36,9 +64,14 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
             <span className="text-foreground" style={{ fontSize: '13px', fontWeight: 700 }}>Aesthetix Studio</span>
           </div>
           <div className="flex items-center gap-5">
-            {["Privacy", "Terms", "Cookies"].map((link) => (
-              <a key={link} href="#" className="text-muted-foreground hover:text-foreground transition-colors" style={{ fontSize: '12px' }} onClick={(e) => e.preventDefault()}>
-                {link}
+            {[
+              { label: "Privacy", href: "/privacy-policy" },
+              { label: "Terms", href: "/terms-of-service" },
+              { label: "Cookies", href: "/cookie-policy" },
+              { label: "Accessibility", href: "/accessibility" },
+            ].map((link) => (
+              <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors" style={{ fontSize: '12px' }}>
+                {link.label}
               </a>
             ))}
           </div>
@@ -62,22 +95,32 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className={cn(
-                "h-11 px-3 rounded-lg border text-sm outline-none focus:ring-2 focus:ring-ring/30 w-52",
-                isDark ? "bg-white/8 border-white/12 text-white placeholder:text-white/30 focus:border-white/30" : "bg-input-background border-border text-foreground placeholder:text-muted-foreground/50"
-              )}
-              style={{ fontSize: '13px' }}
-            />
-            <button
-              className="h-11 px-4 rounded-lg bg-brand text-white transition-all hover:bg-brand-hover flex items-center gap-1.5"
-              style={{ fontSize: '13px', fontWeight: 500 }}
-            >
-              Subscribe
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            {footerSuccess ? (
+              <span className="text-success" style={{ fontSize: '13px', fontWeight: 500 }}>Subscribed!</span>
+            ) : (
+              <form onSubmit={handleFooterSubscribe} className="flex items-center gap-2 shrink-0">
+                <input
+                  type="email"
+                  value={footerEmail}
+                  onChange={(e) => setFooterEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  className={cn(
+                    "h-11 px-3 rounded-lg border text-sm outline-none focus:ring-2 focus:ring-ring/30 w-52",
+                    isDark ? "bg-white/8 border-white/12 text-white placeholder:text-white/30 focus:border-white/30" : "bg-input-background border-border text-foreground placeholder:text-muted-foreground/50"
+                  )}
+                  style={{ fontSize: '13px' }}
+                />
+                <button
+                  type="submit"
+                  disabled={footerLoading}
+                  className="h-11 px-4 rounded-lg bg-brand text-white transition-all hover:bg-brand-hover flex items-center gap-1.5 disabled:opacity-50"
+                  style={{ fontSize: '13px', fontWeight: 500 }}
+                >
+                  {footerLoading ? "..." : <>Subscribe <ArrowRight className="w-3.5 h-3.5" /></>}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
@@ -100,7 +143,8 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
                   key={label}
                   href={href}
                   aria-label={label}
-                  onClick={(e) => e.preventDefault()}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "w-11 h-11 rounded-lg flex items-center justify-center transition-colors",
                     isDark ? "bg-white/8 text-white/50 hover:bg-white/15 hover:text-white" : "bg-secondary text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -119,11 +163,10 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
                 {group}
               </h4>
               <ul className="space-y-1">
-                {links.map((link) => (
+                {links.map((link, i) => (
                   <li key={link}>
                     <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
+                      href={footerLinkHrefs[group as keyof typeof footerLinkHrefs]?.[i] ?? "#"}
                       className={cn(
                         "inline-block py-1.5 transition-colors",
                         isDark ? "text-white/40 hover:text-white/80" : "text-muted-foreground hover:text-foreground"

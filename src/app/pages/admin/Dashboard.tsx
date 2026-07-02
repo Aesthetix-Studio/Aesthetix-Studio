@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { mockProjects, mockTasks, statusColors } from "../../lib/data";
+import { fetchProjects, fetchTasks } from "../../lib/api";
 import { api, ApiLead, ApiInvoice } from "../../lib/api-client";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { TrendingUp, FolderOpen, Flame, DollarSign, ChevronRight } from "lucide-react";
@@ -17,28 +17,34 @@ const revenueData = [
 export default function AdminDashboard() {
   const [leads, setLeads] = useState<ApiLead[]>([]);
   const [invoices, setInvoices] = useState<ApiInvoice[]>([]);
+  const [projects, setProjects] = useState<{ id: string; name: string; status: string; progress: number }[]>([]);
+  const [tasks, setTasks] = useState<{ id: string; title: string; assignee: string; due: string; priority: string; status: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
       api.leads().catch(() => ({ ok: false, leads: [] })),
       api.invoices().catch(() => ({ ok: false, invoices: [] })),
+      fetchProjects().then((r) => r.projects).catch(() => []),
+      fetchTasks().then((r) => r.tasks).catch(() => []),
     ])
-      .then(([leadRes, invRes]) => {
+      .then(([leadRes, invRes, p, t]) => {
         setLeads(leadRes.leads ?? []);
         setInvoices(invRes.invoices ?? []);
+        setProjects(p);
+        setTasks(t);
       })
       .finally(() => setLoading(false));
   }, []);
 
   const hotLeads = leads.filter((l) => l.status === "Hot");
-  const activeProjects = mockProjects.filter((p) => p.status !== "Completed");
-  const upcomingTasks = mockTasks.filter((t) => t.status !== "Done");
+  const activeProjects = projects.filter((p) => p.status !== "Completed");
+  const upcomingTasks = tasks.filter((t) => t.status !== "Done");
 
   const stats = [
     { label: "Monthly Revenue", value: "₹3,00,000", change: "+12%", icon: DollarSign, color: "#6150F6" },
-    { label: "Active Projects", value: "4", change: "ongoing", icon: FolderOpen, color: "#3B82F6" },
-    { label: "New Leads", value: String(leads.length || 8), change: "2 hot", icon: Flame, color: "#EF4444" },
+    { label: "Active Projects", value: String(activeProjects.length || 0), change: "ongoing", icon: FolderOpen, color: "#3B82F6" },
+    { label: "New Leads", value: String(leads.length || 0), change: `${hotLeads.length} hot`, icon: Flame, color: "#EF4444" },
     { label: "Avg Project Value", value: "₹80,000", change: "all time", icon: TrendingUp, color: "#10B981" },
   ];
 
@@ -125,7 +131,7 @@ export default function AdminDashboard() {
           </div>
           <div className="space-y-3">
             {activeProjects.slice(0, 3).map((p) => {
-              const sc = statusColors[p.status] ?? "#737370";
+              const sc = p.status === "Completed" ? "#16A34A" : p.status === "In Progress" ? "#6150F6" : "#F59E0B";
               return (
                 <div key={p.id}>
                   <div className="flex items-center justify-between mb-1">
@@ -149,7 +155,7 @@ export default function AdminDashboard() {
           </div>
           <div className="space-y-3">
             {upcomingTasks.slice(0, 4).map((t) => {
-              const pc = statusColors[t.priority] ?? "#737370";
+              const pc = t.priority === "Urgent" ? "#DC2626" : t.priority === "High" ? "#F59E0B" : t.priority === "Medium" ? "#6150F6" : "#737370";
               return (
                 <div key={t.id} className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">

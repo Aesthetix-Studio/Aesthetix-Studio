@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { statusColors } from "../../lib/data";
 import { Search } from "lucide-react";
 import { fetchLeads, type LeadRow } from "../../lib/leads";
+
+const statusColors: Record<string, string> = {
+  "Hot": "#EF4444", "Warm": "#F59E0B", "Cold": "#737370",
+};
 
 const statuses = ["All", "Hot", "Warm", "Cold"];
 

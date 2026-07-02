@@ -123,6 +123,15 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, apikey, x-file-name, x-object-key",
 };
 
+const logNotification = async (env, type, recipient, subject, body) => {
+  try {
+    const id = crypto.randomUUID();
+    await env.DB.prepare(
+      `INSERT INTO notification_log (id, type, recipient, subject, body, status, created_at) VALUES (?, ?, ?, ?, ?, 'sent', datetime('now'))`
+    ).bind(id, type, recipient, subject, body).run();
+  } catch {}
+};
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -305,9 +314,6 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/api/orders") {
-      const auth = await protectedRequest();
-      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
-
       const body = await readJson(request);
       const { amount, currency = "INR", plan, receipt } = body ?? {};
       if (!amount || amount <= 0) return json({ ok: false, error: "Invalid amount" }, { status: 400 });
@@ -329,7 +335,7 @@ export default {
           amount,
           currency,
           receipt: receipt || `order_${crypto.randomUUID().slice(0, 8)}`,
-          notes: { plan: plan ?? "custom", userId: auth.payload.sub ?? "" },
+          notes: { plan: plan ?? "custom" },
         }),
       });
 
@@ -426,6 +432,11 @@ export default {
         result.values.budget,
         result.values.message
       ).run();
+
+      await logNotification(env, "LEAD_CONTACT", "hello@aesthetix.studio",
+        `New contact form submission from ${result.values.firstName} ${result.values.lastName}`,
+        `${result.values.firstName} from ${result.values.company || 'Unknown'} submitted a contact form. Service: ${result.values.service || 'Not specified'}. Budget: ${result.values.budget || 'Not specified'}.`
+      );
 
       return json({ ok: true, id });
     }
@@ -534,6 +545,279 @@ export default {
       }
 
       return json({ ok: true, key: objectKey });
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/newsletter") {
+      const body = await readJson(request);
+      const result = validate(body, {
+        email: { required: true, label: "Email", email: true },
+      });
+      if (!result.ok) return json({ ok: false, error: "Validation failed", issues: result.errors }, { status: 400 });
+
+      const id = crypto.randomUUID();
+      await env.DB.prepare(
+        `INSERT INTO lead_submissions (id, source, email, created_at)
+         VALUES (?, ?, ?, datetime('now'))`
+      ).bind(id, "NEWSLETTER", result.values.email).run();
+
+      return json({ ok: true, id });
+    }
+
+    // ── Team endpoints ─────────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/team") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const { results } = await env.DB.prepare(
+        `SELECT id, name, role, email, avatar, color, status, created_at FROM team_members ORDER BY created_at DESC`
+      ).all();
+
+      return json({ ok: true, team: results });
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/team") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const body = await readJson(request);
+      const result = validate(body, {
+        name: { required: true, label: "Name" },
+        role: { required: true, label: "Role" },
+        email: { required: true, label: "Email", email: true },
+      });
+      if (!result.ok) return json({ ok: false, error: "Validation failed", issues: result.errors }, { status: 400 });
+
+      const id = crypto.randomUUID();
+      const initials = result.values.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
+      const colors = ["#6150F6","#F59E0B","#EC4899","#10B981","#3B82F6","#EF4444"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      await env.DB.prepare(
+        `INSERT INTO team_members (id, name, role, email, avatar, color, status, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, 'Active', datetime('now'))`
+      ).bind(id, result.values.name, result.values.role, result.values.email, initials, color).run();
+
+      return json({ ok: true, id });
+    }
+
+    // ── Client endpoints ───────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/clients") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const { results } = await env.DB.prepare(
+        `SELECT id, name, contact_name, email, phone, plan, status, joined_at, project_count, total_spend_cents FROM clients ORDER BY created_at DESC`
+      ).all();
+
+      return json({ ok: true, clients: results.map((c) => ({
+        id: c.id, name: c.name, contact: c.contact_name, email: c.email, phone: c.phone ?? "—",
+        plan: c.plan ?? "Starter", status: c.status ?? "Active", joined: c.joined_at ?? "—",
+        projects: c.project_count ?? 0, spend: formatCurrency(c.total_spend_cents),
+      }))});
+    }
+
+    // ── Project endpoints ──────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/projects") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const { results } = await env.DB.prepare(
+        `SELECT id, name, client, status, progress, due_date, type, budget, priority, created_at FROM projects ORDER BY created_at DESC`
+      ).all();
+
+      return json({ ok: true, projects: results.map((p) => ({
+        id: p.id, name: p.name, client: p.client ?? "—", status: p.status ?? "Discovery",
+        progress: p.progress ?? 0, dueDate: p.due_date ?? "—", type: p.type ?? "—",
+        budget: p.budget ?? "—", priority: p.priority ?? "Medium",
+      }))});
+    }
+
+    // ── Task endpoints ─────────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/tasks") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const { results } = await env.DB.prepare(
+        `SELECT id, title, project, assignee, due_date, priority, status, created_at FROM tasks ORDER BY created_at DESC`
+      ).all();
+
+      return json({ ok: true, tasks: results.map((t) => ({
+        id: t.id, title: t.title, project: t.project ?? "—", assignee: t.assignee ?? "—",
+        due: t.due_date ?? "—", priority: t.priority ?? "Medium", status: t.status ?? "To Do",
+      }))});
+    }
+
+    // ── Message endpoints ──────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/messages") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const { results } = await env.DB.prepare(
+        `SELECT id, from_name, from_avatar, from_color, project, preview, sent_at, unread FROM messages ORDER BY sent_at DESC`
+      ).all();
+
+      return json({ ok: true, messages: results.map((m) => ({
+        id: m.id, from: m.from_name, avatar: m.from_avatar, color: m.from_color ?? "#6150F6",
+        project: m.project ?? "—", preview: m.preview ?? "", time: m.sent_at ?? "—", unread: m.unread === 1,
+      }))});
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/messages") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const body = await readJson(request);
+      const result = validate(body, {
+        to_name: { required: true, label: "Recipient" },
+        project: { required: true, label: "Project" },
+        text: { required: true, label: "Message" },
+      });
+      if (!result.ok) return json({ ok: false, error: "Validation failed", issues: result.errors }, { status: 400 });
+
+      const id = crypto.randomUUID();
+      const userName = auth.payload.email ?? "User";
+      await env.DB.prepare(
+        `INSERT INTO messages (id, from_name, from_avatar, from_color, project, preview, sent_at, unread)
+         VALUES (?, ?, ?, ?, ?, ?, datetime('now'), 1)`
+      ).bind(id, userName, userName[0]?.toUpperCase() ?? "U", "#6150F6", result.values.project, result.values.text.slice(0, 200)).run();
+
+      await logNotification(env, "NEW_MESSAGE", result.values.to_name,
+        `New message from ${userName} re: ${result.values.project}`,
+        result.values.text.slice(0, 500)
+      );
+
+      return json({ ok: true, id });
+    }
+
+    // ── Settings endpoints ─────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/settings") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const settings = await env.DB.prepare(
+        `SELECT key, value FROM studio_settings`
+      ).all();
+
+      const map = {};
+      for (const row of settings.results ?? []) {
+        try { map[row.key] = JSON.parse(row.value); } catch { map[row.key] = row.value; }
+      }
+
+      return json({ ok: true, settings: map });
+    }
+
+    if (request.method === "PUT" && url.pathname === "/api/settings") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const body = await readJson(request);
+      if (!body || typeof body !== "object") return json({ ok: false, error: "Invalid body" }, { status: 400 });
+
+      const stmt = env.DB.prepare(
+        `INSERT INTO studio_settings (key, value, updated_at) VALUES (?, ?, datetime('now'))
+         ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at`
+      );
+
+      const batch = Object.entries(body).map(([key, value]) =>
+        stmt.bind(key, typeof value === "string" ? value : JSON.stringify(value))
+      );
+
+      await env.DB.batch(batch);
+      return json({ ok: true });
+    }
+
+    // ── Blog endpoints ─────────────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/blog") {
+      const { results } = await env.DB.prepare(
+        `SELECT id, slug, title, excerpt, category, author, read_time, gradient, created_at FROM blog_posts ORDER BY created_at DESC`
+      ).all();
+
+      return json({ ok: true, posts: results });
+    }
+
+    if (request.method === "GET" && url.pathname.startsWith("/api/blog/")) {
+      const slug = url.pathname.split("/api/blog/")[1];
+      if (!slug) return json({ ok: false, error: "Missing slug" }, { status: 400 });
+
+      const post = await env.DB.prepare(
+        `SELECT id, slug, title, excerpt, content, category, author, author_role, read_time, gradient, created_at FROM blog_posts WHERE slug = ?`
+      ).bind(slug).first();
+
+      if (!post) return json({ ok: false, error: "Post not found" }, { status: 404 });
+      return json({ ok: true, post });
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/blog") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const body = await readJson(request);
+      const result = validate(body, {
+        slug: { required: true, label: "Slug" },
+        title: { required: true, label: "Title" },
+        excerpt: { required: true, label: "Excerpt" },
+        content: { required: true, label: "Content" },
+        category: { required: false, label: "Category" },
+        author: { required: false, label: "Author" },
+      });
+      if (!result.ok) return json({ ok: false, error: "Validation failed", issues: result.errors }, { status: 400 });
+
+      const id = crypto.randomUUID();
+      await env.DB.prepare(
+        `INSERT INTO blog_posts (id, slug, title, excerpt, content, category, author, read_time, gradient, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, '5 min', 'from-violet-400 to-purple-600', datetime('now'))`
+      ).bind(id, result.values.slug, result.values.title, result.values.excerpt, result.values.content, result.values.category ?? "General", result.values.author ?? "Aesthetix Studio").run();
+
+      return json({ ok: true, id });
+    }
+
+    // ── Blog edit/delete ──────────────────────────────────────
+    if (request.method === "PUT" && url.pathname.startsWith("/api/blog/")) {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const slug = url.pathname.split("/api/blog/")[1];
+      if (!slug) return json({ ok: false, error: "Missing slug" }, { status: 400 });
+
+      const body = await readJson(request);
+      if (!body || typeof body !== "object") return json({ ok: false, error: "Invalid body" }, { status: 400 });
+
+      const fields: string[] = [];
+      const binds: unknown[] = [];
+      if (body.title) { fields.push("title = ?"); binds.push(body.title); }
+      if (body.excerpt) { fields.push("excerpt = ?"); binds.push(body.excerpt); }
+      if (body.content) { fields.push("content = ?"); binds.push(body.content); }
+      if (body.category) { fields.push("category = ?"); binds.push(body.category); }
+      if (body.author) { fields.push("author = ?"); binds.push(body.author); }
+
+      if (fields.length === 0) return json({ ok: false, error: "No fields to update" }, { status: 400 });
+
+      binds.push(slug);
+      await env.DB.prepare(`UPDATE blog_posts SET ${fields.join(", ")} WHERE slug = ?`).bind(...binds).run();
+      return json({ ok: true });
+    }
+
+    if (request.method === "DELETE" && url.pathname.startsWith("/api/blog/")) {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const slug = url.pathname.split("/api/blog/")[1];
+      if (!slug) return json({ ok: false, error: "Missing slug" }, { status: 400 });
+
+      await env.DB.prepare(`DELETE FROM blog_posts WHERE slug = ?`).bind(slug).run();
+      return json({ ok: true });
+    }
+
+    // ── Notifications endpoint ──────────────────────────────────
+    if (request.method === "GET" && url.pathname === "/api/notifications") {
+      const auth = await protectedRequest();
+      if (!auth.ok) return json({ ok: false, error: auth.error }, { status: auth.status });
+
+      const { results } = await env.DB.prepare(
+        `SELECT id, type, recipient, subject, body, status, created_at FROM notification_log ORDER BY created_at DESC LIMIT 50`
+      ).all();
+
+      return json({ ok: true, notifications: results });
     }
 
     return json({ ok: false, error: "Not found" }, { status: 404 });

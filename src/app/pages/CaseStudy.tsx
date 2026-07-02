@@ -406,11 +406,11 @@ export default function CaseStudy() {
 
   return (
     <div className="bg-background">
-      <SEO
-        title={`${c.title} — Case Study`}
-        description={c.tagline}
-        url={`/portfolio/${slug}`}
-        image={c.image || `/screenshots/${slug}.png`}
+       <SEO
+         title={`${c.title} — Case Study`}
+         description={`${c.tagline} — ${c.client} project case study by Aesthetix Studio showing ${c.services.join(', ')} delivered with ${c.results[0].value} ${c.results[0].label}.`}
+         url={`/portfolio/${slug}`}
+         image={c.image || `/screenshots/${slug}.png`}
       />
       {/* Hero */}
       <section className={`bg-gradient-to-br ${c.gradient} pt-16 pb-20 px-5 sm:px-8`}>

@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router";
 import { ArrowRight, ArrowLeft, Check, Clock, Package, Users, Star } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const data: Record<string, {
   title: string; tagline: string; hero: string; intro: string;
@@ -133,6 +134,11 @@ export default function ServiceDetail() {
 
   return (
     <div className="bg-background">
+      <SEO
+        title={s.title}
+        description={s.tagline + " " + s.intro.slice(0, 120)}
+        url={`/services/${slug}`}
+      />
       {/* Hero */}
       <section className={`bg-gradient-to-br ${s.hero} py-20 px-5 sm:px-8`}>
         <div className="max-w-4xl mx-auto">

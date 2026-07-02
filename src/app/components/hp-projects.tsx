@@ -105,6 +105,7 @@ function ProjectCard({ slug, title, category, description, tags, image, gradient
             <img
               src={image}
               alt={title}
+              loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;

@@ -1,33 +1,68 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { useEffect, useState, useMemo } from "react";
+import { fetchTasks } from "../../lib/api";
 
-type CalEvent = { label: string; color: string };
+type CalEvent = { label: string; color: string; day: number };
 
-const events: Record<number, CalEvent[]> = {
-  18: [{ label: "Luminary design review", color: "#7C3AED" }],
-  20: [{ label: "Discovery call", color: "#EF4444" }],
-  23: [
-    { label: "Brand guidelines review", color: "#7C3AED" },
-    { label: "Nexus flows", color: "#3B82F6" },
-  ],
-  24: [{ label: "Verdant QA", color: "#16A34A" }],
-  26: [{ label: "Team standup", color: "#737370" }],
-  27: [{ label: "Helix presentation", color: "#EC4899" }],
+const priorityColors: Record<string, string> = {
+  Urgent: "#EF4444", High: "#F59E0B", Medium: "#6150F6", Low: "#737370",
 };
 
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-const JUNE_START_DOW = 0;
-const JUNE_DAYS = 30;
-const TODAY = 21;
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export default function AdminCalendar() {
-  const totalCells = JUNE_START_DOW + JUNE_DAYS;
-  const rows = Math.ceil(totalCells / 7);
+  const [tasks, setTasks] = useState<{ id: string; title: string; due_date: string; priority: string; status: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  useEffect(() => {
+    fetchTasks().then((r) => setTasks(r.tasks)).catch(() => {}).finally(() => setLoading(false));
+  }, []);
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const today = new Date();
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const daysInMonth = lastDay.getDate();
+  const startDow = (firstDay.getDay() + 6) % 7;
+
+  const events: Record<number, CalEvent[]> = useMemo(() => {
+    const map: Record<number, CalEvent[]> = {};
+    tasks.forEach((t) => {
+      if (!t.due_date) return;
+      const d = new Date(t.due_date);
+      if (d.getFullYear() === year && d.getMonth() === month) {
+        const day = d.getDate();
+        if (!map[day]) map[day] = [];
+        map[day].push({
+          label: t.title,
+          color: t.status === "Done" ? "#16A34A" : priorityColors[t.priority] ?? "#737370",
+          day,
+        });
+      }
+    });
+    return map;
+  }, [tasks, year, month]);
 
   const cells: (number | null)[] = [];
-  for (let i = 0; i < JUNE_START_DOW; i++) cells.push(null);
-  for (let d = 1; d <= JUNE_DAYS; d++) cells.push(d);
+  for (let i = 0; i < startDow; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
   while (cells.length % 7 !== 0) cells.push(null);
+  const rows = Math.ceil(cells.length / 7);
+
+  const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
+  const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -37,55 +72,40 @@ export default function AdminCalendar() {
           <p className="text-muted-foreground mt-1 text-sm">Studio schedule and project milestones.</p>
         </div>
         <div className="flex items-center gap-2">
-          <button className="w-8 h-8 rounded-lg flex items-center justify-center border border-border hover:bg-secondary transition-colors">
+          <button onClick={prevMonth} className="w-8 h-8 rounded-lg flex items-center justify-center border border-border hover:bg-secondary transition-colors">
             <ChevronLeft className="w-4 h-4 text-muted-foreground" />
           </button>
-          <span className="text-foreground px-2 text-sm font-semibold">June 2026</span>
-          <button className="w-8 h-8 rounded-lg flex items-center justify-center border border-border hover:bg-secondary transition-colors">
+          <span className="text-foreground px-2 text-sm font-semibold">{monthNames[month]} {year}</span>
+          <button onClick={nextMonth} className="w-8 h-8 rounded-lg flex items-center justify-center border border-border hover:bg-secondary transition-colors">
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </button>
         </div>
       </div>
 
-      {/* Calendar Grid */}
       <div className="rounded-2xl border border-border overflow-hidden">
         <div className="grid grid-cols-7 border-b border-border bg-secondary/50">
           {daysOfWeek.map((d) => (
-            <div key={d} className="py-3 text-center text-muted-foreground text-xs font-semibold">
-              {d}
-            </div>
+            <div key={d} className="py-3 text-center text-muted-foreground text-xs font-semibold">{d}</div>
           ))}
         </div>
 
         {Array.from({ length: rows }).map((_, rowIdx) => (
           <div key={rowIdx} className="grid grid-cols-7" style={{ borderBottom: rowIdx < rows - 1 ? "1px solid var(--border)" : undefined }}>
             {cells.slice(rowIdx * 7, rowIdx * 7 + 7).map((day, colIdx) => {
-              const isToday = day === TODAY;
+              const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
               const dayEvents = day ? events[day] ?? [] : [];
               return (
-                <div
-                  key={colIdx}
-                  className="min-h-24 p-2 border-r border-border last:border-r-0"
-                  style={{ background: day ? "var(--card)" : "var(--secondary)" }}
-                >
+                <div key={colIdx} className="min-h-24 p-2 border-r border-border last:border-r-0" style={{ background: day ? "var(--card)" : "var(--secondary)" }}>
                   {day && (
                     <>
                       <div className="mb-1.5 flex justify-start">
-                        <span
-                          className={`w-7 h-7 flex items-center justify-center rounded-full text-[13px] ${
-                            isToday ? "bg-brand text-white font-bold" : "text-foreground"
-                          }`}
-                        >
+                        <span className={`w-7 h-7 flex items-center justify-center rounded-full text-[13px] ${isToday ? "bg-brand text-white font-bold" : "text-foreground"}`}>
                           {day}
                         </span>
                       </div>
                       <div className="space-y-1">
                         {dayEvents.map((ev, ei) => (
-                          <div
-                            key={ei}
-                            className="px-1.5 py-0.5 rounded truncate text-[10px] font-semibold"
-                            style={{ background: `${ev.color}22`, color: ev.color }}
-                          >
+                          <div key={ei} className="px-1.5 py-0.5 rounded truncate text-[10px] font-semibold" style={{ background: `${ev.color}22`, color: ev.color }}>
                             {ev.label}
                           </div>
                         ))}
@@ -99,15 +119,12 @@ export default function AdminCalendar() {
         ))}
       </div>
 
-      {/* Legend */}
       <div className="flex items-center gap-4 flex-wrap">
         {[
-          { label: "Design", color: "#7C3AED" },
-          { label: "Discovery", color: "#EF4444" },
-          { label: "Development", color: "#3B82F6" },
-          { label: "QA", color: "#16A34A" },
-          { label: "Internal", color: "#737370" },
-          { label: "Presentations", color: "#EC4899" },
+          { label: "Urgent", color: "#EF4444" },
+          { label: "High", color: "#F59E0B" },
+          { label: "Medium", color: "#6150F6" },
+          { label: "Done", color: "#16A34A" },
         ].map((item) => (
           <div key={item.label} className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full" style={{ background: item.color }} />

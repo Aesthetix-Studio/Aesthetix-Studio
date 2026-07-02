@@ -1,97 +1,191 @@
 import { Link } from "react-router";
-import { ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
 import SEO from "../components/SEO";
-
-const team = [
-  { name:"Anna Reeves", role:"Lead Designer & Co-founder", bio:"10 years in brand and product design. Previously at Figma and Stripe. Obsessed with type and the space between things.", initials:"AR", color:"#6150F6" },
-  { name:"Kai Tanaka", role:"UI/UX Designer", bio:"Specializes in product design and motion. Believes great interaction design is invisible — until it isn't.", initials:"KT", color:"#F59E0B" },
-  { name:"Lena Morris", role:"Brand Strategist", bio:"Former brand consultant at Interbrand. Turns 'we need a logo' into complete brand systems that work.", initials:"LM", color:"#EC4899" },
-  { name:"Dev Sharma", role:"Frontend Developer", bio:"Writes the code that makes design real. Obsessive about performance, accessibility, and clean abstractions.", initials:"DS", color:"#10B981" },
-];
+import { ArrowRight } from "lucide-react";
 
 const values = [
-  { num:"01", title:"Restraint", desc:"We add nothing that doesn't earn its place. Every element serves the communication, not the portfolio." },
-  { num:"02", title:"Precision", desc:"Typography kerned to the pixel. Spacing measured to the rem. Details aren't details — they're the whole thing." },
-  { num:"03", title:"Honesty", desc:"We tell you when an idea won't work. The best client relationships are built on candor, not agreement." },
-  { num:"04", title:"Craft", desc:"We take pride in work that holds up under scrutiny. Fast delivery is good. Good delivery is non-negotiable." },
+  {
+    title: "Craft Over Convention",
+    description: "Every pixel, every line of code, every interaction is intentional. We don't ship templates — we build from first principles.",
+  },
+  {
+    title: "Partnership, Not Service",
+    description: "We embed ourselves in your vision. The best work happens when boundaries between client and studio dissolve.",
+  },
+  {
+    title: "Quality Is Non-Negotiable",
+    description: "We'd rather deliver late and exceptional than on-time and forgettable. Our reputation lives in every project.",
+  },
+  {
+    title: "Think in Systems",
+    description: "Beautiful pages are easy. We build brands, design systems, and architectures that scale with your ambition.",
+  },
+];
+
+const milestones = [
+  { year: "2021", event: "Founded in Hyderabad with a focus on premium digital design" },
+  { year: "2022", event: "Expanded to full-service design and development" },
+  { year: "2023", event: "Launched 10+ showcase websites and established the design system" },
+  { year: "2024", event: "Grew to serve startups, SaaS companies, and enterprise clients globally" },
+  { year: "2025", event: "Introduced product design, motion graphics, and 3D capabilities" },
+  { year: "2026", event: "Rebranding to Aesthetix Studio — full creative studio for ambitious brands" },
 ];
 
 export default function About() {
   return (
-    <div className="bg-background">
+    <>
       <SEO
-        title="About"
-        description="Learn about Aesthetix Studio — a design, development, and branding agency focused on delivering measurable results."
+        title="About | Aesthetix Studio"
+        description="Learn about Aesthetix Studio — a premium creative studio in Hyderabad specializing in brand identity, web design, product design, and design systems. Founded 2021."
         url="/about"
       />
-      <section className="py-20 px-5 sm:px-8 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-muted-foreground mb-4" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>About</p>
-          <h1 className="text-foreground mb-6" style={{ fontSize:"clamp(32px,5vw,56px)", fontWeight:800, letterSpacing:"-0.03em", lineHeight:1.1 }}>
-            We're a small studio that does exceptional work.
+      <div className="min-h-screen bg-background">
+        {/* Hero */}
+        <section className="max-w-4xl mx-auto px-6 pt-24 pb-16">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-2 h-2 rounded-full bg-brand" />
+            <span className="text-muted-foreground" style={{ fontSize: "12px", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+              About the Studio
+            </span>
+          </div>
+          <h1
+            className="text-foreground mb-6"
+            style={{
+              fontSize: "clamp(32px, 5vw, 56px)",
+              fontWeight: 700,
+              letterSpacing: "-0.04em",
+              lineHeight: 1.1,
+            }}
+          >
+            We design digital experiences that move people.
           </h1>
-          <p className="text-muted-foreground max-w-2xl" style={{ fontSize:"18px", lineHeight:1.7 }}>
-            Aesthetix Studio is a boutique design agency founded in 2019. We specialize in brand identity, web design, and digital products for founders and growing companies who understand that design is a business decision.
+          <p
+            className="text-muted-foreground max-w-2xl"
+            style={{ fontSize: "clamp(16px, 2vw, 20px)", lineHeight: 1.7 }}
+          >
+            Aesthetix Studio is a premium creative studio based in Hyderabad, India. We partner with startups, SaaS companies, and enterprise brands to create identities, websites, and products that stand apart.
           </p>
-        </div>
-      </section>
+        </section>
 
-      <section className="bg-foreground border-b border-border">
-        <div className="max-w-5xl mx-auto px-5 sm:px-8 py-14 grid grid-cols-2 sm:grid-cols-4 gap-8">
-          {[["80+","Brands launched"],["6","Years in business"],["₹50L+","Client revenue"],["98%","Satisfaction rate"]].map(([v,l]) => (
-            <div key={l} className="text-center">
-              <div className="text-background" style={{ fontSize:"40px", fontWeight:800, letterSpacing:"-0.03em" }}>{v}</div>
-              <div className="text-background/50" style={{ fontSize:"13px" }}>{l}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="py-20 px-5 sm:px-8 border-b border-border">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-muted-foreground mb-12" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>What We Believe</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {values.map((v, i) => (
-              <motion.div key={v.num} initial={{ opacity:0, y:12 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, margin:"-40px" }} transition={{ duration:0.35, delay:i * 0.07 }}>
-                <p className="mb-2" style={{ fontSize:"11px", fontFamily:"'JetBrains Mono',monospace", color:"var(--brand)" }}>{v.num}</p>
-                <h3 className="text-foreground mb-2" style={{ fontSize:"20px", fontWeight:700 }}>{v.title}</h3>
-                <p className="text-muted-foreground" style={{ fontSize:"15px", lineHeight:1.7 }}>{v.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-5 sm:px-8 border-b border-border">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-muted-foreground mb-12" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>The Team</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {team.map((t, i) => (
-              <motion.div key={t.name} initial={{ opacity:0, y:12 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.3, delay:i * 0.07 }} className="bg-card rounded-2xl border border-border p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white" style={{ background:t.color, fontSize:"14px", fontWeight:700 }}>{t.initials}</div>
-                  <div>
-                    <div className="text-foreground" style={{ fontSize:"15px", fontWeight:700 }}>{t.name}</div>
-                    <div className="text-muted-foreground" style={{ fontSize:"12px" }}>{t.role}</div>
-                  </div>
+        {/* Stats */}
+        <section className="border-y border-border bg-card">
+          <div className="max-w-4xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "50+", label: "Projects Delivered" },
+              { value: "30+", label: "Happy Clients" },
+              { value: "5+", label: "Years of Craft" },
+              { value: "10", label: "Showcase Sites" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="text-foreground" style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.03em" }}>
+                  {stat.value}
                 </div>
-                <p className="text-muted-foreground" style={{ fontSize:"14px", lineHeight:1.65 }}>{t.bio}</p>
-              </motion.div>
+                <div className="text-muted-foreground mt-1" style={{ fontSize: "12px", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                  {stat.label}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-20 px-5 sm:px-8 text-center">
-        <div className="max-w-xl mx-auto">
-          <h2 className="text-foreground mb-4" style={{ fontSize:"clamp(24px,3.5vw,36px)", fontWeight:800, letterSpacing:"-0.025em" }}>Want to work with us?</h2>
-          <p className="text-muted-foreground mb-8" style={{ fontSize:"16px", lineHeight:1.65 }}>We take on a limited number of new projects each quarter. Reach out to check availability.</p>
-          <Link to="/discovery-call" className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-xl no-underline hover:bg-brand-hover transition-colors" style={{ fontSize:"14px", fontWeight:600 }}>
-            Book a Discovery Call <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
-    </div>
+        {/* Story */}
+        <section className="max-w-4xl mx-auto px-6 py-20">
+          <div className="grid md:grid-cols-5 gap-12">
+            <div className="md:col-span-2">
+              <h2 className="text-foreground" style={{ fontSize: "22px", fontWeight: 600, letterSpacing: "-0.02em" }}>
+                Our Story
+              </h2>
+            </div>
+            <div className="md:col-span-3 space-y-4">
+              <p className="text-muted-foreground" style={{ fontSize: "15px", lineHeight: 1.8 }}>
+                Aesthetix Studio started with a simple observation: the digital landscape is flooded with sameness. Generic templates, recycled aesthetics, and forgettable experiences dominate. We believed there was room for something better.
+              </p>
+              <p className="text-muted-foreground" style={{ fontSize: "15px", lineHeight: 1.8 }}>
+                Founded in Hyderabad in 2021, we set out to build a studio that treats every project as a craft — not a commodity. From brand identities that resonate to websites that convert, we approach each challenge with the same rigour and attention to detail.
+              </p>
+              <p className="text-muted-foreground" style={{ fontSize: "15px", lineHeight: 1.8 }}>
+                Today, we serve clients across India and globally — from early-stage startups finding their voice to established brands ready for a transformation. Our work spans brand identity, web design, product design, design systems, and motion graphics.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Values */}
+        <section className="border-y border-border bg-card">
+          <div className="max-w-4xl mx-auto px-6 py-20">
+            <h2 className="text-foreground mb-12" style={{ fontSize: "22px", fontWeight: 600, letterSpacing: "-0.02em" }}>
+              What We Stand For
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {values.map((value) => (
+                <div key={value.title} className="p-6 rounded-xl border border-border bg-background">
+                  <h3 className="text-foreground mb-2" style={{ fontSize: "16px", fontWeight: 600 }}>
+                    {value.title}
+                  </h3>
+                  <p className="text-muted-foreground" style={{ fontSize: "14px", lineHeight: 1.7 }}>
+                    {value.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Timeline */}
+        <section className="max-w-4xl mx-auto px-6 py-20">
+          <h2 className="text-foreground mb-12" style={{ fontSize: "22px", fontWeight: 600, letterSpacing: "-0.02em" }}>
+            Our Journey
+          </h2>
+          <div className="space-y-0">
+            {milestones.map((milestone, i) => (
+              <div key={milestone.year} className="flex gap-6 relative">
+                <div className="flex flex-col items-center">
+                  <div className="w-3 h-3 rounded-full bg-brand shrink-0 mt-1.5" />
+                  {i < milestones.length - 1 && (
+                    <div className="w-px flex-1 bg-border" />
+                  )}
+                </div>
+                <div className="pb-8">
+                  <span className="text-foreground block" style={{ fontSize: "13px", fontWeight: 600, letterSpacing: "-0.01em" }}>
+                    {milestone.year}
+                  </span>
+                  <span className="text-muted-foreground" style={{ fontSize: "14px", lineHeight: 1.6 }}>
+                    {milestone.event}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="border-t border-border bg-card">
+          <div className="max-w-4xl mx-auto px-6 py-20 text-center">
+            <h2 className="text-foreground mb-4" style={{ fontSize: "clamp(24px, 3vw, 32px)", fontWeight: 700, letterSpacing: "-0.03em" }}>
+              Ready to build something remarkable?
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-lg mx-auto" style={{ fontSize: "15px", lineHeight: 1.7 }}>
+              We're selective about the projects we take on because every partnership deserves our full attention.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                to="/discovery-call"
+                className="inline-flex items-center gap-2 h-11 px-6 rounded-lg bg-brand text-white transition-all hover:bg-brand-hover"
+                style={{ fontSize: "14px", fontWeight: 500 }}
+              >
+                Book a Discovery Call
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center gap-2 h-11 px-6 rounded-lg border border-border text-foreground transition-colors hover:bg-card"
+                style={{ fontSize: "14px", fontWeight: 500 }}
+              >
+                View Our Work
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

@@ -59,6 +59,7 @@ export default function Portfolio() {
                     <img
                       src={p.image}
                       alt={p.title}
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;

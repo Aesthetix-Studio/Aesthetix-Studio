@@ -9,16 +9,19 @@ import { HPTechIndustries } from "../components/hp-tech-industries";
 import { HPPricingPreview } from "../components/hp-pricing-preview";
 import { HPFaq } from "../components/hp-faq";
 import { HPFinalCTA } from "../components/hp-cta";
-import SEO, { organizationSchema, websiteSchema } from "../components/SEO";
+import SEO, { organizationSchema, websiteSchema, localBusinessSchema, professionalServiceSchema } from "../components/SEO";
 
 export default function Home() {
   return (
     <>
       <SEO
-        title={undefined}
+        title="Aesthetix Studio"
         description="Aesthetix Studio — Design, development, and branding agency for startups and growing businesses. We build brands that convert."
+        url="/"
         structuredData={organizationSchema}
       />
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(professionalServiceSchema)}</script>
       {/* 1. Hero — positioning + dual CTA */}
       <HPHero />
 

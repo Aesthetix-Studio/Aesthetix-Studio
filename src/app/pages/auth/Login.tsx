@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 import { Eye, EyeOff } from "lucide-react";
 import { signInWithPassword } from "../../lib/api";
 import { setSession } from "../../lib/session";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = (location.state as { from?: string })?.from;
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,8 +24,11 @@ export default function Login() {
         role: result.user?.app_metadata?.role ?? "authenticated",
         email: result.user?.email,
         displayName: result.user?.user_metadata?.full_name ?? result.user?.user_metadata?.name ?? result.user?.email ?? undefined,
-      });
-      navigate(result.user?.app_metadata?.role === "admin" ? "/admin" : "/portal");
+      });        if (returnTo) {
+          navigate(returnTo);
+        } else {
+          navigate(result.user?.app_metadata?.role === "admin" ? "/admin" : "/portal");
+        }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to sign in");
     } finally {

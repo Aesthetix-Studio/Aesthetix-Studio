@@ -18,7 +18,7 @@ export function PortfolioMinimal() {
           {minimalProjects.map((p) => (
             <div key={p.id} style={{ cursor: "pointer" }}>
               <div style={{ height: "240px", borderRadius: "8px", overflow: "hidden", marginBottom: "16px", position: "relative" }}>
-                <img src={p.image} alt={p.title} style={imgStyle} />
+                <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
                 <div style={{ position: "absolute", top: "12px", right: "12px", background: "rgba(255,255,255,0.9)", borderRadius: "6px", padding: "4px 10px", backdropFilter: "blur(4px)" }}>
                   <span style={{ fontSize: "11px", color: "#0D0D0C", fontWeight: 600 }}>{p.result}</span>
                 </div>
@@ -53,7 +53,7 @@ export function PortfolioEditorial() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "2px" }}>
           <div style={{ borderRadius: "0", height: "400px", position: "relative", overflow: "hidden", cursor: "pointer" }}>
-            <img src={editorialProjects[0].image} alt={editorialProjects[0].title} style={imgStyle} />
+            <img src={editorialProjects[0].image} alt={editorialProjects[0].title} loading="lazy" style={imgStyle} />
             <div style={{ position: "absolute", bottom: "32px", left: "32px", background: "linear-gradient(transparent, rgba(0,0,0,0.7))", padding: "32px", width: "100%" }}>
               <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "8px" }}>{editorialProjects[0].cat}</p>
               <h3 style={{ fontSize: "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em" }}>{editorialProjects[0].title}</h3>
@@ -65,7 +65,7 @@ export function PortfolioEditorial() {
           <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
             {editorialProjects.slice(1,3).map(p => (
               <div key={p.id} style={{ flex: 1, position: "relative", overflow: "hidden", cursor: "pointer", minHeight: "196px" }}>
-                <img src={p.image} alt={p.title} style={imgStyle} />
+                <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
                 <div style={{ position: "absolute", bottom: "16px", left: "16px", background: "linear-gradient(transparent, rgba(0,0,0,0.6))", padding: "16px", width: "100%" }}>
                   <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", marginBottom: "4px" }}>{p.cat}</p>
                   <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff" }}>{p.title}</h3>
@@ -77,7 +77,7 @@ export function PortfolioEditorial() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "2px", marginTop: "2px" }}>
           {editorialProjects.slice(3).map(p => (
             <div key={p.id} style={{ height: "200px", position: "relative", overflow: "hidden", cursor: "pointer" }}>
-              <img src={p.image} alt={p.title} style={imgStyle} />
+              <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
               <div style={{ position: "absolute", bottom: "16px", left: "16px", background: "linear-gradient(transparent, rgba(0,0,0,0.6))", padding: "16px", width: "100%" }}>
                 <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", marginBottom: "4px" }}>{p.cat}</p>
                 <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff" }}>{p.title}</h3>
@@ -103,7 +103,7 @@ export function PortfolioPremiumSaas() {
           {premiumSaasProjects.map(p => (
             <div key={p.id} style={{ background: "#fff", borderRadius: "16px", border: "1px solid rgba(0,0,0,0.07)", overflow: "hidden", cursor: "pointer", transition: "all 0.2s" }}>
               <div style={{ height: "140px", position: "relative", overflow: "hidden" }}>
-                <img src={p.image} alt={p.title} style={imgStyle} />
+                <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
                 <div style={{ position: "absolute", top: "12px", right: "12px", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)", borderRadius: "6px", padding: "3px 8px" }}>
                   <span style={{ fontSize: "11px", color: "#fff", fontWeight: 600 }}>{p.result}</span>
                 </div>
@@ -137,7 +137,7 @@ export function PortfolioCreativeStudio() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "320px 200px 200px", gap: "16px" }}>
           {creativeStudioProjects.map((p, i) => (
             <div key={p.id} style={{ borderRadius: "16px", overflow: "hidden", cursor: "pointer", position: "relative", gridColumn: i === 0 ? "1 / 2" : undefined, gridRow: i === 0 ? "1 / 3" : undefined }}>
-              <img src={p.image} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <img src={p.image} alt={p.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent 0%, rgba(10,6,3,0.7) 30%, rgba(10,6,3,0.95) 100%)", padding: "24px 20px 20px" }}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "8px" }}>
                   {p.tags.map(t => <span key={t} style={{ fontSize: "10px", color: "rgba(204,120,50,0.9)", background: "rgba(204,120,50,0.2)", padding: "3px 8px", borderRadius: "9999px" }}>{t}</span>)}
@@ -173,7 +173,7 @@ export function PortfolioEnterprise() {
           {enterpriseProjects.map(p => (
             <div key={p.id} style={{ border: "1px solid rgba(0,0,0,0.08)", borderRadius: "10px", overflow: "hidden" }}>
               <div style={{ height: "120px", overflow: "hidden" }}>
-                <img src={p.image} alt={p.title} style={imgStyle} />
+                <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
               </div>
               <div style={{ padding: "16px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px" }}>
@@ -207,7 +207,7 @@ export function PortfolioLuxury() {
           {luxuryProjects.map((p, i) => (
             <div key={p.id} style={{ cursor: "pointer" }}>
               <div style={{ height: i % 2 === 0 ? "280px" : "220px", borderRadius: "4px", marginBottom: "20px", position: "relative", overflow: "hidden" }}>
-                <img src={p.image} alt={p.title} style={imgStyle} />
+                <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
                 <div style={{ position: "absolute", top: "16px", right: "16px", width: "28px", height: "28px", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(4px)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <ArrowUpRight size={14} color="#fff" />
                 </div>
@@ -242,7 +242,7 @@ export function PortfolioStartup() {
           {startupProjects.map((p) => (
             <div key={p.id} style={{ borderRadius: "16px", overflow: "hidden", border: "2px solid transparent", cursor: "pointer", background: "linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #6150F6, #EC4899) border-box", transition: "transform 0.2s" }}>
               <div style={{ height: "160px", position: "relative", overflow: "hidden" }}>
-                <img src={p.image} alt={p.title} style={imgStyle} />
+                <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
                 <div style={{ position: "absolute", top: "12px", left: "12px", background: "#fff", borderRadius: "8px", padding: "4px 10px" }}>
                   <span style={{ fontSize: "12px", fontWeight: 700, color: "#0D0D0C" }}>{p.result}</span>
                 </div>
@@ -274,7 +274,7 @@ export function PortfolioModernTech() {
           {modernTechProjects.map(p => (
             <div key={p.id} style={{ background: "#08080A", padding: "0", cursor: "pointer", position: "relative", overflow: "hidden" }}>
               <div style={{ height: "160px", overflow: "hidden" }}>
-                <img src={p.image} alt={p.title} style={{ ...imgStyle, opacity: 0.75 }} />
+                <img src={p.image} alt={p.title} loading="lazy" style={{ ...imgStyle, opacity: 0.75 }} />
               </div>
               <div style={{ padding: "20px" }}>
                 <code style={{ fontFamily: mono, fontSize: "10px", color: "rgba(255,255,255,0.25)", display: "block", marginBottom: "8px" }}>{p.year} · {p.cat.toLowerCase().replace(/\s/g, "-")}</code>
@@ -305,7 +305,7 @@ export function PortfolioBrutalist() {
             <span style={{ fontSize: "11px", fontWeight: 900, color: "#fff", fontFamily: mono }}>{String(i+1).padStart(2,"0")}</span>
           </div>
           <div style={{ borderRight: "3px solid #000", padding: "0", overflow: "hidden" }}>
-            <img src={p.image} alt={p.title} style={imgStyle} />
+            <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
           </div>
           <div style={{ borderRight: "3px solid #000", padding: "16px 20px", display: "flex", alignItems: "center" }}>
             <span style={{ fontSize: "16px", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.01em" }}>{p.title}</span>
@@ -345,7 +345,7 @@ export function PortfolioHighEndPortfolio() {
           </div>
           <div style={{ padding: "24px 48px 24px 0", display: "flex", alignItems: "center", gap: "16px", justifyContent: "flex-end" }}>
             <div style={{ width: "80px", height: "56px", borderRadius: "8px", overflow: "hidden" }}>
-              <img src={p.image} alt={p.title} style={imgStyle} />
+              <img src={p.image} alt={p.title} loading="lazy" style={imgStyle} />
             </div>
             <div>
               <span style={{ fontSize: "12px", color: "#A3A39D" }}>{p.year}</span><br />

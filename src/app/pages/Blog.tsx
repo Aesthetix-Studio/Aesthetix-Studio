@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Clock } from "lucide-react";
+import SEO from "../components/SEO";
 
 const posts = [
   { slug:"systematic-design", title:"The Case for Systematic Design", excerpt:"Why ad hoc creative decisions always fail at scale — and how a design system changes everything.", category:"Design Systems", date:"Jun 14, 2026", readTime:"6 min", gradient:"from-violet-400 to-purple-600", author:"Anna Reeves", initials:"AR", featured:true },
@@ -15,6 +16,7 @@ export default function Blog() {
   const rest = posts.slice(1);
   return (
     <div className="bg-background">
+      <SEO title="Journal" description="Design insights, brand strategy, and creative process articles from Aesthetix Studio. Learn about design systems, typography, motion design, and SEO." url="/blog" />
       <section className="border-b border-border py-16 px-5 sm:px-8">
         <div className="max-w-6xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>Journal</p>

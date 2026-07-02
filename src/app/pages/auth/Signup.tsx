@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 import { Eye, EyeOff } from "lucide-react";
 import { signUpWithPassword } from "../../lib/api";
 import { setSession } from "../../lib/session";
 
 export default function Signup() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = (location.state as { from?: string })?.from;
   const [showPass, setShowPass] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,11 @@ export default function Signup() {
           email: result.user?.email,
           displayName: fullName || result.user?.email || undefined,
         });
-        navigate("/portal");
+        if (returnTo) {
+          navigate(returnTo);
+        } else {
+          navigate("/portal");
+        }
       } else {
         navigate("/auth/verify-email");
       }
@@ -113,9 +119,9 @@ export default function Signup() {
           </div>
           <span className="text-muted-foreground" style={{ fontSize: "13px" }}>
             I agree to the{" "}
-            <a href="#" className="text-foreground hover:underline" style={{ fontWeight: 500 }}>Terms of Service</a>
+            <Link to="/terms-of-service" className="text-foreground hover:underline" style={{ fontWeight: 500 }}>Terms of Service</Link>
             {" "}and{" "}
-            <a href="#" className="text-foreground hover:underline" style={{ fontWeight: 500 }}>Privacy Policy</a>
+            <Link to="/privacy-policy" className="text-foreground hover:underline" style={{ fontWeight: 500 }}>Privacy Policy</Link>
           </span>
         </label>
         {error && <p className="text-red-600" style={{ fontSize: "12px" }}>{error}</p>}

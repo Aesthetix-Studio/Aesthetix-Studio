@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Check, ArrowRight, Loader2 } from "lucide-react";
 import SEO from "../components/SEO";
 import { createOrder, openRazorpayCheckout, verifyPayment } from "../lib/razorpay";
+import { getSession } from "../lib/session";
+import { captureError } from "../lib/error-tracking";
 
 const plans = [
   { name:"Starter", price:"₹25,000", priceAmount:2500000, sub:"project", desc:"For early-stage founders needing a strong foundation.", features:["Brand identity kit","5-page website","Basic SEO setup","2 revision rounds","3-week delivery","Style guide PDF"], cta:"Get Started", pop:false, href:"/inquiry" },
@@ -17,10 +19,17 @@ const addons = [
 ];
 
 export default function Pricing() {
+  const navigate = useNavigate();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const handleCheckout = async (plan: typeof plans[0]) => {
     if (plan.priceAmount === 0) return;
+
+    if (!getSession()) {
+      navigate("/auth/login", { state: { from: "/pricing" } });
+      return;
+    }
+
     setLoadingPlan(plan.name);
     try {
       const order = await createOrder(plan.priceAmount, { plan: plan.name.toLowerCase() });
@@ -38,7 +47,7 @@ export default function Pricing() {
         onDismiss: () => setLoadingPlan(null),
       });
     } catch (err) {
-      console.error("Checkout error:", err);
+      captureError(err, { context: "pricing-checkout" });
       setLoadingPlan(null);
     }
   };

@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { ArrowLeft, Mail, Phone, Globe, Clock, PhoneCall, UserCheck } from "lucide-react";
 import { fetchLead, type LeadRow } from "../../lib/leads";
-import { statusColors } from "../../lib/data";
+
+const statusColors: Record<string, string> = {
+  "Hot": "#EF4444", "Warm": "#F59E0B", "Cold": "#737370",
+};
 
 const activity = [
   { type: "note", text: "Added initial notes after discovery call.", time: "Jun 18, 2026 · 2:14 PM", by: "Mia Chen" },

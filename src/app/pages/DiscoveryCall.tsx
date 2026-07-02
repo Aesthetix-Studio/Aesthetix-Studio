@@ -3,10 +3,30 @@ import { Calendar, Clock, Video, Check } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { AXInput } from "../components/ds-forms";
 import { submitDiscoveryCall } from "../lib/api";
+import SEO from "../components/SEO";
 
 const slots = ["9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","2:00 PM","2:30 PM","3:00 PM","3:30 PM","4:00 PM"];
-const days = ["Mon Jun 23","Tue Jun 24","Wed Jun 25","Thu Jun 26","Fri Jun 27"];
+const dayNames = ["Mon","Tue","Wed","Thu","Fri"];
 const includes = ["We listen first — no pitch","Project scope assessment","Honest fit assessment","Preliminary timeline estimate","Next steps (if it's a match)"];
+
+function getNextWeekdays(count: number) {
+  const result: { label: string; day: string; date: string }[] = [];
+  const now = new Date();
+  let d = new Date(now);
+  while (result.length < count) {
+    const day = d.getDay();
+    if (day >= 1 && day <= 5) {
+      const dayName = dayNames[day - 1];
+      const month = d.toLocaleString("en", { month: "short" });
+      const date = String(d.getDate());
+      result.push({ label: `${dayName} ${month} ${date}`, day: String(day), date });
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return result;
+}
+
+const days = getNextWeekdays(5);
 
 export default function DiscoveryCall() {
   const navigate = useNavigate();
@@ -25,7 +45,7 @@ export default function DiscoveryCall() {
       await submitDiscoveryCall({
         name,
         email,
-        day: days[selectedDay],
+        day: days[selectedDay].label,
         time: slots[selectedTime],
       });
       navigate("/thank-you");
@@ -38,6 +58,7 @@ export default function DiscoveryCall() {
 
   return (
     <div className="bg-background">
+      <SEO title="Book a Discovery Call" description="Book a free 30-minute discovery call with Aesthetix Studio. No pitch, no pressure — just a conversation about your goals and how we can help." url="/discovery-call" />
       <section className="border-b border-border py-14 px-5 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <p className="text-muted-foreground mb-3" style={{ fontSize:"11px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.1em" }}>Book a Call</p>
@@ -55,9 +76,9 @@ export default function DiscoveryCall() {
             </div>
             <div className="flex gap-2 mb-5 overflow-x-auto pb-1">
               {days.map((d, i) => (
-                <button key={d} onClick={() => { setSelectedDay(i); setSelectedTime(null); }} className="flex flex-col items-center px-3 py-2 rounded-xl border shrink-0 transition-all" style={{ minWidth:"80px", background:selectedDay===i?"var(--foreground)":"var(--secondary)", borderColor:selectedDay===i?"var(--foreground)":"var(--border)", color:selectedDay===i?"var(--background)":"var(--muted-foreground)" }}>
-                  <span style={{ fontSize:"10px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.06em" }}>{d.split(" ")[0]}</span>
-                  <span style={{ fontSize:"14px", fontWeight:700 }}>{d.split(" ")[1]}</span>
+                <button key={d.label} onClick={() => { setSelectedDay(i); setSelectedTime(null); }} className="flex flex-col items-center px-3 py-2 rounded-xl border shrink-0 transition-all" style={{ minWidth:"80px", background:selectedDay===i?"var(--foreground)":"var(--secondary)", borderColor:selectedDay===i?"var(--foreground)":"var(--border)", color:selectedDay===i?"var(--background)":"var(--muted-foreground)" }}>
+                  <span style={{ fontSize:"10px", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.06em" }}>{d.label.split(" ")[0]}</span>
+                  <span style={{ fontSize:"14px", fontWeight:700 }}>{d.label.split(" ")[2]}</span>
                 </button>
               ))}
             </div>
@@ -71,7 +92,7 @@ export default function DiscoveryCall() {
             {error && <p className="text-red-600 mt-4" style={{ fontSize: "12px" }}>{error}</p>}
             {selectedTime !== null && (
               <button onClick={handleSubmit} disabled={loading || !name || !email} className="w-full mt-5 py-3 rounded-xl bg-brand text-white hover:bg-brand-hover disabled:opacity-50 transition-colors" style={{ fontSize:"14px", fontWeight:600 }}>
-                {loading ? "Booking…" : `Confirm — ${days[selectedDay]} at ${slots[selectedTime]}`}
+                {loading ? "Booking…" : `Confirm — ${days[selectedDay].label} at ${slots[selectedTime]}`}
               </button>
             )}
           </div>
@@ -79,7 +100,7 @@ export default function DiscoveryCall() {
             <div className="bg-card border border-border rounded-xl p-5">
               <h3 className="text-foreground mb-4" style={{ fontSize:"14px", fontWeight:700 }}>Call details</h3>
               <div className="space-y-3">
-                {[{ icon:Clock, text:"30 minutes" },{ icon:Video, text:"Google Meet (link sent by email)" },{ icon:Calendar, text:"Mon–Fri, 9am–5pm ET" }].map(({ icon:Icon, text }) => (
+                {[{ icon:Clock, text:"30 minutes" },{ icon:Video, text:"Google Meet (link sent by email)" },{ icon:Calendar, text:"Mon–Fri, 9am–5pm IST" }].map(({ icon:Icon, text }) => (
                   <div key={text} className="flex items-center gap-2.5"><Icon className="w-4 h-4 text-muted-foreground" /><span className="text-muted-foreground" style={{ fontSize:"13px" }}>{text}</span></div>
                 ))}
               </div>

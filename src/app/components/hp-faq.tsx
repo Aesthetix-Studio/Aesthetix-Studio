@@ -55,8 +55,7 @@ export function HPFaq() {
               Still have a question? Drop us a line — we typically respond within a few hours.
             </p>
             <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
+              href="/contact"
               className="inline-flex items-center gap-2 text-brand hover:underline"
               style={{ fontSize: '13px', fontWeight: 600 }}
             >

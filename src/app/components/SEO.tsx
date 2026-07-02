@@ -63,10 +63,23 @@ export const organizationSchema = {
   url: "https://aesthetixstudio.dev",
   logo: "https://aesthetixstudio.dev/favicon.svg",
   description: "Design, development, and branding agency for startups and growing businesses.",
-  sameAs: [],
+  sameAs: [
+    "https://www.linkedin.com/company/aesthetix-studio",
+    "https://dribbble.com/aesthetixstudio",
+    "https://www.behance.net/aesthetixstudio",
+    "https://www.clutch.co/profile/aesthetix-studio",
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
+    email: "hello@aesthetixstudio.dev",
+    availableLanguage: "English",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Hyderabad",
+    addressRegion: "Telangana",
+    addressCountry: "IN",
   },
 };
 
@@ -115,3 +128,68 @@ export const faqSchema = (faqs: { q: string; a: string }[]) => ({
     },
   })),
 });
+
+export const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Aesthetix Studio",
+  image: "https://aesthetixstudio.dev/og-image.svg",
+  url: "https://aesthetixstudio.dev",
+  telephone: "+91-9876543210",
+  email: "hello@aesthetixstudio.dev",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Hyderabad",
+    addressRegion: "Telangana",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 17.385,
+    longitude: 78.4867,
+  },
+  sameAs: [],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  priceRange: "$$",
+  areaServed: {
+    "@type": "Country",
+    name: "India",
+  },
+};
+
+export const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Aesthetix Studio",
+  description: "Premium creative studio specializing in brand identity, web design, product design, and design systems.",
+  url: "https://aesthetixstudio.dev",
+  serviceType: [
+    "Brand Identity Design",
+    "Web Design",
+    "Web Development",
+    "Product Design",
+    "Design Systems",
+    "Motion Graphics",
+  ],
+  provider: {
+    "@type": "Organization",
+    name: "Aesthetix Studio",
+  },
+  areaServed: "IN",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Creative Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Brand Identity Design", description: "Complete brand identity systems including logos, typography, color palettes, and brand guidelines." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design", description: "Custom website design with responsive layouts, modern aesthetics, and conversion-focused UX." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Development", description: "Full-stack web development with React, TypeScript, and Cloudflare infrastructure." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Product Design", description: "End-to-end product design from research and wireframing to high-fidelity prototypes." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Design Systems", description: "Scalable design systems with tokens, components, and documentation." } },
+    ],
+  },
+};

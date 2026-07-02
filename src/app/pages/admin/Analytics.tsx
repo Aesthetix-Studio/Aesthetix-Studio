@@ -2,41 +2,64 @@ import {
   BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip,
   PieChart, Pie, Cell,
 } from "recharts";
-import { TrendingUp, DollarSign, Users, RefreshCw } from "lucide-react";
+import { TrendingUp, DollarSign, Users, RefreshCw, Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { fetchProjects, fetchTasks } from "../../lib/api";
+import { fetchLeads, type LeadRow } from "../../lib/leads";
+import { fetchInvoices, type InvoiceRow } from "../../lib/invoices";
 
-const monthlyRevenue = [
-  { month: "Jan", revenue: 200000 },
-  { month: "Feb", revenue: 240000 },
-  { month: "Mar", revenue: 180000 },
-  { month: "Apr", revenue: 320000 },
-  { month: "May", revenue: 280000 },
-  { month: "Jun", revenue: 300000 },
-];
-
-const serviceRevenue = [
-  { name: "Web Design", value: 42, color: "#6150F6" },
-  { name: "Brand Identity", value: 28, color: "#F59E0B" },
-  { name: "Development", value: 18, color: "#3B82F6" },
-  { name: "SEO", value: 12, color: "#10B981" },
-];
-
-const leadSources = [
-  { source: "Referral", leads: 14 },
-  { source: "Dribbble", leads: 9 },
-  { source: "Website", leads: 7 },
-  { source: "Conference", leads: 5 },
-  { source: "LinkedIn", leads: 4 },
-];
-
-const stats = [
-  { label: "Total Revenue", value: "₹15,20,000", change: "+18% YoY", icon: DollarSign, color: "#6150F6" },
-  { label: "Avg Project Value", value: "₹80,000", change: "across 20 projects", icon: TrendingUp, color: "#3B82F6" },
-  { label: "Lead Conv. Rate", value: "34%", change: "+4% this quarter", icon: Users, color: "#F59E0B" },
-  { label: "Client Retention", value: "91%", change: "industry avg 78%", icon: RefreshCw, color: "#10B981" },
-];
+const serviceColors: Record<string, string> = {
+  Website: "#6150F6", Branding: "#F59E0B", "Web App": "#3B82F6", SaaS: "#10B981", "E-commerce": "#EF4444",
+};
 
 export default function AdminAnalytics() {
-  const totalRevenue = monthlyRevenue.reduce((s, m) => s + m.revenue, 0);
+  const [projects, setProjects] = useState<{ id: string; type: string; budget: string; status: string }[]>([]);
+  const [leads, setLeads] = useState<LeadRow[]>([]);
+  const [invoices, setInvoices] = useState<InvoiceRow[]>([]);
+  const [tasks, setTasks] = useState<{ id: string; status: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      fetchProjects().then((r) => r.projects).catch(() => []),
+      fetchLeads().then((r) => r.leads).catch(() => []),
+      fetchInvoices().then((r) => r.invoices).catch(() => []),
+      fetchTasks().then((r) => r.tasks).catch(() => []),
+    ]).then(([p, l, inv, t]) => { setProjects(p); setLeads(l); setInvoices(inv); setTasks(t); }).finally(() => setLoading(false));
+  }, []);
+
+  const totalRevenue = invoices.reduce((s, inv) => s + (inv.amountCents ?? 0), 0);
+  const paidCount = invoices.filter((i) => i.status === "Paid").length;
+  const totalCount = invoices.length || 1;
+  const completedProjects = projects.filter((p) => p.status === "Completed").length;
+  const completedTasks = tasks.filter((t) => t.status === "Done").length;
+  const totalTasks = tasks.length || 1;
+
+  const serviceMap: Record<string, number> = {};
+  projects.forEach((p) => { serviceMap[p.type] = (serviceMap[p.type] ?? 0) + 1; });
+  const serviceRevenue = Object.entries(serviceMap).map(([name, count]) => ({
+    name, value: Math.round((count / projects.length) * 100) || 1,
+    color: serviceColors[name] ?? "#737370",
+  }));
+
+  const sourceMap: Record<string, number> = {};
+  leads.forEach((l) => { const src = l.source ?? "Unknown"; sourceMap[src] = (sourceMap[src] ?? 0) + 1; });
+  const leadSources = Object.entries(sourceMap).map(([source, leads]) => ({ source, leads })).sort((a, b) => b.leads - a.leads);
+
+  const stats = [
+    { label: "Total Revenue", value: `₹${(totalRevenue / 100).toLocaleString("en-IN")}`, change: `${paidCount} invoices paid`, icon: DollarSign, color: "#6150F6" },
+    { label: "Active Projects", value: String(projects.length), change: `${completedProjects} completed`, icon: TrendingUp, color: "#3B82F6" },
+    { label: "Total Leads", value: String(leads.length), change: `${leads.filter((l) => l.status === "Hot").length} hot`, icon: Users, color: "#F59E0B" },
+    { label: "Task Completion", value: `${Math.round((completedTasks / totalTasks) * 100)}%`, change: `${completedTasks}/${tasks.length} done`, icon: RefreshCw, color: "#10B981" },
+  ];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -45,7 +68,6 @@ export default function AdminAnalytics() {
         <p className="text-muted-foreground mt-1 text-sm">Studio performance metrics and insights.</p>
       </div>
 
-      {/* Stat Cards */}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label} className="rounded-2xl p-4 border border-border bg-card">
@@ -61,45 +83,34 @@ export default function AdminAnalytics() {
         ))}
       </div>
 
-      {/* Monthly Revenue Bar Chart */}
       <div className="rounded-2xl p-5 border border-border bg-card">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-foreground text-sm font-semibold">Monthly Revenue — 2026</h2>
-          <span className="text-muted-foreground text-xs">YTD: ₹{totalRevenue.toLocaleString("en-IN")}</span>
+          <h2 className="text-foreground text-sm font-semibold">Revenue by Service Type</h2>
         </div>
         <div className="h-56">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={monthlyRevenue} barCategoryGap="30%">
-              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}k`} />
+            <BarChart data={serviceRevenue} barCategoryGap="30%">
+              <XAxis dataKey="name" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
               <Tooltip
-                formatter={(value: number) => [`₹${value.toLocaleString("en-IN")}`, "Revenue"]}
+                formatter={(value: number) => [`${value}%`, "Share"]}
                 contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12 }}
                 labelStyle={{ color: "var(--foreground)", fontWeight: 600 }}
               />
-              <Bar dataKey="revenue" fill="var(--brand)" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="value" fill="var(--brand)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Service Revenue Donut */}
         <div className="rounded-2xl p-5 border border-border bg-card">
           <h2 className="text-foreground mb-4 text-sm font-semibold">Revenue by Service</h2>
           <div className="flex items-center gap-6">
             <div className="h-[180px] w-[180px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={serviceRevenue}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={50}
-                    outerRadius={80}
-                    paddingAngle={3}
-                    dataKey="value"
-                  >
+                  <Pie data={serviceRevenue} cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={3} dataKey="value">
                     {serviceRevenue.map((entry) => (
                       <Cell key={entry.name} fill={entry.color} />
                     ))}
@@ -123,7 +134,6 @@ export default function AdminAnalytics() {
           </div>
         </div>
 
-        {/* Lead Sources Horizontal Bar */}
         <div className="rounded-2xl p-5 border border-border bg-card">
           <h2 className="text-foreground mb-4 text-sm font-semibold">Lead Sources</h2>
           <div className="h-[180px]">

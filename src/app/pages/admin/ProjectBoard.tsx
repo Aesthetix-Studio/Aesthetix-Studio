@@ -1,18 +1,33 @@
 import { Link } from "react-router";
-import { mockProjects, statusColors } from "../../lib/data";
-import { List } from "lucide-react";
+import { useEffect, useState } from "react";
+import { fetchProjects } from "../../lib/api";
+import { List, Loader2 } from "lucide-react";
+
+type Project = { id: string; name: string; client: string; status: string; progress: number; dueDate: string; priority: string };
 
 const columns = ["Discovery", "In Progress", "In Review", "Completed"] as const;
 
-export default function AdminProjectBoard() {
-  const byStatus = (status: string) => mockProjects.filter((p) => p.status === status);
+const columnColors: Record<string, string> = {
+  Discovery: "#3B82F6", "In Progress": "#6150F6", "In Review": "#F59E0B", Completed: "#16A34A",
+};
 
-  const columnColors: Record<string, string> = {
-    Discovery: "#3B82F6",
-    "In Progress": "#6150F6",
-    "In Review": "#F59E0B",
-    Completed: "#16A34A",
-  };
+export default function AdminProjectBoard() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProjects().then((r) => setProjects(r.projects)).catch(() => {}).finally(() => setLoading(false));
+  }, []);
+
+  const byStatus = (status: string) => projects.filter((p) => p.status === status);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -35,10 +50,9 @@ export default function AdminProjectBoard() {
         </div>
       </div>
 
-      {/* Board */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {columns.map((col) => {
-          const projects = byStatus(col);
+          const colProjects = byStatus(col);
           const cc = columnColors[col];
           return (
             <div key={col}>
@@ -51,14 +65,14 @@ export default function AdminProjectBoard() {
                   className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold"
                   style={{ background: cc }}
                 >
-                  {projects.length}
+                  {colProjects.length}
                 </span>
               </div>
 
               <div className="rounded-2xl p-3 space-y-3 min-h-32 bg-secondary">
-                {projects.map((p) => {
-                  const sc = statusColors[p.status] ?? "#737370";
-                  const pc = statusColors[p.priority] ?? "#737370";
+                {colProjects.map((p) => {
+                  const sc = p.status === "Completed" ? "#16A34A" : p.status === "In Progress" ? "#6150F6" : "#F59E0B";
+                  const pc = p.priority === "Urgent" ? "#DC2626" : p.priority === "High" ? "#F59E0B" : p.priority === "Medium" ? "#6150F6" : "#737370";
                   return (
                     <div
                       key={p.id}
@@ -85,7 +99,7 @@ export default function AdminProjectBoard() {
                     </div>
                   );
                 })}
-                {projects.length === 0 && (
+                {colProjects.length === 0 && (
                   <div className="rounded-xl border-2 border-dashed border-border p-6 text-center">
                     <p className="text-muted-foreground text-xs">No projects</p>
                   </div>

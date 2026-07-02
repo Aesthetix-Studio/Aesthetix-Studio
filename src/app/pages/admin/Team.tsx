@@ -1,69 +1,64 @@
-import { mockTeam, mockTasks } from "../../lib/data";
-import { Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+import { fetchTeam, fetchTasks } from "../../lib/api";
+import { Mail, Loader2 } from "lucide-react";
 
 export default function AdminTeam() {
-  const getTaskCount = (name: string) => {
-    const firstName = name.split(" ")[0];
-    return mockTasks.filter((t) => t.assignee.startsWith(firstName) && t.status !== "Done").length;
-  };
+  const [team, setTeam] = useState<{ id: string; name: string; role: string; email: string; avatar: string; color: string; status: string }[]>([]);
+  const [tasks, setTasks] = useState<{ id: string; assignee: string; status: string }[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const getProjectCount = (member: typeof mockTeam[number]) => member.projects;
+  useEffect(() => {
+    Promise.all([
+      fetchTeam().then((r) => r.team).catch(() => []),
+      fetchTasks().then((r) => r.tasks).catch(() => []),
+    ]).then(([t, tk]) => { setTeam(t); setTasks(tk); }).finally(() => setLoading(false));
+  }, []);
+
+  const getTaskCount = (name: string) => tasks.filter((t) => t.assignee === name && t.status !== "Done").length;
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-foreground">Team</h1>
-          <p className="text-muted-foreground mt-1 text-sm">Your studio team members and current workload.</p>
-        </div>
-        <button className="px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand/90 transition-all text-sm font-semibold">
-          + Invite Member
-        </button>
+      <div>
+        <h1 className="text-2xl font-extrabold tracking-tight text-foreground">Team</h1>
+        <p className="text-muted-foreground mt-1 text-sm">Manage your team members and their assignments.</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {mockTeam.map((member) => {
-          const openTasks = getTaskCount(member.name);
-          const activeProjects = getProjectCount(member);
-          return (
-            <div
-              key={member.id}
-              className="rounded-2xl p-5 border border-border bg-card flex flex-col gap-4 hover:border-brand/30 transition-all"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-white text-sm font-bold"
-                  style={{ background: member.color }}
-                >
-                  {member.avatar}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {team.length === 0 ? (
+          <p className="text-muted-foreground text-sm col-span-2 py-8">No team members found.</p>
+        ) : (
+          team.map((m) => {
+            const taskCount = getTaskCount(m.name);
+            return (
+              <div key={m.id} className="rounded-2xl p-4 border border-border bg-card hover:bg-secondary transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white" style={{ background: m.color }}>
+                    {m.avatar}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-foreground font-semibold truncate">{m.name}</p>
+                    <p className="text-muted-foreground text-sm truncate">{m.role}</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center shrink-0">
+                    <span className="text-foreground text-sm font-semibold">{taskCount}</span>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-foreground text-[15px] font-bold">{member.name}</p>
-                  <p className="text-muted-foreground text-xs">{member.role}</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                <div className="rounded-xl p-3 text-center bg-secondary">
-                  <p className="text-foreground text-xl font-bold">{activeProjects}</p>
-                  <p className="text-muted-foreground text-[11px]">Active projects</p>
-                </div>
-                <div className="rounded-xl p-3 text-center bg-secondary">
-                  <p className="text-foreground text-xl font-bold">{openTasks}</p>
-                  <p className="text-muted-foreground text-[11px]">Open tasks</p>
+                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
+                  <Mail className="w-3.5 h-3.5 text-muted-foreground" />
+                  <span className="text-muted-foreground text-xs truncate">{m.email}</span>
                 </div>
               </div>
-
-              <a
-                href={`mailto:${member.email}`}
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors no-underline mt-auto text-xs"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                {member.email}
-              </a>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );

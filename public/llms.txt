@@ -1,0 +1,38 @@
+# Aesthetix Studio
+# https://aesthetixstudio.dev
+
+## About
+Aesthetix Studio is a premium creative studio based in Hyderabad, India, specializing in brand identity, web design, product design, design systems, and motion graphics. We partner with startups, SaaS companies, and enterprise brands to create digital experiences that stand apart.
+
+## Services
+- Brand Identity Design — Complete brand systems including logos, typography, color palettes, and guidelines
+- Web Design — Custom responsive website design with modern aesthetics and conversion-focused UX
+- Web Development — Full-stack development with React, TypeScript, and Cloudflare infrastructure
+- Product Design — End-to-end product design from research to high-fidelity prototypes
+- Design Systems — Scalable design systems with tokens, components, and documentation
+- Motion Graphics — Animated brand elements, micro-interactions, and visual storytelling
+
+## Key Information
+- Location: Hyderabad, Telangana, India
+- Founded: 2021
+- Projects Delivered: 50+
+- Clients Served: 30+
+- Showcase Websites: 10
+
+## Notable Projects
+- PhysioCore — Healthcare platform redesign with modern UX and HIPAA-compliant architecture
+- Aurelia — Premium SaaS dashboard with design system and component library
+- Review Harvest — B2B review platform with data visualization and enterprise features
+- LuxeTech — Luxury technology brand with high-end visual identity and product design
+
+## Tech Stack
+- Frontend: React, TypeScript, Vite, Tailwind CSS
+- Backend: Cloudflare Workers, D1 Database
+- Payments: Razorpay
+- Authentication: Supabase
+- Hosting: Cloudflare Pages
+
+## Contact
+- Email: hello@aesthetixstudio.dev
+- Website: https://aesthetixstudio.dev
+- Discovery Calls: https://aesthetixstudio.dev/discovery-call
