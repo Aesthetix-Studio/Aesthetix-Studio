@@ -1,0 +1,2308 @@
+{
+  "home": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(255, 255, 255)",
+      "oklch(0.828 0.189 84.429)",
+      "rgba(0, 0, 0, 0.07)",
+      "oklab(0 0 0 / 0)",
+      "oklab(0.999994 0.0000455678 0.0000200868 / 0.65)",
+      "oklab(0.999994 0.0000455678 0.0000200868 / 0.15)",
+      "oklab(0 0 0 / 0.0423529)",
+      "oklab(0.554572 -0.00127301 0.00438085 / 0.45)",
+      "oklab(0.963589 -0.000706702 0.00256205 / 0.3)",
+      "oklab(0 0 0 / 0.3)",
+      "oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+      "rgb(242, 240, 255)",
+      "oklab(0.554572 -0.00127301 0.00438085 / 0.4)",
+      "oklch(0.97 0.014 254.604)",
+      "oklch(0.546 0.245 262.881)",
+      "rgb(240, 253, 244)",
+      "rgb(22, 163, 74)",
+      "rgb(255, 251, 235)",
+      "rgb(217, 119, 6)",
+      "rgb(243, 243, 241)",
+      "oklab(0.963589 -0.000706702 0.00256205 / 0.5)",
+      "oklab(0.963589 -0.000706702 0.00256205 / 0.4)",
+      "oklab(0.554572 -0.00127301 0.00438085 / 0.5)",
+      "oklch(0.606 0.25 292.717)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Your website should beyour best salesperson.",
+        "fontSize": "62px",
+        "fontWeight": "800",
+        "lineHeight": "66.96px",
+        "letterSpacing": "-1.86px"
+      },
+      {
+        "tag": "H2",
+        "text": "Brands we've helpedbecome impossible to ignore.",
+        "fontSize": "38px",
+        "fontWeight": "800",
+        "lineHeight": "45.6px",
+        "letterSpacing": "-0.95px"
+      },
+      {
+        "tag": "H3",
+        "text": "Luminary Financial",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Verdant Foods Co.",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Solari Energy",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Nexus Protocol",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Helix Medical",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Orbit Analytics",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H2",
+        "text": "Everything you need to win online — nothing you don't.",
+        "fontSize": "40px",
+        "fontWeight": "800",
+        "lineHeight": "46px",
+        "letterSpacing": "-1px"
+      },
+      {
+        "tag": "H3",
+        "text": "Sites that convert browsers into buyers",
+        "fontSize": "17px",
+        "fontWeight": "700",
+        "lineHeight": "22.1px",
+        "letterSpacing": "-0.17px"
+      },
+      {
+        "tag": "H3",
+        "text": "Fast, clean code built to last",
+        "fontSize": "17px",
+        "fontWeight": "700",
+        "lineHeight": "22.1px",
+        "letterSpacing": "-0.17px"
+      },
+      {
+        "tag": "H3",
+        "text": "Get found by buyers who are ready",
+        "fontSize": "17px",
+        "fontWeight": "700",
+        "lineHeight": "22.1px",
+        "letterSpacing": "-0.17px"
+      },
+      {
+        "tag": "H3",
+        "text": "Brand systems that scale with you",
+        "fontSize": "17px",
+        "fontWeight": "700",
+        "lineHeight": "22.1px",
+        "letterSpacing": "-0.17px"
+      },
+      {
+        "tag": "H2",
+        "text": "No guesswork.A repeatable system that delivers every time.",
+        "fontSize": "38px",
+        "fontWeight": "800",
+        "lineHeight": "45.6px",
+        "letterSpacing": "-0.95px"
+      },
+      {
+        "tag": "H2",
+        "text": "What makes us different —and why it matters.",
+        "fontSize": "38px",
+        "fontWeight": "800",
+        "lineHeight": "45.6px",
+        "letterSpacing": "-0.95px"
+      },
+      {
+        "tag": "H3",
+        "text": "Built to Convert",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Predictable Timelines",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Fast Without Corners",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Transparent Pricing",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Accessible by Default",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Small Team, Senior Work",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H2",
+        "text": "Don't take our word for it.Take theirs.",
+        "fontSize": "38px",
+        "fontWeight": "800",
+        "lineHeight": "45.6px",
+        "letterSpacing": "-0.95px"
+      },
+      {
+        "tag": "H2",
+        "text": "Built with the best tools.",
+        "fontSize": "30px",
+        "fontWeight": "800",
+        "lineHeight": "39px",
+        "letterSpacing": "-0.6px"
+      },
+      {
+        "tag": "H2",
+        "text": "We understand your market.",
+        "fontSize": "30px",
+        "fontWeight": "800",
+        "lineHeight": "39px",
+        "letterSpacing": "-0.6px"
+      },
+      {
+        "tag": "H2",
+        "text": "Simple, fixed-price packages.No hourly billing. Ever.",
+        "fontSize": "36px",
+        "fontWeight": "800",
+        "lineHeight": "43.2px",
+        "letterSpacing": "-0.9px"
+      },
+      {
+        "tag": "H3",
+        "text": "Starter",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "21px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "Growth",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "21px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "Enterprise",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "21px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H2",
+        "text": "Everything you wanted to ask but didn't.",
+        "fontSize": "34px",
+        "fontWeight": "800",
+        "lineHeight": "40.8px",
+        "letterSpacing": "-0.85px"
+      },
+      {
+        "tag": "H2",
+        "text": "Ready to build somethingworth talking about?",
+        "fontSize": "52px",
+        "fontWeight": "800",
+        "lineHeight": "57.2px",
+        "letterSpacing": "-1.56px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 197,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "See our work",
+        "width": 151,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "View all projects",
+        "width": 141,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "View all projects",
+        "width": 141,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Learn more",
+        "width": 90,
+        "height": 20,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Learn more",
+        "width": 90,
+        "height": 20,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Learn more",
+        "width": 90,
+        "height": 20,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Learn more",
+        "width": 90,
+        "height": 20,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "See full pricing",
+        "width": 116,
+        "height": 20,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Get started",
+        "width": 259,
+        "height": 42,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Start your project",
+        "width": 265,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Contact us",
+        "width": 259,
+        "height": 42,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Send us a message →",
+        "width": 132,
+        "height": 20,
+        "undersized": true
+      }
+    ],
+    "totalWords": 1119,
+    "textBlockCount": 99,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal",
+    "mobile": {
+      "hasHorizontalScroll": false,
+      "bodyWidth": 375,
+      "viewportWidth": 375
+    }
+  },
+  "services": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(243, 243, 241)",
+      "rgb(255, 255, 255)",
+      "rgb(242, 240, 255)",
+      "rgb(22, 163, 74)",
+      "oklab(0.963589 -0.000706702 0.00256205 / 0.5)",
+      "rgb(239, 246, 255)",
+      "rgb(37, 99, 235)",
+      "rgb(240, 253, 244)",
+      "rgb(255, 251, 235)",
+      "rgb(217, 119, 6)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Everything you need to win online.",
+        "fontSize": "52px",
+        "fontWeight": "800",
+        "lineHeight": "57.2px",
+        "letterSpacing": "-1.56px"
+      },
+      {
+        "tag": "H2",
+        "text": "Sites that convert browsers into buyers",
+        "fontSize": "22px",
+        "fontWeight": "700",
+        "lineHeight": "28.6px",
+        "letterSpacing": "-0.33px"
+      },
+      {
+        "tag": "H2",
+        "text": "Fast, clean code built to last",
+        "fontSize": "22px",
+        "fontWeight": "700",
+        "lineHeight": "28.6px",
+        "letterSpacing": "-0.33px"
+      },
+      {
+        "tag": "H2",
+        "text": "Get found by buyers who are ready",
+        "fontSize": "22px",
+        "fontWeight": "700",
+        "lineHeight": "28.6px",
+        "letterSpacing": "-0.33px"
+      },
+      {
+        "tag": "H2",
+        "text": "Brand systems that scale with you",
+        "fontSize": "22px",
+        "fontWeight": "700",
+        "lineHeight": "28.6px",
+        "letterSpacing": "-0.33px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Learn more",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Book a call",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Learn more",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Book a call",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Learn more",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Book a call",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Learn more",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Book a call",
+        "width": 235,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      }
+    ],
+    "totalWords": 294,
+    "textBlockCount": 37,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal",
+    "mobile": {
+      "hasHorizontalScroll": false,
+      "bodyWidth": 375,
+      "viewportWidth": 375
+    }
+  },
+  "portfolio": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(243, 243, 241)",
+      "rgb(255, 255, 255)",
+      "oklab(0 0 0 / 0)",
+      "oklab(0 0 0 / 0.25)",
+      "oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+      "rgb(22, 163, 74)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Work that speaksfor itself.",
+        "fontSize": "50px",
+        "fontWeight": "800",
+        "lineHeight": "55px",
+        "letterSpacing": "-1.5px"
+      },
+      {
+        "tag": "H3",
+        "text": "Mono Studio",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "The Chronicle",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "ClimateBridge",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Saffron Kitchen",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Meridian Systems",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Maison Aurélien",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Launchpad",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Resonance Records",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Pulse Fitness",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Atelier Noir",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "All",
+        "width": 40,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Branding",
+        "width": 78,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Web Design",
+        "width": 95,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Development",
+        "width": 105,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "SaaS",
+        "width": 55,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Product",
+        "width": 73,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Brand Identity",
+        "width": 87,
+        "height": 16,
+        "undersized": true
+      }
+    ],
+    "totalWords": 65,
+    "textBlockCount": 11,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal",
+    "mobile": {
+      "hasHorizontalScroll": false,
+      "bodyWidth": 375,
+      "viewportWidth": 375
+    }
+  },
+  "about": {
+    "fonts": [
+      "Plus Jakarta Sans",
+      "JetBrains Mono"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(243, 243, 241)",
+      "rgb(255, 255, 255)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.5)",
+      "rgb(245, 158, 11)",
+      "rgb(236, 72, 153)",
+      "rgb(16, 185, 129)",
+      "rgb(22, 163, 74)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "We're a small studio that does exceptional work.",
+        "fontSize": "56px",
+        "fontWeight": "800",
+        "lineHeight": "61.6px",
+        "letterSpacing": "-1.68px"
+      },
+      {
+        "tag": "H3",
+        "text": "Restraint",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "28px",
+        "letterSpacing": "-0.2px"
+      },
+      {
+        "tag": "H3",
+        "text": "Precision",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "28px",
+        "letterSpacing": "-0.2px"
+      },
+      {
+        "tag": "H3",
+        "text": "Honesty",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "28px",
+        "letterSpacing": "-0.2px"
+      },
+      {
+        "tag": "H3",
+        "text": "Craft",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "28px",
+        "letterSpacing": "-0.2px"
+      },
+      {
+        "tag": "H2",
+        "text": "Want to work with us?",
+        "fontSize": "36px",
+        "fontWeight": "800",
+        "lineHeight": "46.8px",
+        "letterSpacing": "-0.9px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Brand Identity",
+        "width": 87,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Web Design",
+        "width": 74,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Product Design",
+        "width": 96,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Motion & 3D",
+        "width": 75,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Design Systems",
+        "width": 99,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "About Studio",
+        "width": 81,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 32,
+        "height": 16,
+        "undersized": true
+      }
+    ],
+    "totalWords": 237,
+    "textBlockCount": 17,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal"
+  },
+  "contact": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(255, 255, 255)",
+      "rgb(220, 38, 38)",
+      "rgb(243, 243, 241)",
+      "rgb(22, 163, 74)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Let's talk about your project.",
+        "fontSize": "50px",
+        "fontWeight": "800",
+        "lineHeight": "55px",
+        "letterSpacing": "-1.5px"
+      },
+      {
+        "tag": "H2",
+        "text": "About you",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "19.5px",
+        "letterSpacing": "-0.225px"
+      },
+      {
+        "tag": "H2",
+        "text": "Your project",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "19.5px",
+        "letterSpacing": "-0.225px"
+      },
+      {
+        "tag": "H3",
+        "text": "Other ways to reach us",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 286,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 286,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 584,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 584,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 584,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Book a call",
+        "width": 278,
+        "height": 20,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Brand Identity",
+        "width": 87,
+        "height": 16,
+        "undersized": true
+      }
+    ],
+    "totalWords": 109,
+    "textBlockCount": 12,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal"
+  },
+  "pricing": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(255, 255, 255)",
+      "rgb(240, 253, 244)",
+      "rgb(22, 163, 74)",
+      "rgb(243, 243, 241)",
+      "oklab(0.963589 -0.000706702 0.00256205 / 0.5)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Simple, transparent pricing.",
+        "fontSize": "50px",
+        "fontWeight": "800",
+        "lineHeight": "55px",
+        "letterSpacing": "-1.5px"
+      },
+      {
+        "tag": "H3",
+        "text": "Starter",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H3",
+        "text": "Growth",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H3",
+        "text": "Enterprise",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H2",
+        "text": "Add-ons & Retainers",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "26px",
+        "letterSpacing": "-0.2px"
+      },
+      {
+        "tag": "H3",
+        "text": "SEO Monthly Retainer",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Design Retainer",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Motion Package",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "19.6px",
+        "letterSpacing": "-0.14px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Get Started",
+        "width": 257,
+        "height": 42,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Start Project",
+        "width": 262,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Contact Sales",
+        "width": 257,
+        "height": 42,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Book Discovery Call",
+        "width": 189,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Brand Identity",
+        "width": 87,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Web Design",
+        "width": 74,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Product Design",
+        "width": 96,
+        "height": 16,
+        "undersized": true
+      }
+    ],
+    "totalWords": 140,
+    "textBlockCount": 21,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal"
+  },
+  "blog": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(243, 243, 241)",
+      "rgb(255, 255, 255)",
+      "oklab(0 0 0 / 0)",
+      "rgb(78, 61, 224)",
+      "rgb(242, 240, 255)",
+      "rgb(22, 163, 74)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Design, strategy, and the craft.",
+        "fontSize": "50px",
+        "fontWeight": "800",
+        "lineHeight": "55px",
+        "letterSpacing": "-1.5px"
+      },
+      {
+        "tag": "H2",
+        "text": "The Case for Systematic Design",
+        "fontSize": "26px",
+        "fontWeight": "800",
+        "lineHeight": "31.2px",
+        "letterSpacing": "-0.52px"
+      },
+      {
+        "tag": "H3",
+        "text": "Motion Design Principles for Enterprise Software",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "20.25px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "Choosing Type for Digital Products",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "20.25px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "SEO for Creative Agencies: Stop Ignoring It",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "20.25px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "Dark Mode Done Right",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "20.25px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "How to Price Creative Work",
+        "fontSize": "15px",
+        "fontWeight": "700",
+        "lineHeight": "20.25px",
+        "letterSpacing": "-0.15px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Brand Identity",
+        "width": 87,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Web Design",
+        "width": 74,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Product Design",
+        "width": 96,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Motion & 3D",
+        "width": 75,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Design Systems",
+        "width": 99,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "About Studio",
+        "width": 81,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 32,
+        "height": 16,
+        "undersized": true
+      }
+    ],
+    "totalWords": 164,
+    "textBlockCount": 17,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal"
+  },
+  "faq": {
+    "fonts": [
+      "Plus Jakarta Sans"
+    ],
+    "colors": [
+      "rgb(0, 0, 0)",
+      "rgb(13, 13, 12)",
+      "rgb(250, 250, 249)",
+      "oklab(0.984819 -0.000328124 0.00128484 / 0.9)",
+      "rgb(97, 80, 246)",
+      "rgb(115, 115, 112)",
+      "rgb(255, 255, 255)",
+      "oklab(0.963589 -0.000706702 0.00256205 / 0.5)",
+      "rgb(243, 243, 241)",
+      "rgb(22, 163, 74)"
+    ],
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "Everything you wanted to ask but didn't.",
+        "fontSize": "50px",
+        "fontWeight": "800",
+        "lineHeight": "55px",
+        "letterSpacing": "-1.5px"
+      },
+      {
+        "tag": "H2",
+        "text": "Working with Us",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "20.8px",
+        "letterSpacing": "-0.24px"
+      },
+      {
+        "tag": "H2",
+        "text": "Design Process",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "20.8px",
+        "letterSpacing": "-0.24px"
+      },
+      {
+        "tag": "H2",
+        "text": "Pricing & Contracts",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "20.8px",
+        "letterSpacing": "-0.24px"
+      },
+      {
+        "tag": "H3",
+        "text": "Stay ahead of the curve",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "22.4px",
+        "letterSpacing": "-0.16px"
+      },
+      {
+        "tag": "H4",
+        "text": "Services",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Company",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Resources",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      },
+      {
+        "tag": "H4",
+        "text": "Legal",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "18px",
+        "letterSpacing": "0.72px"
+      }
+    ],
+    "touchTargets": [
+      {
+        "tag": "A",
+        "text": "Aesthetix Studio",
+        "width": 149,
+        "height": 24,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Services",
+        "width": 97,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Work",
+        "width": 61,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Studio",
+        "width": 69,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Journal",
+        "width": 72,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Get a Quote",
+        "width": 96,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Book Discovery Call",
+        "width": 138,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "get in touch",
+        "width": 95,
+        "height": 22,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Send us a message",
+        "width": 159,
+        "height": 40,
+        "undersized": true
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "width": 208,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 115,
+        "height": 36,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Brand Identity",
+        "width": 87,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Web Design",
+        "width": 74,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Product Design",
+        "width": 96,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Motion & 3D",
+        "width": 75,
+        "height": 16,
+        "undersized": true
+      },
+      {
+        "tag": "A",
+        "text": "Design Systems",
+        "width": 99,
+        "height": 16,
+        "undersized": true
+      }
+    ],
+    "totalWords": 121,
+    "textBlockCount": 18,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "hasHorizontalScroll": false,
+    "colorScheme": "normal"
+  }
+}

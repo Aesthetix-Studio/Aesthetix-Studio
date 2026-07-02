@@ -1,0 +1,30 @@
+-- CreateEnum
+CREATE TYPE "LeadSource" AS ENUM ('CONTACT', 'DISCOVERY_CALL', 'PROJECT_INQUIRY');
+
+-- CreateTable
+CREATE TABLE "LeadSubmission" (
+    "id" TEXT NOT NULL,
+    "source" "LeadSource" NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT,
+    "email" TEXT NOT NULL,
+    "company" TEXT,
+    "service" TEXT,
+    "budget" TEXT,
+    "message" TEXT,
+    "day" TEXT,
+    "time" TEXT,
+    "projectSummary" TEXT,
+    "inspiration" TEXT,
+    "startDate" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "LeadSubmission_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE INDEX "LeadSubmission_source_createdAt_idx" ON "LeadSubmission"("source", "createdAt");
+
+-- CreateIndex
+CREATE INDEX "LeadSubmission_email_idx" ON "LeadSubmission"("email");
