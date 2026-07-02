@@ -468,7 +468,7 @@ export default function CaseStudy() {
           >
             <div className="overflow-y-auto max-h-[600px] rounded-2xl">
               <img
-                src={`/screenshots/${slug}.png`}
+                src={c.image || `/screenshots/${slug}.png`}
                 alt={`${c.title} - Full website screenshot`}
                 className="w-full block"
                 loading="lazy"
