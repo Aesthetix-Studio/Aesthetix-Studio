@@ -1,6 +1,7 @@
 {
   "name": "aesthetix-studio",
   "compatibility_date": "2026-06-30",
+  "compatibility_flags": ["nodejs_compat"],
   "main": "worker/index.mjs",
   "assets": {
     "directory": "./dist"
