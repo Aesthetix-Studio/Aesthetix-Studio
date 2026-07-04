@@ -30,7 +30,7 @@ export default function AdminSettings() {
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [studioName, setStudioName] = useState("Aesthetix Studio");
-  const [studioEmail, setStudioEmail] = useState("hello@aesthetix.studio");
+  const [studioEmail, setStudioEmail] = useState("hello@aesthetixstudio.dev");
   const [studioWebsite, setStudioWebsite] = useState("https://aesthetixstudio.dev");
   const [studioTimezone, setStudioTimezone] = useState("Asia/Kolkata");
   const [team, setTeam] = useState<{ id: string; name: string; role: string; email: string; avatar: string; color: string; status: string }[]>([]);

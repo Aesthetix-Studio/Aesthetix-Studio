@@ -58,24 +58,24 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
       <footer className="border-t border-border bg-background py-6 px-6">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded-md bg-brand flex items-center justify-center">
+            <div className="w-6 h-6 rounded-md bg-brand flex items-center justify-center">
               <AesthetixMark size={12} color="#ffffff" />
             </div>
-            <span className="text-foreground" style={{ fontSize: '13px', fontWeight: 700 }}>Aesthetix Studio</span>
+            <span className="text-foreground text-body-sm font-semibold">Aesthetix Studio</span>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-6">
             {[
               { label: "Privacy", to: "/privacy-policy" },
               { label: "Terms", to: "/terms-of-service" },
               { label: "Cookies", to: "/cookie-policy" },
               { label: "Accessibility", to: "/accessibility" },
             ].map((link) => (
-              <Link key={link.label} to={link.to} className="text-muted-foreground hover:text-foreground transition-colors" style={{ fontSize: '12px' }}>
+              <Link key={link.label} to={link.to} className="text-muted-foreground hover:text-foreground transition-colors text-body-sm">
                 {link.label}
               </Link>
             ))}
           </div>
-          <p className="text-muted-foreground" style={{ fontSize: '12px' }}>© 2026 Aesthetix Studio. All rights reserved.</p>
+          <p className="text-muted-foreground text-body-sm">© 2026 Aesthetix Studio. All rights reserved.</p>
         </div>
       </footer>
     );
@@ -87,16 +87,16 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
       <div className={cn("border-b px-6 py-10", isDark ? "border-white/8" : "border-border")}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
-            <h3 className={isDark ? "text-white" : "text-foreground"} style={{ fontSize: '16px', fontWeight: 600, letterSpacing: '-0.01em' }}>
+            <h3 className={isDark ? "text-white" : "text-foreground"} style={{ fontSize: '18px', fontWeight: 600, letterSpacing: '-0.01em' }}>
               Stay ahead of the curve
             </h3>
-            <p className={isDark ? "text-white/50" : "text-muted-foreground"} style={{ fontSize: '13px', marginTop: '4px' }}>
+            <p className={isDark ? "text-white/50" : "text-muted-foreground"} style={{ fontSize: '14px', marginTop: '4px' }}>
               Monthly dispatches on design, brand strategy, and the craft.
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {footerSuccess ? (
-              <span className="text-success" style={{ fontSize: '13px', fontWeight: 500 }}>Subscribed!</span>
+              <span className="text-success text-body-sm font-medium">Subscribed!</span>
             ) : (
               <form onSubmit={handleFooterSubscribe} className="flex items-center gap-2 shrink-0">
                 <input
@@ -106,16 +106,16 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
                   placeholder="your@email.com"
                   required
                   className={cn(
-                    "h-11 px-3 rounded-lg border text-sm outline-none focus:ring-2 focus:ring-ring/30 w-52",
+                    "h-10 px-4 rounded-lg border text-base outline-none focus:ring-2 focus:ring-ring/30 w-52",
                     isDark ? "bg-white/8 border-white/12 text-white placeholder:text-white/30 focus:border-white/30" : "bg-input-background border-border text-foreground placeholder:text-muted-foreground/50"
                   )}
-                  style={{ fontSize: '13px' }}
+                  style={{ fontSize: '14px' }}
                 />
                 <button
                   type="submit"
                   disabled={footerLoading}
-                  className="h-11 px-4 rounded-lg bg-brand text-white transition-all hover:bg-brand-hover flex items-center gap-1.5 disabled:opacity-50"
-                  style={{ fontSize: '13px', fontWeight: 500 }}
+                  className="h-10 px-4 rounded-lg bg-brand text-brand-foreground transition-all duration-180 ease-standard hover:bg-brand-hover flex items-center gap-1.5 disabled:opacity-50 shadow-brand"
+                  style={{ fontSize: '14px', fontWeight: 500 }}
                 >
                   {footerLoading ? "..." : <>Subscribe <ArrowRight className="w-3.5 h-3.5" /></>}
                 </button>
@@ -130,13 +130,21 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-8">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-5">
               <AesthetixMark size={20} color={isDark ? "rgba(255,255,255,0.9)" : "var(--foreground)"} />
-              <span className={isDark ? "text-white" : "text-foreground"} style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '-0.01em' }}>Aesthetix Studio</span>
+              <span className={isDark ? "text-white" : "text-foreground"} style={{ fontSize: '16px', fontWeight: 700, letterSpacing: '-0.01em' }}>Aesthetix Studio</span>
             </div>
-            <p className={isDark ? "text-white/45" : "text-muted-foreground"} style={{ fontSize: '13px', lineHeight: '1.7', maxWidth: '240px' }}>
+            <p className={isDark ? "text-white/45" : "text-muted-foreground"} style={{ fontSize: '14px', lineHeight: '1.7', maxWidth: '240px' }}>
               A premium creative studio specializing in brand identity, web design, and product experiences.
             </p>
+            <div className="mt-5 space-y-2">
+              <p className={isDark ? "text-white/40" : "text-muted-foreground"} style={{ fontSize: '13px' }}>
+                Falaknuma, Hyderabad, Telangana 500053
+              </p>
+              <p className={isDark ? "text-white/40" : "text-muted-foreground"} style={{ fontSize: '13px' }}>
+                hello@aesthetixstudio.dev
+              </p>
+            </div>
             <div className="flex items-center gap-2 mt-5">
               {socialLinks.map(({ icon: Icon, label, href }) => (
                 <a
@@ -146,7 +154,7 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "w-11 h-11 rounded-lg flex items-center justify-center transition-colors",
+                    "w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-180",
                     isDark ? "bg-white/8 text-white/50 hover:bg-white/15 hover:text-white" : "bg-secondary text-muted-foreground hover:bg-accent hover:text-foreground"
                   )}
                 >
@@ -159,19 +167,19 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([group, links]) => (
             <div key={group}>
-              <h4 className={isDark ? "text-white/70" : "text-foreground"} style={{ fontSize: '12px', fontWeight: 600, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <h4 className={isDark ? "text-white/70" : "text-foreground"} style={{ fontSize: '12px', fontWeight: 600, marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 {group}
               </h4>
-              <ul className="space-y-1">
+              <ul className="space-y-2">
                 {links.map((link, i) => (
                   <li key={link}>
                     <Link
                       to={footerLinkHrefs[group as keyof typeof footerLinkHrefs]?.[i] ?? "/"}
                       className={cn(
-                        "inline-block py-1.5 transition-colors",
+                        "inline-block py-1 transition-colors duration-180",
                         isDark ? "text-white/40 hover:text-white/80" : "text-muted-foreground hover:text-foreground"
                       )}
-                      style={{ fontSize: '13px' }}
+                      style={{ fontSize: '14px' }}
                     >
                       {link}
                     </Link>
@@ -186,12 +194,12 @@ export function AXFooter({ variant = "default" }: AXFooterProps) {
       {/* Bottom bar */}
       <div className={cn("border-t px-6 py-5", isDark ? "border-white/8" : "border-border")}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className={isDark ? "text-white/35" : "text-muted-foreground"} style={{ fontSize: '12px' }}>
+          <p className={isDark ? "text-white/35" : "text-muted-foreground"} style={{ fontSize: '13px' }}>
             © 2026 Aesthetix Studio. All rights reserved.
           </p>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-success" />
-            <span className={isDark ? "text-white/35" : "text-muted-foreground"} style={{ fontSize: '12px' }}>
+            <span className={isDark ? "text-white/35" : "text-muted-foreground"} style={{ fontSize: '13px' }}>
               WCAG AA · Accessible by design
             </span>
           </div>
@@ -210,19 +218,19 @@ export function DSFooterSection() {
       badge="Patterns"
     >
       <DSSubSection title="Full Footer — Light">
-        <div className="rounded-xl overflow-hidden border border-border">
+        <div className="rounded-lg overflow-hidden border border-border">
           <AXFooter variant="default" />
         </div>
       </DSSubSection>
 
       <DSSubSection title="Full Footer — Dark">
-        <div className="rounded-xl overflow-hidden border border-border">
+        <div className="rounded-lg overflow-hidden border border-border">
           <AXFooter variant="dark" />
         </div>
       </DSSubSection>
 
       <DSSubSection title="Minimal Footer">
-        <div className="rounded-xl overflow-hidden border border-border">
+        <div className="rounded-lg overflow-hidden border border-border">
           <AXFooter variant="minimal" />
         </div>
       </DSSubSection>

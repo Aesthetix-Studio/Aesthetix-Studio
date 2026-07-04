@@ -73,7 +73,7 @@ export default function FAQ() {
         <div className="text-center py-8 bg-secondary/50 rounded-2xl border border-border">
           <p className="text-foreground mb-2" style={{ fontSize:"16px", fontWeight:700 }}>Still have questions?</p>
           <p className="text-muted-foreground mb-4" style={{ fontSize:"14px" }}>We respond within 4 business hours.</p>
-          <Link to="/contact" className="inline-flex items-center gap-2 bg-foreground text-background px-5 py-2.5 rounded-xl no-underline hover:bg-foreground/90 transition-colors" style={{ fontSize:"13px", fontWeight:600 }}>
+          <Link to="/contact" className="inline-flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-lg no-underline hover:bg-brand-hover transition-colors" style={{ fontSize:"13px", fontWeight:600 }}>
             Send us a message
           </Link>
         </div>

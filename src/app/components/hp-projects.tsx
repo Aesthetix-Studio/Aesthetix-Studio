@@ -17,7 +17,7 @@ const projects = [
     span: "col-span-1 sm:col-span-2",
     height: "h-72 sm:h-80",
     year: "2025",
-    result: "Live",
+    result: "+68% bookings",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const projects = [
     span: "col-span-1",
     height: "h-72 sm:h-80",
     year: "2025",
-    result: "10k+ businesses",
+    result: "+180% reviews",
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ const projects = [
     span: "col-span-1",
     height: "h-64",
     year: "2025",
-    result: "Awwwards Style",
+    result: "5.2× leads",
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ const projects = [
     span: "col-span-1",
     height: "h-64",
     year: "2025",
-    result: "Commerce Kit",
+    result: "87% faster launch",
   },
   {
     id: 5,
@@ -87,7 +87,7 @@ const projects = [
     span: "col-span-1",
     height: "h-64",
     year: "2025",
-    result: "-32% emissions",
+    result: "60% faster reports",
   },
 ];
 

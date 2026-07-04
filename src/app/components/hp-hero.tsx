@@ -33,7 +33,7 @@ const projectPreviews = [
 
 const trustStats = [
   { value: "80+", label: "brands launched" },
-  { value: "98%", label: "client satisfaction" },
+  { value: "42%", label: "avg. conversion lift" },
   { value: "4.2×", label: "average ROI" },
   { value: "6 yrs", label: "in the craft" },
 ];
@@ -41,7 +41,7 @@ const trustStats = [
 export function HPHero() {
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-16 pb-20 sm:pt-20 sm:pb-28">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-20 pb-24 sm:pt-24 sm:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-16 items-center">
 
           {/* Left: Content */}
@@ -50,15 +50,15 @@ export function HPHero() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
+              transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xs border border-border bg-card mb-6">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="w-2.5 h-2.5 fill-craft text-craft" />
                   ))}
                 </div>
-                <span className="text-muted-foreground" style={{ fontSize: '12px', fontWeight: 500 }}>
+                <span className="text-muted-foreground text-caption font-medium">
                   Trusted by 80+ founders & growing teams
                 </span>
               </div>
@@ -68,11 +68,12 @@ export function HPHero() {
             <motion.h1
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-              className="text-foreground mb-5"
+              transition={{ duration: 0.4, delay: 0.05, ease: [0.4, 0, 0.2, 1] }}
+              className="text-foreground mb-6"
               style={{
+                fontFamily: 'var(--font-family-display)',
                 fontSize: 'clamp(36px, 5.5vw, 62px)',
-                fontWeight: 800,
+                fontWeight: 400,
                 letterSpacing: '-0.03em',
                 lineHeight: 1.08,
               }}
@@ -85,9 +86,9 @@ export function HPHero() {
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-muted-foreground mb-8 max-w-lg"
-              style={{ fontSize: '17px', lineHeight: '1.65', fontWeight: 400 }}
+              transition={{ duration: 0.4, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+              className="text-muted-foreground mb-10 max-w-lg"
+              style={{ fontSize: '18px', lineHeight: '1.6', fontWeight: 400 }}
             >
               We design and build conversion-focused websites, brand systems,
               and digital products for founders and teams ready to compete
@@ -98,8 +99,8 @@ export function HPHero() {
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-10"
+              transition={{ duration: 0.4, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-12"
             >
               <Link to="/discovery-call" className="w-full sm:w-auto">
                 <AXButton
@@ -128,15 +129,15 @@ export function HPHero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="flex flex-wrap items-center gap-x-5 gap-y-3"
+              className="flex flex-wrap items-center gap-x-6 gap-y-4"
             >
               {trustStats.map(({ value, label }, i) => (
                 <div key={label} className="flex items-center gap-2">
-                  {i > 0 && <div className="w-px h-4 bg-border hidden sm:block" />}
-                  <span className="text-foreground" style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                  {i > 0 && <div className="w-px h-5 bg-border hidden sm:block" />}
+                  <span className="text-foreground" style={{ fontSize: '22px', fontWeight: 700, letterSpacing: '-0.02em' }}>
                     {value}
                   </span>
-                  <span className="text-muted-foreground" style={{ fontSize: '13px' }}>{label}</span>
+                  <span className="text-muted-foreground text-body-sm">{label}</span>
                 </div>
               ))}
             </motion.div>
@@ -146,42 +147,29 @@ export function HPHero() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="hidden lg:grid grid-cols-2 gap-3"
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="hidden lg:grid grid-cols-2 gap-4"
           >
-            {projectPreviews.map((p, i) => (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.25 + i * 0.07 }}
+            {projectPreviews.map((project, i) => (
+              <Link
+                key={project.title}
+                to="/portfolio"
                 className={cn(
-                  "group relative rounded-2xl overflow-hidden cursor-pointer",
-                  "border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
-                  p.size === "large" ? "h-52" : "h-44"
+                  "group relative overflow-hidden rounded-lg border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5",
+                  project.size === "large" ? "row-span-2 h-64" : "h-30"
                 )}
               >
-                <div className={cn("absolute inset-0 bg-gradient-to-br", p.gradient)} />
+                <div className={cn("absolute inset-0 bg-gradient-to-br", project.gradient)} />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-3.5">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-white" style={{ fontSize: '13px', fontWeight: 700 }}>{p.title}</div>
-                      <div className="text-white/65" style={{ fontSize: '11px' }}>{p.category}</div>
-                    </div>
-                    <div className="w-6 h-6 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      <ArrowUpRight className="w-3 h-3 text-white" />
-                    </div>
-                  </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="text-white font-medium text-body-sm">{project.title}</div>
+                  <div className="text-white/70 text-caption">{project.category}</div>
                 </div>
-              </motion.div>
+              </Link>
             ))}
           </motion.div>
         </div>
       </div>
-
-      {/* Bottom fade separator */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-border/60" />
     </section>
   );
 }

@@ -18,9 +18,9 @@ export function AXInput({ label, helper, error, leadingIcon, trailingIcon, optio
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={inputId} className="flex items-center gap-1 mb-1.5 text-foreground" style={{ fontSize: '13px', fontWeight: 500 }}>
+        <label htmlFor={inputId} className="flex items-center gap-1 mb-1.5 text-[13px] font-medium text-foreground">
           {label}
-          {optional && <span className="text-muted-foreground ml-1" style={{ fontWeight: 400, fontSize: '11px' }}>(optional)</span>}
+          {optional && <span className="text-[11px] font-normal text-muted-foreground ml-1">(optional)</span>}
         </label>
       )}
       <div className="relative">
@@ -53,10 +53,10 @@ export function AXInput({ label, helper, error, leadingIcon, trailingIcon, optio
       {error ? (
         <div className="flex items-center gap-1.5 mt-1.5">
           <AlertCircle className="w-3 h-3 text-destructive shrink-0" />
-          <p className="text-destructive" style={{ fontSize: '12px' }}>{error}</p>
+          <p className="text-xs text-destructive">{error}</p>
         </div>
       ) : helper ? (
-        <p className="mt-1.5 text-muted-foreground" style={{ fontSize: '12px' }}>{helper}</p>
+        <p className="mt-1.5 text-xs text-muted-foreground">{helper}</p>
       ) : null}
     </div>
   );
@@ -75,15 +75,15 @@ export function AXTextarea({ label, helper, error, optional, className, id, ...p
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={textareaId} className="flex items-center gap-1 mb-1.5 text-foreground" style={{ fontSize: '13px', fontWeight: 500 }}>
+        <label htmlFor={textareaId} className="flex items-center gap-1 mb-1.5 text-[13px] font-medium text-foreground">
           {label}
-          {optional && <span className="text-muted-foreground ml-1" style={{ fontWeight: 400, fontSize: '11px' }}>(optional)</span>}
+          {optional && <span className="text-[11px] font-normal text-muted-foreground ml-1">(optional)</span>}
         </label>
       )}
       <textarea
         id={textareaId}
         className={cn(
-          "w-full px-3 py-2.5 rounded-lg border text-foreground placeholder:text-muted-foreground/50",
+          "w-full px-3 py-2.5 rounded-lg border text-[13px] text-foreground placeholder:text-muted-foreground/50",
           "bg-input-background border-border resize-none",
           "transition-all duration-150",
           "focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring",
@@ -91,17 +91,16 @@ export function AXTextarea({ label, helper, error, optional, className, id, ...p
           error && "border-destructive focus:ring-destructive/30",
           className
         )}
-        style={{ fontSize: '13px' }}
         rows={4}
         {...props}
       />
       {error ? (
         <div className="flex items-center gap-1.5 mt-1.5">
           <AlertCircle className="w-3 h-3 text-destructive shrink-0" />
-          <p className="text-destructive" style={{ fontSize: '12px' }}>{error}</p>
+          <p className="text-xs text-destructive">{error}</p>
         </div>
       ) : helper ? (
-        <p className="mt-1.5 text-muted-foreground" style={{ fontSize: '12px' }}>{helper}</p>
+        <p className="mt-1.5 text-xs text-muted-foreground">{helper}</p>
       ) : null}
     </div>
   );
@@ -121,16 +120,16 @@ export function AXSelect({ label, helper, error, options, optional, className, i
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={selectId} className="flex items-center gap-1 mb-1.5 text-foreground" style={{ fontSize: '13px', fontWeight: 500 }}>
+        <label htmlFor={selectId} className="flex items-center gap-1 mb-1.5 text-[13px] font-medium text-foreground">
           {label}
-          {optional && <span className="text-muted-foreground ml-1" style={{ fontWeight: 400, fontSize: '11px' }}>(optional)</span>}
+          {optional && <span className="text-[11px] font-normal text-muted-foreground ml-1">(optional)</span>}
         </label>
       )}
       <div className="relative">
         <select
           id={selectId}
           className={cn(
-            "w-full h-9 pl-3 pr-8 rounded-lg border text-foreground appearance-none cursor-pointer",
+            "w-full h-9 pl-3 pr-8 rounded-lg border text-[13px] text-foreground appearance-none cursor-pointer",
             "bg-input-background border-border",
             "transition-all duration-150",
             "focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring",
@@ -138,7 +137,6 @@ export function AXSelect({ label, helper, error, options, optional, className, i
             error && "border-destructive",
             className
           )}
-          style={{ fontSize: '13px' }}
           {...props}
         >
           {options.map((opt) => (
@@ -148,9 +146,9 @@ export function AXSelect({ label, helper, error, options, optional, className, i
         <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
       </div>
       {error ? (
-        <p className="mt-1.5 text-destructive" style={{ fontSize: '12px' }}>{error}</p>
+        <p className="mt-1.5 text-xs text-destructive">{error}</p>
       ) : helper ? (
-        <p className="mt-1.5 text-muted-foreground" style={{ fontSize: '12px' }}>{helper}</p>
+        <p className="mt-1.5 text-xs text-muted-foreground">{helper}</p>
       ) : null}
     </div>
   );

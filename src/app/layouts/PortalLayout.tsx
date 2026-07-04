@@ -1,7 +1,8 @@
 import { Outlet, NavLink, Link } from "react-router";
-import { LayoutDashboard, FolderOpen, Paperclip, MessageSquare, Receipt, Settings, Sparkles, LogOut, Bell, ChevronDown } from "lucide-react";
+import { LayoutDashboard, FolderOpen, Paperclip, MessageSquare, Receipt, Settings, LogOut, Bell, ChevronDown } from "lucide-react";
 import { clearSession, getSession, refreshSession } from "../lib/session";
 import { useEffect, useState } from "react";
+import { AesthetixMark } from "../components/AesthetixMark";
 
 const navItems = [
   { to:"/portal", icon:LayoutDashboard, label:"Dashboard", end:true },
@@ -39,9 +40,7 @@ export default function PortalLayout() {
       <aside className="w-56 shrink-0 flex flex-col overflow-y-auto bg-card border-r border-border">
         <div className="px-4 py-4 border-b border-border">
           <Link to="/" className="flex items-center gap-2 no-underline">
-            <div className="w-6 h-6 rounded-md bg-brand flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            <AesthetixMark size={24} color="var(--brand)" />
             <div>
               <div className="text-foreground" style={{ fontSize:"12px", fontWeight:700 }}>Aesthetix</div>
               <div className="text-muted-foreground" style={{ fontSize:"9px", textTransform:"uppercase", letterSpacing:"0.08em" }}>Client Portal</div>

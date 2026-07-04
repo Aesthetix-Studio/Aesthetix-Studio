@@ -34,10 +34,10 @@ export function AXAlert({ variant, title, description, dismissible, action }: AX
     <div className={cn("flex gap-3 p-4 rounded-xl border", cfg.bg, cfg.border)}>
       <Icon className={cn("w-4 h-4 shrink-0 mt-0.5", cfg.iconColor)} />
       <div className="flex-1 min-w-0">
-        <div className={cn("text-sm", cfg.titleColor)} style={{ fontWeight: 600 }}>{title}</div>
-        {description && <div className={cn("mt-1 text-sm", cfg.textColor)} style={{ fontSize: '13px', lineHeight: '1.5' }}>{description}</div>}
+        <div className={cn("text-sm font-semibold", cfg.titleColor)}>{title}</div>
+        {description && <div className={cn("mt-1 text-[13px] leading-snug text-sm", cfg.textColor)}>{description}</div>}
         {action && (
-          <button onClick={action.onClick} className={cn("mt-2 text-sm underline", cfg.titleColor)} style={{ fontSize: '12px', fontWeight: 500 }}>
+          <button onClick={action.onClick} className={cn("mt-2 text-xs font-medium underline", cfg.titleColor)}>
             {action.label}
           </button>
         )}
@@ -73,7 +73,7 @@ interface AXBadgeProps {
 
 export function AXBadge({ variant = "default", children, dot, className }: AXBadgeProps) {
   return (
-    <span className={cn("inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full", badgeStyles[variant], className)} style={{ fontSize: '11px', fontWeight: 600 }}>
+    <span className={cn("inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold", badgeStyles[variant], className)}>
       {dot && <span className="w-1.5 h-1.5 rounded-full bg-current opacity-70" />}
       {children}
     </span>
@@ -98,7 +98,7 @@ const tagColors: Record<NonNullable<AXTagProps["color"]>, string> = {
 
 export function AXTag({ children, onRemove, color = "default" }: AXTagProps) {
   return (
-    <span className={cn("inline-flex items-center gap-1 px-2.5 py-1 rounded-lg", tagColors[color])} style={{ fontSize: '12px', fontWeight: 500 }}>
+    <span className={cn("inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium", tagColors[color])}>
       {children}
       {onRemove && (
         <button onClick={onRemove} className="hover:opacity-70 transition-opacity ml-0.5">
@@ -145,7 +145,7 @@ export function AXFAQAccordion() {
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
           >
-            <span className="text-foreground pr-4" style={{ fontSize: '14px', fontWeight: 500 }}>{item.q}</span>
+            <span className="text-[14px] font-medium text-foreground pr-4">{item.q}</span>
             <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.2 }} className="shrink-0">
               <ChevronDown className="w-4 h-4 text-muted-foreground" />
             </motion.div>
@@ -159,7 +159,7 @@ export function AXFAQAccordion() {
                 transition={{ duration: 0.2 }}
               >
                 <div className="px-5 pb-4 border-t border-border/40">
-                  <p className="text-muted-foreground pt-3" style={{ fontSize: '13px', lineHeight: '1.7' }}>{item.a}</p>
+                  <p className="text-[13px] leading-relaxed text-muted-foreground pt-3">{item.a}</p>
                 </div>
               </motion.div>
             )}
@@ -182,7 +182,7 @@ export function AXCTASection({ variant = "brand" }: AXCTASectionProps) {
   return (
     <div className={cn(
       "rounded-2xl p-10 relative overflow-hidden",
-      isBrand ? "bg-gradient-to-br from-brand to-violet-700" : isDark ? "bg-[#0D0D0C]" : "bg-secondary"
+      isBrand ? "bg-gradient-to-br from-brand to-violet-700" : isDark ? "bg-background" : "bg-secondary"
     )}>
       {isBrand && (
         <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%)" }} />
@@ -190,34 +190,31 @@ export function AXCTASection({ variant = "brand" }: AXCTASectionProps) {
       <div className="relative text-center max-w-lg mx-auto space-y-4">
         <div className={cn("inline-flex items-center gap-2 px-3 py-1.5 rounded-full border", isBrand ? "border-white/20 bg-white/10 text-white" : "border-border bg-card text-muted-foreground")}>
           <Sparkles className="w-3.5 h-3.5" />
-          <span style={{ fontSize: '12px', fontWeight: 500 }}>Limited spots available — Q3 2026</span>
+          <span className="text-xs font-medium">Limited spots available — Q3 2026</span>
         </div>
         <h2
-          className={cn(isBrand || isDark ? "text-white" : "text-foreground")}
-          style={{ fontSize: '28px', fontWeight: 700, letterSpacing: '-0.025em' }}
+          className={cn("text-[28px] font-bold tracking-tight", isBrand || isDark ? "text-white" : "text-foreground")}
         >
           Ready to define your brand?
         </h2>
-        <p className={cn(isBrand ? "text-white/75" : isDark ? "text-white/60" : "text-muted-foreground")} style={{ fontSize: '15px', lineHeight: '1.6' }}>
+        <p className={cn("text-[15px] leading-normal", isBrand ? "text-white/75" : isDark ? "text-white/60" : "text-muted-foreground")}>
           We take on a select number of new clients each quarter to maintain quality. Let's talk about your project.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
           <button
             className={cn(
-              "inline-flex items-center gap-2 h-10 px-6 rounded-xl transition-all duration-150",
+              "inline-flex items-center gap-2 h-10 px-6 rounded-xl text-sm font-semibold transition-all duration-150",
               isBrand ? "bg-white text-brand hover:bg-white/90" : "bg-foreground text-background hover:bg-foreground/90"
             )}
-            style={{ fontSize: '14px', fontWeight: 600 }}
           >
             Book a Call
             <ArrowRight className="w-4 h-4" />
           </button>
           <button
             className={cn(
-              "inline-flex items-center gap-1.5 h-10 px-5 rounded-xl transition-colors",
+              "inline-flex items-center gap-1.5 h-10 px-5 rounded-xl text-sm font-medium transition-colors",
               isBrand ? "text-white/80 hover:text-white hover:bg-white/10" : isDark ? "text-white/60 hover:text-white hover:bg-white/8" : "text-muted-foreground hover:text-foreground hover:bg-accent"
             )}
-            style={{ fontSize: '14px', fontWeight: 500 }}
           >
             View Work
             <ChevronRight className="w-4 h-4" />
@@ -253,8 +250,8 @@ export function AXToastDemo() {
           {variant === "error" && <AlertCircle className="w-4 h-4 text-destructive mt-0.5 shrink-0" />}
           {variant === "default" && <Info className="w-4 h-4 text-brand mt-0.5 shrink-0" />}
           <div className="flex-1">
-            <div className="text-foreground" style={{ fontSize: '13px', fontWeight: 600 }}>{title}</div>
-            <div className="text-muted-foreground" style={{ fontSize: '12px' }}>{desc}</div>
+            <div className="text-[13px] font-semibold text-foreground">{title}</div>
+            <div className="text-xs text-muted-foreground">{desc}</div>
           </div>
           <button className="text-muted-foreground hover:text-foreground transition-colors">
             <X className="w-3.5 h-3.5" />

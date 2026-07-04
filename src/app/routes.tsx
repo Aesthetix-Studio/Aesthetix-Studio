@@ -91,6 +91,7 @@ export const router = createBrowserRouter([
           { path:"contact", lazy: lazyPage(() => import("./pages/Contact")) },
           { path:"pricing", lazy: lazyPage(() => import("./pages/Pricing")) },
           { path:"faq", lazy: lazyPage(() => import("./pages/FAQ")) },
+          { path:"web-design-hyderabad", lazy: lazyPage(() => import("./pages/WebDesignHyderabad")) },
           { path:"privacy-policy", lazy: lazyPage(() => import("./pages/PrivacyPolicy")) },
           { path:"terms-of-service", lazy: lazyPage(() => import("./pages/TermsOfService")) },
           { path:"cookie-policy", lazy: lazyPage(() => import("./pages/CookiePolicy")) },

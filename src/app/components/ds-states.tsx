@@ -38,9 +38,9 @@ export function AXSpinner({ size = "md", variant = "default" }: AXSpinnerProps) 
 /* ─── Card Skeleton ─────────────────────────────────────────── */
 export function AXCardSkeleton() {
   return (
-    <div className="bg-card rounded-xl border border-border p-5 space-y-4">
+    <div className="bg-card rounded-lg border border-border shadow-sm p-8 space-y-4">
       <div className="flex items-center gap-3">
-        <AXSkeleton className="w-10 h-10 rounded-xl" />
+        <AXSkeleton className="w-10 h-10 rounded-full" />
         <div className="space-y-1.5 flex-1">
           <AXSkeleton className="h-3.5 w-32" />
           <AXSkeleton className="h-3 w-20" />
@@ -50,8 +50,8 @@ export function AXCardSkeleton() {
       <AXSkeleton className="h-3 w-5/6" />
       <AXSkeleton className="h-3 w-3/4" />
       <div className="flex gap-2 pt-1">
-        <AXSkeleton className="h-6 w-16 rounded-full" />
-        <AXSkeleton className="h-6 w-20 rounded-full" />
+        <AXSkeleton className="h-6 w-16 rounded-xs" />
+        <AXSkeleton className="h-6 w-20 rounded-xs" />
       </div>
     </div>
   );
@@ -59,15 +59,15 @@ export function AXCardSkeleton() {
 
 export function AXListSkeleton({ rows = 5 }: { rows?: number }) {
   return (
-    <div className="bg-card rounded-xl border border-border overflow-hidden">
+    <div className="bg-card rounded-lg border border-border shadow-sm overflow-hidden">
       {Array.from({ length: rows }).map((_, i) => (
-        <div key={i} className="flex items-center gap-3 px-5 py-3.5 border-b border-border/40 last:border-0">
+        <div key={i} className="flex items-center gap-3 px-8 py-4 border-b border-border/40 last:border-0">
           <AXSkeleton className="w-8 h-8 rounded-full shrink-0" />
           <div className="flex-1 space-y-1.5">
             <AXSkeleton className="h-3 w-40" />
             <AXSkeleton className="h-2.5 w-24" />
           </div>
-          <AXSkeleton className="h-6 w-14 rounded-full" />
+          <AXSkeleton className="h-6 w-14 rounded-xs" />
           <AXSkeleton className="h-3 w-16" />
         </div>
       ))}
@@ -87,13 +87,13 @@ interface AXEmptyStateProps {
 export function AXEmptyState({ icon: Icon, title, description, action, secondaryAction }: AXEmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-14 px-6">
-      <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-4">
+      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
         <Icon className="w-6 h-6 text-muted-foreground" />
       </div>
-      <h3 className="text-foreground mb-2" style={{ fontSize: '15px', fontWeight: 600 }}>{title}</h3>
-      <p className="text-muted-foreground max-w-xs mb-6" style={{ fontSize: '13px', lineHeight: '1.6' }}>{description}</p>
+      <h3 className="text-foreground mb-2 text-title-sm font-semibold">{title}</h3>
+      <p className="text-muted-foreground max-w-xs mb-6 text-body-md">{description}</p>
       {(action || secondaryAction) && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {action && <AXButton variant="primary" size="sm" icon={action.icon}>{action.label}</AXButton>}
           {secondaryAction && <AXButton variant="ghost" size="sm" onClick={secondaryAction.onClick}>{secondaryAction.label}</AXButton>}
         </div>

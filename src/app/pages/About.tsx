@@ -170,7 +170,7 @@ export default function About() {
               <Link
                 to="/discovery-call"
                 className="inline-flex items-center gap-2 h-11 px-6 rounded-lg bg-brand text-white transition-all hover:bg-brand-hover"
-                style={{ fontSize: "14px", fontWeight: 500 }}
+                style={{ fontSize: "14px", fontWeight: 600 }}
               >
                 Book a Discovery Call
                 <ArrowRight className="w-4 h-4" />

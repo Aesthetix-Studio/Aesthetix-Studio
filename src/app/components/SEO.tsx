@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 const SITE_NAME = "Aesthetix Studio";
-const DEFAULT_DESCRIPTION = "Design, development, and branding agency for startups and growing businesses. We build brands that convert.";
+const DEFAULT_DESCRIPTION = "Design, development, and branding agency in Hyderabad, India. We build conversion-focused websites and brand systems for startups and growing businesses.";
 const DEFAULT_IMAGE = "/og-image.svg";
 
 export default function SEO({
@@ -39,6 +39,7 @@ export default function SEO({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:image" content={fullImage} />
       <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:locale" content="en_IN" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -59,10 +60,11 @@ export default function SEO({
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://aesthetixstudio.dev/#organization",
   name: "Aesthetix Studio",
   url: "https://aesthetixstudio.dev",
   logo: "https://aesthetixstudio.dev/favicon.svg",
-  description: "Design, development, and branding agency for startups and growing businesses.",
+  description: "Design, development, and branding agency for startups and growing businesses in Hyderabad, India.",
   sameAs: [
     "https://www.linkedin.com/company/aesthetix-studio",
     "https://dribbble.com/aesthetixstudio",
@@ -72,13 +74,16 @@ export const organizationSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
+    telephone: "",
     email: "hello@aesthetixstudio.dev",
     availableLanguage: "English",
   },
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Falaknuma",
     addressLocality: "Hyderabad",
     addressRegion: "Telangana",
+    postalCode: "500053",
     addressCountry: "IN",
   },
 };
@@ -131,16 +136,19 @@ export const faqSchema = (faqs: { q: string; a: string }[]) => ({
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "LocalBusiness",
+  "@id": "https://aesthetixstudio.dev/#organization",
   name: "Aesthetix Studio",
   image: "https://aesthetixstudio.dev/og-image.svg",
   url: "https://aesthetixstudio.dev",
-  telephone: "+91-9876543210",
+  telephone: "+91-98765-43210",
   email: "hello@aesthetixstudio.dev",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Falaknuma",
     addressLocality: "Hyderabad",
     addressRegion: "Telangana",
+    postalCode: "500053",
     addressCountry: "IN",
   },
   geo: {
@@ -148,7 +156,12 @@ export const localBusinessSchema = {
     latitude: 17.385,
     longitude: 78.4867,
   },
-  sameAs: [],
+  sameAs: [
+    "https://www.linkedin.com/company/aesthetix-studio",
+    "https://dribbble.com/aesthetixstudio",
+    "https://www.behance.net/aesthetixstudio",
+    "https://www.clutch.co/profile/aesthetix-studio",
+  ],
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -156,9 +169,17 @@ export const localBusinessSchema = {
     closes: "18:00",
   },
   priceRange: "$$",
-  areaServed: {
-    "@type": "Country",
-    name: "India",
+  areaServed: [
+    { "@type": "City", name: "Hyderabad" },
+    { "@type": "State", name: "Telangana" },
+    { "@type": "Country", name: "India" },
+  ],
+  hasMap: "https://www.google.com/maps/search/Aesthetix+Studio+Hyderabad",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "50",
+    bestRating: "5",
   },
 };
 
@@ -193,3 +214,108 @@ export const professionalServiceSchema = {
     ],
   },
 };
+
+// Knowledge Graph / Entity Schema — helps AI systems understand the business entity
+export const knowledgeGraphSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://aesthetixstudio.dev/#organization",
+  name: "Aesthetix Studio",
+  alternateName: ["Aesthetix", "Aesthetix Studio Hyderabad"],
+  url: "https://aesthetixstudio.dev",
+  logo: "https://aesthetixstudio.dev/favicon.svg",
+  image: "https://aesthetixstudio.dev/og-image.svg",
+  description: "Aesthetix Studio is a web design and brand identity agency in Hyderabad, India. We build conversion-focused websites, brand systems, and digital products for startups and growing businesses. 80+ brands launched, 42% average conversion lift.",
+  foundingDate: "2021",
+  foundingLocation: {
+    "@type": "Place",
+    name: "Hyderabad, Telangana, India",
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Falaknuma",
+    addressLocality: "Hyderabad",
+    addressRegion: "Telangana",
+    postalCode: "500053",
+    addressCountry: "IN",
+  },
+  telephone: "+91-98765-43210",
+  email: "hello@aesthetixstudio.dev",
+  sameAs: [
+    "https://www.linkedin.com/company/aesthetix-studio",
+    "https://dribbble.com/aesthetixstudio",
+    "https://www.behance.net/aesthetixstudio",
+    "https://www.clutch.co/profile/aesthetix-studio",
+  ],
+  knowsAbout: [
+    "Web Design",
+    "Brand Identity",
+    "UI/UX Design",
+    "Product Design",
+    "Design Systems",
+    "React Development",
+    "Next.js Development",
+    "TypeScript",
+    "Tailwind CSS",
+    "Cloudflare Workers",
+    "E-Commerce Design",
+    "SaaS Design",
+    "Landing Page Design",
+  ],
+  makesOffer: [
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Brand Identity" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Development" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Product Design" } },
+  ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "50",
+    bestRating: "5",
+    ratingProvider: "Clutch",
+  },
+};
+
+// Case Study Schema — AI-readable case study structured data
+export const caseStudySchema = (study: {
+  title: string; client: string; industry: string;
+  problem: string; solution: string; results: string[];
+  url: string; datePublished: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: `${study.title} — Case Study by Aesthetix Studio`,
+  description: `How Aesthetix Studio helped ${study.client} ${study.problem.slice(0, 150)}...`,
+  author: {
+    "@type": "Organization",
+    name: "Aesthetix Studio",
+    url: "https://aesthetixstudio.dev",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Aesthetix Studio",
+    logo: { "@type": "ImageObject", url: "https://aesthetixstudio.dev/favicon.svg" },
+  },
+  datePublished: study.datePublished,
+  url: study.url,
+  about: {
+    "@type": "Organization",
+    name: study.client,
+  },
+  articleSection: "Case Study",
+  keywords: [study.industry, "case study", "web design", "Aesthetix Studio", study.client],
+});
+
+// Brand Mention Schema — for client testimonials and reviews
+export const brandMentionSchema = (mentions: { brand: string; url: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Aesthetix Studio — Client Work",
+  description: "Web design and brand identity projects by Aesthetix Studio in Hyderabad, India",
+  about: mentions.map(m => ({
+    "@type": "Organization",
+    name: m.brand,
+    url: m.url,
+  })),
+});

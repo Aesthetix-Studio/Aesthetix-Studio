@@ -1,7 +1,8 @@
 import { Outlet, NavLink, Link } from "react-router";
-import { LayoutDashboard, Users, Briefcase, CheckSquare, Calendar, BarChart2, BookOpen, Settings, Sparkles, Bell, Search, UserCircle, FolderKanban, ChevronDown, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, Briefcase, CheckSquare, Calendar, BarChart2, BookOpen, Settings, Bell, Search, UserCircle, FolderKanban, ChevronDown, LogOut } from "lucide-react";
 import { clearSession, getSession, refreshSession } from "../lib/session";
 import { useEffect, useState } from "react";
+import { AesthetixMark } from "../components/AesthetixMark";
 
 interface NavItem {
   to: string;
@@ -51,7 +52,7 @@ export default function AdminLayout() {
 
   const displayName = session?.displayName ?? session?.email?.split("@")[0].replace(/[._-]+/g, " ") ?? "Admin";
   const initials = displayName.slice(0, 2).toUpperCase();
-  const companyName = "aesthetix.studio";
+  const companyName = "aesthetixstudio.dev";
   const handleSignOut = () => {
     clearSession();
     setSessionState(null);
@@ -62,9 +63,7 @@ export default function AdminLayout() {
       <aside className="w-56 shrink-0 flex flex-col overflow-y-auto bg-card border-r border-border">
         <div className="px-4 py-4 border-b border-border">
           <Link to="/" className="flex items-center gap-2 no-underline">
-            <div className="w-6 h-6 rounded-md bg-brand flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            <AesthetixMark size={24} color="var(--brand)" />
             <div>
               <div className="text-foreground text-xs font-bold">Aesthetix</div>
               <div className="text-muted-foreground text-[9px] uppercase tracking-widest">Admin</div>

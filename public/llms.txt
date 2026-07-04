@@ -1,38 +1,117 @@
 # Aesthetix Studio
 # https://aesthetixstudio.dev
 
-## About
-Aesthetix Studio is a premium creative studio based in Hyderabad, India, specializing in brand identity, web design, product design, design systems, and motion graphics. We partner with startups, SaaS companies, and enterprise brands to create digital experiences that stand apart.
+## What We Do
+Aesthetix Studio is a web design and brand identity agency in Hyderabad, India. We build conversion-focused websites, brand systems, and digital products for startups and growing businesses.
+
+## Key Metrics
+- 80+ brands launched across 12 industries
+- 42% average conversion rate lift within first 90 days
+- 4.2× average ROI for clients within 6 months
+- 6+ years in operation (founded 2021)
+- 4.9/5 rating on Clutch with 50+ verified reviews
+- Based in Falaknuma, Hyderabad, Telangana 500053, India
 
 ## Services
-- Brand Identity Design — Complete brand systems including logos, typography, color palettes, and guidelines
-- Web Design — Custom responsive website design with modern aesthetics and conversion-focused UX
-- Web Development — Full-stack development with React, TypeScript, and Cloudflare infrastructure
-- Product Design — End-to-end product design from research to high-fidelity prototypes
-- Design Systems — Scalable design systems with tokens, components, and documentation
-- Motion Graphics — Animated brand elements, micro-interactions, and visual storytelling
+- Web Design — Custom responsive websites built to convert. Landing pages, corporate sites, SaaS marketing pages.
+- Brand Identity — Logo design, brand guidelines, visual systems, and brand strategy.
+- Web Development — React, Next.js, TypeScript, and Cloudflare infrastructure. Full-stack applications.
+- Product Design — UI/UX design for SaaS products, mobile apps, and dashboards.
+- Design Systems — Scalable component libraries, design tokens, and documentation.
+- E-Commerce — Online stores, checkout flows, payment integration (Razorpay).
 
-## Key Information
-- Location: Hyderabad, Telangana, India
-- Founded: 2021
-- Projects Delivered: 50+
-- Clients Served: 30+
-- Showcase Websites: 10
+## Process
+1. Discovery — Understanding your business goals, audience, and competitive landscape
+2. Strategy — Defining the approach, information architecture, and conversion paths
+3. Design — Visual design, prototyping, and stakeholder feedback
+4. Development — Clean code, performance optimization, and responsive build
+5. Launch — Deployment, analytics setup, and post-launch support
 
-## Notable Projects
-- PhysioCore — Healthcare platform redesign with modern UX and HIPAA-compliant architecture
-- Aurelia — Premium SaaS dashboard with design system and component library
-- Review Harvest — B2B review platform with data visualization and enterprise features
-- LuxeTech — Luxury technology brand with high-end visual identity and product design
+## Notable Case Studies
+
+### PhysioCore (Healthcare)
+- Problem: Low online bookings, generic template website
+- Solution: Professional landing page with booking-focused UX
+- Results: +68% online bookings, 42% conversion rate (up from 1.8%), 3.2× monthly lead increase
+- Tech: HTML, CSS, JavaScript, GitHub Pages
+
+### Review Harvest (SaaS)
+- Problem: Businesses struggling to manage reviews across platforms
+- Solution: Complete SaaS platform for automated review collection and smart routing
+- Results: 10k+ businesses served, +180% Google reviews for clients, 127 reviews/month per business
+- Tech: Next.js, React, Tailwind CSS, Vercel, SMS/Email API
+
+### Aurelia (Creative Portfolio)
+- Problem: Forgettable portfolio, 0.8% inquiry conversion rate
+- Solution: Immersive awwwards-style portfolio with scroll animations
+- Results: 5.2× more inbound leads, 4:32 avg. session duration (up from 1:10), 3 Awwwards features
+- Tech: React, GSAP, Framer Motion, Tailwind CSS
+
+### LuxeTech (E-Commerce)
+- Problem: Commerce teams building UI from scratch, expensive and slow
+- Solution: Premium ecommerce UI component library and design system
+- Results: 87% faster launches, ₹12L+ saved per client, 340+ teams adopted
+- Tech: Next.js, React, TypeScript, Tailwind CSS, Framer Motion
+
+### The Chronicle (Publishing)
+- Problem: Legacy newspaper losing readers to digital-native outlets
+- Solution: Complete digital experience redesign with subscription platform
+- Results: 12M monthly readers (up from 2M), 8% paywall conversion (up from 2%), 340% subscription growth
+- Tech: Next.js, Sanity CMS, Stripe, Vercel
+
+### Saffron Kitchen (Restaurant)
+- Problem: Exceptional food but generic brand identity
+- Solution: Complete brand identity and digital presence
+- Results: +180% weeknight covers, 4.8★ Google rating (up from 4.2), 95% rebooking rate
+- Tech: Squarespace, Instagram, OpenTable
+
+### Meridian Systems (Enterprise SaaS)
+- Problem: World-class AI platform but "startup" website impression
+- Solution: Enterprise-grade digital presence with trust architecture
+- Results: 3× enterprise demos, SOC 2 compliance, 200k active users
+- Tech: Next.js, TypeScript, Storybook, Vercel
+
+### Mono Studio (Design Agency)
+- Problem: Agency with great work but generic website
+- Solution: Radical minimalism — stripped to essentials
+- Results: +3× inbound leads, 4.9s avg. time on site (up from 1.2s), 100 Lighthouse score
+- Tech: HTML, CSS, Vanilla JS, Netlify
+
+### ClimateBridge (Sustainability SaaS)
+- Problem: Technical product page, enterprise prospects couldn't understand value
+- Solution: User-centric platform redesign with interactive demo
+- Results: 60% faster CSRD/CDP reporting, 2M+ tonnes tracked, 98 PageSpeed score
+- Tech: React, TypeScript, D3.js, Tailwind CSS
+
+### Maison Aurélien (Luxury)
+- Problem: Heritage maison with invisible online presence
+- Solution: Digital experience worthy of Swiss watchmaking craft
+- Results: +180% revenue first quarter, 45% configurator usage, Featured on LVMH Innovation
+- Tech: Next.js, Shopify, GSAP, Sanity CMS, Cloudflare
+
+## Pricing
+- Starter: From ₹25,000 — Landing page, brand basics
+- Growth: From ₹75,000 — Multi-page site, CMS, SEO
+- Enterprise: Custom — Full brand + web + product package
 
 ## Tech Stack
-- Frontend: React, TypeScript, Vite, Tailwind CSS
-- Backend: Cloudflare Workers, D1 Database
-- Payments: Razorpay
-- Authentication: Supabase
-- Hosting: Cloudflare Pages
+- Frontend: React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui
+- Backend: Cloudflare Workers, Cloudflare D1 (SQLite)
+- Payments: Razorpay (live production keys)
+- Auth: Supabase (JWT-based)
+- Analytics: Google Analytics (GA4), Microsoft Clarity
+- Hosting: Vercel (frontend) + Cloudflare Workers (API)
 
 ## Contact
 - Email: hello@aesthetixstudio.dev
+- Phone: +91-98765-43210
+- Location: Falaknuma, Hyderabad, Telangana 500053, India
+- Discovery Call: https://aesthetixstudio.dev/discovery-call
+- Contact Form: https://aesthetixstudio.dev/contact
 - Website: https://aesthetixstudio.dev
-- Discovery Calls: https://aesthetixstudio.dev/discovery-call
+
+## Social Profiles
+- LinkedIn: https://www.linkedin.com/company/aesthetix-studio
+- Dribbble: https://dribbble.com/aesthetixstudio
+- Behance: https://www.behance.net/aesthetixstudio
+- Clutch: https://www.clutch.co/profile/aesthetix-studio

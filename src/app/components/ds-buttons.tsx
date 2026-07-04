@@ -4,7 +4,7 @@ import { DSSection, DSSubSection, DSPreview } from "./ds-section";
 import { cn } from "./ui/utils";
 
 /* ─── Aesthetix Button primitives ─────────────────────────── */
-type AXButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive" | "brand" | "link";
+type AXButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive" | "brand" | "link" | "craft";
 type AXButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 interface AXButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,21 +17,22 @@ interface AXButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<AXButtonVariant, string> = {
-  primary: "bg-foreground text-background hover:bg-foreground/90 active:bg-foreground/80",
-  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/70 active:bg-secondary/60 border border-border",
-  outline: "bg-transparent text-foreground border border-border hover:bg-accent hover:border-foreground/20 active:bg-accent/70",
-  ghost: "bg-transparent text-foreground hover:bg-accent active:bg-accent/70",
-  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80",
-  brand: "bg-brand text-brand-foreground hover:bg-brand-hover active:bg-brand-hover/90 shadow-[var(--shadow-brand)]",
+  primary: "bg-foreground text-background hover:bg-foreground/90 active:scale-[0.98]",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-[0.98] border border-border",
+  outline: "bg-transparent text-foreground border border-border hover:bg-accent active:scale-[0.98]",
+  ghost: "bg-transparent text-foreground hover:bg-accent active:scale-[0.98]",
+  destructive: "bg-destructive text-white hover:bg-destructive/90 active:scale-[0.98]",
+  brand: "bg-brand text-brand-foreground hover:bg-brand-hover active:scale-[0.98] shadow-brand hover:shadow-brand-lg",
+  craft: "bg-craft text-craft-foreground hover:bg-craft-hover active:scale-[0.98] shadow-sm hover:shadow-md",
   link: "bg-transparent text-brand hover:underline p-0 h-auto",
 };
 
 const sizeStyles: Record<AXButtonSize, string> = {
-  xs: "h-7 px-2.5 text-[11px] rounded-md gap-1",
-  sm: "h-9 px-3 text-[12px] rounded-lg gap-1.5",
-  md: "h-11 px-4 text-[13px] rounded-lg gap-2",
-  lg: "h-12 px-5 text-[14px] rounded-xl gap-2",
-  xl: "h-14 px-6 text-[15px] rounded-xl gap-2.5",
+  xs: "h-7 px-2.5 text-caption rounded-md gap-1",
+  sm: "h-8 px-3 text-body-sm rounded-md gap-1.5",
+  md: "h-10 px-5 text-base rounded-lg gap-2",
+  lg: "h-12 px-7 text-base rounded-lg gap-2",
+  xl: "h-14 px-8 text-body-lg rounded-lg gap-2.5",
 };
 
 export function AXButton({ variant = "primary", size = "md", loading, icon, iconRight, iconOnly, children, className, disabled, ...props }: AXButtonProps) {
@@ -40,7 +41,7 @@ export function AXButton({ variant = "primary", size = "md", loading, icon, icon
       {...props}
       disabled={disabled || loading}
       className={cn(
-        "inline-flex items-center justify-center font-500 transition-all duration-150 cursor-pointer",
+        "inline-flex items-center justify-center font-medium transition-all duration-150 cursor-pointer",
         "disabled:opacity-40 disabled:cursor-not-allowed",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         variantStyles[variant],
@@ -49,9 +50,8 @@ export function AXButton({ variant = "primary", size = "md", loading, icon, icon
         variant !== "link" && "select-none",
         className
       )}
-      style={{ fontWeight: 500 }}
     >
-      {loading ? <Loader2 className="animate-spin" style={{ width: 14, height: 14 }} /> : icon}
+      {loading ? <Loader2 className="animate-spin w-3.5 h-3.5" /> : icon}
       {!iconOnly && children}
       {!loading && iconRight}
     </button>
@@ -88,7 +88,7 @@ export function DSButtonsSection() {
           {variants.map(({ label, variant, desc }) => (
             <div key={variant} className="flex items-center gap-6 px-6 py-4 border-b border-border/40 last:border-0 hover:bg-accent/30 transition-colors">
               <div className="w-32 shrink-0">
-                <div className="text-[13px] font-500 text-foreground" style={{ fontWeight: 500 }}>{label}</div>
+                <div className="text-[13px] font-medium text-foreground">{label}</div>
                 <div className="text-[11px] text-muted-foreground">{desc}</div>
               </div>
               <div className="flex items-center gap-3 flex-wrap">
@@ -115,7 +115,7 @@ export function DSButtonsSection() {
           {(["xs", "sm", "md", "lg", "xl"] as AXButtonSize[]).map((size) => (
             <div key={size} className="flex flex-col items-center gap-2">
               <AXButton variant="brand" size={size}>Get Started</AXButton>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider" style={{ fontWeight: 500 }}>{size}</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">{size}</span>
             </div>
           ))}
         </DSPreview>

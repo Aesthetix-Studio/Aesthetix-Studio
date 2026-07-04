@@ -117,7 +117,7 @@ export default function DiscoveryCall() {
               </ul>
             </div>
             <p className="text-muted-foreground" style={{ fontSize:"12px" }}>
-              Prefer email? <Link to="/contact" className="text-brand hover:underline no-underline">hello@aesthetix.studio</Link>
+              Prefer email? <Link to="/contact" className="text-brand hover:underline no-underline">hello@aesthetixstudio.dev</Link>
             </p>
           </div>
         </div>

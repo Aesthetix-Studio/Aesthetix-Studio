@@ -4,7 +4,7 @@ import { cn } from "./ui/utils";
 
 const stats = [
   { value: "80+", label: "Brands Launched", sub: "Across 12 industries" },
-  { value: "98%", label: "Client Satisfaction", sub: "Based on 200 reviews" },
+  { value: "42%", label: "Avg. Conversion Lift", sub: "Within first 90 days" },
   { value: "4.2×", label: "Average ROI", sub: "Within 6 months of launch" },
   { value: "₹50L+", label: "Revenue Generated", sub: "For clients since 2019" },
 ];

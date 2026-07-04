@@ -118,19 +118,19 @@ export default function BlogArticle() {
       try {
         const res = await fetchBlogPost(slug);
         if (cancelled) return;
-        if (res?.data) {
+        if (res?.post) {
           let content = [];
-          try { content = JSON.parse(res.data.content || "[]"); } catch { content = [{ body: res.data.content || "" }]; }
+          try { content = JSON.parse(res.post.content || "[]"); } catch { content = [{ body: res.post.content || "" }]; }
           setArticle({
-            title: res.data.title,
-            category: res.data.category || "Journal",
-            date: res.data.published_at ? new Date(res.data.published_at).toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric" }) : res.data.created_at?.slice(0,10) || "",
-            readTime: `${Math.max(1, Math.ceil((res.data.content || "").split(/\s+/).length / 200))} min`,
-            author: res.data.author_name || "Aesthetix Studio",
-            initials: (res.data.author_name || "AS").split(" ").map((w:string)=>w[0]).join("").slice(0,2).toUpperCase(),
+            title: res.post.title,
+            category: res.post.category || "Journal",
+            date: res.post.created_at?.slice(0,10) || "",
+            readTime: `${Math.max(1, Math.ceil((res.post.content || "").split(/\s+/).length / 200))} min`,
+            author: res.post.author || "Aesthetix Studio",
+            initials: (res.post.author || "AS").split(" ").map((w:string)=>w[0]).join("").slice(0,2).toUpperCase(),
             role: "Team",
             gradient: "from-violet-400 to-purple-600",
-            excerpt: res.data.excerpt || "",
+            excerpt: res.post.excerpt || "",
             content,
           });
         }

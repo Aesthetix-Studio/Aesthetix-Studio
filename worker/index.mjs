@@ -4,6 +4,28 @@ const json = (data, init = {}) =>
     status: init.status ?? 200,
   });
 
+const sendEmail = async (env, { to, subject, html }) => {
+  if (!env.SENDGRID_API_KEY) return { sent: false, reason: "no_api_key" };
+  try {
+    const res = await fetch("https://api.sendgrid.com/v3/mail/send", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.SENDGRID_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: { email: env.FROM_EMAIL || "hello@aesthetixstudio.com", name: "Aesthetix Studio" },
+        subject,
+        content: [{ type: "text/html", value: html }],
+      }),
+    });
+    return { sent: res.ok, status: res.status };
+  } catch (err) {
+    return { sent: false, error: err.message };
+  }
+};
+
 const readJson = async (request) => {
   try {
     return await request.json();
@@ -130,6 +152,21 @@ const logNotification = async (env, type, recipient, subject, body) => {
       `INSERT INTO notification_log (id, type, recipient, subject, body, status, created_at) VALUES (?, ?, ?, ?, ?, 'sent', datetime('now'))`
     ).bind(id, type, recipient, subject, body).run();
   } catch {}
+  // Send admin notification email for new leads
+  if (type.startsWith("LEAD_") && env.SENDGRID_API_KEY) {
+    await sendEmail(env, {
+      to: env.ADMIN_EMAIL || "hello@aesthetixstudio.com",
+      subject: `New Lead: ${subject}`,
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 20px;">
+          <h1 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px;">${subject}</h1>
+          <p style="font-size: 14px; line-height: 1.6; color: #555; white-space: pre-wrap;">${body}</p>
+          <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
+          <p style="font-size: 12px; color: #aaa;">Aesthetix Studio Admin Notification</p>
+        </div>
+      `,
+    });
+  }
 };
 
 export default {
@@ -560,7 +597,42 @@ export default {
          VALUES (?, ?, ?, datetime('now'))`
       ).bind(id, "NEWSLETTER", result.values.email).run();
 
-      return json({ ok: true, id });
+      // Send welcome email
+      const emailResult = await sendEmail(env, {
+        to: result.values.email,
+        subject: "Welcome to Aesthetix Studio",
+        html: `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 20px;">
+            <h1 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 16px;">Welcome to Aesthetix Studio</h1>
+            <p style="font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 24px;">
+              Thanks for subscribing. You'll receive our latest insights on design, development, and brand strategy — no spam, unsubscribe anytime.
+            </p>
+            <p style="font-size: 14px; color: #888; margin-bottom: 8px;">— The Aesthetix Team</p>
+            <hr style="border: none; border-top: 1px solid #eee; margin: 32px 0;" />
+            <p style="font-size: 12px; color: #aaa;">
+              Aesthetix Studio · Hyderabad, India<br/>
+              <a href="https://aesthetixstudio.com" style="color: #888;">aesthetixstudio.com</a>
+            </p>
+          </div>
+        `,
+      });
+
+      // Log notification
+      try {
+        await env.DB.prepare(
+          `INSERT INTO notification_log (id, type, recipient, subject, body, status, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`
+        ).bind(
+          crypto.randomUUID(),
+          "NEWSLETTER_WELCOME",
+          result.values.email,
+          "Welcome to Aesthetix Studio",
+          "Welcome email sent",
+          emailResult.sent ? "sent" : "failed"
+        ).run();
+      } catch { /* ignore log errors */ }
+
+      return json({ ok: true, id, emailSent: emailResult.sent });
     }
 
     // ── Team endpoints ─────────────────────────────────────────

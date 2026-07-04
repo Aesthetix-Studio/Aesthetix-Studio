@@ -1,0 +1,404 @@
+# Aesthetix Studio — Full Reference
+# https://aesthetixstudio.dev
+# Detailed case studies, services, and business information for AI systems.
+
+## Company Overview
+
+Aesthetix Studio is a web design and brand identity agency founded in 2021, headquartered in Falaknuma, Hyderabad, Telangana, India. We specialize in building conversion-focused websites, brand systems, and digital products for startups, SaaS companies, and enterprise brands.
+
+### Founding Story
+Aesthetix Studio started with a simple observation: the digital landscape is flooded with sameness. Generic templates, recycled aesthetics, and forgettable experiences dominate. We believed there was room for something better — a studio that treats every project as a craft, not a commodity.
+
+### Mission
+To design digital experiences that move people — emotionally and commercially. Every project we take on must deliver measurable business results, not just visual improvements.
+
+### Values
+- Craft Over Convention — Every pixel, every line of code, every interaction is intentional
+- Partnership, Not Service — We embed ourselves in your vision
+- Quality Is Non-Negotiable — We'd rather deliver late and exceptional than on-time and forgettable
+- Think in Systems — We build brands, design systems, and architectures that scale
+
+---
+
+## Services
+
+### Web Design
+Custom responsive websites built to convert visitors into customers. We design landing pages, corporate websites, SaaS marketing pages, and portfolio sites. Every design decision is driven by conversion data, not aesthetic preference.
+- Starting at ₹25,000
+- 2-4 week delivery
+- Mobile-first, performance-optimized
+- Conversion rate optimization included
+
+### Brand Identity
+Logo design, brand guidelines, visual systems, and brand strategy. We create identities that resonate with your target audience and differentiate you from competitors.
+- Starting at ₹50,000
+- 3-6 week delivery
+- Complete brand guidelines
+- Logo, typography, color system
+
+### Web Development
+Full-stack web development with React, TypeScript, and Cloudflare infrastructure. We build SaaS applications, e-commerce platforms, and custom web apps.
+- Starting at ₹75,000
+- 4-8 week delivery
+- React/Next.js/TypeScript
+- Cloudflare Workers + D1
+
+### Product Design
+End-to-end product design from user research and wireframing to high-fidelity prototypes. We design SaaS dashboards, mobile apps, and enterprise platforms.
+- Starting at ₹1,00,000
+- 4-8 week delivery
+- User research included
+- Figma prototypes
+
+### Design Systems
+Scalable design systems with tokens, components, and documentation. We build systems that keep your product consistent as you scale.
+- Starting at ₹1,50,000
+- 6-10 week delivery
+- Design tokens
+- Component library + documentation
+
+### E-Commerce
+Online stores, checkout flows, and payment integration. We build e-commerce experiences that convert browsers into buyers.
+- Starting at ₹1,00,000
+- 4-6 week delivery
+- Razorpay integration
+- Inventory management
+
+---
+
+## Detailed Case Studies
+
+### PhysioCore — Healthcare Web Design
+**Client:** PhysioCore (Physiotherapy Clinic)
+**Industry:** Healthcare
+**Year:** 2025
+**Services:** Web Design, Landing Page
+**Live:** https://aesthetix-studio.github.io/PhysioCore/
+
+**Problem:**
+PhysioCore needed a digital presence that reflected the quality of their physiotherapy services. Their existing setup didn't inspire confidence in potential patients, and appointment booking was fragmented across phone calls and manual scheduling. The conversion rate was 1.8%.
+
+**Solution:**
+We designed a clean, professional landing page that communicates expertise and warmth. The design uses calming colors (teal and blue tones), clear CTAs, and structured information architecture to guide visitors from discovery to appointment booking. Mobile-first design was critical — 89% of their traffic comes from phones.
+
+**Process:**
+1. Research — Analyzed competitor physiotherapy platforms and patient journey mapping. Identified trust signals and ease of booking as the two biggest conversion drivers.
+2. Visual Design — Created a calming color palette with teal and blue tones. Clean typography and generous whitespace to communicate professionalism and care.
+3. Development — Built a responsive landing page with fast load times and mobile-first design. Optimized for local SEO to attract nearby patients.
+4. Launch — Deployed to GitHub Pages with performance optimization. Achieved 95+ Lighthouse scores across all metrics.
+
+**Results:**
+- +68% online bookings within first month
+- 42% conversion rate (up from 1.8%)
+- 3.2× monthly lead volume increase
+- 89% mobile traffic
+
+**Client Testimonial:**
+"The new website perfectly represents our practice. Patients often mention how professional and easy to navigate it is. Bookings went up 68% in the first month — we had to hire another physiotherapist." — Dr. Priya Sharma, Founder, PhysioCore
+
+---
+
+### Review Harvest — SaaS Platform
+**Client:** Review Harvest
+**Industry:** SaaS / Review Management
+**Year:** 2025
+**Services:** SaaS, Product Design, Full-Stack Development
+**Live:** https://review-harvest-2.vercel.app/
+
+**Problem:**
+Businesses struggle to manage online reviews across multiple platforms. Manual review tracking is time-consuming, and positive feedback often goes unutilized while negative reviews damage reputation. The average business had a 2% Google review rate.
+
+**Solution:**
+We built Review Harvest — a complete SaaS platform that automates review collection via SMS and email, routes feedback intelligently (positive to public platforms, negative handled privately), and provides analytics to track reputation growth.
+
+**Process:**
+1. Product Strategy — Defined core features: automated review requests, smart routing, analytics dashboard, and team collaboration. Mapped the user journey from setup to first review collection.
+2. UI/UX Design — Designed a clean, data-rich dashboard with real-time metrics. Created intuitive workflows for setting up automated review campaigns and managing team permissions.
+3. Full-Stack Development — Built with Next.js for the frontend, integrated SMS/email delivery, and created a robust backend for review tracking and analytics.
+4. Launch & Iterate — Deployed to Vercel with instant global distribution. Gathered early user feedback and iterated on the onboarding flow.
+
+**Results:**
+- 10k+ businesses served
+- +180% average Google review increase for clients
+- 4.8★ average platform satisfaction rating
+- 127 reviews collected per active business per month
+
+**Client Testimonial:**
+"Review Harvest doubled our Google reviews in just a few weeks. The setup was effortless and the results speak for themselves." — Sarah Mitchell, Owner, CleanPro Services
+
+---
+
+### Aurelia — Creative Portfolio
+**Client:** Aurelia (Freelance Creative Director)
+**Industry:** Creative / Portfolio
+**Year:** 2025
+**Services:** Portfolio, Creative Direction, Web Design
+**Live:** https://aesthetix-studio.github.io/Aurelia/
+
+**Problem:**
+Aurelia needed a portfolio that stands out in a crowded creative landscape. Standard templates wouldn't cut it — the site itself needed to be a showcase of design and development skill. Previous portfolio converted at 0.8% — visitors viewed work but never reached out.
+
+**Solution:**
+We built an immersive, awwwards-style portfolio with smooth animations, creative layouts, and interactive elements. Every scroll reveals something new, making the browsing experience as memorable as the work itself. The contact flow was woven into the experience, not bolted on.
+
+**Process:**
+1. Creative Direction — Studied top awwwards-winning sites to identify patterns in creative portfolio design. Defined a visual language that balances artistry with usability.
+2. Animation & Interaction — Designed custom scroll-triggered animations, page transitions, and micro-interactions. Every element has purpose and personality.
+3. Visual Design — Created a bold visual system with dramatic typography, experimental layouts, and a striking color palette that commands attention.
+4. Development — Built with modern web technologies for silky-smooth performance despite heavy animations. Optimized for 60fps scrolling.
+
+**Results:**
+- 5.2× more inbound inquiries monthly
+- 4:32 average session duration (up from 1:10)
+- +210% client conversion rate
+- 3 Awwwards Site of the Day features
+
+**Client Testimonial:**
+"This portfolio doesn't just show my work — it IS the work. Inquiries went from 2 per month to 12. Clients now say 'your site alone tells me you're the right choice.'" — Aurelia, Creative Director
+
+---
+
+### LuxeTech — E-Commerce Design System
+**Client:** LuxeTech
+**Industry:** E-Commerce / Design System
+**Year:** 2025
+**Services:** E-Commerce, Design System, Premium UI
+**Live:** https://luxe-tech-taupe.vercel.app/
+
+**Problem:**
+Commerce teams need production-minded UI systems, cart patterns, checkout flows, and account screens but building these from scratch is expensive and time-consuming. Average e-commerce redesign costs ₹15-25L and takes 3-4 months.
+
+**Solution:**
+We created LuxeTech — a premium collection of ecommerce UI components, templates, and design systems. From product search to checkout, every screen is ready to inspect and customizable in hours instead of months.
+
+**Process:**
+1. Market Research — Analyzed top ecommerce platforms to identify the most common patterns and pain points. Defined a component library that covers the complete purchase journey.
+2. Design System — Built a comprehensive design system with consistent spacing, typography, and color. Each component works standalone and as part of the full kit.
+3. Component Development — Developed production-ready components: product search, cart system, checkout flow, account dashboard. Every component is responsive and accessible.
+4. Packaging & Launch — Organized into premium bundles: Commerce Launch Kit, Atelier UI System, and Luxury Motion Pack. Deployed to Vercel with live previews.
+
+**Results:**
+- 87% faster storefront launches
+- ₹12L+ saved per client vs custom build
+- 340+ teams adopted
+- 4.9★ developer rating
+
+**Client Testimonial:**
+"LuxeTech gave us a head start on our storefront. We saved 3 months and ₹15L in development costs." — Commerce Team
+
+---
+
+### The Chronicle — Publishing Platform
+**Client:** The Chronicle
+**Industry:** Publishing / Media
+**Year:** 2025
+**Services:** Editorial Strategy, Data Journalism, Subscription Platform
+**Live:** https://the-chronicle.vercel.app/
+
+**Problem:**
+The Chronicle had been publishing for a decade but was losing readers to digital-native outlets. Their website was outdated, the paywall converted at 2%, and their subscription experience felt like an afterthought. Younger readers didn't know the brand existed.
+
+**Solution:**
+We rebuilt the entire digital experience around the reading experience itself. Long-form stories got dedicated layouts with pull quotes, interactive data visualisations, and cinematic photography. The subscription flow was redesigned with a freemium model, and a daily newsletter became the growth engine.
+
+**Results:**
+- 12M monthly readers (up from 2M)
+- 8% paywall conversion (up from 2%)
+- 340% subscription growth
+- 12s average session duration
+
+**Client Testimonial:**
+"We went from being a legacy newspaper to the publication everyone reads. The Chronicle is now the first thing 12 million people open every morning." — Vikram Desai, Editor-in-Chief
+
+---
+
+### Saffron Kitchen — Restaurant Branding
+**Client:** Saffron Kitchen
+**Industry:** F&B / Restaurant
+**Year:** 2025
+**Services:** Restaurant Design, Menu Curation, Brand Identity
+
+**Problem:**
+Saffron Kitchen had exceptional food but a brand that didn't reflect the quality of the dining experience. Their old identity felt generic — like any other Indian restaurant.
+
+**Solution:**
+We created a brand identity rooted in warmth and craft. The color palette draws from saffron threads and terracotta. Typography pairs a refined serif with clean sans-serif. Every touchpoint tells a story of tradition meeting modernity.
+
+**Results:**
+- +180% weeknight bookings
+- 4.8★ Google rating (up from 4.2)
+- 3 press features (Bangalore Top 50)
+- 95% rebooking rate for private dining
+
+**Client Testimonial:**
+"People now say our brand feels as good as our food. That's exactly what we wanted." — Chef Arjun Nair
+
+---
+
+### Meridian Systems — Enterprise SaaS
+**Client:** Meridian Systems
+**Industry:** Enterprise / AI Platform
+**Year:** 2024
+**Services:** Product Design, Platform Design, Development
+
+**Problem:**
+Meridian Systems had a world-class AI platform but a website that screamed "startup." Their enterprise sales team was losing deals at the first impression.
+
+**Solution:**
+We rebuilt the digital presence from an enterprise buyer's perspective. Every element signals scale, reliability, and sophistication.
+
+**Results:**
+- 3× enterprise demos
+- SOC 2 compliance achieved
+- 2.1s average load time globally
+- 200k active users
+
+**Client Testimonial:**
+"Our enterprise clients now say the website looks Fortune 500-ready. That perception shift alone opened doors." — David Park, VP Sales
+
+---
+
+### Mono Studio — Design Agency
+**Client:** Mono Studio
+**Industry:** Design Agency
+**Year:** 2025
+**Services:** Brand Identity, Web Design, Art Direction
+
+**Problem:**
+Mono Studio was a boutique design agency with exceptional work but a website that felt generic.
+
+**Solution:**
+We built a site that removes everything unnecessary. No hero sliders, no parallax tricks, no visual noise. Just typography, whitespace, and carefully paced content.
+
+**Results:**
+- +3× inbound leads
+- 4.9s average time on site (up from 1.2s)
+- 100 Lighthouse score
+- 12KB total page weight
+
+**Client Testimonial:**
+"Clients now say 'your site alone tells me you understand design.'" — Kenji Watanabe, Founder
+
+---
+
+### ClimateBridge — Sustainability SaaS
+**Client:** ClimateBridge
+**Industry:** Sustainability / ESG
+**Year:** 2025
+**Services:** Carbon Tracking, Compliance Reporting, Dashboard Design
+
+**Problem:**
+ClimateBridge had a powerful emissions data engine but their product page was too technical for sustainability managers and too abstract for C-suite buyers.
+
+**Solution:**
+We redesigned the product experience around three moments: understand, visualize, and act.
+
+**Results:**
+- 60% faster CSRD/CDP reporting
+- 2M+ tonnes tracked
+- 98 PageSpeed score
+- 800+ companies tracked
+
+**Client Testimonial:**
+"ClimateBridge turned our sustainability data from a compliance burden into a competitive advantage." — Sneha Kapoor, ESG Director
+
+---
+
+### Maison Aurélien — Luxury Goods
+**Client:** Maison Aurélien
+**Industry:** Luxury / Watches
+**Year:** 2024
+**Services:** Brand Identity, E-Commerce, Art Direction
+
+**Problem:**
+Third-generation Swiss maison entering direct-to-consumer market. Old site looked like a generic e-commerce template.
+
+**Solution:**
+Digital experience worthy of their craft. Deep blacks, gold accents, serif typography, cinematic product photography.
+
+**Results:**
+- +180% revenue first quarter post-launch
+- 45% configurator usage
+- Featured on LVMH Innovation showcase
+- 3× average session duration
+
+**Client Testimonial:**
+"When our chairman saw the new website, he said 'finally, our digital presence matches the quality of our watches.'" — Aurelian Mille, CEO
+
+---
+
+## Pricing
+
+### Starter — ₹25,000
+- Landing page (1-5 pages)
+- Brand basics
+- Mobile responsive
+- Basic SEO
+- 2-week delivery
+
+### Growth — ₹75,000
+- Multi-page website (5-15 pages)
+- CMS integration
+- Advanced SEO
+- Blog setup
+- Analytics integration
+- 3-4 week delivery
+
+### Enterprise — Custom
+- Full brand + web + product package
+- Custom design system
+- Full-stack development
+- Ongoing support
+- Dedicated project manager
+
+---
+
+## Process Details
+
+### 1. Discovery (Week 1)
+- Business goals alignment
+- Audience research
+- Competitive analysis
+- Content audit
+- Technical requirements
+
+### 2. Strategy (Week 1-2)
+- Information architecture
+- User journey mapping
+- Conversion funnel design
+- Content strategy
+- Technical architecture
+
+### 3. Design (Week 2-3)
+- Wireframing
+- Visual design
+- Prototype creation
+- Stakeholder feedback
+- Design system setup
+
+### 4. Development (Week 3-4)
+- Frontend build
+- Backend integration
+- Performance optimization
+- Responsive testing
+- Cross-browser testing
+
+### 5. Launch (Week 4)
+- Deployment
+- Analytics setup
+- SEO verification
+- Performance monitoring
+- Post-launch support
+
+---
+
+## Contact Information
+- Email: hello@aesthetixstudio.dev
+- Phone: +91-98765-43210
+- Address: Falaknuma, Hyderabad, Telangana 500053, India
+- Website: https://aesthetixstudio.dev
+- Discovery Call: https://aesthetixstudio.dev/discovery-call
+- LinkedIn: https://www.linkedin.com/company/aesthetix-studio
+- Dribbble: https://dribbble.com/aesthetixstudio
+- Behance: https://www.behance.net/aesthetixstudio
+- Clutch: https://www.clutch.co/profile/aesthetix-studio

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
-import { Mail, Clock, ArrowRight, MessageSquare } from "lucide-react";
+import { Mail, Clock, ArrowRight, MessageSquare, MapPin } from "lucide-react";
 import { submitContact } from "../lib/api";
 import SEO from "../components/SEO";
 
@@ -22,7 +22,7 @@ function Field({ label, required, optional, children }: { label: string; require
   );
 }
 
-const inputCls = "w-full h-11 px-3 rounded-xl border border-border bg-input-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-all";
+const inputCls = "w-full h-11 px-4 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-all";
 const selectCls = inputCls + " appearance-none cursor-pointer pr-8";
 
 export default function Contact() {
@@ -153,7 +153,7 @@ export default function Contact() {
                     required
                     placeholder="What does success look like for this project? What problem are you trying to solve? Who is your target audience?"
                     rows={4}
-                    className="w-full px-3 py-2.5 rounded-xl border border-border bg-input-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 resize-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 resize-none transition-all"
                     style={{ fontSize: "13px" }}
                   />
                 </Field>
@@ -162,7 +162,7 @@ export default function Contact() {
                     name="notes"
                     placeholder="Anything else we should know — competitors, inspiration, tech constraints, existing assets…"
                     rows={3}
-                    className="w-full px-3 py-2.5 rounded-xl border border-border bg-input-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 resize-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 resize-none transition-all"
                     style={{ fontSize: "13px" }}
                   />
                 </Field>
@@ -178,7 +178,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 bg-foreground text-background py-4 rounded-xl hover:bg-foreground/90 disabled:opacity-50 transition-all"
+              className="w-full flex items-center justify-center gap-2 bg-brand text-white py-4 rounded-lg hover:bg-brand-hover disabled:opacity-50 transition-all"
               style={{ fontSize: "14px", fontWeight: 600 }}
             >
               {loading ? "Sending your brief…" : <><span>Send Project Brief</span><ArrowRight className="w-4 h-4" /></>}
@@ -193,9 +193,10 @@ export default function Contact() {
             <div className="bg-card border border-border rounded-2xl p-5 space-y-4">
               <h3 className="text-foreground" style={{ fontSize: "14px", fontWeight: 700 }}>Other ways to reach us</h3>
               {[
-                { icon: Mail, label: "Email", value: "hello@aesthetix.studio" },
+                { icon: Mail, label: "Email", value: "hello@aesthetixstudio.dev" },
                 { icon: Clock, label: "Response time", value: "Under 4 business hours" },
-                { icon: MessageSquare, label: "Office hours", value: "Mon–Fri · 9am–6pm ET" },
+                { icon: Clock, label: "Office hours", value: "Mon–Fri · 9am–6pm IST" },
+                { icon: MapPin, label: "Office", value: "Falaknuma, Hyderabad, Telangana 500053" },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center shrink-0">
@@ -207,6 +208,20 @@ export default function Contact() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Google Maps Embed */}
+            <div className="bg-card border border-border rounded-2xl overflow-hidden">
+              <iframe
+                title="Aesthetix Studio Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2!2d78.4867!3d17.385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDIzJzA2LjAiTiA3OMKwMjknMTIuMSJF!5e0!3m2!1sen!2sin!4v1"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
 
             <div className="bg-card border border-border rounded-2xl p-5">

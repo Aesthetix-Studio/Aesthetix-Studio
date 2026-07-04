@@ -40,7 +40,7 @@ export function DSTypographySection() {
               className="flex items-baseline gap-6 px-6 py-4 border-b border-border/40 last:border-0 hover:bg-accent/50 transition-colors group"
             >
               <div className="w-24 shrink-0">
-                <div className="text-[11px] font-600 text-muted-foreground" style={{ fontWeight: 600 }}>{t.name}</div>
+                <div className="text-[11px] font-semibold text-muted-foreground">{t.name}</div>
                 <div className="text-[10px] text-muted-foreground/60 font-mono">{t.size} / {t.weight}</div>
               </div>
               <div
@@ -66,8 +66,8 @@ export function DSTypographySection() {
           {fontWeights.map((w) => (
             <div key={w.name} className="bg-card rounded-xl border border-border p-4">
               <div
-                className="text-2xl text-foreground mb-2 truncate"
-                style={{ fontWeight: w.weight, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                className="text-2xl font-display text-foreground mb-2 truncate"
+                style={{ fontWeight: w.weight }}
               >
                 {w.sample}
               </div>
@@ -79,8 +79,8 @@ export function DSTypographySection() {
       </DSSubSection>
 
       <DSSubSection title="Monospace — JetBrains Mono">
-        <div className="bg-[#0D0D0C] rounded-xl border border-border p-6">
-          <div className="text-[13px]" style={{ fontFamily: "'JetBrains Mono', monospace", color: "#A3A39D", lineHeight: "1.7" }}>
+        <div className="bg-background rounded-xl border border-border p-6">
+          <div className="text-[13px] font-mono text-muted-foreground leading-relaxed">
             <span style={{ color: "#8C78FF" }}>const</span>
             <span style={{ color: "#F3F3F1" }}> design</span>
             <span style={{ color: "#6150F6" }}> =</span>
@@ -109,24 +109,24 @@ export function DSTypographySection() {
       <DSSubSection title="Prose — Editorial Example">
         <DSPreview>
           <article className="max-w-2xl space-y-4">
-            <p className="text-[11px] font-600 uppercase tracking-widest text-brand" style={{ fontWeight: 600 }}>
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-brand">
               Design Systems
             </p>
-            <h1 className="text-foreground" style={{ fontSize: '36px', fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1.15 }}>
+            <h1 className="text-4xl font-bold tracking-tight leading-tight text-foreground">
               A systematic approach to building digital products at scale
             </h1>
-            <p className="text-muted-foreground" style={{ fontSize: '17px', lineHeight: '1.75' }}>
+            <p className="text-[17px] leading-relaxed text-muted-foreground">
               Great design systems are like great architecture — invisible when working, immediately felt when absent.
               Aesthetix Studio's design language is built around restraint, hierarchy, and precision.
             </p>
-            <p className="text-muted-foreground" style={{ fontSize: '15px', lineHeight: '1.7' }}>
+            <p className="text-[15px] leading-normal text-muted-foreground">
               Every decision — from shadow depth to border radius — is deliberate. Components ship with WCAG AA accessibility
               and dark mode support by default.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white text-[11px] font-700" style={{ fontWeight: 700 }}>AS</div>
+              <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white text-[11px] font-bold">AS</div>
               <div>
-                <div className="text-[13px] font-500 text-foreground" style={{ fontWeight: 500 }}>Aesthetix Studio</div>
+                <div className="text-[13px] font-medium text-foreground">Aesthetix Studio</div>
                 <div className="text-[11px] text-muted-foreground">Design Systems · June 2026</div>
               </div>
             </div>
