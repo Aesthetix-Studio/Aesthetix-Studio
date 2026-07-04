@@ -1,47 +1,5 @@
 import { motion } from "motion/react";
-import { Zap, Clock, Target, Shield, Users, DollarSign } from "lucide-react";
-
-const reasons = [
-  {
-    icon: Target,
-    title: "Built to Convert",
-    desc: "Every design decision is made with your business goals in mind — not awards, not trends. If it doesn't move the needle, it doesn't ship.",
-  },
-  {
-    icon: Clock,
-    title: "Predictable Timelines",
-    desc: "You'll always know exactly where we are. Milestones, check-ins, and delivery windows set at kickoff — no surprises.",
-  },
-  {
-    icon: Zap,
-    title: "Fast Without Corners",
-    desc: "Most projects complete in 4–6 weeks. We run a tight process so speed and quality aren't a tradeoff.",
-  },
-  {
-    icon: DollarSign,
-    title: "Transparent Pricing",
-    desc: "Fixed-price projects mean you know the cost before we start. No hourly billing, no scope creep, no hidden fees.",
-  },
-  {
-    icon: Shield,
-    title: "Accessible by Default",
-    desc: "WCAG AA compliance, semantic markup, and keyboard navigation are included in every project — not add-ons.",
-  },
-  {
-    icon: Users,
-    title: "Small Team, Senior Work",
-    desc: "You work directly with the designers building your project. No account managers. No hand-offs. No junior work.",
-  },
-];
-
-const comparisonRows = [
-  { label: "Fixed-price projects", us: true, typical: false },
-  { label: "Direct senior designer access", us: true, typical: false },
-  { label: "WCAG AA included", us: true, typical: false },
-  { label: "Figma source files delivered", us: true, typical: "Extra" },
-  { label: "30-day post-launch support", us: true, typical: false },
-  { label: "Strategy before design", us: true, typical: false },
-];
+import { reasons, comparisonRows } from "../../content";
 
 export function HPWhyUs() {
   return (
@@ -64,7 +22,7 @@ export function HPWhyUs() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 items-start">
           {/* Reasons grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {reasons.map(({ icon: Icon, title, desc }, i) => (
+            {reasons.map(({ icon: Icon, title, description }, i) => (
               <motion.div
                 key={title}
                 initial={{ opacity: 0, y: 14 }}
@@ -77,7 +35,7 @@ export function HPWhyUs() {
                   <Icon className="w-4 h-4 text-brand" />
                 </div>
                 <h3 className="text-foreground mb-2" style={{ fontSize: "14px", fontWeight: 700 }}>{title}</h3>
-                <p className="text-muted-foreground" style={{ fontSize: "13px", lineHeight: "1.65" }}>{desc}</p>
+                <p className="text-muted-foreground" style={{ fontSize: "13px", lineHeight: "1.65" }}>{description}</p>
               </motion.div>
             ))}
           </div>

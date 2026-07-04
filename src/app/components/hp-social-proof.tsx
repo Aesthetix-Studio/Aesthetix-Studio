@@ -1,45 +1,7 @@
 import { motion } from "motion/react";
 import { Star } from "lucide-react";
 import { cn } from "./ui/utils";
-
-const stats = [
-  { value: "80+", label: "Brands Launched", sub: "Across 12 industries" },
-  { value: "42%", label: "Avg. Conversion Lift", sub: "Within first 90 days" },
-  { value: "4.2×", label: "Average ROI", sub: "Within 6 months of launch" },
-  { value: "₹50L+", label: "Revenue Generated", sub: "For clients since 2019" },
-];
-
-const testimonials = [
-  {
-    quote: "Aesthetix completely transformed how our company presents itself online. Three weeks after launch, we closed a ₹15L deal where the client specifically mentioned our website as the reason they reached out.",
-    name: "Sarah Chen",
-    role: "CEO",
-    company: "Luminary Financial",
-    initials: "SC",
-    avatarColor: "bg-violet-500",
-    stars: 5,
-  },
-  {
-    quote: "I've worked with five agencies over my career. Aesthetix is the first one that challenged our thinking before they started designing. The strategy session alone was worth the engagement.",
-    name: "Marcus Webb",
-    role: "Founder",
-    company: "Solari Energy",
-    initials: "MW",
-    avatarColor: "bg-amber-500",
-    stars: 5,
-  },
-  {
-    quote: "Our organic traffic went up 148% in four months. More importantly, the leads actually convert — because the site speaks to the right audience from the first line of copy.",
-    name: "Priya Nair",
-    role: "Head of Marketing",
-    company: "Helix Medical",
-    initials: "PN",
-    avatarColor: "bg-rose-500",
-    stars: 5,
-  },
-];
-
-const logoNames = ["Luminary", "Verdant", "Solari", "Nexus", "Helix", "Orbit", "Capsule", "Meridian"];
+import { fullMetrics, testimonials, logoStripNames } from "../../content";
 
 function TestimonialCard({ quote, name, role, company, initials, avatarColor, stars }: typeof testimonials[0]) {
   return (
@@ -77,7 +39,7 @@ export function HPSocialProof() {
       <section className="bg-foreground py-14 border-b border-border/20">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map(({ value, label, sub }, i) => (
+            {fullMetrics.map(({ value, label, sublabel: sub }, i) => (
               <motion.div
                 key={label}
                 initial={{ opacity: 0, y: 10 }}
@@ -108,7 +70,7 @@ export function HPSocialProof() {
             Trusted by growing teams at
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            {logoNames.map((name) => (
+            {logoStripNames.map((name) => (
               <span key={name} className="text-muted-foreground/50 hover:text-muted-foreground transition-colors" style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '-0.01em' }}>
                 {name}
               </span>

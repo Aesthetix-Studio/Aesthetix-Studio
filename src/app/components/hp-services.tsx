@@ -1,51 +1,9 @@
 import { motion } from "motion/react";
-import { Monitor, Code2, SearchCheck, Layers, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "./ui/utils";
+import { services } from "../../content";
 
-const services = [
-  {
-    icon: Monitor,
-    title: "Website Design",
-    headline: "Sites that convert browsers into buyers",
-    desc: "We design high-converting websites that balance beauty with function. Every page is crafted with your audience's intent in mind — not just aesthetics.",
-    deliverables: ["UX wireframes", "Visual design", "Responsive layouts", "Conversion optimization"],
-    accent: "from-violet-500/10 to-brand/5",
-    iconBg: "bg-brand-muted",
-    iconColor: "text-brand",
-  },
-  {
-    icon: Code2,
-    title: "Web Development",
-    headline: "Fast, clean code built to last",
-    desc: "Modern stacks, accessible markup, and performance-first builds. Your site will load in under 2 seconds and score 95+ on Google PageSpeed.",
-    deliverables: ["React / Next.js", "CMS integration", "Performance tuning", "Accessibility (WCAG AA)"],
-    accent: "from-blue-500/10 to-cyan-500/5",
-    iconBg: "bg-blue-50 dark:bg-blue-950/30",
-    iconColor: "text-blue-600 dark:text-blue-400",
-  },
-  {
-    icon: SearchCheck,
-    title: "SEO",
-    headline: "Get found by buyers who are ready",
-    desc: "Strategic on-page SEO, technical audits, and content architecture that puts you in front of high-intent audiences — and keeps you there.",
-    deliverables: ["Technical audit", "Keyword strategy", "On-page optimization", "Core Web Vitals"],
-    accent: "from-emerald-500/10 to-green-500/5",
-    iconBg: "bg-success-muted",
-    iconColor: "text-success",
-  },
-  {
-    icon: Layers,
-    title: "Digital Design",
-    headline: "Brand systems that scale with you",
-    desc: "Logos, visual systems, motion assets, and brand guidelines that make every touchpoint — from pitch decks to social — instantly recognizable.",
-    deliverables: ["Brand identity", "Design system", "Motion assets", "Brand guidelines"],
-    accent: "from-amber-500/10 to-orange-400/5",
-    iconBg: "bg-warning-muted",
-    iconColor: "text-warning",
-  },
-];
-
-function ServiceCard({ icon: Icon, title, headline, desc, deliverables, accent, iconBg, iconColor }: typeof services[0]) {
+function ServiceCard({ icon: Icon, title, headline, description, deliverables, accent, iconBg, iconColor }: typeof services[0]) {
   return (
     <motion.div
       whileHover={{ y: -3 }}
@@ -69,7 +27,7 @@ function ServiceCard({ icon: Icon, title, headline, desc, deliverables, accent, 
           {headline}
         </h3>
         <p className="text-muted-foreground mb-6" style={{ fontSize: '15px', lineHeight: '1.6' }}>
-          {desc}
+          {description}
         </p>
 
         {/* Deliverables */}

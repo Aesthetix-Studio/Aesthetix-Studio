@@ -1,39 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
-
-const founder = {
-  name: "Aesthetix Studio",
-  role: "Independent Digital Studio",
-  initials: "AS",
-  bio: "Aesthetix Studio is an independent digital experience studio focused on building high-performance websites, premium branding systems, and modern web applications. We collaborate with trusted specialists when projects require additional expertise.",
-  stats: [
-    { value: "80+", label: "Projects Delivered" },
-    { value: "6+", label: "Years in the Craft" },
-    { value: "42%", label: "Avg. Conversion Lift" },
-  ],
-};
-
-const collaborators = [
-  {
-    name: "Design Specialists",
-    description: "Brand identity, UI/UX, and design systems — brought in for projects that need deep visual expertise.",
-    color: "bg-violet-500",
-    initials: "DS",
-  },
-  {
-    name: "Development Specialists",
-    description: "React, Next.js, and modern web technologies — collaborative engineering for complex builds.",
-    color: "bg-amber-500",
-    initials: "DE",
-  },
-  {
-    name: "Strategy Specialists",
-    description: "Market research, brand positioning, and conversion strategy — data-driven creative direction.",
-    color: "bg-rose-500",
-    initials: "ST",
-  },
-];
+import { studio, collaborators, studioStats } from "../../content";
 
 export function HPTeam() {
   return (
@@ -68,15 +36,15 @@ export function HPTeam() {
               <div className="flex flex-col items-center sm:items-start gap-4">
                 <div className="w-20 h-20 rounded-2xl bg-brand/10 flex items-center justify-center border border-brand/20">
                   <span className="text-brand" style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.02em' }}>
-                    {founder.initials}
+                    {studio.initials}
                   </span>
                 </div>
                 <div className="text-center sm:text-left">
                   <h3 className="text-foreground" style={{ fontSize: '18px', fontWeight: 700, letterSpacing: '-0.02em' }}>
-                    {founder.name}
+                    {studio.name}
                   </h3>
                   <p className="text-muted-foreground" style={{ fontSize: '13px' }}>
-                    {founder.role}
+                    {studio.role}
                   </p>
                 </div>
               </div>
@@ -84,10 +52,10 @@ export function HPTeam() {
               {/* Bio + stats */}
               <div>
                 <p className="text-muted-foreground mb-6" style={{ fontSize: '15px', lineHeight: 1.7 }}>
-                  {founder.bio}
+                  {studio.bio}
                 </p>
                 <div className="flex flex-wrap gap-6">
-                  {founder.stats.map((stat) => (
+                  {studioStats.map((stat) => (
                     <div key={stat.label}>
                       <div className="text-foreground" style={{ fontSize: '22px', fontWeight: 700, letterSpacing: '-0.02em' }}>
                         {stat.value}

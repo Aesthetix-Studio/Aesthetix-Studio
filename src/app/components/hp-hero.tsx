@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
 import { Link } from "react-router";
 import { cn } from "./ui/utils";
 import { AXButton } from "./ds-buttons";
+import { heroStats } from "../../content";
 
 const projectPreviews = [
   {
@@ -29,13 +30,6 @@ const projectPreviews = [
     gradient: "from-slate-600 to-zinc-900",
     size: "large",
   },
-];
-
-const trustStats = [
-  { value: "80+", label: "brands launched" },
-  { value: "42%", label: "avg. conversion lift" },
-  { value: "4.2×", label: "average ROI" },
-  { value: "6 yrs", label: "in the craft" },
 ];
 
 export function HPHero() {
@@ -131,7 +125,7 @@ export function HPHero() {
               transition={{ duration: 0.5, delay: 0.25 }}
               className="flex flex-wrap items-center gap-x-6 gap-y-4"
             >
-              {trustStats.map(({ value, label }, i) => (
+              {heroStats.map(({ value, label }, i) => (
                 <div key={label} className="flex items-center gap-2">
                   {i > 0 && <div className="w-px h-5 bg-border hidden sm:block" />}
                   <span className="text-foreground" style={{ fontSize: '22px', fontWeight: 700, letterSpacing: '-0.02em' }}>

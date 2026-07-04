@@ -2,37 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown } from "lucide-react";
-
-const faqs = [
-  {
-    q: "What's included in a typical website project?",
-    a: "Every project starts with a strategy session, then moves through UX wireframes, full visual design in Figma, a component library, and responsive front-end development. You'll receive complete source files and a 30-day support window post-launch. The exact scope varies by package — see our Pricing section for details.",
-  },
-  {
-    q: "How long does it take to build a website?",
-    a: "A focused 5-page marketing site typically takes 4–6 weeks from kickoff to launch. Larger projects — design systems, e-commerce, or custom web apps — run 8–14 weeks. We share a detailed milestone schedule during the kickoff call so you always know what's coming next.",
-  },
-  {
-    q: "Do you work with startups that don't have a brand yet?",
-    a: "Yes — and it's actually ideal. Starting fresh means we can build everything from the right foundation. Our Growth package covers brand identity and website together, which produces more cohesive results than retrofitting a brand onto an existing site.",
-  },
-  {
-    q: "Can you take over or redesign an existing website?",
-    a: "Absolutely. We do full redesigns regularly. We'll start with a short audit of your current site — what's working, what's not, conversion data if available — then build a strategy before designing anything. We don't redesign for the sake of redesigning.",
-  },
-  {
-    q: "What do you need from us to get started?",
-    a: "A discovery call (30–60 minutes), answers to a short creative brief, access to any existing brand assets, and your key pages, goals, and timeline. Most of our clients are surprised by how little upfront content they need — we help develop copy direction as part of the process.",
-  },
-  {
-    q: "Do you offer monthly retainer plans?",
-    a: "Yes. Many clients move to a retainer after their initial project for ongoing design support — new landing pages, campaign assets, feature design, and SEO updates. Retainers start at a defined number of hours per month and include weekly check-ins. Talk to us about what would work for your team.",
-  },
-  {
-    q: "What does the discovery call actually involve?",
-    a: "It's a 30-minute conversation — not a sales pitch. We'll ask about your goals, target audience, timeline, budget range, and what success looks like for you. You'll get a clear sense of whether we're the right fit, and so will we. No pressure, no obligation.",
-  },
-];
+import { homepageFaq } from "../../content";
 
 export function HPFaq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -66,7 +36,7 @@ export function HPFaq() {
 
           {/* Right: accordion */}
           <div className="space-y-2">
-            {faqs.map((item, i) => (
+            {homepageFaq.map((item, i) => (
               <div key={i} className="bg-background rounded-xl border border-border overflow-hidden">
                 <button
                   className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-accent/50 transition-colors"
@@ -74,7 +44,7 @@ export function HPFaq() {
                   aria-expanded={open === i}
                 >
                   <span className="text-foreground pr-8" style={{ fontSize: '14px', fontWeight: 600, lineHeight: '1.4' }}>
-                    {item.q}
+                    {item.question}
                   </span>
                   <motion.div
                     animate={{ rotate: open === i ? 180 : 0 }}
@@ -95,7 +65,7 @@ export function HPFaq() {
                     >
                       <div className="px-5 pb-5 border-t border-border/40">
                         <p className="text-muted-foreground pt-4" style={{ fontSize: '14px', lineHeight: '1.75' }}>
-                          {item.a}
+                          {item.answer}
                         </p>
                       </div>
                     </motion.div>

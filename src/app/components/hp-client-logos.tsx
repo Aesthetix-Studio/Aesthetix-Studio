@@ -1,19 +1,5 @@
 import { motion } from "motion/react";
-
-const clients = [
-  { name: "PhysioCore", industry: "Healthcare", color: "text-teal-500" },
-  { name: "Aurelia", industry: "Creative", color: "text-fuchsia-500" },
-  { name: "Review Harvest", industry: "SaaS", color: "text-emerald-500" },
-  { name: "LuxeTech", industry: "E-Commerce", color: "text-amber-500" },
-  { name: "ClimateBridge", industry: "Sustainability", color: "text-green-500" },
-  { name: "Mono Studio", industry: "Agency", color: "text-neutral-500" },
-  { name: "Nexus", industry: "Technology", color: "text-blue-500" },
-  { name: "Helix Medical", industry: "Healthcare", color: "text-rose-500" },
-  { name: "Solari Energy", industry: "Energy", color: "text-orange-500" },
-  { name: "Verdant", industry: "Agriculture", color: "text-lime-500" },
-  { name: "Orbit", industry: "Technology", color: "text-indigo-500" },
-  { name: "Meridian", industry: "Finance", color: "text-cyan-500" },
-];
+import { clientLogos } from "../../content";
 
 function LogoCard({ name, industry, color }: typeof clients[0]) {
   return (
@@ -54,7 +40,7 @@ export function HPClientLogos() {
 
         {/* Logo row - scrollable on mobile, grid on desktop */}
         <div className="flex sm:grid sm:grid-cols-4 lg:grid-cols-6 gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-5 px-5 sm:mx-0 sm:px-0">
-          {clients.map((client, i) => (
+          {clientLogos.map((client, i) => (
             <motion.div
               key={client.name}
               initial={{ opacity: 0, y: 10 }}
