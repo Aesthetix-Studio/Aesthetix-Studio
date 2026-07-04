@@ -4,7 +4,7 @@
  *
  * Reusable marketing blocks for landing pages.
  * Import from here:
- *   import { Hero, FeatureGrid, FAQ, CTA } from '@/design-system/components/marketing';
+ *   import { Hero, FeatureGrid, FAQ, CTA, Statement, Metric, Quote, FeatureItem, CaseStudy } from '@/design-system/components/marketing';
  */
 
 export { Hero } from './Hero';
@@ -30,3 +30,18 @@ export type { TimelineProps, TimelineStep } from './Timeline';
 
 export { Testimonials } from './Testimonials';
 export type { TestimonialsProps, TestimonialItem } from './Testimonials';
+
+export { Statement } from './Statement';
+export type { StatementProps, StatementAlign } from './Statement';
+
+export { Metric } from './Metric';
+export type { MetricProps } from './Metric';
+
+export { Quote } from './Quote';
+export type { QuoteProps } from './Quote';
+
+export { FeatureItem } from './FeatureItem';
+export type { FeatureItemProps } from './FeatureItem';
+
+export { CaseStudy } from './CaseStudy';
+export type { CaseStudyProps } from './CaseStudy';

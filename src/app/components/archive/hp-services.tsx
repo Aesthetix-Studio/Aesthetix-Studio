@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import { cn } from "./ui/utils";
-import { services } from "../../content";
+import { cn } from "../ui/utils";
+import { services } from "../../../content";
 
 function ServiceCard({ icon: Icon, title, headline, description, deliverables, accent, iconBg, iconColor }: typeof services[0]) {
   return (

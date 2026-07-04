@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
-import { cn } from "./ui/utils";
-import { processSteps } from "../../content";
+import { cn } from "../ui/utils";
+import { processSteps } from "../../../content";
 
 export function HPProcess() {
   return (

@@ -1,9 +1,9 @@
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
 import { Link } from "react-router";
-import { cn } from "./ui/utils";
-import { AXButton } from "./ds-buttons";
-import { heroStats } from "../../content";
+import { cn } from "../ui/utils";
+import { AXButton } from "../ds-buttons";
+import { heroStats } from "../../../content";
 
 const projectPreviews = [
   {

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { clientLogos } from "../../content";
+import { clientLogos } from "../../../content";
 
 function LogoCard({ name, industry, color }: typeof clients[0]) {
   return (

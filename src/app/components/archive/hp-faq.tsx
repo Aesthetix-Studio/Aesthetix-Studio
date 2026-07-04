@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown } from "lucide-react";
-import { homepageFaq } from "../../content";
+import { homepageFaq } from "../../../content";
 
 export function HPFaq() {
   const [open, setOpen] = useState<number | null>(0);

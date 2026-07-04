@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight, Check } from "lucide-react";
 import { motion } from "motion/react";
-import { pricingPlans } from "../../content";
+import { pricingPlans } from "../../../content";
 
 export function HPPricingPreview() {
   return (

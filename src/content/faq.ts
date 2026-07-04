@@ -14,28 +14,24 @@ export interface FAQItem {
 
 export const homepageFaq: FAQItem[] = [
   {
-    question: 'What\'s included in a typical website project?',
-    answer: 'Every project starts with a strategy session, then moves through UX wireframes, full visual design in Figma, a component library, and responsive front-end development. You\'ll receive complete source files and a 30-day support window post-launch.',
+    question: 'How long does a project take?',
+    answer: 'A focused 5-page marketing site typically takes 4–6 weeks from kickoff to launch. Larger projects — design systems, SaaS products, or custom web apps — run 8–14 weeks. We share a detailed milestone schedule at kickoff.',
   },
   {
-    question: 'How long does it take to build a website?',
-    answer: 'A focused 5-page marketing site typically takes 4–6 weeks from kickoff to launch. Larger projects — design systems, e-commerce, or custom web apps — run 8–14 weeks.',
+    question: 'Can you redesign an existing product?',
+    answer: 'Absolutely. We start with a short audit of your current site — what\'s working, what\'s not, conversion data if available — then build a strategy before designing anything.',
   },
   {
-    question: 'Do you work with startups that don\'t have a brand yet?',
-    answer: 'Yes — and it\'s actually ideal. Starting fresh means we can build everything from the right foundation. Our Growth package covers brand identity and website together.',
+    question: 'Do you build AI-powered applications?',
+    answer: 'Yes. We integrate AI thoughtfully — from intelligent search and content generation to complex analytics dashboards and automated workflows. We only recommend AI when it solves a real business problem.',
   },
   {
-    question: 'Can you take over or redesign an existing website?',
-    answer: 'Absolutely. We do full redesigns regularly. We\'ll start with a short audit of your current site — what\'s working, what\'s not — then build a strategy before designing anything.',
+    question: 'Can you work with our existing team?',
+    answer: 'We regularly collaborate with in-house teams, other agencies, and freelance developers. We\'re flexible — we can lead the entire project or plug into your existing workflow.',
   },
   {
-    question: 'What do you need from us to get started?',
-    answer: 'A discovery call (30–60 minutes), answers to a short creative brief, access to any existing brand assets, and your key pages, goals, and timeline.',
-  },
-  {
-    question: 'Do you offer monthly retainer plans?',
-    answer: 'Yes. Many clients move to a retainer after their initial project for ongoing design support — new landing pages, campaign assets, feature design, and SEO updates.',
+    question: 'Do you provide long-term support?',
+    answer: 'Yes. Many clients move to a monthly retainer after their initial project for ongoing design, new features, and optimization. We also offer 30-day post-launch support with every project.',
   },
 ];
 

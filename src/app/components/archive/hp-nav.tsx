@@ -2,9 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router";
-import { cn } from "./ui/utils";
-import { AXButton } from "./ds-buttons";
-import { AesthetixWordmark } from "./AesthetixMark";
+import { cn } from "../ui/utils";
+import { AXButton } from "../ds-buttons";
+import { AesthetixWordmark } from "../AesthetixMark";
 
 const navLinks = [
   {

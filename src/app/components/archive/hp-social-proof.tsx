@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Star } from "lucide-react";
-import { cn } from "./ui/utils";
-import { fullMetrics, testimonials, logoStripNames } from "../../content";
+import { cn } from "../ui/utils";
+import { fullMetrics, testimonials, logoStripNames } from "../../../content";
 
 function TestimonialCard({ quote, name, role, company, initials, avatarColor, stars }: typeof testimonials[0]) {
   return (

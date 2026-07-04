@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import { cn } from "./ui/utils";
-import { AXButton } from "./ds-buttons";
+import { cn } from "../ui/utils";
+import { AXButton } from "../ds-buttons";
 
 const projects = [
   {

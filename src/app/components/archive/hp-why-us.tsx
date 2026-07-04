@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { reasons, comparisonRows } from "../../content";
+import { reasons, comparisonRows } from "../../../content";
 
 export function HPWhyUs() {
   return (

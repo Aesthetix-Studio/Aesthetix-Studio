@@ -4,7 +4,7 @@
  *
  * Central export for all structured content.
  * Import from here:
- *   import { services, testimonials, heroStats } from '@/content';
+ *   import { capabilities, projects, techStack, testimonials } from '@/content';
  */
 
 export { services } from './services';
@@ -33,3 +33,12 @@ export type { Reason, ComparisonRow } from './whyUs';
 
 export { studio, collaborators } from './team';
 export type { TeamMember } from './team';
+
+export { capabilities } from './capabilities';
+export type { Capability } from './capabilities';
+
+export { projects } from './projects';
+export type { Project } from './projects';
+
+export { techStack } from './techStack';
+export type { TechCategory } from './techStack';

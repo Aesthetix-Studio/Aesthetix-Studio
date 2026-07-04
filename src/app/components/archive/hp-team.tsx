@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
-import { studio, collaborators, studioStats } from "../../content";
+import { studio, collaborators, studioStats } from "../../../content";
 
 export function HPTeam() {
   return (
