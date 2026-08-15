@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Aesthetix Studio — digital product studio site. Static HTML generated from templates, served by a zero-dependency Node server with a JSON API.",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "build": "node scripts/generate.js",
     "generate": "node scripts/generate.js",

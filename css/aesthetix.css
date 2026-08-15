@@ -666,6 +666,27 @@ h3{font:32px/.98 var(--serif);letter-spacing:-.02em;margin:0 0 18px}
 .quote-author b{display:block;font-size:13px}
 .quote-author span{font-size:11px;color:var(--text-3)}
 
+/* ── Tool screens, legal prose & generated auth (generate.js templates) ── */
+.screen-head h1{font-family:var(--serif);letter-spacing:-.02em;font-size:clamp(38px,4.5vw,64px);margin:0 0 14px}
+.screen-head .small{color:var(--text-2);font-size:13px;max-width:560px}
+.screen-img{margin-top:34px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--surface-1)}
+.screen-img img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
+.screen-cards{padding-top:0}
+.screen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.scard{background:var(--surface-1);border:1px solid var(--line);border-radius:12px;padding:26px}
+.scard h3{font-size:22px;margin-bottom:10px}
+.prose{max-width:720px}
+.prose h2{font-size:clamp(24px,2.5vw,34px);margin-top:38px}
+.auth{min-height:70vh;display:grid;place-items:center;padding:120px 28px 80px}
+.auth-card h1{font-family:var(--serif);letter-spacing:-.02em;font-size:clamp(30px,3.5vw,44px);margin:0 0 6px}
+.auth-card .field{margin-bottom:16px}
+.auth-card .field input{border-color:var(--line);background:var(--surface-2);color:var(--white)}
+.auth-card .field label{color:var(--text-2)}
+.auth-card .submit{background:var(--brand);color:#fff;margin-top:6px}
+.submit{width:100%;border:0;background:var(--brand);color:#fff;padding:15px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;margin-top:24px}
+.auth-alt{margin-top:14px;color:var(--text-3)}
+.auth-alt a{color:var(--brand)}
+
 /* ── Responsive ────────────────────────────────────────────── */
 @media(max-width:1024px){
   .dash-stat-cards{grid-template-columns:repeat(3,1fr)}
@@ -751,4 +772,6 @@ h3{font:32px/.98 var(--serif);letter-spacing:-.02em;margin:0 0 18px}
   .dash-sidebar{display:none}
   .dash-stat-cards{grid-template-columns:1fr 1fr}
   .dash-main-grid,.dash-second-grid{grid-template-columns:1fr}
+  .screen-grid{grid-template-columns:1fr}
+  .auth{padding:110px 24px 70px}
 }
