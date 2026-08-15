@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /site
+Disallow: /scripts
+
+Sitemap: https://aesthetixstudio.com/sitemap.xml
