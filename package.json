@@ -3,11 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Velora — fine jewellery static site (htmx + Alpine.js, no build step)",
+  "description": "Aesthetix Studio — digital product studio site. Static HTML generated from templates, served by a zero-dependency Node server with a JSON API.",
   "scripts": {
     "build": "node scripts/generate.js",
     "generate": "node scripts/generate.js",
     "serve": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
     "check": "node scripts/serve.mjs --check",
     "dev": "node scripts/generate.js && node scripts/serve.mjs"
   }

@@ -31,5 +31,5 @@ Zero-dependency Node project — no `npm install`, no frameworks. Node stdlib on
 - **Serve:** `node scripts/serve.mjs` (a.k.a. `npm run serve`) — stdlib-only static server on http://localhost:4173 (`PORT` env overrides). Clean URLs (`/work` → `work.html`) and 301s from `.html` to the clean URL are handled here.
 - **Dev:** `npm run dev` = generate + serve.
 - **Self-check:** `npm run check` boots the server on an ephemeral port and asserts routes (status, content-type, redirects, contact API, traversal 403). Keep it green; extend it whenever routes or behavior change.
-- **Contact form:** `POST /api/contact` validates input and stores submissions in SQLite via `node:sqlite` at `data/contact.sqlite` (gitignored; in-memory during self-check). Local-dev only — Vercel static hosting has no persistent filesystem.
+- **Admin API:** `scripts/api.mjs` (mounted by `serve.mjs` at `/api/*`) — JSON CRUD for `leads, projects, invoices, users, articles, proposals, feedback, media` in one SQLite file `data/app.sqlite` via `node:sqlite` (gitignored; `:memory:` during self-check). Seeded on first run. `POST /api/contact` writes to `leads`. Deliberately not wired to the frontend yet; no auth yet — local-dev only, Vercel static hosting has no persistent filesystem.
 - **Rule:** never add an npm dependency — the standard library covers everything this project needs.
