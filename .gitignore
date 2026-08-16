@@ -29,3 +29,6 @@ dist-ssr
 # Added by code-review-graph
 .code-review-graph/
 .gstack/
+
+# Agent-to-agent scratchpad — never commit
+A2A.md

@@ -88,6 +88,11 @@ if (check) {
       ['/pricing', 200, 'text/html', '', ['₹29,999', 'Growth']], // pricing tiers
       ['/dashboard', 200, 'text/html', '', ['dash-layout', 'Rohit Malhotra']], // dashboard
       ['/admin', 301, '', '/dashboard'], // admin alias
+      ['/admin-analytics', 200, 'text/html', '', ['Analytics — Aesthetix Studio', 'dash-layout']], // other agent's admin screens
+      ['/admin-articles', 200, 'text/html', '', ['adm-table', 'Articles — Aesthetix Studio']],
+      ['/admin-leads', 200, 'text/html', '', ['adm-table', 'Leads — Aesthetix Studio']],
+      ['/admin-media', 200, 'text/html', '', ['Media Library — Aesthetix Studio']],
+      ['/admin-projects', 200, 'text/html', '', ['adm-table', 'Projects — Aesthetix Studio']],
       ['/500', 200, 'text/html', '', ['Server error']], // error screen
     ];
     const req = (path, { method = 'GET', body } = {}) => new Promise((ok, fail) => {
@@ -115,6 +120,13 @@ if (check) {
     api('POST /api/contact invalid', await req('/api/contact', { method: 'POST', body: { name: '', email: 'nope', message: '' } }), 400);
     api('GET /api/contact', await req('/api/contact'), 405);
     api('GET /api/leads', await req('/api/leads'), 200, '"name":"Sam Chen"'); // seeded
+    api('POST /api/leads bad status', await req('/api/leads', { method: 'POST', body: { name: 'X', email: 'x@x.com', message: 'hi', status: 'wonky' } }), 400); // enum enforced
+    api('PUT /api/leads/3 reply', await req('/api/leads/3', { method: 'PUT', body: { status: 'contacted' } }), 200, '"id":3'); // replied_at stamped
+    api('GET /api/leads/3 replied', await req('/api/leads/3'), 200, '"replied_at"');
+    api('POST /api/leads/3/convert', await req('/api/leads/3/convert', { method: 'POST' }), 201, '"project_id"'); // won + project created
+    api('POST /api/leads/3/convert twice', await req('/api/leads/3/convert', { method: 'POST' }), 409); // already won
+    api('POST /api/leads/999/convert', await req('/api/leads/999/convert', { method: 'POST' }), 404);
+    api('GET /api/projects converted', await req('/api/projects'), 200, '"Vertex — new engagement"'); // project from lead
     api('GET /api/dashboard', await req('/api/dashboard'), 200, '"projects_active"'); // aggregates
     api('GET /api/dashboard charts', await req('/api/dashboard'), 200, '"top_pages"'); // chart datasets
     api('GET /api/dashboard sources', await req('/api/dashboard'), 200, '"Organic Search"');
@@ -132,11 +144,11 @@ if (check) {
     api('GET /api/projects', await req('/api/projects'), 200, '"Luminary Financial"');
     api('GET /api/projects/1', await req('/api/projects/1'), 200, '"client":"Luminary Financial"');
     api('GET /api/projects/999', await req('/api/projects/999'), 404);
-    api('POST /api/projects', await req('/api/projects', { method: 'POST', body: { title: 'Test project', client: 'Acme' } }), 201, '"id":5');
-    api('PUT /api/projects/5', await req('/api/projects/5', { method: 'PUT', body: { status: 'review' } }), 200, '"id":5');
-    api('GET /api/projects/5 updated', await req('/api/projects/5'), 200, '"status":"review"');
-    api('DELETE /api/projects/5', await req('/api/projects/5', { method: 'DELETE' }), 200);
-    api('GET /api/projects/5 deleted', await req('/api/projects/5'), 404);
+    api('POST /api/projects', await req('/api/projects', { method: 'POST', body: { title: 'Test project', client: 'Acme' } }), 201, '"id":6'); // id 5 is the converted lead's project
+    api('PUT /api/projects/6', await req('/api/projects/6', { method: 'PUT', body: { status: 'review' } }), 200, '"id":6');
+    api('GET /api/projects/6 updated', await req('/api/projects/6'), 200, '"status":"review"');
+    api('DELETE /api/projects/6', await req('/api/projects/6', { method: 'DELETE' }), 200);
+    api('GET /api/projects/6 deleted', await req('/api/projects/6'), 404);
     api('POST /api/projects empty', await req('/api/projects', { method: 'POST', body: {} }), 400);
     api('POST /api/invoices bad amount', await req('/api/invoices', { method: 'POST', body: { client: 'X', amount: 'abc' } }), 400);
     api('PUT /api/leads (collection)', await req('/api/leads', { method: 'PUT', body: {} }), 405);

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leads — Aesthetix Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+.ftabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
+.ftab.active{background:var(--brand);color:#fff}
+.adm-table{width:100%;border-collapse:collapse;font-size:12px}
+.adm-table th{color:var(--text-4);font-weight:500;padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+.adm-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.adm-table tr:hover td{background:rgba(255,255,255,.02)}
+.bx{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;display:inline-block}
+.bx-new{background:rgba(108,92,231,.15);color:#6C5CE7}
+.bx-contacted{background:rgba(59,130,246,.15);color:#3b82f6}
+.bx-qualified{background:rgba(34,197,94,.15);color:#22c55e}
+.bx-proposal{background:rgba(245,158,11,.15);color:#f59e0b}
+.bx-converted{background:rgba(16,185,129,.15);color:#10b981}
+.bx-lost{background:rgba(239,68,68,.15);color:#ef4444}
+.src-badge{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:500;background:var(--surface-2);color:var(--text-3)}
+.score-dot{width:7px;height:7px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body style="overflow:hidden">
+<div class="dash-layout">
+
+<aside class="dash-sidebar">
+  <div class="dash-logo-wrap">
+    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
+    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+  </div>
+  <div class="dash-user">
+    <div class="dash-avatar">RM</div>
+    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
+    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+  </div>
+  <nav class="dash-nav">
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Overview</div>
+      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
+      <a class="dash-nav-item" href="/admin-analytics.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</a>
+    </div>
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Content</div>
+      <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
+      <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Articles</a>
+      <a class="dash-nav-item" href="/admin-media.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
+      <a class="dash-nav-item" href="/admin-forms.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></span> Forms</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Pages</a>
+    </div>
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">CRM</div>
+      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Lead Sources</a>
+    </div>
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">AI Tools</div>
+      <a class="dash-nav-item" href="/admin-proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
+      <a class="dash-nav-item" href="/admin-ai-chat.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
+      <a class="dash-nav-item" href="/admin-brand-audit.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
+    </div>
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">System</div>
+      <a class="dash-nav-item" href="/admin-users.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
+      <a class="dash-nav-item" href="/admin-settings.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span> Activity Logs</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
+    </div>
+  </nav>
+  <div class="dash-sidebar-bottom">
+    <button class="dash-visit-btn">Visit Website ↗</button>
+    <div class="dash-dark-toggle">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
+      <div class="toggle-switch on"></div>
+    </div>
+  </div>
+</aside>
+
+<div class="dash-main">
+  <div class="dash-topbar">
+    <div><h1>Leads</h1><p>Track and manage all your sales leads and prospects.</p></div>
+    <div class="dash-topbar-right">
+      <div class="dash-search"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="text" placeholder="Search leads..."><span class="dash-search-kbd">⌘K</span></div>
+      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filters</button>
+      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+      <button class="btn-create-new">+ Add Lead</button>
+    </div>
+  </div>
+
+  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
+
+    <!-- 6 stat cards -->
+    <div class="dash-stat-cards" style="grid-template-columns:repeat(6,1fr)">
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="dash-stat-label">Total Leads</div>
+        <div class="dash-stat-value">342</div>
+        <div class="dash-stat-delta delta-up">↑ 24.3%</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,28 25,22 50,18 75,12 100,8" fill="none" stroke="#6C5CE7" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#3b82f6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="dash-stat-label">New</div>
+        <div class="dash-stat-value">58</div>
+        <div class="dash-stat-delta delta-up">↑ 12.1%</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,30 25,24 50,18 75,14 100,10" fill="none" stroke="#3b82f6" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+        <div class="dash-stat-label">Contacted</div>
+        <div class="dash-stat-value">124</div>
+        <div class="dash-stat-delta delta-up">↑ 8.4%</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,26 25,22 50,18 75,14 100,12" fill="none" stroke="#f59e0b" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="dash-stat-label">Qualified</div>
+        <div class="dash-stat-value">87</div>
+        <div class="dash-stat-delta delta-up">↑ 16.2%</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,32 25,26 50,20 75,14 100,8" fill="none" stroke="#22c55e" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#10b981"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="dash-stat-label">Converted</div>
+        <div class="dash-stat-value">43</div>
+        <div class="dash-stat-delta delta-up">↑ 31.7%</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,32 25,28 50,22 75,14 100,8" fill="none" stroke="#10b981" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#ec4899"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <div class="dash-stat-label">Conv. Rate</div>
+        <div class="dash-stat-value">12.6%</div>
+        <div class="dash-stat-delta delta-up">↑ 2.4%</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,28 25,24 50,18 75,14 100,10" fill="none" stroke="#ec4899" stroke-width="1.5"/></svg></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 260px;gap:16px">
+
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div class="ftabs">
+            <button class="ftab active">All</button>
+            <button class="ftab">New</button>
+            <button class="ftab">Contacted</button>
+            <button class="ftab">Qualified</button>
+            <button class="ftab">Proposal Sent</button>
+            <button class="ftab">Converted</button>
+            <button class="ftab">Lost</button>
+          </div>
+        </div>
+        <div class="dash-chart-card" style="padding:0;overflow:hidden">
+          <table class="adm-table">
+            <thead>
+              <tr>
+                <th style="padding-left:14px">Lead</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th>Score</th>
+                <th>Value</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding-left:14px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(108,92,231,.25);color:#6C5CE7;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">SJ</div>
+                    <div><div style="font-weight:600;color:#fff;font-size:12px">Sarah Johnson</div><div style="color:var(--text-4);font-size:10px">sarah.j@example.com</div></div>
+                  </div>
+                </td>
+                <td><span class="src-badge">Contact Form</span></td>
+                <td><span class="bx bx-new">New</span></td>
+                <td><span class="score-dot" style="background:#22c55e"></span><span style="font-size:11px;color:var(--text-2)">92</span></td>
+                <td style="color:var(--text-2)">₹1,20,000</td>
+                <td style="color:var(--text-3);font-size:11px">May 24, 2025</td>
+                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+              </tr>
+              <tr>
+                <td style="padding-left:14px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(59,130,246,.25);color:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">RK</div>
+                    <div><div style="font-weight:600;color:#fff;font-size:12px">Rahul Kumar</div><div style="color:var(--text-4);font-size:10px">rahul.k@techcorp.in</div></div>
+                  </div>
+                </td>
+                <td><span class="src-badge">LinkedIn</span></td>
+                <td><span class="bx bx-qualified">Qualified</span></td>
+                <td><span class="score-dot" style="background:#22c55e"></span><span style="font-size:11px;color:var(--text-2)">88</span></td>
+                <td style="color:var(--text-2)">₹2,50,000</td>
+                <td style="color:var(--text-3);font-size:11px">May 22, 2025</td>
+                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+              </tr>
+              <tr>
+                <td style="padding-left:14px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(34,197,94,.25);color:#22c55e;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">PM</div>
+                    <div><div style="font-weight:600;color:#fff;font-size:12px">Priya Mehta</div><div style="color:var(--text-4);font-size:10px">priya@studiom.com</div></div>
+                  </div>
+                </td>
+                <td><span class="src-badge">Referral</span></td>
+                <td><span class="bx bx-proposal">Proposal Sent</span></td>
+                <td><span class="score-dot" style="background:#f59e0b"></span><span style="font-size:11px;color:var(--text-2)">74</span></td>
+                <td style="color:var(--text-2)">₹85,000</td>
+                <td style="color:var(--text-3);font-size:11px">May 20, 2025</td>
+                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+              </tr>
+              <tr>
+                <td style="padding-left:14px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(16,185,129,.25);color:#10b981;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">AS</div>
+                    <div><div style="font-weight:600;color:#fff;font-size:12px">Arjun Singh</div><div style="color:var(--text-4);font-size:10px">arjun@nexabrands.io</div></div>
+                  </div>
+                </td>
+                <td><span class="src-badge">Organic</span></td>
+                <td><span class="bx bx-converted">Converted</span></td>
+                <td><span class="score-dot" style="background:#22c55e"></span><span style="font-size:11px;color:var(--text-2)">96</span></td>
+                <td style="color:var(--text-2)">₹1,40,000</td>
+                <td style="color:var(--text-3);font-size:11px">May 18, 2025</td>
+                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+              </tr>
+              <tr>
+                <td style="padding-left:14px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(245,158,11,.25);color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">DW</div>
+                    <div><div style="font-weight:600;color:#fff;font-size:12px">Diana Webb</div><div style="color:var(--text-4);font-size:10px">d.webb@horizonco.com</div></div>
+                  </div>
+                </td>
+                <td><span class="src-badge">Instagram</span></td>
+                <td><span class="bx bx-contacted">Contacted</span></td>
+                <td><span class="score-dot" style="background:#f59e0b"></span><span style="font-size:11px;color:var(--text-2)">61</span></td>
+                <td style="color:var(--text-2)">₹60,000</td>
+                <td style="color:var(--text-3);font-size:11px">May 16, 2025</td>
+                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+              </tr>
+              <tr>
+                <td style="padding-left:14px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(239,68,68,.25);color:#ef4444;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">VN</div>
+                    <div><div style="font-weight:600;color:#fff;font-size:12px">Vikram Nair</div><div style="color:var(--text-4);font-size:10px">vnair@example.com</div></div>
+                  </div>
+                </td>
+                <td><span class="src-badge">Google Ads</span></td>
+                <td><span class="bx bx-lost">Lost</span></td>
+                <td><span class="score-dot" style="background:#ef4444"></span><span style="font-size:11px;color:var(--text-2)">32</span></td>
+                <td style="color:var(--text-2)">₹45,000</td>
+                <td style="color:var(--text-3);font-size:11px">May 12, 2025</td>
+                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:11px;color:var(--text-4)">Showing 1–6 of 342 leads</span>
+            <div style="display:flex;gap:4px">
+              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
+              <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
+              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">2</button>
+              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panels -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="dash-chart-card">
+          <h3>Leads Overview</h3>
+          <div class="dash-pie-wrap" style="gap:12px">
+            <div class="dash-pie" style="width:90px;height:90px"><div class="dash-pie-hole" style="width:62px;height:62px"><div class="dash-pie-total" style="font-size:16px">342</div><div class="dash-pie-label">Total</div></div></div>
+            <div class="dash-pie-legend">
+              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#6C5CE7"></div> New &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;58</div>
+              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#3b82f6"></div> Contacted 124</div>
+              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#22c55e"></div> Qualified &nbsp;87</div>
+              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#10b981"></div> Converted 43</div>
+              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#ef4444"></div> Lost &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30</div>
+            </div>
+          </div>
+        </div>
+        <div class="dash-chart-card">
+          <h3>Leads by Source</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
+              <span style="color:var(--text-2)">Contact Form</span>
+              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:38%;height:4px;background:#6C5CE7;border-radius:2px"></div></div>
+              <span style="color:var(--text-3);min-width:28px;text-align:right">38%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
+              <span style="color:var(--text-2)">LinkedIn</span>
+              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:24%;height:4px;background:#3b82f6;border-radius:2px"></div></div>
+              <span style="color:var(--text-3);min-width:28px;text-align:right">24%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
+              <span style="color:var(--text-2)">Organic</span>
+              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:18%;height:4px;background:#22c55e;border-radius:2px"></div></div>
+              <span style="color:var(--text-3);min-width:28px;text-align:right">18%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
+              <span style="color:var(--text-2)">Referral</span>
+              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:12%;height:4px;background:#f59e0b;border-radius:2px"></div></div>
+              <span style="color:var(--text-3);min-width:28px;text-align:right">12%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
+              <span style="color:var(--text-2)">Instagram</span>
+              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:8%;height:4px;background:#ec4899;border-radius:2px"></div></div>
+              <span style="color:var(--text-3);min-width:28px;text-align:right">8%</span>
+            </div>
+          </div>
+        </div>
+        <div class="dash-chart-card">
+          <h3>Recent Activity <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <div style="width:26px;height:26px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">SJ</div>
+              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">New lead: Sarah Johnson</div><div style="font-size:10px;color:var(--text-4)">2 min ago · Contact Form</div></div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <div style="width:26px;height:26px;border-radius:50%;background:rgba(16,185,129,.15);color:#10b981;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">AS</div>
+              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Arjun Singh converted</div><div style="font-size:10px;color:var(--text-4)">1 hr ago · ₹1,40,000</div></div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <div style="width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,.15);color:#f59e0b;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">PM</div>
+              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Proposal sent to Priya</div><div style="font-size:10px;color:var(--text-4)">3 hrs ago</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

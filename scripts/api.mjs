@@ -10,10 +10,11 @@ const now = () => new Date().toISOString();
 
 const entities = {
   leads: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, company TEXT DEFAULT '', website TEXT DEFAULT '', project_type TEXT DEFAULT '', message TEXT NOT NULL, status TEXT DEFAULT 'new', created_at TEXT NOT NULL",
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, company TEXT DEFAULT '', website TEXT DEFAULT '', project_type TEXT DEFAULT '', message TEXT NOT NULL, status TEXT DEFAULT 'new', replied_at TEXT DEFAULT '', created_at TEXT NOT NULL",
     fields: ['name', 'email', 'company', 'website', 'project_type', 'message', 'status'],
     required: ['name', 'email', 'message'],
     defaults: { status: 'new' },
+    statuses: ['new', 'contacted', 'won'],
     search: ['name', 'email', 'company'],
     validate(d) {
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(d.email ?? ''))) return 'A valid email address is required.';
@@ -29,6 +30,7 @@ const entities = {
     fields: ['title', 'client', 'status', 'timeline', 'budget', 'description'],
     required: ['title', 'client'],
     defaults: { status: 'active' },
+    statuses: ['active', 'review', 'completed'],
     search: ['title', 'client', 'status'],
     seed: [
       ['Designing trust in financial experiences.', 'Luminary Financial', 'completed', '4 Months', '$48,000', 'Wealth management platform rebuilt around clarity and trust.', ],
@@ -42,6 +44,7 @@ const entities = {
     fields: ['client', 'amount', 'status', 'due_date'],
     required: ['client'],
     defaults: { status: 'draft', amount: 0 },
+    statuses: ['draft', 'paid', 'outstanding'],
     validate(d) {
       if (d.amount !== undefined && Number.isNaN(Number(d.amount))) return 'amount must be a number.';
     },
@@ -72,6 +75,7 @@ const entities = {
     fields: ['title', 'category', 'status', 'read_time'],
     required: ['title'],
     defaults: { status: 'draft' },
+    statuses: ['draft', 'published', 'scheduled'],
     search: ['title', 'category', 'status'],
     seed: [
       ['Designing for clarity in a noisy world.', 'Design', 'published', '8 min'],
@@ -85,6 +89,7 @@ const entities = {
     fields: ['title', 'client', 'scope', 'investment', 'status'],
     required: ['title'],
     defaults: { status: 'draft', investment: 0 },
+    statuses: ['draft', 'sent', 'accepted', 'rejected'],
     validate(d) {
       if (d.investment !== undefined && Number.isNaN(Number(d.investment))) return 'investment must be a number.';
     },
@@ -139,6 +144,7 @@ const entities = {
     fields: ['title', 'date', 'attendees', 'summary', 'status', 'action_items'],
     required: ['title'],
     defaults: { status: 'scheduled' },
+    statuses: ['scheduled', 'held'],
     search: ['title', 'attendees', 'status'],
     seed: [
       ['Luminary kickoff', '2026-08-10', 'Sarah Mitchell, Aarav Shah', 'Scope confirmed; design sprint booked.', 'held', 'Send discovery summary'],
@@ -151,6 +157,7 @@ const entities = {
     fields: ['form_name', 'name', 'email', 'message', 'status'],
     required: ['form_name'],
     defaults: { status: 'new' },
+    statuses: ['new', 'qualified', 'converted'],
     search: ['form_name', 'name', 'email', 'status'],
     seed: [
       ['Contact form', 'Amelia Ross', 'amelia@northwind.com', 'Interested in a full website redesign.', 'qualified'],
@@ -163,6 +170,7 @@ const entities = {
     fields: ['title', 'project', 'assignee', 'status', 'due_date'],
     required: ['title'],
     defaults: { status: 'todo' },
+    statuses: ['todo', 'in progress', 'done'],
     search: ['title', 'project', 'assignee', 'status'],
     seed: [
       ['Send Luminary discovery summary', 'Luminary Financial', 'Sarah Chen', 'done', '2026-08-12'],
@@ -176,6 +184,7 @@ const entities = {
     fields: ['project_id', 'title', 'status', 'due_date'],
     required: ['title'],
     defaults: { project_id: 0, status: 'scheduled' },
+    statuses: ['scheduled', 'in progress', 'complete'],
     search: ['title', 'status'],
     seed: [
       [1, 'Discovery & audit', 'complete', '2026-08-01'],
@@ -256,8 +265,16 @@ const values = (e, d) => e.fields.map((f) => (d[f] !== undefined ? String(d[f]) 
 export function createApi({ file }) {
   if (file !== ':memory:') mkdirSync(dirname(resolve(file)), { recursive: true });
   const db = new DatabaseSync(file);
+  // ponytail: keep the schema forward-compatible — existing DBs (created before a column
+  // was added to an entity's cols) get the new column via ALTER TABLE. Ceiling: one-shot
+  // migrations only; upgrade path: a proper migration runner if the schema keeps growing.
+  const ensureCols = (t, cols) => {
+    const have = new Set(db.prepare(`PRAGMA table_info(${t})`).all().map((c) => c.name));
+    for (const c of cols) if (!have.has(c.split(' ')[0])) db.exec(`ALTER TABLE ${t} ADD COLUMN ${c}`);
+  };
   for (const [name, e] of Object.entries(entities)) {
     db.exec(`CREATE TABLE IF NOT EXISTS ${name} (${e.cols})`);
+    ensureCols(name, ['replied_at TEXT DEFAULT ""']); // leads.replied_at for 24h-reply tracking
     const { n } = db.prepare(`SELECT COUNT(*) n FROM ${name}`).get();
     if (!n && e.seed?.length) {
       const ins = db.prepare(`INSERT INTO ${name} (${e.fields.join(', ')}, created_at) VALUES (${e.fields.map(() => '?').join(', ')}, ?)`);
@@ -267,6 +284,7 @@ export function createApi({ file }) {
 
   const create = (res, table, e, d) => {
     for (const f of e.required) if (!String(d[f] ?? '').trim()) return send(res, 400, { ok: false, error: `${f} is required.` });
+    if (e.statuses && d.status !== undefined && !e.statuses.includes(d.status)) return send(res, 400, { ok: false, error: `status must be one of: ${e.statuses.join(', ')}.` });
     if (e.validate) { const err = e.validate(d); if (err) return send(res, 400, { ok: false, error: err }); }
     const info = db.prepare(`INSERT INTO ${table} (${e.fields.join(', ')}, created_at) VALUES (${e.fields.map(() => '?').join(', ')}, ?)`).run(...values(e, d), now());
     return send(res, 201, { ok: true, id: Number(info.lastInsertRowid) });
@@ -304,6 +322,7 @@ export function createApi({ file }) {
         projects_completed: count('projects', 'status', 'completed'),
         leads_new: count('leads', 'status', 'new'),
         leads_won: count('leads', 'status', 'won'),
+        leads_replied_24h: db.prepare(`SELECT COUNT(*) n FROM leads WHERE replied_at != '' AND (julianday('now') - julianday(replied_at)) <= 1`).get().n,
         invoices_outstanding: count('invoices', 'status', 'outstanding'),
         invoices_collected: count('invoices', 'status', 'paid'),
         users_team: count('users', 'role', 'team'),
@@ -408,9 +427,9 @@ export function createApi({ file }) {
 
   return async (req, res) => {
     const [path, qs = ''] = req.url.split('?');
-    const m = path.match(/^\/api\/([a-z-]+)(?:\/(\d+))?$/);
+    const m = path.match(/^\/api\/([a-z-]+)(?:\/(\d+))?(?:\/([a-z-]+))?$/);
     if (!m) return send(res, 404, { ok: false, error: 'Unknown endpoint' });
-    let name = m[1], id = m[2];
+    let name = m[1], id = m[2], action = m[3];
     // the contact form posts here; it is just a lead with status 'new'
     if (name === 'contact') {
       const ct = (req.headers['content-type'] || '').split(';')[0];
@@ -433,6 +452,18 @@ export function createApi({ file }) {
     }
     const e = entities[name];
     if (!e) return send(res, 404, { ok: false, error: `No such resource: ${name}` });
+    // lead → project conversion: marks the lead won and creates a project from it
+    if (name === 'leads' && action === 'convert') {
+      if (req.method !== 'POST') return send(res, 405, { ok: false, error: 'Method not allowed' });
+      const lead = db.prepare(`SELECT * FROM leads WHERE id = ?`).get(id);
+      if (!lead) return send(res, 404, { ok: false, error: 'Lead not found' });
+      if (lead.status === 'won') return send(res, 409, { ok: false, error: 'Lead already converted' });
+      const info = db.prepare(`INSERT INTO projects (title, client, status, description, created_at) VALUES (?, ?, 'active', ?, ?)`)
+        .run(`${lead.company || lead.name} — new engagement`, lead.company || lead.name, lead.message, now());
+      db.prepare(`UPDATE leads SET status = 'won', replied_at = ? WHERE id = ?`).run(now(), id);
+      return send(res, 201, { ok: true, lead_id: Number(id), project_id: Number(info.lastInsertRowid) });
+    }
+    if (action) return send(res, 404, { ok: false, error: 'Unknown action' });
     if (id) {
       if (!['GET', 'PUT', 'DELETE'].includes(req.method)) return send(res, 405, { ok: false, error: 'Method not allowed' });
       const row = db.prepare(`SELECT * FROM ${name} WHERE id = ?`).get(id);
@@ -444,9 +475,12 @@ export function createApi({ file }) {
       }
       const d = await jsonBody(req, res);
       if (!d) return;
+      if (e.statuses && d.status !== undefined && !e.statuses.includes(d.status)) return send(res, 400, { ok: false, error: `status must be one of: ${e.statuses.join(', ')}.` });
       const patch = pick(e, d);
       if (!Object.keys(patch).length) return send(res, 400, { ok: false, error: 'Nothing to update' });
       if (e.validate) { const err = e.validate({ ...row, ...d }); if (err) return send(res, 400, { ok: false, error: err }); }
+      // leads: stamp replied_at the first time a lead moves past 'new'
+      if (name === 'leads' && d.status && d.status !== 'new' && !row.replied_at) patch.replied_at = now();
       db.prepare(`UPDATE ${name} SET ${Object.keys(patch).map((f) => `${f} = ?`).join(', ')} WHERE id = ?`).run(...Object.values(patch), id);
       return send(res, 200, { ok: true, id: Number(id) });
     }
