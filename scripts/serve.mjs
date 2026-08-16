@@ -46,6 +46,8 @@ const server = createServer(async (req, res) => {
     const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
     return res.writeHead(301, { location: target + qs }).end();
   }
+  // aliases: /admin is the admin dashboard (the old React SPA's /admin route)
+  if (clean === '/admin') return res.writeHead(301, { location: '/dashboard' }).end();
   const file = resolve(root, '.' + clean);
   // serve only files inside the project root
   if (relative(root, file).split(/[\\/]/)[0] === '..') return res.writeHead(403, { 'content-type': 'text/plain' }).end('Forbidden');
@@ -85,6 +87,7 @@ if (check) {
       ['/login', 200, 'text/html', '', ['auth-card', 'Sign in']], // auth screen
       ['/pricing', 200, 'text/html', '', ['₹29,999', 'Growth']], // pricing tiers
       ['/dashboard', 200, 'text/html', '', ['dash-layout', 'Rohit Malhotra']], // dashboard
+      ['/admin', 301, '', '/dashboard'], // admin alias
       ['/500', 200, 'text/html', '', ['Server error']], // error screen
     ];
     const req = (path, { method = 'GET', body } = {}) => new Promise((ok, fail) => {
@@ -112,6 +115,20 @@ if (check) {
     api('POST /api/contact invalid', await req('/api/contact', { method: 'POST', body: { name: '', email: 'nope', message: '' } }), 400);
     api('GET /api/contact', await req('/api/contact'), 405);
     api('GET /api/leads', await req('/api/leads'), 200, '"name":"Sam Chen"'); // seeded
+    api('GET /api/dashboard', await req('/api/dashboard'), 200, '"projects_active"'); // aggregates
+    api('GET /api/dashboard charts', await req('/api/dashboard'), 200, '"top_pages"'); // chart datasets
+    api('GET /api/dashboard sources', await req('/api/dashboard'), 200, '"Organic Search"');
+    api('GET /api/analytics', await req('/api/analytics'), 200, '"visitors_30d"');
+    api('GET /api/search?q=luminary', await req('/api/search?q=luminary'), 200, '"type":"projects"'); // cross-entity search
+    api('GET /api/search (no q)', await req('/api/search'), 400);
+    api('GET /api/settings', await req('/api/settings'), 200, '"site_name"'); // seeded
+    api('PUT /api/settings', await req('/api/settings', { method: 'PUT', body: { site_name: 'Aesthetix' } }), 200, '"updated":1');
+    api('GET /api/settings updated', await req('/api/settings'), 200, '"Aesthetix"');
+    api('GET /api/files', await req('/api/files'), 200, '"design-system.fig"');
+    api('GET /api/meetings', await req('/api/meetings'), 200, '"Luminary kickoff"');
+    api('GET /api/tasks', await req('/api/tasks'), 200, '"title":"Send Luminary discovery summary"');
+    api('GET /api/milestones', await req('/api/milestones'), 200, '"Design sprint"');
+    api('POST /api/messages', await req('/api/messages', { method: 'POST', body: { role: 'user', content: 'hi' } }), 201, '"id":5');
     api('GET /api/projects', await req('/api/projects'), 200, '"Luminary Financial"');
     api('GET /api/projects/1', await req('/api/projects/1'), 200, '"client":"Luminary Financial"');
     api('GET /api/projects/999', await req('/api/projects/999'), 404);

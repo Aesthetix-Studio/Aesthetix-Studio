@@ -122,6 +122,93 @@ const entities = {
       ['demo-recording.mp4', 'video', '86 MB', 'unused'],
     ],
   },
+  files: {
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, type TEXT DEFAULT 'file', size TEXT DEFAULT '', project TEXT DEFAULT '', usage TEXT DEFAULT 'unused', uploaded_by TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['name', 'type', 'size', 'project', 'usage', 'uploaded_by'],
+    required: ['name'],
+    defaults: { type: 'file', usage: 'unused' },
+    search: ['name', 'type', 'project', 'usage'],
+    seed: [
+      ['brand-guidelines.pdf', 'document', '4.1 MB', 'Luminary Financial', 'unused', 'Maya Iyer'],
+      ['design-system.fig', 'design', '18 MB', 'Kora Health', 'used', 'Aarav Shah'],
+      ['case-study-notes.md', 'document', '12 KB', 'Vertex', 'used', 'Sarah Chen'],
+    ],
+  },
+  meetings: {
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, date TEXT DEFAULT '', attendees TEXT DEFAULT '', summary TEXT DEFAULT '', status TEXT DEFAULT 'scheduled', action_items TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['title', 'date', 'attendees', 'summary', 'status', 'action_items'],
+    required: ['title'],
+    defaults: { status: 'scheduled' },
+    search: ['title', 'attendees', 'status'],
+    seed: [
+      ['Luminary kickoff', '2026-08-10', 'Sarah Mitchell, Aarav Shah', 'Scope confirmed; design sprint booked.', 'held', 'Send discovery summary'],
+      ['Kora weekly sync', '2026-08-14', 'Dr. Priya Nair, Maya Iyer', 'Prototype reviewed; approval pending.', 'held', 'Share updated flows'],
+      ['Vertex status', '2026-08-20', 'Ravi Menon, Aarav Shah', 'Data pipeline API ready for review.', 'scheduled', 'Prepare demo'],
+    ],
+  },
+  forms: {
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, form_name TEXT NOT NULL, name TEXT DEFAULT '', email TEXT DEFAULT '', message TEXT DEFAULT '', status TEXT DEFAULT 'new', created_at TEXT NOT NULL",
+    fields: ['form_name', 'name', 'email', 'message', 'status'],
+    required: ['form_name'],
+    defaults: { status: 'new' },
+    search: ['form_name', 'name', 'email', 'status'],
+    seed: [
+      ['Contact form', 'Amelia Ross', 'amelia@northwind.com', 'Interested in a full website redesign.', 'qualified'],
+      ['Newsletter', 'Dev Patel', 'dev@buildlab.io', '', 'new'],
+      ['Contact form', 'Lena Kowalski', 'lena@brightloop.co', 'Pricing for the Growth plan?', 'converted'],
+    ],
+  },
+  tasks: {
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, project TEXT DEFAULT '', assignee TEXT DEFAULT '', status TEXT DEFAULT 'todo', due_date TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['title', 'project', 'assignee', 'status', 'due_date'],
+    required: ['title'],
+    defaults: { status: 'todo' },
+    search: ['title', 'project', 'assignee', 'status'],
+    seed: [
+      ['Send Luminary discovery summary', 'Luminary Financial', 'Sarah Chen', 'done', '2026-08-12'],
+      ['Share updated care-portal flows', 'Kora Health', 'Maya Iyer', 'in progress', '2026-08-18'],
+      ['Prepare Vertex analytics demo', 'Vertex', 'Aarav Shah', 'todo', '2026-08-22'],
+      ['Draft Q3 invoice for Kora', 'Kora Health', 'Rohit Malhotra', 'todo', '2026-08-25'],
+    ],
+  },
+  milestones: {
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, project_id INTEGER DEFAULT 0, title TEXT NOT NULL, status TEXT DEFAULT 'scheduled', due_date TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['project_id', 'title', 'status', 'due_date'],
+    required: ['title'],
+    defaults: { project_id: 0, status: 'scheduled' },
+    search: ['title', 'status'],
+    seed: [
+      [1, 'Discovery & audit', 'complete', '2026-08-01'],
+      [1, 'Design sprint', 'in progress', '2026-08-15'],
+      [1, 'Build & QA', 'scheduled', '2026-09-10'],
+    ],
+  },
+  messages: {
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, role TEXT NOT NULL, content TEXT NOT NULL, thread TEXT DEFAULT 'general', created_at TEXT NOT NULL",
+    fields: ['role', 'content', 'thread'],
+    required: ['role', 'content'],
+    defaults: { thread: 'general' },
+    search: ['content', 'thread'],
+    seed: [
+      ['user', 'Summarize our proposal process for a new client.', 'general'],
+      ['assistant', 'Here is the standard flow: discovery call, brief review, proposal, then contract.', 'general'],
+      ['user', 'When is the Kora invoice due?', 'general'],
+      ['assistant', 'The Kora invoice is due 2026-08-15.', 'general'],
+    ],
+  },
+  settings: {
+    // key/value store — /api/settings is intercepted below (GET all, PUT upsert)
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, section TEXT DEFAULT 'general', key TEXT NOT NULL, value TEXT DEFAULT '', created_at TEXT NOT NULL, UNIQUE(section, key)",
+    fields: ['section', 'key', 'value'],
+    required: ['key'],
+    defaults: { section: 'general', value: '' },
+    seed: [
+      ['general', 'site_name', 'Aesthetix Studio'],
+      ['general', 'contact_email', 'hello@aesthetixstudio.com'],
+      ['billing', 'plan', 'Growth'],
+      ['notifications', 'weekly_digest', 'on'],
+    ],
+  },
 };
 
 const send = (res, code, obj) => {
@@ -199,6 +286,126 @@ export function createApi({ file }) {
     send(res, 200, { ok: true, data: rows });
   };
 
+  // read-only aggregates for the dashboard / analytics / search screens
+  const table = (t) => `SELECT COUNT(*) n FROM ${t}`;
+  const count = (t, f, v) => db.prepare(`${table(t)}${f ? ` WHERE ${f} = ?` : ''}`).get(...(v !== undefined ? [v] : [])).n;
+
+  const dashboard = (res) => {
+    const recent = (t, n) => db.prepare(`SELECT * FROM ${t} ORDER BY id DESC LIMIT ?`).all(n);
+    // ponytail: chart series are demo numbers — no analytics source is wired yet.
+    // Upgrade path: replace kpis/traffic/sources with a real analytics API
+    // (Plausible/GA) and keep activity/top_pages/health as computed + static checks.
+    const traffic = [8420, 9100, 8750, 10200, 11400, 10980, 12543];
+    return send(res, 200, {
+      ok: true,
+      stats: {
+        projects_active: count('projects', 'status', 'active'),
+        projects_in_review: count('projects', 'status', 'review'),
+        projects_completed: count('projects', 'status', 'completed'),
+        leads_new: count('leads', 'status', 'new'),
+        leads_won: count('leads', 'status', 'won'),
+        invoices_outstanding: count('invoices', 'status', 'outstanding'),
+        invoices_collected: count('invoices', 'status', 'paid'),
+        users_team: count('users', 'role', 'team'),
+        users_clients: count('users', 'role', 'client'),
+        tasks_open: count('tasks', 'status', 'todo') + count('tasks', 'status', 'in progress'),
+      },
+      kpis: [
+        { label: 'Total Visitors', value: '12,543', delta: '+16.2%', spark: [620, 780, 640, 890, 1020, 940, 1250] },
+        { label: 'Leads Captured', value: '842', delta: '+8.4%', spark: [40, 55, 48, 72, 66, 88, 92] },
+        { label: 'Proposals Generated', value: '156', delta: '+5.1%', spark: [12, 15, 10, 18, 16, 21, 24] },
+        { label: 'Revenue', value: '₹8,45,230', delta: '+12.7%', spark: [55, 70, 64, 82, 96, 88, 120] },
+        { label: 'Conversion Rate', value: '3.42%', delta: '+0.4%', spark: [2.8, 3.0, 2.9, 3.2, 3.1, 3.3, 3.4] },
+      ],
+      traffic: {
+        total: '12,543',
+        delta: '+16.2%',
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        series: [
+          { name: 'Visitors', points: traffic },
+          { name: 'Previous week', points: [7900, 8400, 8600, 9300, 9800, 10200, 10800] },
+        ],
+      },
+      sources: [
+        { name: 'Organic Search', pct: 28.7, value: 3600, color: '#6C5CE7' },
+        { name: 'Direct', pct: 24.3, value: 3048, color: '#f59e0b' },
+        { name: 'Referral', pct: 18.6, value: 2333, color: '#22c55e' },
+        { name: 'Social Media', pct: 8.4, value: 1054, color: '#3b82f6' },
+        { name: 'Email', pct: 12.0, value: 1505, color: '#ec4899' },
+        { name: 'Other', pct: 8.0, value: 1003, color: '#8b5cf6' },
+      ],
+      health: [
+        { label: 'Server Status', status: 'ok', detail: 'All systems operational' },
+        { label: 'Database', status: 'ok', detail: 'Optimized' },
+        { label: 'SSL Certificate', status: 'ok', detail: 'Valid (89 days)' },
+        { label: 'Backup', status: 'ok', detail: 'Last backup: 2h ago' },
+        { label: 'Storage', status: 'ok', detail: '42% of 50 GB used' },
+        { label: 'Uptime', status: 'ok', detail: '99.96%' },
+      ],
+      activity: [
+        { type: 'Lead', title: 'New lead captured from Contact Form', meta: '', time: '2 min ago' },
+        { type: 'Proposal', title: 'Proposal generated for Luxe Jewelry', meta: 'Project ID: #P-2025-041', time: '15 min ago' },
+        { type: 'Blog', title: 'Blog post published', meta: '', time: '45 min ago' },
+        { type: 'Invoice', title: 'Invoice #INV-2026-014 paid', meta: 'Luminary Financial', time: '1h ago' },
+        { type: 'Task', title: 'Task completed: Send discovery summary', meta: '', time: '3h ago' },
+      ],
+      top_pages: [
+        { path: '/', views: 3245, visitors: 2341, bounce: 32.4, avg_time: '2m 45s' },
+        { path: '/services', views: 2157, visitors: 1742, bounce: 28.1, avg_time: '2m 18s' },
+        { path: '/portfolio', views: 1892, visitors: 1356, bounce: 31.8, avg_time: '2m 05s' },
+        { path: '/about', views: 1543, visitors: 1210, bounce: 26.4, avg_time: '2m 52s' },
+        { path: '/journal', views: 1276, visitors: 998, bounce: 34.2, avg_time: '1m 58s' },
+      ],
+      recent_leads: recent('leads', 4),
+      upcoming_tasks: db.prepare(`SELECT * FROM tasks WHERE status != 'done' ORDER BY due_date ASC LIMIT 5`).all(),
+    });
+  };
+
+  const analytics = (res) => {
+    // ponytail: static demo numbers — the prototype screens show placeholder metrics.
+    // Upgrade path: wire a real analytics source (Plausible/GA) and replace these.
+    return send(res, 200, {
+      ok: true,
+      visitors_30d: 48000,
+      conversion: 4.2,
+      top_source: 'Organic',
+      sources: [
+        { source: 'Organic', sessions: 18240, pct: 38 },
+        { source: 'Direct', sessions: 13920, pct: 29 },
+        { source: 'Referral', sessions: 9600, pct: 20 },
+        { source: 'Social', sessions: 6240, pct: 13 },
+      ],
+      pages: [
+        { path: '/work', views: 12400 },
+        { path: '/capabilities', views: 9800 },
+        { path: '/journal', views: 6400 },
+      ],
+    });
+  };
+
+  const searchAll = (res, qs) => {
+    const p = new URLSearchParams(qs);
+    const q = p.get('q');
+    if (!q) return send(res, 400, { ok: false, error: 'q is required.' });
+    const like = `%${q}%`;
+    const out = [];
+    for (const [name, e] of Object.entries(entities)) {
+      if (!e.search) continue;
+      const rows = db.prepare(`SELECT * FROM ${name} WHERE ${e.search.map((f) => `${f} LIKE ?`).join(' OR ')} LIMIT 3`).all(...e.search.map(() => like));
+      for (const r of rows) out.push({ type: name, id: r.id, title: r.title || r.name || r.email || r.form_name, label: r.client || r.company || '' });
+    }
+    return send(res, 200, { ok: true, data: out });
+  };
+
+  const settingsAll = (res) => send(res, 200, { ok: true, data: db.prepare(`SELECT section, key, value FROM settings ORDER BY section, key`).all() });
+  const settingsUpsert = (res, d) => {
+    const entries = Object.entries(d ?? {}).filter(([, v]) => v !== undefined);
+    if (!entries.length) return send(res, 400, { ok: false, error: 'Nothing to update' });
+    const upsert = db.prepare(`INSERT INTO settings (section, key, value, created_at) VALUES (?, ?, ?, ?) ON CONFLICT(section, key) DO UPDATE SET value = excluded.value`);
+    for (const [key, value] of entries) upsert.run('general', key, String(value), now());
+    return send(res, 200, { ok: true, updated: entries.length });
+  };
+
   return async (req, res) => {
     const [path, qs = ''] = req.url.split('?');
     const m = path.match(/^\/api\/([a-z-]+)(?:\/(\d+))?$/);
@@ -211,6 +418,18 @@ export function createApi({ file }) {
       if (!d) return;
       if (req.method !== 'POST') return send(res, 405, { ok: false, error: 'Method not allowed' });
       return create(res, 'leads', entities.leads, { status: 'new', ...d });
+    }
+    if (name === 'dashboard' && req.method === 'GET') return dashboard(res);
+    if (name === 'analytics' && req.method === 'GET') return analytics(res);
+    if (name === 'search' && req.method === 'GET') return searchAll(res, qs);
+    if (name === 'settings') {
+      if (req.method === 'GET') return settingsAll(res);
+      if (req.method === 'PUT') {
+        const d = await jsonBody(req, res);
+        if (!d) return;
+        return settingsUpsert(res, d);
+      }
+      return send(res, 405, { ok: false, error: 'Method not allowed' });
     }
     const e = entities[name];
     if (!e) return send(res, 404, { ok: false, error: `No such resource: ${name}` });
