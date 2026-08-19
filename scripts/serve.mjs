@@ -1,17 +1,30 @@
 // Static dev server for the generated site — Node stdlib only, zero deps.
 import { createServer, request } from 'node:http';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import { extname, relative, resolve } from 'node:path';
+import { dirname, extname, relative, resolve } from 'node:path';
 import { createApi } from './api.mjs';
 
 const root = process.cwd();
 // fail fast if the site hasn't been generated yet (run `npm run generate` first)
 if (!existsSync(resolve(root, 'index.html'))) { console.error('Missing generated pages — run `npm run generate` first.'); process.exit(1); }
+// tiny .env.local loader (gitignored) — real env vars win; zero deps
+for (const line of existsSync(resolve(root, '.env.local')) ? readFileSync(resolve(root, '.env.local'), 'utf8').split(/\r?\n/) : []) {
+  const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+  if (m && !(m[1] in process.env)) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+}
 const port = Number(process.env.PORT) || 4173;
 const check = process.argv.includes('--check');
+// DB_PATH (e.g. a mounted volume on Render/Railway) overrides the default SQLite location.
+// Parent dir is created so a fresh mount path works on first boot.
+const dbFile = resolve(root, process.env.DB_PATH || 'data/app.sqlite');
+if (!check && !existsSync(dirname(dbFile))) mkdirSync(dirname(dbFile), { recursive: true });
 // admin JSON API + contact form → SQLite (node:sqlite, zero deps); in-memory during self-check
-const handleApi = createApi({ file: check ? ':memory:' : resolve(root, 'data/app.sqlite') });
+// auth: all /api/* routes except POST /api/contact require `Authorization: Bearer $ADMIN_TOKEN`
+// when ADMIN_TOKEN is set. Unset = open (local dev). Token lives in .env.local or the env.
+// check mode keeps the mounted API open (deterministic); the auth gate is tested below
+// against a dedicated token-gated in-memory API.
+const handleApi = createApi({ file: check ? ':memory:' : dbFile, token: check ? '' : process.env.ADMIN_TOKEN || '' });
 const types = {
   '.css': 'text/css',
   '.html': 'text/html',
@@ -76,7 +89,8 @@ if (check) {
       ['/work/luminary-financial', 200, 'text/html', '', ['cs-split', 'process-bar']], // nested clean URL + case-study content
       ['/case-studies', 200, 'text/html', '', ['cs-row', 'Luminary Financial']],
       ['/work/', 200, 'text/html'], // trailing slash
-      ['/css/aesthetix.css', 200, 'text/css', '', ['work-hero', 'process-bar', 'tablet-side']], // stylesheet tail intact (a parse break silently drops it)
+      ['/css/aesthetix.css', 200, 'text/css', '', ['work-hero', 'process-bar', 'tablet-side', 'adm-modal']], // stylesheet tail intact (a parse break silently drops it)
+      ['/js/admin.js', 200, 'text/javascript', '', ['fillStat', 'modal', 'toast']], // shared admin wiring
       ['/robots.txt', 200, 'text/plain'],
       ['/sitemap.xml', 200, 'application/xml', '', ['aesthetixstudio.com']],
       ['/work.html', 301, '', '/work'], // .html → clean URL
@@ -88,11 +102,22 @@ if (check) {
       ['/pricing', 200, 'text/html', '', ['₹29,999', 'Growth']], // pricing tiers
       ['/dashboard', 200, 'text/html', '', ['dash-layout', 'Rohit Malhotra']], // dashboard
       ['/admin', 301, '', '/dashboard'], // admin alias
-      ['/admin-analytics', 200, 'text/html', '', ['Analytics — Aesthetix Studio', 'dash-layout']], // other agent's admin screens
-      ['/admin-articles', 200, 'text/html', '', ['adm-table', 'Articles — Aesthetix Studio']],
-      ['/admin-leads', 200, 'text/html', '', ['adm-table', 'Leads — Aesthetix Studio']],
-      ['/admin-media', 200, 'text/html', '', ['Media Library — Aesthetix Studio']],
-      ['/admin-projects', 200, 'text/html', '', ['adm-table', 'Projects — Aesthetix Studio']],
+      ['/admin-analytics', 200, 'text/html', '', ['Analytics — Aesthetix Studio', 'dash-layout', 'js/admin.js']], // admin screens wired to the API
+      ['/admin-articles', 200, 'text/html', '', ['adm-table', 'Articles — Aesthetix Studio', 'js/admin.js']],
+      ['/admin-leads', 200, 'text/html', '', ['adm-table', 'Leads — Aesthetix Studio', 'js/admin.js', 'adm-tbody']],
+      ['/admin-media', 200, 'text/html', '', ['Media Library — Aesthetix Studio', 'js/admin.js', 'adm-grid']],
+      ['/admin-projects', 200, 'text/html', '', ['adm-table', 'Projects — Aesthetix Studio', 'js/admin.js']],
+      ['/admin-invoices', 200, 'text/html', '', ['adm-table', 'Invoices — Aesthetix Studio', 'js/admin.js']],
+      ['/admin-users', 200, 'text/html', '', ['adm-table', 'Users — Aesthetix Studio', 'js/admin.js']],
+      ['/admin-settings', 200, 'text/html', '', ['Settings — Aesthetix Studio', 'js/admin.js', 'save-btn']],
+      ['/forms', 200, 'text/html', '', ['Forms — Aesthetix Studio', 'wireToolPage', 'adm-tbody']], // generated tool screens wired
+      ['/feedback', 200, 'text/html', '', ['Feedback — Aesthetix Studio', 'wireToolPage']],
+      ['/meeting-notes', 200, 'text/html', '', ['Meeting Notes — Aesthetix Studio', 'wireToolPage']],
+      ['/proposal-generator', 200, 'text/html', '', ['Proposal Generator — Aesthetix Studio', 'wireToolPage']],
+      ['/files-deliverables', 200, 'text/html', '', ['Files & Deliverables — Aesthetix Studio', 'wireToolPage']],
+      ['/project-timeline', 200, 'text/html', '', ['Project Timeline — Aesthetix Studio', 'wireToolPage']],
+      ['/ai-chat-assistant', 200, 'text/html', '', ['AI Chat Assistant — Aesthetix Studio', 'wireChat']],
+      ['/search', 200, 'text/html', '', ['Search — Aesthetix Studio', 'wireSearch']],
       ['/500', 200, 'text/html', '', ['Server error']], // error screen
     ];
     const req = (path, { method = 'GET', body } = {}) => new Promise((ok, fail) => {
@@ -131,6 +156,11 @@ if (check) {
     api('GET /api/dashboard charts', await req('/api/dashboard'), 200, '"top_pages"'); // chart datasets
     api('GET /api/dashboard sources', await req('/api/dashboard'), 200, '"Organic Search"');
     api('GET /api/analytics', await req('/api/analytics'), 200, '"visitors_30d"');
+    api('GET /api/analytics full', await req('/api/analytics'), 200, '"page_views"'); // prototype-matching analytics payload
+    api('GET /api/leads fields', await req('/api/leads'), 200, '"source"'); // prototype lead columns
+    api('GET /api/projects fields', await req('/api/projects'), 200, '"progress"'); // prototype project columns
+    api('GET /api/users fields', await req('/api/users'), 200, '"status"');
+    api('GET /api/articles fields', await req('/api/articles'), 200, '"views"');
     api('GET /api/search?q=luminary', await req('/api/search?q=luminary'), 200, '"type":"projects"'); // cross-entity search
     api('GET /api/search (no q)', await req('/api/search'), 400);
     api('GET /api/settings', await req('/api/settings'), 200, '"site_name"'); // seeded
@@ -141,6 +171,12 @@ if (check) {
     api('GET /api/tasks', await req('/api/tasks'), 200, '"title":"Send Luminary discovery summary"');
     api('GET /api/milestones', await req('/api/milestones'), 200, '"Design sprint"');
     api('POST /api/messages', await req('/api/messages', { method: 'POST', body: { role: 'user', content: 'hi' } }), 201, '"id":5');
+    api('GET /api/proposals', await req('/api/proposals'), 200, '"Luminary Financial — platform v2"'); // tool-screen entities seeded
+    api('GET /api/feedback', await req('/api/feedback'), 200, '"rating":5');
+    api('GET /api/meetings', await req('/api/meetings'), 200, '"Luminary kickoff"');
+    api('GET /api/files', await req('/api/files'), 200, '"design-system.fig"');
+    api('GET /api/forms', await req('/api/forms'), 200, '"Contact form"');
+    api('GET /api/milestones', await req('/api/milestones'), 200, '"Design sprint"');
     api('GET /api/projects', await req('/api/projects'), 200, '"Luminary Financial"');
     api('GET /api/projects/1', await req('/api/projects/1'), 200, '"client":"Luminary Financial"');
     api('GET /api/projects/999', await req('/api/projects/999'), 404);
@@ -153,7 +189,30 @@ if (check) {
     api('POST /api/invoices bad amount', await req('/api/invoices', { method: 'POST', body: { client: 'X', amount: 'abc' } }), 400);
     api('PUT /api/leads (collection)', await req('/api/leads', { method: 'PUT', body: {} }), 405);
     api('GET /api/nope', await req('/api/nope'), 404);
-    const total = cases.length + 16;
+    // auth gate: dedicated token-gated in-memory API — admin routes 401 without the
+    // Bearer token, /api/contact stays public. (The mounted API above stays open in
+    // check mode so the CRUD checks are deterministic regardless of the dev's .env.)
+    const authApi = createApi({ file: ':memory:', token: 'test-admin-token' });
+    const authServer = createServer((req, res) => authApi(req, res));
+    await new Promise((ok) => authServer.listen(0, '127.0.0.1', ok));
+    const { port: ap } = authServer.address();
+    const areq = (path, { method = 'GET', body, token } = {}) => new Promise((ok, fail) => {
+      const headers = { ...(body ? { 'content-type': 'application/json' } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}) };
+      const r = request({ host: '127.0.0.1', port: ap, path, method, headers }, (res) => {
+        let text = '';
+        res.on('data', (c) => (text += c));
+        res.on('end', () => ok({ status: res.statusCode, body: text }));
+      }).on('error', fail);
+      if (body) r.write(JSON.stringify(body));
+      r.end();
+    });
+    api('AUTH leads no token', await areq('/api/leads'), 401);
+    api('AUTH leads wrong token', await areq('/api/leads', { token: 'nope' }), 401);
+    api('AUTH leads with token', await areq('/api/leads', { token: 'test-admin-token' }), 200, '"name":"Sam Chen"');
+    api('AUTH contact public POST', await areq('/api/contact', { method: 'POST', body: { name: 'T', email: 't@t.com', message: 'hi' } }), 201, '"ok":true');
+    api('AUTH contact public GET', await areq('/api/contact'), 405);
+    authServer.close();
+    const total = cases.length + 16 + 5;
     server.close();
     if (failures.length) {
       failures.forEach((f) => console.error('  - ' + f));

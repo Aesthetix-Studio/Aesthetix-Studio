@@ -10,78 +10,98 @@ const now = () => new Date().toISOString();
 
 const entities = {
   leads: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, company TEXT DEFAULT '', website TEXT DEFAULT '', project_type TEXT DEFAULT '', message TEXT NOT NULL, status TEXT DEFAULT 'new', replied_at TEXT DEFAULT '', created_at TEXT NOT NULL",
-    fields: ['name', 'email', 'company', 'website', 'project_type', 'message', 'status'],
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, company TEXT DEFAULT '', website TEXT DEFAULT '', project_type TEXT DEFAULT '', source TEXT DEFAULT 'Contact Form', score INTEGER DEFAULT 50, value REAL DEFAULT 0, message TEXT NOT NULL, status TEXT DEFAULT 'new', replied_at TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['name', 'email', 'company', 'website', 'project_type', 'source', 'score', 'value', 'message', 'status'],
     required: ['name', 'email', 'message'],
-    defaults: { status: 'new' },
-    statuses: ['new', 'contacted', 'won'],
+    defaults: { status: 'new', source: 'Contact Form', score: 50, value: 0 },
+    statuses: ['new', 'contacted', 'qualified', 'proposal', 'won', 'lost'],
     search: ['name', 'email', 'company'],
     validate(d) {
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(d.email ?? ''))) return 'A valid email address is required.';
     },
     seed: [
-      ['Sam Chen', 'sam@luminary.com', 'Luminary Financial', '', 'Web application', 'Follow-up on the wealth platform proposal.', 'won'],
-      ['Priya Nair', 'priya@kora.health', 'Kora Health', '', 'Website', 'Rebuild of the care portal.', 'contacted'],
-      ['Ravi Menon', 'ravi@vertex.io', 'Vertex', '', 'AI solution', 'Analytics workflow automation.', 'new'],
+      ['Sam Chen', 'sam@luminary.com', 'Luminary Financial', '', 'Web application', 'Contact Form', 92, 120000, 'Follow-up on the wealth platform proposal.', 'won'],
+      ['Priya Nair', 'priya@kora.health', 'Kora Health', '', 'Website', 'Referral', 88, 250000, 'Rebuild of the care portal.', 'contacted'],
+      ['Ravi Menon', 'ravi@vertex.io', 'Vertex', '', 'AI solution', 'LinkedIn', 74, 60000, 'Analytics workflow automation.', 'new'],
+      ['Sarah Johnson', 'sarah.j@example.com', 'Luxoré Jewels', 'luxorejewels.com', 'Website', 'Contact Form', 92, 120000, 'Website redesign for the new collection.', 'new'],
+      ['Rahul Kumar', 'rahul.k@techcorp.in', 'TechCorp', '', 'Web application', 'LinkedIn', 88, 250000, 'Dashboard product revamp.', 'qualified'],
+      ['Priya Mehta', 'priya@studiom.com', 'Studio M', '', 'Website', 'Referral', 74, 85000, 'Brand site with e-commerce.', 'proposal'],
+      ['Arjun Singh', 'arjun@nexabrands.io', 'Nexa Brands', '', 'AI solution', 'Organic', 96, 140000, 'AI chatbot for customer support.', 'won'],
+      ['Diana Webb', 'd.webb@horizonco.com', 'Horizon Co', '', 'Website', 'Instagram', 61, 60000, 'Landing page refresh.', 'contacted'],
+      ['Vikram Nair', 'vnair@example.com', '', '', '', 'Google Ads', 32, 45000, 'Quick quote request.', 'lost'],
     ],
   },
   projects: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, client TEXT NOT NULL, status TEXT DEFAULT 'active', timeline TEXT DEFAULT '', budget TEXT DEFAULT '', description TEXT DEFAULT '', created_at TEXT NOT NULL",
-    fields: ['title', 'client', 'status', 'timeline', 'budget', 'description'],
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, client TEXT NOT NULL, category TEXT DEFAULT '', status TEXT DEFAULT 'active', progress INTEGER DEFAULT 0, timeline TEXT DEFAULT '', budget TEXT DEFAULT '', deadline TEXT DEFAULT '', description TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['title', 'client', 'category', 'status', 'progress', 'timeline', 'budget', 'deadline', 'description'],
     required: ['title', 'client'],
-    defaults: { status: 'active' },
-    statuses: ['active', 'review', 'completed'],
+    defaults: { status: 'active', category: '', progress: 0 },
+    statuses: ['active', 'review', 'completed', 'on hold', 'cancelled'],
     search: ['title', 'client', 'status'],
     seed: [
-      ['Designing trust in financial experiences.', 'Luminary Financial', 'completed', '4 Months', '$48,000', 'Wealth management platform rebuilt around clarity and trust.', ],
-      ['Healthcare that feels human.', 'Kora Health', 'active', '6 Months', '$62,000', 'Patient-first care platform.', ],
-      ['From data to decisions.', 'Vertex', 'active', '5 Months', '$54,000', 'Analytics platform for operational decisions.', ],
-      ['Fintech onboarding redesign.', 'Meridian', 'review', '3 Months', '$38,000', 'Onboarding flow redesign.', ],
+      ['Designing trust in financial experiences.', 'Luminary Financial', 'Web Design & Dev', 'completed', 100, '4 Months', '₹1,20,000', '2025-06-15', 'Wealth management platform rebuilt around clarity and trust.'],
+      ['Healthcare that feels human.', 'Kora Health', 'Product Design', 'active', 45, '6 Months', '₹62,000', '2025-08-30', 'Patient-first care platform.'],
+      ['From data to decisions.', 'Vertex', 'Web Application', 'active', 72, '5 Months', '₹54,000', '2025-09-10', 'Analytics platform for operational decisions.'],
+      ['Fintech onboarding redesign.', 'Meridian', 'UX Strategy', 'review', 30, '3 Months', '₹38,000', '2025-07-25', 'Onboarding flow redesign.'],
     ],
   },
   invoices: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, client TEXT NOT NULL, amount REAL NOT NULL, status TEXT DEFAULT 'draft', due_date TEXT DEFAULT '', created_at TEXT NOT NULL",
-    fields: ['client', 'amount', 'status', 'due_date'],
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, client TEXT NOT NULL, project TEXT DEFAULT '', amount REAL NOT NULL, status TEXT DEFAULT 'draft', issue_date TEXT DEFAULT '', due_date TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['client', 'project', 'amount', 'status', 'issue_date', 'due_date'],
     required: ['client'],
     defaults: { status: 'draft', amount: 0 },
-    statuses: ['draft', 'paid', 'outstanding'],
+    statuses: ['draft', 'paid', 'outstanding', 'overdue'],
     validate(d) {
       if (d.amount !== undefined && Number.isNaN(Number(d.amount))) return 'amount must be a number.';
     },
     seed: [
-      ['Luminary Financial', 48000, 'paid', '2026-07-01'],
-      ['Kora Health', 15500, 'outstanding', '2026-08-15'],
-      ['Vertex', 12000, 'draft', '2026-09-01'],
+      ['Luminary Financial', 'Wealth platform v2', 48000, 'paid', '2026-06-15', '2026-07-01'],
+      ['Kora Health', 'Care portal', 15500, 'outstanding', '2026-08-01', '2026-08-15'],
+      ['Vertex', 'Analytics platform', 12000, 'draft', '2026-08-20', '2026-09-01'],
+      ['Luxoré Jewels', 'Website Redesign', 60000, 'outstanding', '2025-05-24', '2025-06-07'],
+      ['Nexa Interiors', 'Website Build', 140000, 'paid', '2025-05-10', '2025-05-24'],
+      ['Horizon Labs', 'UI/UX Design', 40000, 'paid', '2025-04-15', '2025-04-30'],
     ],
   },
   users: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, role TEXT DEFAULT 'client', created_at TEXT NOT NULL",
-    fields: ['name', 'email', 'role'],
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, role TEXT DEFAULT 'client', status TEXT DEFAULT 'active', last_active TEXT DEFAULT '', projects INTEGER DEFAULT 0, created_at TEXT NOT NULL",
+    fields: ['name', 'email', 'role', 'status', 'last_active', 'projects'],
     required: ['name', 'email'],
-    defaults: { role: 'client' },
+    defaults: { role: 'client', status: 'active', projects: 0 },
+    statuses: ['active', 'inactive', 'suspended'],
     search: ['name', 'email', 'role'],
     validate(d) {
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(d.email ?? ''))) return 'A valid email address is required.';
     },
     seed: [
-      ['Sarah Mitchell', 'sarah@luminary.com', 'client'],
-      ['Dr. Priya Nair', 'priya@kora.health', 'client'],
-      ['Aarav Shah', 'aarav@aesthetixstudio.com', 'team'],
-      ['Maya Iyer', 'maya@aesthetixstudio.com', 'team'],
+      ['Sarah Mitchell', 'sarah@luminary.com', 'client', 'active', '2 days ago', 1],
+      ['Dr. Priya Nair', 'priya@kora.health', 'client', 'active', '1 day ago', 1],
+      ['Aarav Shah', 'aarav@aesthetixstudio.com', 'team', 'active', '15 min ago', 12],
+      ['Maya Iyer', 'maya@aesthetixstudio.com', 'team', 'active', '30 min ago', 7],
+      ['Rohit Malhotra', 'rohit@aesthetixstudio.com', 'admin', 'active', 'Just now', 18],
+      ['Ananya Singh', 'ananya@aesthetixstudio.com', 'editor', 'active', '15 min ago', 9],
+      ['Vikram Khanna', 'vikram@aesthetixstudio.com', 'designer', 'active', '2 hrs ago', 12],
+      ['Dev Patel', 'dev@aesthetixstudio.com', 'developer', 'active', '30 min ago', 7],
+      ['Luxoré Jewels', 'admin@luxorejewels.com', 'client', 'active', '1 day ago', 1],
+      ['Maya Reddy', 'maya@example.com', 'editor', 'inactive', '3 weeks ago', 2],
     ],
   },
   articles: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, category TEXT DEFAULT '', status TEXT DEFAULT 'draft', read_time TEXT DEFAULT '', created_at TEXT NOT NULL",
-    fields: ['title', 'category', 'status', 'read_time'],
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, author TEXT DEFAULT '', category TEXT DEFAULT '', status TEXT DEFAULT 'draft', read_time TEXT DEFAULT '', views INTEGER DEFAULT 0, created_at TEXT NOT NULL",
+    fields: ['title', 'author', 'category', 'status', 'read_time', 'views'],
     required: ['title'],
-    defaults: { status: 'draft' },
-    statuses: ['draft', 'published', 'scheduled'],
+    defaults: { status: 'draft', author: '', views: 0 },
+    statuses: ['draft', 'published', 'scheduled', 'review'],
     search: ['title', 'category', 'status'],
     seed: [
-      ['Designing for clarity in a noisy world.', 'Design', 'published', '8 min'],
-      ['What good product strategy actually looks like.', 'Strategy', 'published', '6 min'],
-      ['The case for fewer, better features.', 'Process', 'draft', '5 min'],
-      ['Building AI products people can trust.', 'AI', 'scheduled', '7 min'],
+      ['Designing for clarity in a noisy world.', 'Rohit M.', 'Design', 'published', '8 min', 8432],
+      ['What good product strategy actually looks like.', 'Ananya S.', 'Strategy', 'published', '6 min', 6218],
+      ['The case for fewer, better features.', 'Rohit M.', 'Process', 'draft', '5 min', 0],
+      ['Building AI products people can trust.', 'Ananya S.', 'AI', 'scheduled', '7 min', 0],
+      ['How AI is Transforming UX Design', 'Ananya S.', 'AI & Tech', 'published', '6 min', 6218],
+      ['Brand Identity: A Complete Guide', 'Rohit M.', 'Branding', 'review', '12 min', 0],
+      ['Case Study: Luxoré Jewels Website', 'Ananya S.', 'Case Study', 'published', '5 min', 4102],
+      ['SEO Best Practices for 2025', 'Rohit M.', 'SEO', 'draft', '9 min', 0],
     ],
   },
   proposals: {
@@ -125,6 +145,12 @@ const entities = {
       ['laptop-mockup.png', 'image', '1.8 MB', 'used'],
       ['brand-guidelines.pdf', 'document', '4.1 MB', 'unused'],
       ['demo-recording.mp4', 'video', '86 MB', 'unused'],
+      ['luxore-hero.jpg', 'image', '2.4 MB', 'used'],
+      ['brand-logo-dark.png', 'image', '128 KB', 'used'],
+      ['portfolio-nexa.jpg', 'image', '1.8 MB', 'used'],
+      ['proposal-template.pdf', 'document', '542 KB', 'unused'],
+      ['studio-showreel.mp4', 'video', '48.2 MB', 'unused'],
+      ['horizon-cover.jpg', 'image', '1.1 MB', 'used'],
     ],
   },
   files: {
@@ -214,6 +240,21 @@ const entities = {
     seed: [
       ['general', 'site_name', 'Aesthetix Studio'],
       ['general', 'contact_email', 'hello@aesthetixstudio.com'],
+      ['general', 'tagline', 'Design that drives results.'],
+      ['general', 'site_url', 'https://aesthetixstudio.com'],
+      ['general', 'site_description', 'A premium design & development studio crafting exceptional digital experiences for ambitious brands.'],
+      ['general', 'admin_email', 'rohit@aesthetixstudio.com'],
+      ['general', 'contact_phone', '+91 98765 43210'],
+      ['general', 'language', 'English (India)'],
+      ['general', 'timezone', 'Asia/Kolkata (IST)'],
+      ['general', 'currency', 'INR (₹)'],
+      ['general', 'two_factor_auth', 'on'],
+      ['general', 'login_notifications', 'on'],
+      ['general', 'session_timeout', 'off'],
+      ['general', 'maintenance_mode', 'off'],
+      ['general', 'image_optimization', 'on'],
+      ['general', 'cdn_enabled', 'on'],
+      ['general', 'browser_caching', 'on'],
       ['billing', 'plan', 'Growth'],
       ['notifications', 'weekly_digest', 'on'],
     ],
@@ -262,7 +303,7 @@ const formBody = async (req, res) => {
 };
 const pick = (e, d) => Object.fromEntries(e.fields.filter((f) => d[f] !== undefined).map((f) => [f, d[f]]));
 const values = (e, d) => e.fields.map((f) => (d[f] !== undefined ? String(d[f]) : String(e.defaults?.[f] ?? '')));
-export function createApi({ file }) {
+export function createApi({ file, token = '' }) {
   if (file !== ':memory:') mkdirSync(dirname(resolve(file)), { recursive: true });
   const db = new DatabaseSync(file);
   // ponytail: keep the schema forward-compatible — existing DBs (created before a column
@@ -270,10 +311,24 @@ export function createApi({ file }) {
   // migrations only; upgrade path: a proper migration runner if the schema keeps growing.
   const ensureCols = (t, cols) => {
     const have = new Set(db.prepare(`PRAGMA table_info(${t})`).all().map((c) => c.name));
-    for (const c of cols) if (!have.has(c.split(' ')[0])) db.exec(`ALTER TABLE ${t} ADD COLUMN ${c}`);
+    // only plain column defs can be ADD COLUMN'd — skip table constraints like UNIQUE(...)
+    for (const c of cols) {
+      const name = c.split(' ')[0];
+      if (c.includes('(') || have.has(name)) continue;
+      db.exec(`ALTER TABLE ${t} ADD COLUMN ${c}`);
+    }
+  };
+  // columns added after a table's first release — backfilled onto existing DBs
+  const migrate = {
+    leads: ['source TEXT DEFAULT "Contact Form"', 'score INTEGER DEFAULT 50', 'value REAL DEFAULT 0'],
+    projects: ['category TEXT DEFAULT ""', 'progress INTEGER DEFAULT 0', 'deadline TEXT DEFAULT ""'],
+    invoices: ['project TEXT DEFAULT ""', 'issue_date TEXT DEFAULT ""'],
+    users: ['status TEXT DEFAULT "active"', 'last_active TEXT DEFAULT ""', 'projects INTEGER DEFAULT 0'],
+    articles: ['author TEXT DEFAULT ""', 'views INTEGER DEFAULT 0'],
   };
   for (const [name, e] of Object.entries(entities)) {
     db.exec(`CREATE TABLE IF NOT EXISTS ${name} (${e.cols})`);
+    ensureCols(name, migrate[name] || []);
     ensureCols(name, ['replied_at TEXT DEFAULT ""']); // leads.replied_at for 24h-reply tracking
     const { n } = db.prepare(`SELECT COUNT(*) n FROM ${name}`).get();
     if (!n && e.seed?.length) {
@@ -385,14 +440,42 @@ export function createApi({ file }) {
     // Upgrade path: wire a real analytics source (Plausible/GA) and replace these.
     return send(res, 200, {
       ok: true,
-      visitors_30d: 48000,
+      visitors_30d: 48294,
+      page_views: 124568,
+      bounce_rate: 38.7,
+      avg_session: '3m 42s',
+      conversions: 1842,
       conversion: 4.2,
       top_source: 'Organic',
+      realtime: { active: 247, pages_min: 842, top_page: '/services', top_country: 'India 68%', top_device: 'Mobile 54%', new_return: '62% / 38%' },
+      countries: [
+        { name: 'India', pct: 68, color: '#6C5CE7' },
+        { name: 'United States', pct: 14, color: '#3b82f6' },
+        { name: 'United Kingdom', pct: 8, color: '#22c55e' },
+        { name: 'UAE', pct: 6, color: '#f59e0b' },
+      ],
+      devices: [
+        { name: 'Mobile', pct: 54.2, color: '#6C5CE7' },
+        { name: 'Desktop', pct: 36.8, color: '#3b82f6' },
+        { name: 'Tablet', pct: 9.0, color: '#22c55e' },
+      ],
+      conversions_by_source: [
+        { name: 'Contact Form', value: 642 },
+        { name: 'Discovery Call', value: 318 },
+        { name: 'Project Inquiry', value: 254 },
+        { name: 'Newsletter', value: 628 },
+      ],
+      traffic: {
+        labels: ['Apr 24', 'May 1', 'May 8', 'May 15', 'May 22', 'May 24'],
+        visitors: [4200, 5100, 4800, 6200, 7400, 8600, 9400],
+        page_views: [9800, 11500, 12400, 14200, 16800, 18900, 20500],
+      },
       sources: [
-        { source: 'Organic', sessions: 18240, pct: 38 },
-        { source: 'Direct', sessions: 13920, pct: 29 },
-        { source: 'Referral', sessions: 9600, pct: 20 },
-        { source: 'Social', sessions: 6240, pct: 13 },
+        { source: 'Organic', sessions: 18524, users: 15243, conv: 4.2, bounce: 34.1, pct: 38.4, color: '#6C5CE7' },
+        { source: 'Direct', sessions: 11876, users: 10124, conv: 5.8, bounce: 29.7, pct: 24.6, color: '#3b82f6' },
+        { source: 'Social', sessions: 8792, users: 7456, conv: 3.1, bounce: 42.3, pct: 18.2, color: '#22c55e' },
+        { source: 'Referral', sessions: 5504, users: 4892, conv: 6.4, bounce: 31.5, pct: 11.4, color: '#f59e0b' },
+        { source: 'Email', sessions: 3598, users: 3102, conv: 7.9, bounce: 24.8, pct: 7.4, color: '#ec4899' },
       ],
       pages: [
         { path: '/work', views: 12400 },
@@ -427,6 +510,10 @@ export function createApi({ file }) {
 
   return async (req, res) => {
     const [path, qs = ''] = req.url.split('?');
+    // admin API is gated behind a Bearer token when one is configured (ADMIN_TOKEN).
+    // /api/contact stays public — the marketing site contact form posts to it.
+    if (token && path !== '/api/contact' && req.headers.authorization !== `Bearer ${token}`)
+      return send(res, 401, { ok: false, error: 'Unauthorized — ADMIN_TOKEN required' });
     const m = path.match(/^\/api\/([a-z-]+)(?:\/(\d+))?(?:\/([a-z-]+))?$/);
     if (!m) return send(res, 404, { ok: false, error: 'Unknown endpoint' });
     let name = m[1], id = m[2], action = m[3];

@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/aesthetix.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
 <style>
 .ftabs{display:flex;gap:4px;margin-bottom:14px}
 .ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
@@ -53,8 +54,8 @@
     </div>
     <div class="dash-nav-section">
       <div class="dash-nav-label">AI Tools <span class="dash-new-badge">New</span></div>
-      <a class="dash-nav-item" href="/admin-proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
-      <a class="dash-nav-item" href="/admin-ai-chat.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
+      <a class="dash-nav-item" href="/proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
+      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
       <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
     </div>
     <div class="dash-nav-section">
@@ -144,74 +145,10 @@
           </div>
         </div>
 
-        <div class="media-grid">
-          <!-- Image cards with gradient placeholders -->
-          <div class="media-card selected">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#6C5CE7,#3b82f6)">
-              <div class="media-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-            <div class="media-info"><div class="media-name">luxore-hero.jpg</div><div class="media-size">2.4 MB · 3840×2160</div></div>
-          </div>
-          <div class="media-card selected">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
-              <div class="media-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-            <div class="media-info"><div class="media-name">brand-logo-dark.png</div><div class="media-size">128 KB · 800×400</div></div>
-          </div>
-          <div class="media-card selected">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#22c55e,#10b981)">
-              <div class="media-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-            <div class="media-info"><div class="media-name">portfolio-nexa.jpg</div><div class="media-size">1.8 MB · 2560×1440</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">
-              <div class="media-check"></div>
-            </div>
-            <div class="media-info"><div class="media-name">team-photo.jpg</div><div class="media-size">3.1 MB · 4000×2667</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">
-              <div class="media-check"></div>
-            </div>
-            <div class="media-info"><div class="media-name">vertex-banner.png</div><div class="media-size">890 KB · 1920×600</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#f97316,#f59e0b)">
-              <div class="media-check"></div>
-            </div>
-            <div class="media-info"><div class="media-name">reverie-mood.jpg</div><div class="media-size">2.2 MB · 2400×1600</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#14b8a6,#22c55e)">
-              <div class="media-check"></div>
-            </div>
-            <div class="media-info"><div class="media-name">about-office.jpg</div><div class="media-size">1.5 MB · 2560×1440</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:var(--surface-2);display:flex;align-items:center;justify-content:center">
-              <div class="media-check"></div>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-4)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            </div>
-            <div class="media-info"><div class="media-name">proposal-template.pdf</div><div class="media-size">542 KB · PDF</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#6C5CE7 20%,#09090B)">
-              <div class="media-check"></div>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" style="position:absolute"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            </div>
-            <div class="media-info"><div class="media-name">studio-showreel.mp4</div><div class="media-size">48.2 MB · 1920×1080</div></div>
-          </div>
-          <div class="media-card">
-            <div class="media-thumb" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">
-              <div class="media-check"></div>
-            </div>
-            <div class="media-info"><div class="media-name">horizon-cover.jpg</div><div class="media-size">1.1 MB · 2000×1200</div></div>
-          </div>
-        </div>
+        <div class="media-grid" id="adm-grid"></div>
 
         <div style="padding:14px 0;display:flex;justify-content:space-between;align-items:center">
-          <span style="font-size:11px;color:var(--text-4)">Showing 1–10 of 1,284 files</span>
+          <span id="adm-count" style="font-size:11px;color:var(--text-4)"></span>
           <div style="display:flex;gap:4px">
             <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
             <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
@@ -290,5 +227,77 @@
   </div>
 </div>
 </div>
+<script>
+// ── Media library: live grid from /api/media ──
+(() => {
+  const grid = $('#adm-grid');
+  const count = $('#adm-count');
+  const GRADS = ['linear-gradient(135deg,#6C5CE7,#3b82f6)', 'linear-gradient(135deg,#f59e0b,#ef4444)', 'linear-gradient(135deg,#22c55e,#10b981)', 'linear-gradient(135deg,#8b5cf6,#ec4899)', 'linear-gradient(135deg,#06b6d4,#3b82f6)', 'linear-gradient(135deg,#f97316,#f59e0b)', 'linear-gradient(135deg,#14b8a6,#22c55e)', 'linear-gradient(135deg,#ec4899,#8b5cf6)'];
+  let media = [];
+  let filter = 'All Files';
+  const TYPE_ICON = (t) => t === 'document' ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-4)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : t === 'video' ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" style="position:absolute"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>' : '';
+  const card = (m, i) => `<div class="media-card" data-id="${m.id}" style="cursor:pointer">
+    <div class="media-thumb" style="background:${m.type === 'document' ? 'var(--surface-2)' : GRADS[i % GRADS.length]};display:flex;align-items:center;justify-content:center">${TYPE_ICON(m.type)}</div>
+    <div class="media-info"><div class="media-name">${esc(m.name)}</div><div class="media-size">${esc(m.size || '—')} · ${esc(m.type)}</div></div>
+  </div>`;
+  const render = () => {
+    const list = media.filter((m) => {
+      if (filter === 'All Files') return true;
+      if (filter === 'Documents') return m.type === 'document';
+      if (filter === 'Other') return !['image', 'video', 'document'].includes(m.type);
+      return m.type === filter.toLowerCase().replace(/s$/, '');
+    });
+    grid.innerHTML = list.length ? list.map(card).join('') : '<div class="adm-empty" style="grid-column:1/-1">No files match this filter.</div>';
+    count.textContent = `Showing 1–${list.length} of ${media.length} files`;
+    const n = (t) => media.filter((m) => m.type === t).length;
+    fillStat('Total Files', media.length);
+    fillStat('Images', n('image'));
+    fillStat('Videos', n('video'));
+    fillStat('Storage Used', Math.min(99, Math.round((media.length / 20) * 100)) + '%');
+  };
+  const load = async () => { try { media = (await api('/api/media')).data; render(); } catch (e) { toast(e.message, false); } };
+  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
+    $$('.ftab').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active');
+    filter = b.textContent.trim();
+    render();
+  }));
+  const search = $('.dash-search input');
+  if (search) search.addEventListener('input', () => {
+    const q = search.value.toLowerCase();
+    grid.innerHTML = media.filter((m) => m.name.toLowerCase().includes(q)).map(card).join('') || '<div class="adm-empty" style="grid-column:1/-1">No files match.</div>';
+  });
+  // upload → create
+  $$('.btn-create-new').forEach((btn) => btn.addEventListener('click', () => modal({
+    title: 'Upload File',
+    fields: [
+      { name: 'name', label: 'File name', required: true },
+      { name: 'type', label: 'Type', type: 'select', options: ['image', 'video', 'document', 'audio', 'archive'], value: 'image' },
+      { name: 'size', label: 'Size' },
+      { name: 'usage', label: 'Usage', type: 'select', options: ['used', 'unused'], value: 'unused' },
+    ],
+    onSubmit: async (d) => { await api('/api/media', { method: 'POST', body: d }); load(); },
+  })));
+  // click card → edit / delete
+  grid.addEventListener('click', async (e) => {
+    const cardEl = e.target.closest('.media-card');
+    if (!cardEl) return;
+    const m = media.find((x) => x.id === Number(cardEl.dataset.id));
+    if (!m) return;
+    modal({
+      title: m.name,
+      fields: [
+        { name: 'name', label: 'File name', value: m.name, required: true },
+        { name: 'type', label: 'Type', type: 'select', options: ['image', 'video', 'document', 'audio', 'archive'], value: m.type },
+        { name: 'size', label: 'Size', value: m.size },
+        { name: 'usage', label: 'Usage', type: 'select', options: ['used', 'unused'], value: m.usage },
+      ],
+      onSubmit: async (d) => { await api('/api/media/' + m.id, { method: 'PUT', body: d }); load(); },
+      onDelete: async () => { await api('/api/media/' + m.id, { method: 'DELETE' }); load(); },
+    });
+  });
+  load();
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invoices — Aesthetix Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.ftabs{display:flex;gap:4px;margin-bottom:16px}
+.ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
+.ftab.active{background:var(--brand);color:#fff}
+.adm-table{width:100%;border-collapse:collapse;font-size:12px}
+.adm-table th{color:var(--text-4);font-weight:500;padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.adm-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.adm-table tr:hover td{background:rgba(255,255,255,.02)}
+.bx{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;display:inline-block}
+.bx-paid{background:rgba(34,197,94,.15);color:#22c55e}
+.bx-pending{background:rgba(245,158,11,.15);color:#f59e0b}
+.bx-overdue{background:rgba(239,68,68,.15);color:#ef4444}
+.bx-draft{background:rgba(113,113,122,.15);color:var(--text-4)}
+.inv-detail{background:var(--surface-1);border:1px solid var(--line);border-radius:10px;padding:18px;position:sticky;top:0}
+</style>
+</head>
+<body style="overflow:hidden">
+<div class="dash-layout">
+
+<aside class="dash-sidebar">
+  <div class="dash-logo-wrap">
+    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
+    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+  </div>
+  <div class="dash-user">
+    <div class="dash-avatar">RM</div>
+    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
+    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+  </div>
+  <nav class="dash-nav">
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Main</div>
+      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
+      <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span> Tasks</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span> Messages</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></span> Files &amp; Deliverables</a>
+      <a class="dash-nav-item" href="/feedback.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Feedback</a>
+      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span> Invoices</a>
+    </div>
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">AI Tools</div>
+      <a class="dash-nav-item" href="/proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
+      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
+    </div>
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Billing</div>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span> Payments</a>
+      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span> Subscriptions</a>
+    </div>
+  </nav>
+  <div class="dash-sidebar-bottom">
+    <button class="dash-visit-btn">Visit Website ↗</button>
+    <div class="dash-dark-toggle">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
+      <div class="toggle-switch on"></div>
+    </div>
+  </div>
+</aside>
+
+<div class="dash-main">
+  <div class="dash-topbar">
+    <div><h1>Invoices</h1><p>Manage and track all your client invoices and payments.</p></div>
+    <div class="dash-topbar-right">
+      <div class="dash-search"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="text" placeholder="Search invoices..."><span class="dash-search-kbd">⌘K</span></div>
+      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+      <button class="btn-create-new">+ New Invoice</button>
+    </div>
+  </div>
+
+  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
+
+    <!-- Stat cards -->
+    <div class="dash-stat-cards" style="grid-template-columns:repeat(4,1fr)">
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="dash-stat-label">Total Paid</div>
+        <div class="dash-stat-value" style="font-size:16px">&#8377;18.4L</div>
+        <div class="dash-stat-delta delta-up">↑ 22.1% <span style="color:var(--text-4)">vs last month</span></div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,30 25,24 50,18 75,12 100,8" fill="none" stroke="#22c55e" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="dash-stat-label">Pending</div>
+        <div class="dash-stat-value" style="font-size:16px">&#8377;6.2L</div>
+        <div class="dash-stat-delta" style="color:var(--text-4)">4 invoices pending</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,18 25,20 50,16 75,20 100,18" fill="none" stroke="#f59e0b" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#ef4444"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+        <div class="dash-stat-label">Overdue</div>
+        <div class="dash-stat-value" style="font-size:16px">&#8377;1.8L</div>
+        <div class="dash-stat-delta delta-down">2 overdue invoices</div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,12 25,14 50,16 75,20 100,22" fill="none" stroke="#ef4444" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="dash-stat-label">Total Revenue (YTD)</div>
+        <div class="dash-stat-value" style="font-size:16px">&#8377;42.6L</div>
+        <div class="dash-stat-delta delta-up">↑ 34.8% <span style="color:var(--text-4)">vs last year</span></div>
+        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,32 25,26 50,20 75,12 100,6" fill="none" stroke="#6C5CE7" stroke-width="1.5"/></svg></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:16px">
+
+      <!-- Invoices table -->
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div class="ftabs">
+            <button class="ftab active">All</button>
+            <button class="ftab">Paid</button>
+            <button class="ftab">Pending</button>
+            <button class="ftab">Overdue</button>
+            <button class="ftab">Draft</button>
+          </div>
+          <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer">Sort ▾</button>
+        </div>
+        <div class="dash-chart-card" style="padding:0;overflow:hidden">
+          <table class="adm-table">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Project</th>
+                <th>Client</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adm-tbody"></tbody>
+          </table>
+          <div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04)">
+            <span id="adm-count" style="font-size:11px;color:var(--text-4)"></span>
+            <div style="display:flex;gap:4px">
+              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
+              <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
+              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">2</button>
+              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice detail panel -->
+      <div>
+        <div class="inv-detail">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+            <div>
+              <div style="font-size:10px;color:var(--text-4);margin-bottom:2px">Invoice Details</div>
+              <div style="font-size:14px;font-weight:700;color:var(--brand);font-family:monospace">INV-2025-041</div>
+            </div>
+            <span style="background:rgba(245,158,11,.15);color:#f59e0b;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:600">Pending</span>
+          </div>
+
+          <div style="background:var(--surface-2);border-radius:8px;padding:12px;margin-bottom:14px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:11px;color:var(--text-4)">Client</span>
+              <span style="font-size:11px;color:var(--text-2);font-weight:500">Luxoré Jewels</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:11px;color:var(--text-4)">Project</span>
+              <span style="font-size:11px;color:var(--text-2)">Website Redesign</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:11px;color:var(--text-4)">Issue Date</span>
+              <span style="font-size:11px;color:var(--text-2)">May 24, 2025</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="font-size:11px;color:var(--text-4)">Due Date</span>
+              <span style="font-size:11px;color:#f59e0b;font-weight:600">Jun 7, 2025</span>
+            </div>
+          </div>
+
+          <!-- Line items -->
+          <div style="margin-bottom:14px">
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);margin-bottom:8px">Line Items</div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+              <span style="color:var(--text-2)">UI Design</span><span style="color:#fff">&#8377;25,000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+              <span style="color:var(--text-2)">Development</span><span style="color:#fff">&#8377;30,000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+              <span style="color:var(--text-2)">SEO Setup</span><span style="color:#fff">&#8377;5,000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;padding:8px 0;font-weight:700">
+              <span style="color:var(--text-2)">Total</span><span style="color:#fff">&#8377;60,000</span>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button style="background:var(--brand);border:none;color:#fff;padding:9px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;width:100%">Mark as Paid</button>
+            <div style="display:flex;gap:8px">
+              <button style="flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 10px;border-radius:6px;font-size:11px;cursor:pointer">Send Reminder</button>
+              <button style="flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 10px;border-radius:6px;font-size:11px;cursor:pointer">Download PDF</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-chart-card" style="margin-top:14px">
+          <h3>Payment History</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">INV-2025-040</div><div style="font-size:10px;color:var(--text-4)">May 22, 2025</div></div>
+              <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">&#8377;1,40,000</div><div style="font-size:10px;color:#22c55e">Paid</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">INV-2025-036</div><div style="font-size:10px;color:var(--text-4)">Apr 28, 2025</div></div>
+              <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">&#8377;40,000</div><div style="font-size:10px;color:#22c55e">Paid</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">INV-2025-034</div><div style="font-size:10px;color:var(--text-4)">Apr 12, 2025</div></div>
+              <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">&#8377;47,500</div><div style="font-size:10px;color:#22c55e">Paid</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+<script>
+// ── Invoices: live table from /api/invoices ──
+(() => {
+  const tbody = $('#adm-tbody');
+  const count = $('#adm-count');
+  const BADGE = { paid: ['bx-paid', 'Paid'], outstanding: ['bx-pending', 'Pending'], overdue: ['bx-overdue', 'Overdue'], draft: ['bx-draft', 'Draft'] };
+  const invNo = (i) => 'INV-2025-' + String(Number(i.id) + 30).padStart(3, '0');
+  let invoices = [];
+  let filter = 'All';
+  const row = (i) => `<tr>
+    <td style="font-weight:600;color:var(--brand);font-family:monospace">${invNo(i)}</td>
+    <td style="color:var(--text-2)">${esc(i.project || '—')}</td>
+    <td style="color:var(--text-3)">${esc(i.client)}</td>
+    <td style="color:var(--text-3);font-size:11px">${fmtDate(i.issue_date)}</td>
+    <td style="color:${i.status === 'overdue' ? '#ef4444' : 'var(--text-3)'};font-size:11px">${fmtDate(i.due_date)}</td>
+    <td style="color:#fff;font-weight:600">${fmtINR(i.amount)}</td>
+    <td>${badge(i.status, BADGE)}</td>
+    <td><button class="row-view" data-id="${i.id}" style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+  </tr>`;
+  const render = () => {
+    const list = invoices.filter((i) => filter === 'All' || i.status === filter);
+    tbody.innerHTML = list.length ? list.map(row).join('') : '<tr><td colspan="8" class="adm-empty">No invoices match this filter.</td></tr>';
+    count.textContent = `Showing 1–${list.length} of ${invoices.length} invoices`;
+    const sum = (s) => invoices.filter((i) => i.status === s).reduce((a, i) => a + (Number(i.amount) || 0), 0);
+    fillStat('Total Paid', fmtINR(sum('paid')));
+    fillStat('Pending', fmtINR(sum('outstanding')));
+    fillStat('Overdue', fmtINR(sum('overdue')));
+    fillStat('Total Revenue (YTD)', fmtINR(sum('paid') + sum('outstanding') + sum('overdue')));
+  };
+  const load = async () => { try { invoices = (await api('/api/invoices')).data; render(); } catch (e) { toast(e.message, false); } };
+  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
+    $$('.ftab').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active');
+    filter = b.textContent.trim() === 'All' ? 'All' : b.textContent.trim().toLowerCase();
+    render();
+  }));
+  const search = $('.dash-search input');
+  if (search) search.addEventListener('input', () => {
+    const q = search.value.toLowerCase();
+    tbody.innerHTML = invoices.filter((i) => i.client.toLowerCase().includes(q) || (i.project || '').toLowerCase().includes(q))
+      .map(row).join('') || '<tr><td colspan="8" class="adm-empty">No invoices match.</td></tr>';
+  });
+  $('.btn-create-new').addEventListener('click', () => modal({
+    title: 'New Invoice',
+    fields: [
+      { name: 'client', label: 'Client', required: true },
+      { name: 'project', label: 'Project' },
+      { name: 'amount', label: 'Amount (₹)', type: 'number', value: 0 },
+      { name: 'status', label: 'Status', type: 'select', options: Object.keys(BADGE), value: 'draft' },
+      { name: 'issue_date', label: 'Issue date', type: 'date' },
+      { name: 'due_date', label: 'Due date', type: 'date' },
+    ],
+    onSubmit: async (d) => { await api('/api/invoices', { method: 'POST', body: d }); load(); },
+  }));
+  tbody.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.row-view');
+    if (!btn) return;
+    const i = invoices.find((x) => x.id === Number(btn.dataset.id));
+    if (!i) return;
+    modal({
+      title: invNo(i),
+      fields: [
+        { name: 'client', label: 'Client', value: i.client, required: true },
+        { name: 'project', label: 'Project', value: i.project },
+        { name: 'amount', label: 'Amount (₹)', type: 'number', value: i.amount },
+        { name: 'status', label: 'Status', type: 'select', options: Object.keys(BADGE), value: i.status },
+        { name: 'issue_date', label: 'Issue date', type: 'date', value: i.issue_date },
+        { name: 'due_date', label: 'Due date', type: 'date', value: i.due_date },
+      ],
+      onSubmit: async (d) => { await api('/api/invoices/' + i.id, { method: 'PUT', body: d }); load(); },
+      onDelete: async () => { await api('/api/invoices/' + i.id, { method: 'DELETE' }); load(); },
+    });
+  });
+  load();
+})();
+</script>
+</body>
+</html>

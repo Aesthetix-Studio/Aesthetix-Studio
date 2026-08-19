@@ -1,0 +1,20 @@
+# Render blueprint — deploy by clicking "New +" → "Blueprint" and picking this repo,
+# or from the CLI: `render blueprint launch`. Persists the SQLite DB on a disk.
+services:
+  - type: web
+    name: aesthetix-studio
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.5.0
+      - key: ADMIN_TOKEN
+        sync: false # set a long random secret in the dashboard — admin API is 401 without it
+      - key: DB_PATH
+        value: /data/app.sqlite
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1

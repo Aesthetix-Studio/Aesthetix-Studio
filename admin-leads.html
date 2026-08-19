@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/aesthetix.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
 <style>
 .ftabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
 .ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
@@ -52,7 +53,7 @@
       <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
       <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Articles</a>
       <a class="dash-nav-item" href="/admin-media.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
-      <a class="dash-nav-item" href="/admin-forms.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></span> Forms</a>
+      <a class="dash-nav-item" href="/forms.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></span> Forms</a>
       <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Pages</a>
     </div>
     <div class="dash-nav-section">
@@ -62,9 +63,9 @@
     </div>
     <div class="dash-nav-section">
       <div class="dash-nav-label">AI Tools</div>
-      <a class="dash-nav-item" href="/admin-proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
-      <a class="dash-nav-item" href="/admin-ai-chat.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
-      <a class="dash-nav-item" href="/admin-brand-audit.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
+      <a class="dash-nav-item" href="/proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
+      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
+      <a class="dash-nav-item" href="/brand-audit-tool.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
     </div>
     <div class="dash-nav-section">
       <div class="dash-nav-label">System</div>
@@ -169,95 +170,10 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td style="padding-left:14px">
-                  <div style="display:flex;align-items:center;gap:10px">
-                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(108,92,231,.25);color:#6C5CE7;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">SJ</div>
-                    <div><div style="font-weight:600;color:#fff;font-size:12px">Sarah Johnson</div><div style="color:var(--text-4);font-size:10px">sarah.j@example.com</div></div>
-                  </div>
-                </td>
-                <td><span class="src-badge">Contact Form</span></td>
-                <td><span class="bx bx-new">New</span></td>
-                <td><span class="score-dot" style="background:#22c55e"></span><span style="font-size:11px;color:var(--text-2)">92</span></td>
-                <td style="color:var(--text-2)">₹1,20,000</td>
-                <td style="color:var(--text-3);font-size:11px">May 24, 2025</td>
-                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-              </tr>
-              <tr>
-                <td style="padding-left:14px">
-                  <div style="display:flex;align-items:center;gap:10px">
-                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(59,130,246,.25);color:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">RK</div>
-                    <div><div style="font-weight:600;color:#fff;font-size:12px">Rahul Kumar</div><div style="color:var(--text-4);font-size:10px">rahul.k@techcorp.in</div></div>
-                  </div>
-                </td>
-                <td><span class="src-badge">LinkedIn</span></td>
-                <td><span class="bx bx-qualified">Qualified</span></td>
-                <td><span class="score-dot" style="background:#22c55e"></span><span style="font-size:11px;color:var(--text-2)">88</span></td>
-                <td style="color:var(--text-2)">₹2,50,000</td>
-                <td style="color:var(--text-3);font-size:11px">May 22, 2025</td>
-                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-              </tr>
-              <tr>
-                <td style="padding-left:14px">
-                  <div style="display:flex;align-items:center;gap:10px">
-                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(34,197,94,.25);color:#22c55e;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">PM</div>
-                    <div><div style="font-weight:600;color:#fff;font-size:12px">Priya Mehta</div><div style="color:var(--text-4);font-size:10px">priya@studiom.com</div></div>
-                  </div>
-                </td>
-                <td><span class="src-badge">Referral</span></td>
-                <td><span class="bx bx-proposal">Proposal Sent</span></td>
-                <td><span class="score-dot" style="background:#f59e0b"></span><span style="font-size:11px;color:var(--text-2)">74</span></td>
-                <td style="color:var(--text-2)">₹85,000</td>
-                <td style="color:var(--text-3);font-size:11px">May 20, 2025</td>
-                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-              </tr>
-              <tr>
-                <td style="padding-left:14px">
-                  <div style="display:flex;align-items:center;gap:10px">
-                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(16,185,129,.25);color:#10b981;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">AS</div>
-                    <div><div style="font-weight:600;color:#fff;font-size:12px">Arjun Singh</div><div style="color:var(--text-4);font-size:10px">arjun@nexabrands.io</div></div>
-                  </div>
-                </td>
-                <td><span class="src-badge">Organic</span></td>
-                <td><span class="bx bx-converted">Converted</span></td>
-                <td><span class="score-dot" style="background:#22c55e"></span><span style="font-size:11px;color:var(--text-2)">96</span></td>
-                <td style="color:var(--text-2)">₹1,40,000</td>
-                <td style="color:var(--text-3);font-size:11px">May 18, 2025</td>
-                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-              </tr>
-              <tr>
-                <td style="padding-left:14px">
-                  <div style="display:flex;align-items:center;gap:10px">
-                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(245,158,11,.25);color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">DW</div>
-                    <div><div style="font-weight:600;color:#fff;font-size:12px">Diana Webb</div><div style="color:var(--text-4);font-size:10px">d.webb@horizonco.com</div></div>
-                  </div>
-                </td>
-                <td><span class="src-badge">Instagram</span></td>
-                <td><span class="bx bx-contacted">Contacted</span></td>
-                <td><span class="score-dot" style="background:#f59e0b"></span><span style="font-size:11px;color:var(--text-2)">61</span></td>
-                <td style="color:var(--text-2)">₹60,000</td>
-                <td style="color:var(--text-3);font-size:11px">May 16, 2025</td>
-                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-              </tr>
-              <tr>
-                <td style="padding-left:14px">
-                  <div style="display:flex;align-items:center;gap:10px">
-                    <div style="width:30px;height:30px;border-radius:50%;background:rgba(239,68,68,.25);color:#ef4444;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">VN</div>
-                    <div><div style="font-weight:600;color:#fff;font-size:12px">Vikram Nair</div><div style="color:var(--text-4);font-size:10px">vnair@example.com</div></div>
-                  </div>
-                </td>
-                <td><span class="src-badge">Google Ads</span></td>
-                <td><span class="bx bx-lost">Lost</span></td>
-                <td><span class="score-dot" style="background:#ef4444"></span><span style="font-size:11px;color:var(--text-2)">32</span></td>
-                <td style="color:var(--text-2)">₹45,000</td>
-                <td style="color:var(--text-3);font-size:11px">May 12, 2025</td>
-                <td><button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-              </tr>
-            </tbody>
+            <tbody id="adm-tbody"></tbody>
           </table>
           <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04)">
-            <span style="font-size:11px;color:var(--text-4)">Showing 1–6 of 342 leads</span>
+            <span id="adm-count" style="font-size:11px;color:var(--text-4)"></span>
             <div style="display:flex;gap:4px">
               <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
               <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
@@ -336,5 +252,100 @@
   </div>
 </div>
 </div>
+<script>
+// ── Leads: live table from /api/leads ──
+(() => {
+  const tbody = $('#adm-tbody');
+  const count = $('#adm-count');
+  const BADGE = {
+    new: ['bx-new', 'New'], contacted: ['bx-contacted', 'Contacted'], qualified: ['bx-qualified', 'Qualified'],
+    proposal: ['bx-proposal', 'Proposal Sent'], won: ['bx-converted', 'Converted'], lost: ['bx-lost', 'Lost'],
+  };
+  const SCORE_COLOR = (s) => (s >= 75 ? '#22c55e' : s >= 50 ? '#f59e0b' : '#ef4444');
+  const SRCS = ['Contact Form', 'LinkedIn', 'Referral', 'Organic', 'Instagram', 'Google Ads'];
+  let leads = [];
+  let filter = 'All';
+  const row = (l) => `<tr>
+    <td style="padding-left:14px"><div style="display:flex;align-items:center;gap:10px">${avatar(l.name)}<div><div style="font-weight:600;color:#fff;font-size:12px">${esc(l.name)}</div><div style="color:var(--text-4);font-size:10px">${esc(l.email)}</div></div></div></td>
+    <td><span class="src-badge">${esc(l.source || 'Contact Form')}</span></td>
+    <td>${badge(l.status, BADGE)}</td>
+    <td><span class="score-dot" style="background:${SCORE_COLOR(Number(l.score) || 0)}"></span><span style="font-size:11px;color:var(--text-2)">${esc(l.score ?? '—')}</span></td>
+    <td style="color:var(--text-2)">${fmtINR(l.value)}</td>
+    <td style="color:var(--text-3);font-size:11px">${fmtDate(l.created_at)}</td>
+    <td><button class="row-view" data-id="${l.id}" style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
+  </tr>`;
+  const render = () => {
+    const list = leads.filter((l) => filter === 'All' || l.status === filter);
+    tbody.innerHTML = list.length ? list.map(row).join('') : '<tr><td colspan="7" class="adm-empty">No leads match this filter.</td></tr>';
+    count.textContent = `Showing 1–${list.length} of ${leads.length} leads`;
+    const n = (s) => leads.filter((l) => l.status === s).length;
+    const won = n('won');
+    fillStat('Total Leads', leads.length);
+    fillStat('New', n('new'));
+    fillStat('Contacted', n('contacted') + n('qualified') + n('proposal'));
+    fillStat('Qualified', n('qualified'));
+    fillStat('Converted', won);
+    fillStat('Conv. Rate', leads.length ? Math.round((won / leads.length) * 1000) / 10 + '%' : '0%');
+  };
+  const load = async () => { try { leads = (await api('/api/leads')).data; render(); } catch (e) { toast(e.message, false); } };
+  // status tabs
+  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
+    $$('.ftab').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active');
+    const label = b.textContent.trim();
+    filter = label === 'All' ? 'All' : label === 'Proposal Sent' ? 'proposal' : label.toLowerCase();
+    render();
+  }));
+  // search box
+  const search = $('.dash-search input');
+  if (search) search.addEventListener('input', () => {
+    const q = search.value.toLowerCase();
+    tbody.innerHTML = leads.filter((l) => l.name.toLowerCase().includes(q) || l.email.toLowerCase().includes(q))
+      .map(row).join('') || '<tr><td colspan="7" class="adm-empty">No leads match.</td></tr>';
+  });
+  // add lead
+  $('.btn-create-new').addEventListener('click', () => modal({
+    title: 'Add Lead',
+    fields: [
+      { name: 'name', label: 'Name', required: true },
+      { name: 'email', label: 'Email', type: 'email', required: true },
+      { name: 'company', label: 'Company' },
+      { name: 'website', label: 'Website' },
+      { name: 'project_type', label: 'Project type', type: 'select', options: ['Website', 'Web application', 'AI solution'] },
+      { name: 'source', label: 'Source', type: 'select', options: SRCS },
+      { name: 'score', label: 'Score', type: 'number', value: 50 },
+      { name: 'value', label: 'Value (₹)', type: 'number', value: 0 },
+      { name: 'message', label: 'Message', type: 'textarea' },
+      { name: 'status', label: 'Status', type: 'select', options: Object.keys(BADGE), value: 'new' },
+    ],
+    onSubmit: async (d) => { await api('/api/leads', { method: 'POST', body: d }); load(); },
+  }));
+  // view → edit / convert / delete
+  tbody.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.row-view');
+    if (!btn) return;
+    const l = leads.find((x) => x.id === Number(btn.dataset.id));
+    if (!l) return;
+    modal({
+      title: l.name,
+      fields: [
+        { name: 'name', label: 'Name', value: l.name, required: true },
+        { name: 'email', label: 'Email', type: 'email', value: l.email, required: true },
+        { name: 'company', label: 'Company', value: l.company },
+        { name: 'website', label: 'Website', value: l.website },
+        { name: 'project_type', label: 'Project type', type: 'select', options: ['Website', 'Web application', 'AI solution'], value: l.project_type },
+        { name: 'source', label: 'Source', type: 'select', options: SRCS, value: l.source || 'Contact Form' },
+        { name: 'score', label: 'Score', type: 'number', value: l.score },
+        { name: 'value', label: 'Value (₹)', type: 'number', value: l.value },
+        { name: 'message', label: 'Message', type: 'textarea', value: l.message },
+        { name: 'status', label: 'Status', type: 'select', options: Object.keys(BADGE), value: l.status },
+      ],
+      onSubmit: async (d) => { await api('/api/leads/' + l.id, { method: 'PUT', body: d }); load(); },
+      onDelete: async () => { await api('/api/leads/' + l.id, { method: 'DELETE' }); load(); },
+    });
+  });
+  load();
+})();
+</script>
 </body>
 </html>
