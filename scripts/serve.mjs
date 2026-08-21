@@ -105,18 +105,20 @@ if (check) {
       ['/admin-analytics', 200, 'text/html', '', ['Analytics — Aesthetix Studio', 'dash-layout', 'js/admin.js']], // admin screens wired to the API
       ['/admin-articles', 200, 'text/html', '', ['adm-table', 'Articles — Aesthetix Studio', 'js/admin.js']],
       ['/admin-leads', 200, 'text/html', '', ['adm-table', 'Leads — Aesthetix Studio', 'js/admin.js', 'adm-tbody']],
+      ['/leads', 200, 'text/html', '', ['dash-layout', 'Leads — Aesthetix Studio', 'adm-tbody', 'ftab']],
       ['/admin-media', 200, 'text/html', '', ['Media Library — Aesthetix Studio', 'js/admin.js', 'adm-grid']],
       ['/admin-projects', 200, 'text/html', '', ['adm-table', 'Projects — Aesthetix Studio', 'js/admin.js']],
       ['/admin-invoices', 200, 'text/html', '', ['adm-table', 'Invoices — Aesthetix Studio', 'js/admin.js']],
       ['/admin-users', 200, 'text/html', '', ['adm-table', 'Users — Aesthetix Studio', 'js/admin.js']],
       ['/admin-settings', 200, 'text/html', '', ['Settings — Aesthetix Studio', 'js/admin.js', 'save-btn']],
-      ['/forms', 200, 'text/html', '', ['Forms — Aesthetix Studio', 'wireToolPage', 'adm-tbody']], // generated tool screens wired
+      ['/forms', 200, 'text/html', '', ['Forms — Aesthetix Studio', 'dash-layout', 'adm-tbody']], // dashboard with live table
       ['/feedback', 200, 'text/html', '', ['Feedback — Aesthetix Studio', 'wireToolPage']],
       ['/meeting-notes', 200, 'text/html', '', ['Meeting Notes — Aesthetix Studio', 'wireToolPage']],
       ['/proposal-generator', 200, 'text/html', '', ['Proposal Generator — Aesthetix Studio', 'wireToolPage']],
       ['/files-deliverables', 200, 'text/html', '', ['Files & Deliverables — Aesthetix Studio', 'wireToolPage']],
       ['/project-timeline', 200, 'text/html', '', ['Project Timeline — Aesthetix Studio', 'wireToolPage']],
       ['/ai-chat-assistant', 200, 'text/html', '', ['AI Chat Assistant — Aesthetix Studio', 'wireChat']],
+      ['/brand-audit-tool', 200, 'text/html', '', ['Brand Audit Tool — Aesthetix Studio', 'dash-layout', 'score-gauge']],
       ['/search', 200, 'text/html', '', ['Search — Aesthetix Studio', 'wireSearch']],
       ['/500', 200, 'text/html', '', ['Server error']], // error screen
     ];
