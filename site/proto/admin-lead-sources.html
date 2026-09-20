@@ -74,7 +74,7 @@
       <div class="dash-topbar-right">
         <div class="dash-search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="ls-search" placeholder="Search sources...">
+          <input type="text" id="ls-search" aria-label="Search sources" placeholder="Search sources...">
         </div>
         <button class="pj-btn" id="ls-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
         <button class="btn-new" id="ls-new">＋ New Lead</button>
@@ -104,7 +104,7 @@
       <div class="ls-body">
         <div style="min-width:0">
           <div class="ls-toolbar">
-            <select class="pj-sort" id="ls-sort">
+            <select class="pj-sort" id="ls-sort" aria-label="Sort lead sources">
               <option value="leads">Sort by: Most Leads</option>
               <option value="value">Sort by: Pipeline Value</option>
               <option value="score">Sort by: Avg Score</option>

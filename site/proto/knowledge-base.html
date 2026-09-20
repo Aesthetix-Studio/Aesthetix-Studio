@@ -104,7 +104,7 @@
       <div class="dash-topbar-right">
         <div class="dash-search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="kb-search" placeholder="Search knowledge base...">
+          <input type="text" id="kb-search" aria-label="Search knowledge base" placeholder="Search knowledge base...">
           <span class="dash-search-kbd">⌘K</span>
         </div>
         <button class="btn-new" id="kb-new">＋ New Article</button>
@@ -135,9 +135,9 @@
       <div class="kb-searchrow">
         <div class="kb-bigsearch">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6E6E7E" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="kb-search2" placeholder="Search articles, topics or keywords...">
+          <input type="text" id="kb-search2" aria-label="Search articles, topics or keywords" placeholder="Search articles, topics or keywords...">
         </div>
-        <select class="pj-sort" id="kb-catselect" style="padding:11px 12px;font-size:12px"></select>
+        <select class="pj-sort" id="kb-catselect" aria-label="Filter by category" style="padding:11px 12px;font-size:12px"></select>
       </div>
 
       <div class="kb-body">
@@ -166,7 +166,7 @@
 
           <div class="kb-sechead"><h3>All Articles</h3>
             <span style="margin-left:auto"></span>
-            <select class="pj-sort" id="kb-sort">
+            <select class="pj-sort" id="kb-sort" aria-label="Sort articles">
               <option value="featured">Sort by: Featured</option>
               <option value="recent">Sort by: Most Recent</option>
               <option value="views">Sort by: Most Viewed</option>

@@ -13,6 +13,8 @@
     "serve": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
     "check": "node scripts/serve.mjs --check",
+    "qa": "node qa/audit.mjs",
+    "qa:test": "node qa/audit.test.mjs",
     "dev": "node scripts/generate.js && node scripts/serve.mjs"
   }
 }

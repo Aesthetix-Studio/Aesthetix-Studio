@@ -235,10 +235,10 @@ body{background:var(--st-bg)!important}
               <span class="edit-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></span>
             </div>
             <div style="flex:1;min-width:0">
-              <div class="st-field"><label>Site Name</label><input name="site_name" value="Aesthetix Studio"></div>
-              <div class="st-field"><label>Tagline</label><input name="tagline" value="Digital Experience Lab"></div>
-              <div class="st-field"><label>Site URL</label><input name="site_url" value="https://aesthetixstudio.com"></div>
-              <div class="st-field" style="margin-bottom:0"><label>Admin Email</label><input name="admin_email" value="mohdabraralikhan@gmail.com"></div>
+              <div class="st-field"><label for="set-site-name">Site Name</label><input id="set-site-name" name="site_name" value="Aesthetix Studio"></div>
+              <div class="st-field"><label for="set-tagline">Tagline</label><input id="set-tagline" name="tagline" value="Digital Experience Lab"></div>
+              <div class="st-field"><label for="set-site-url">Site URL</label><input id="set-site-url" name="site_url" value="https://aesthetixstudio.com"></div>
+              <div class="st-field" style="margin-bottom:0"><label for="set-admin-email">Admin Email</label><input id="set-admin-email" name="admin_email" value="mohdabraralikhan@gmail.com"></div>
             </div>
           </div>
         </div>
@@ -263,7 +263,7 @@ body{background:var(--st-bg)!important}
           <div class="st-maint">
             <div class="st-maint-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
             <div class="st-maint-txt" style="flex:1"><b>Maintenance Mode</b><span>Your site is live and accessible to visitors.</span></div>
-            <button class="tgl" type="button" aria-label="Maintenance mode"></button>
+            <button class="tgl" type="button" aria-label="Maintenance mode" aria-label="Toggle Maintenance Mode"></button>
           </div>
         </div>
       </div>
@@ -272,25 +272,25 @@ body{background:var(--st-bg)!important}
       <div class="st-col">
         <div class="st-card">
           <div class="st-card-head"><div><h3>Localization</h3><p>Set your language and regional preferences.</p></div></div>
-          <div class="st-loc-row"><label>Language</label><div class="st-loc-sel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E8E9A" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><select name="language"><option>English (US)</option><option>English (India)</option><option>Hindi</option></select><span style="color:#5E5E6E">⌄</span></div></div>
-          <div class="st-loc-row"><label>Timezone</label><div class="st-loc-sel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E8E9A" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><select name="timezone"><option>Asia/Kolkata (UTC +05:30)</option><option>UTC</option></select><span style="color:#5E5E6E">⌄</span></div></div>
-          <div class="st-loc-row"><label>Date Format</label><div class="st-loc-sel"><select name="date_format"><option>May 24, 2025</option><option>24 May 2025</option><option>2025-05-24</option></select><span style="color:#5E5E6E">⌄</span></div></div>
-          <div class="st-loc-row" style="margin-bottom:0"><label>Time Format</label><div class="st-loc-sel"><select name="time_format"><option>12 Hour (03:45 PM)</option><option>24 Hour (15:45)</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row"><label for="set-language">Language</label><div class="st-loc-sel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E8E9A" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><select id="set-language" name="language"><option>English (US)</option><option>English (India)</option><option>Hindi</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row"><label for="set-timezone">Timezone</label><div class="st-loc-sel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E8E9A" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><select id="set-timezone" name="timezone"><option>Asia/Kolkata (UTC +05:30)</option><option>UTC</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row"><label for="set-date-format">Date Format</label><div class="st-loc-sel"><select id="set-date-format" name="date_format"><option>May 24, 2025</option><option>24 May 2025</option><option>2025-05-24</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row" style="margin-bottom:0"><label for="set-time-format">Time Format</label><div class="st-loc-sel"><select id="set-time-format" name="time_format"><option>12 Hour (03:45 PM)</option><option>24 Hour (15:45)</option></select><span style="color:#5E5E6E">⌄</span></div></div>
         </div>
 
         <div class="st-card">
           <div class="st-card-head"><div><h3>Security Settings</h3><p>Manage your security and access preferences.</p></div><button class="st-chev-right">›</button></div>
-          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="st-sec-txt"><b>Two-Factor Authentication</b><span>Add an extra layer of security</span></div><button class="tgl on" type="button"></button></div>
-          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="st-sec-txt"><b>Login Session Timeout</b><span>Automatically log out inactive users</span></div><select class="st-mini-select"><option>30 min</option><option>1 hour</option><option>8 hours</option></select></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="st-sec-txt"><b>Two-Factor Authentication</b><span>Add an extra layer of security</span></div><button class="tgl on" type="button" aria-label="Toggle Two-Factor Authentication"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="st-sec-txt"><b>Login Session Timeout</b><span>Automatically log out inactive users</span></div><select class="st-mini-select" aria-label="Login Session Timeout"><option>30 min</option><option>1 hour</option><option>8 hours</option></select></div>
           <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="st-sec-txt"><b>Password Policy</b><span>Enforce strong password rules</span></div><button class="st-chev-right">›</button></div>
-          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="st-sec-txt"><b>Login Attempts</b><span>Limit failed login attempts</span></div><button class="tgl on" type="button"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="st-sec-txt"><b>Login Attempts</b><span>Limit failed login attempts</span></div><button class="tgl on" type="button" aria-label="Toggle Login Attempts"></button></div>
         </div>
 
         <div class="st-card">
           <div class="st-card-head"><div><h3>Performance</h3><p>Optimize your site performance and speed.</p></div></div>
-          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="st-sec-txt"><b>Cache System</b><span>Speed up your website</span></div><button class="tgl on" type="button"></button></div>
-          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="st-sec-txt"><b>Image Optimization</b><span>Automatically optimize images</span></div><button class="tgl on" type="button"></button></div>
-          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="st-sec-txt"><b>Minify Assets</b><span>Minify CSS, JS and HTML files</span></div><button class="tgl" type="button"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="st-sec-txt"><b>Cache System</b><span>Speed up your website</span></div><button class="tgl on" type="button" aria-label="Toggle Cache System"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="st-sec-txt"><b>Image Optimization</b><span>Automatically optimize images</span></div><button class="tgl on" type="button" aria-label="Toggle Image Optimization"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="st-sec-txt"><b>Minify Assets</b><span>Minify CSS, JS and HTML files</span></div><button class="tgl" type="button" aria-label="Toggle Minify Assets"></button></div>
         </div>
       </div>
 

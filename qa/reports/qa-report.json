@@ -1,0 +1,3366 @@
+{
+  "meta": {
+    "generatedAt": "2026-09-20T14:03:23.826Z",
+    "tool": "qa/audit.mjs",
+    "mode": "static + http:live",
+    "pagesAudited": 77,
+    "anchorsParsed": 1372,
+    "imagesParsed": 73,
+    "httpChecks": 172,
+    "externalLinks": 0,
+    "noindexPages": [
+      "/404",
+      "/500"
+    ],
+    "counts": {
+      "HIGH": 1,
+      "MEDIUM": 42,
+      "LOW": 108
+    },
+    "byCategory": {
+      "cta": 42,
+      "links": 1,
+      "a11y": 89,
+      "assets": 15,
+      "forms": 4
+    }
+  },
+  "inventory": {
+    "routes": [
+      {
+        "route": "/",
+        "file": "index.html",
+        "source": "site/proto/index.html",
+        "gated": false
+      },
+      {
+        "route": "/404",
+        "file": "404.html",
+        "source": "site/proto/404.html",
+        "gated": false
+      },
+      {
+        "route": "/500",
+        "file": "500.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/accessibility",
+        "file": "accessibility.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/accessibility-scanner",
+        "file": "accessibility-scanner.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/admin-activity",
+        "file": "admin-activity.html",
+        "source": "site/proto/admin-activity.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-ai-writer",
+        "file": "admin-ai-writer.html",
+        "source": "site/proto/admin-ai-writer.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-analytics",
+        "file": "admin-analytics.html",
+        "source": "site/proto/admin-analytics.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-articles",
+        "file": "admin-articles.html",
+        "source": "site/proto/admin-articles.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-categories",
+        "file": "admin-categories.html",
+        "source": "site/proto/admin-categories.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-comments",
+        "file": "admin-comments.html",
+        "source": "site/proto/admin-comments.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-integrations",
+        "file": "admin-integrations.html",
+        "source": "site/proto/admin-integrations.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-invoices",
+        "file": "admin-invoices.html",
+        "source": "site/proto/admin-invoices.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-lead-sources",
+        "file": "admin-lead-sources.html",
+        "source": "site/proto/admin-lead-sources.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-leads",
+        "file": "admin-leads.html",
+        "source": "site/proto/admin-leads.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-media",
+        "file": "admin-media.html",
+        "source": "site/proto/admin-media.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-pages",
+        "file": "admin-pages.html",
+        "source": "site/proto/admin-pages.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-projects",
+        "file": "admin-projects.html",
+        "source": "site/proto/admin-projects.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-roles",
+        "file": "admin-roles.html",
+        "source": "site/proto/admin-roles.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-settings",
+        "file": "admin-settings.html",
+        "source": "site/proto/admin-settings.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-system-health",
+        "file": "admin-system-health.html",
+        "source": "site/proto/admin-system-health.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-tags",
+        "file": "admin-tags.html",
+        "source": "site/proto/admin-tags.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-testimonials",
+        "file": "admin-testimonials.html",
+        "source": "site/proto/admin-testimonials.html",
+        "gated": true
+      },
+      {
+        "route": "/admin-users",
+        "file": "admin-users.html",
+        "source": "site/proto/admin-users.html",
+        "gated": true
+      },
+      {
+        "route": "/ai-chat-assistant",
+        "file": "ai-chat-assistant.html",
+        "source": "site/proto/ai-chat-assistant.html",
+        "gated": true
+      },
+      {
+        "route": "/ai-solutions",
+        "file": "ai-solutions.html",
+        "source": "site/proto/ai-solutions.html",
+        "gated": false
+      },
+      {
+        "route": "/audit-analysis",
+        "file": "audit-analysis.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/brand-audit-tool",
+        "file": "brand-audit-tool.html",
+        "source": "site/proto/brand-audit-tool.html",
+        "gated": true
+      },
+      {
+        "route": "/calendar",
+        "file": "calendar.html",
+        "source": "site/proto/calendar.html",
+        "gated": true
+      },
+      {
+        "route": "/capabilities",
+        "file": "capabilities.html",
+        "source": "site/proto/capabilities.html",
+        "gated": false
+      },
+      {
+        "route": "/careers",
+        "file": "careers.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/case-studies",
+        "file": "case-studies.html",
+        "source": "site/proto/case-studies.html",
+        "gated": false
+      },
+      {
+        "route": "/client-review",
+        "file": "client-review.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/contact",
+        "file": "contact.html",
+        "source": "site/proto/contact.html",
+        "gated": false
+      },
+      {
+        "route": "/cookies-policy",
+        "file": "cookies-policy.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/dashboard",
+        "file": "dashboard.html",
+        "source": "site/proto/dashboard.html",
+        "gated": true
+      },
+      {
+        "route": "/design-brief-analyzer",
+        "file": "design-brief-analyzer.html",
+        "source": "site/proto/design-brief-analyzer.html",
+        "gated": true
+      },
+      {
+        "route": "/design-system",
+        "file": "design-system.html",
+        "source": "site/proto/design-system.html",
+        "gated": true
+      },
+      {
+        "route": "/discovery-call",
+        "file": "discovery-call.html",
+        "source": "site/proto/discovery-call.html",
+        "gated": false
+      },
+      {
+        "route": "/feedback",
+        "file": "feedback.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/files-deliverables",
+        "file": "files-deliverables.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/forgot-password",
+        "file": "forgot-password.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/forms",
+        "file": "forms.html",
+        "source": "site/proto/forms.html",
+        "gated": true
+      },
+      {
+        "route": "/journal",
+        "file": "journal.html",
+        "source": "site/proto/journal.html",
+        "gated": false
+      },
+      {
+        "route": "/knowledge-base",
+        "file": "knowledge-base.html",
+        "source": "site/proto/knowledge-base.html",
+        "gated": true
+      },
+      {
+        "route": "/leads",
+        "file": "leads.html",
+        "source": "site/proto/leads.html",
+        "gated": true
+      },
+      {
+        "route": "/login",
+        "file": "login.html",
+        "source": "site/proto/login.html",
+        "gated": false
+      },
+      {
+        "route": "/maintenance",
+        "file": "maintenance.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/meeting-notes",
+        "file": "meeting-notes.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/messages",
+        "file": "messages.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/performance-analyzer",
+        "file": "performance-analyzer.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/pricing",
+        "file": "pricing.html",
+        "source": "site/proto/pricing.html",
+        "gated": false
+      },
+      {
+        "route": "/privacy-policy",
+        "file": "privacy-policy.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/process",
+        "file": "process.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/project-timeline",
+        "file": "project-timeline.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/proposal",
+        "file": "proposal.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/proposal-generator",
+        "file": "proposal-generator.html",
+        "source": "site/proto/proposal-generator.html",
+        "gated": true
+      },
+      {
+        "route": "/proposal-request",
+        "file": "proposal-request.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/reset-password",
+        "file": "reset-password.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/rss-feed",
+        "file": "rss-feed.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/search",
+        "file": "search.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/seo-analyzer",
+        "file": "seo-analyzer.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/seo-service",
+        "file": "seo-service.html",
+        "source": "site/proto/seo-service.html",
+        "gated": false
+      },
+      {
+        "route": "/signup",
+        "file": "signup.html",
+        "source": "site/proto/signup.html",
+        "gated": false
+      },
+      {
+        "route": "/sitemap-tool",
+        "file": "sitemap-tool.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/start-a-project",
+        "file": "start-a-project.html",
+        "source": "site/proto/start-a-project.html",
+        "gated": false
+      },
+      {
+        "route": "/studio",
+        "file": "studio.html",
+        "source": "site/proto/studio.html",
+        "gated": false
+      },
+      {
+        "route": "/subscriptions",
+        "file": "subscriptions.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/tasks",
+        "file": "tasks.html",
+        "source": "scripts/generate.js",
+        "gated": true
+      },
+      {
+        "route": "/terms-of-service",
+        "file": "terms-of-service.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/verify-email",
+        "file": "verify-email.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/website-audit-tool",
+        "file": "website-audit-tool.html",
+        "source": "scripts/generate.js",
+        "gated": false
+      },
+      {
+        "route": "/website-redesign",
+        "file": "website-redesign.html",
+        "source": "site/proto/website-redesign.html",
+        "gated": false
+      },
+      {
+        "route": "/work",
+        "file": "work.html",
+        "source": "site/proto/work.html",
+        "gated": false
+      },
+      {
+        "route": "/work/kora-health",
+        "file": "work/kora-health.html",
+        "source": "scripts/generate.js (case-study template)",
+        "gated": false
+      },
+      {
+        "route": "/work/luminary-financial",
+        "file": "work/luminary-financial.html",
+        "source": "scripts/generate.js (case-study template)",
+        "gated": false
+      },
+      {
+        "route": "/work/vertex",
+        "file": "work/vertex.html",
+        "source": "scripts/generate.js (case-study template)",
+        "gated": false
+      }
+    ]
+  },
+  "http": {
+    "mode": "live",
+    "checks": 172,
+    "results": [
+      {
+        "path": "/",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/404",
+        "status": 404,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/500",
+        "status": 500,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/accessibility",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/accessibility-scanner",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/admin-activity",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-ai-writer",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-analytics",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-articles",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-categories",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-comments",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-integrations",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-invoices",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-lead-sources",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-leads",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-media",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-pages",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-projects",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-roles",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-settings",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-system-health",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-tags",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-testimonials",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/admin-users",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/ai-chat-assistant",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/ai-solutions",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/audit-analysis",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/brand-audit-tool",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/calendar",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/capabilities",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/careers",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/case-studies",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/client-review",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/contact",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/cookies-policy",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/dashboard",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/design-brief-analyzer",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/design-system",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/discovery-call",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/feedback",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/files-deliverables",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/forgot-password",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/forms",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/journal",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/knowledge-base",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/leads",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/login",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/maintenance",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/meeting-notes",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/messages",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/performance-analyzer",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/pricing",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/privacy-policy",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/process",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/project-timeline",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/proposal",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/proposal-generator",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/proposal-request",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/reset-password",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/rss-feed",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/search",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/seo-analyzer",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/seo-service",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/signup",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/sitemap-tool",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/start-a-project",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/studio",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/subscriptions",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/tasks",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "gated page (200 open / 302 with ADMIN_TOKEN)"
+      },
+      {
+        "path": "/terms-of-service",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/verify-email",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/website-audit-tool",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/website-redesign",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/work",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/work/kora-health",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/work/luminary-financial",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/work/vertex",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "page"
+      },
+      {
+        "path": "/ai-solutions.html",
+        "status": 301,
+        "location": "/ai-solutions",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/seo-service.html",
+        "status": 301,
+        "location": "/seo-service",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/website-redesign.html",
+        "status": 301,
+        "location": "/website-redesign",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/pricing.html",
+        "status": 301,
+        "location": "/pricing",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/start-a-project.html",
+        "status": 301,
+        "location": "/start-a-project",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/dashboard.html",
+        "status": 301,
+        "location": "/dashboard",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-analytics.html",
+        "status": 301,
+        "location": "/admin-analytics",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-leads.html",
+        "status": 301,
+        "location": "/admin-leads",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-lead-sources.html",
+        "status": 301,
+        "location": "/admin-lead-sources",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-projects.html",
+        "status": 301,
+        "location": "/admin-projects",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-articles.html",
+        "status": 301,
+        "location": "/admin-articles",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-media.html",
+        "status": 301,
+        "location": "/admin-media",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/forms.html",
+        "status": 301,
+        "location": "/forms",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-pages.html",
+        "status": 301,
+        "location": "/admin-pages",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-comments.html",
+        "status": 301,
+        "location": "/admin-comments",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-testimonials.html",
+        "status": 301,
+        "location": "/admin-testimonials",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-categories.html",
+        "status": 301,
+        "location": "/admin-categories",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-tags.html",
+        "status": 301,
+        "location": "/admin-tags",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/proposal-generator.html",
+        "status": 301,
+        "location": "/proposal-generator",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/ai-chat-assistant.html",
+        "status": 301,
+        "location": "/ai-chat-assistant",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-ai-writer.html",
+        "status": 301,
+        "location": "/admin-ai-writer",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/brand-audit-tool.html",
+        "status": 301,
+        "location": "/brand-audit-tool",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-users.html",
+        "status": 301,
+        "location": "/admin-users",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-roles.html",
+        "status": 301,
+        "location": "/admin-roles",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-settings.html",
+        "status": 301,
+        "location": "/admin-settings",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-activity.html",
+        "status": 301,
+        "location": "/admin-activity",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-integrations.html",
+        "status": 301,
+        "location": "/admin-integrations",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/admin-system-health.html",
+        "status": 301,
+        "location": "/admin-system-health",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/work.html",
+        "status": 301,
+        "location": "/work",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/capabilities.html",
+        "status": 301,
+        "location": "/capabilities",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/journal.html",
+        "status": 301,
+        "location": "/journal",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/studio.html",
+        "status": 301,
+        "location": "/studio",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/contact.html",
+        "status": 301,
+        "location": "/contact",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/discovery-call.html",
+        "status": 301,
+        "location": "/discovery-call",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/case-studies.html",
+        "status": 301,
+        "location": "/case-studies",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/work/luminary-financial.html",
+        "status": 301,
+        "location": "/work/luminary-financial",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/work/vertex.html",
+        "status": 301,
+        "location": "/work/vertex",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/work/kora-health.html",
+        "status": 301,
+        "location": "/work/kora-health",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/careers.html",
+        "status": 301,
+        "location": "/careers",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/process.html",
+        "status": 301,
+        "location": "/process",
+        "pass": true,
+        "note": "301 to clean URL"
+      },
+      {
+        "path": "/images/assets/03_22_00_home_hero.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/06_luminary_laptop.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/02_circular_stairwell.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/fonts/manrope.woff2",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/fonts/dm-serif-display.woff2",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/css/aesthetix.css",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/favicon.svg",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/placeholder.svg",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/js/admin.js",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/AI-Solutions-Hero.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/AI-Solutions-Card-01.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/AI-Solutions-Card-02.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/AI-Solutions-Card-03.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/AI-Solutions-Card-04.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/Capabilities-hero.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/capabilities_02_laptop_mockup.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/capabilities_03_dashboard_mockup.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/capabilities_04_ai_abstract.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/case_studies_01_hero_background.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/case_studies_02_luminary.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/case_studies_03_nexora.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/case_studies_04_medicare.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/case_studies_05_aether_ai.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/contact-hero.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/contact-thumb.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/discovery_call_01_studio_environment.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_01_hero_background.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_02_featured_article.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_03_article_thumbnail_01.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_04_article_thumbnail_02.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_05_article_thumbnail_03.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_06_article_thumbnail_04.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_07_article_thumbnail_05.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/journal_08_article_thumbnail_06.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/10_stairwell_round.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/pricing_01_hero_glass_A.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/SEO-Service-Hero.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/SEO-Service-02.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/signup_01_left_side_stairwell.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/studio_01_hero_background.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/studio_02_abrar_portrait.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/studio_03_sara_portrait.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/studio_04_arjun_portrait.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/studio_05_mei_portrait.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/work_01_medicare_tablet_mockup.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/images/assets/work_02_nexora_saas_laptop_mockup.png",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "asset"
+      },
+      {
+        "path": "/favicon.ico",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "browser auto-request"
+      },
+      {
+        "path": "/site/proto/dashboard",
+        "status": 404,
+        "location": "",
+        "pass": true,
+        "note": "admin template reachability check"
+      },
+      {
+        "path": "/api/contact",
+        "status": 405,
+        "location": "",
+        "pass": true,
+        "note": "endpoint used by /contact"
+      },
+      {
+        "path": "/api/contact",
+        "status": 405,
+        "location": "",
+        "pass": true,
+        "note": "endpoint used by /design-brief-analyzer"
+      },
+      {
+        "path": "/api/contact",
+        "status": 405,
+        "location": "",
+        "pass": true,
+        "note": "endpoint used by /discovery-call"
+      },
+      {
+        "path": "/api/session",
+        "status": 405,
+        "location": "",
+        "pass": true,
+        "note": "endpoint used by /login"
+      },
+      {
+        "path": "/api/contact",
+        "status": 405,
+        "location": "",
+        "pass": true,
+        "note": "endpoint used by /start-a-project"
+      },
+      {
+        "path": "/api/public/projects",
+        "status": 200,
+        "location": "",
+        "pass": true,
+        "note": "endpoint used by /work"
+      },
+      {
+        "path": "POST /api/contact {}",
+        "status": 400,
+        "pass": true,
+        "note": "validation"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "category": "cta",
+      "page": "/, /404, /500, /accessibility, /accessibility-scanner, /ai-solutions +35 more",
+      "url": "#",
+      "issue": "Dead placeholder link on 41 pages: \"LinkedIn\", \"GitHub\", \"Dribbble\", \"X (Twitter)\"",
+      "evidence": "href=\"#\" (sample: index.html:184)",
+      "source": "site/_footer.html",
+      "fix": "Set the real social profile URLs in site/_footer.html — one edit fixes every page."
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Tasks\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:48)",
+      "source": "admin-invoices.html:48",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 3,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices, /work/kora-health",
+      "url": "#",
+      "issue": "Dead placeholder link on 2 pages: \"Messages\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:49)",
+      "source": "admin-invoices.html:49",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 4,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Files &amp; Deliverables\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:50)",
+      "source": "admin-invoices.html:50",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 5,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Invoices\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:52)",
+      "source": "admin-invoices.html:52",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 6,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices",
+      "url": "#",
+      "issue": "Dead placeholder link: \"AI Writer\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:58)",
+      "source": "admin-invoices.html:58",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 7,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Payments\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:62)",
+      "source": "admin-invoices.html:62",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 8,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-invoices",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Subscriptions\"",
+      "evidence": "href=\"#\" (sample: admin-invoices.html:63)",
+      "source": "admin-invoices.html:63",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 9,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-leads",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Pages\"",
+      "evidence": "href=\"#\" (sample: admin-leads.html:58)",
+      "source": "admin-leads.html:58",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 10,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-leads, /leads",
+      "url": "#",
+      "issue": "Dead placeholder link on 2 pages: \"Leads\"",
+      "evidence": "href=\"#\" (sample: admin-leads.html:62)",
+      "source": "admin-leads.html:62",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 11,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-leads, /leads",
+      "url": "#",
+      "issue": "Dead placeholder link on 2 pages: \"Lead Sources\"",
+      "evidence": "href=\"#\" (sample: admin-leads.html:63)",
+      "source": "admin-leads.html:63",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 12,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-leads",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Activity Logs\"",
+      "evidence": "href=\"#\" (sample: admin-leads.html:75)",
+      "source": "admin-leads.html:75",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 13,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-leads",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Integrations\"",
+      "evidence": "href=\"#\" (sample: admin-leads.html:76)",
+      "source": "admin-leads.html:76",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 14,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/admin-leads, /forms, /leads",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"View all\"",
+      "evidence": "href=\"#\" (sample: admin-leads.html:228)",
+      "source": "admin-leads.html:228",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 15,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/brand-audit-tool",
+      "url": "#",
+      "issue": "Dead placeholder link: \"—\"",
+      "evidence": "href=\"#\" (sample: brand-audit-tool.html:120)",
+      "source": "brand-audit-tool.html:120",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 16,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/forms",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Forms\"",
+      "evidence": "href=\"#\" (sample: forms.html:64)",
+      "source": "forms.html:64",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 17,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/journal",
+      "url": "#",
+      "issue": "Dead placeholder link: \"&#8599; Subscribe to our newsletter\"",
+      "evidence": "href=\"#\" (sample: journal.html:10)",
+      "source": "journal.html:10",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 18,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/journal",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Read article &#8599;\"",
+      "evidence": "href=\"#\" (sample: journal.html:24)",
+      "source": "journal.html:24",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 19,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/leads",
+      "url": "#",
+      "issue": "Dead placeholder link: \"This Month\"",
+      "evidence": "href=\"#\" (sample: leads.html:190)",
+      "source": "leads.html:190",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 20,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/verify-email",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Resend link\"",
+      "evidence": "href=\"#\" (sample: verify-email.html:3)",
+      "source": "verify-email.html:3",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 21,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health, /work/luminary-financial, /work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"Visit website ↗\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:11)",
+      "source": "work/kora-health.html:11",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 22,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health, /work/luminary-financial, /work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"＋ Key challenges\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:46)",
+      "source": "work/kora-health.html:46",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 23,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health, /work/luminary-financial, /work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"Next section\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:48)",
+      "source": "work/kora-health.html:48",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 24,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health, /work/luminary-financial, /work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"＋ Our approach\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:53)",
+      "source": "work/kora-health.html:53",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 25,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health, /work/luminary-financial, /work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"Overview\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:68)",
+      "source": "work/kora-health.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 26,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Appointments\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:68)",
+      "source": "work/kora-health.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 27,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Care plan\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:68)",
+      "source": "work/kora-health.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 28,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Records\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:68)",
+      "source": "work/kora-health.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 29,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/kora-health, /work/luminary-financial, /work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link on 3 pages: \"Settings\"",
+      "evidence": "href=\"#\" (sample: work/kora-health.html:68)",
+      "source": "work/kora-health.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 30,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/luminary-financial",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Portfolio\"",
+      "evidence": "href=\"#\" (sample: work/luminary-financial.html:68)",
+      "source": "work/luminary-financial.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 31,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/luminary-financial",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Investments\"",
+      "evidence": "href=\"#\" (sample: work/luminary-financial.html:68)",
+      "source": "work/luminary-financial.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 32,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/luminary-financial",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Transactions\"",
+      "evidence": "href=\"#\" (sample: work/luminary-financial.html:68)",
+      "source": "work/luminary-financial.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 33,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/luminary-financial",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Insights\"",
+      "evidence": "href=\"#\" (sample: work/luminary-financial.html:68)",
+      "source": "work/luminary-financial.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 34,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Metrics\"",
+      "evidence": "href=\"#\" (sample: work/vertex.html:68)",
+      "source": "work/vertex.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 35,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Alerts\"",
+      "evidence": "href=\"#\" (sample: work/vertex.html:68)",
+      "source": "work/vertex.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 36,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Reports\"",
+      "evidence": "href=\"#\" (sample: work/vertex.html:68)",
+      "source": "work/vertex.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 37,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work/vertex",
+      "url": "#",
+      "issue": "Dead placeholder link: \"Sources\"",
+      "evidence": "href=\"#\" (sample: work/vertex.html:68)",
+      "source": "work/vertex.html:68",
+      "fix": "Point at a real destination or remove the affordance."
+    },
+    {
+      "id": 38,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/case-studies",
+      "url": "/work/vertex",
+      "issue": "Possible wrong destination: card \"Nexora SaaS\" links to /work/vertex (\"Case Study\")",
+      "evidence": "case-studies.html:20",
+      "source": "case-studies.html:20",
+      "fix": "Verify the card↔destination mapping — the card name shares no tokens with the destination page."
+    },
+    {
+      "id": 39,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/case-studies",
+      "url": "/work/vertex",
+      "issue": "Possible wrong destination: card \"Aether AI\" links to /work/vertex (\"Case Study\")",
+      "evidence": "case-studies.html:22",
+      "source": "case-studies.html:22",
+      "fix": "Verify the card↔destination mapping — the card name shares no tokens with the destination page."
+    },
+    {
+      "id": 40,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work",
+      "url": "/work/vertex",
+      "issue": "Possible wrong destination: card \"Nexora\" links to /work/vertex (\"Case Study\")",
+      "evidence": "work.html:63",
+      "source": "work.html:63",
+      "fix": "Verify the card↔destination mapping — the card name shares no tokens with the destination page."
+    },
+    {
+      "id": 41,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/case-studies",
+      "url": "/work/kora-health",
+      "issue": "Possible wrong destination: card \"Medixcare\" links to /work/kora-health (\"Case Study\")",
+      "evidence": "case-studies.html:21",
+      "source": "case-studies.html:21",
+      "fix": "Verify the card↔destination mapping — the card name shares no tokens with the destination page."
+    },
+    {
+      "id": 42,
+      "severity": "MEDIUM",
+      "category": "cta",
+      "page": "/work",
+      "url": "/work/kora-health",
+      "issue": "Possible wrong destination: card \"Medixcare\" links to /work/kora-health (\"Case Study\")",
+      "evidence": "work.html:51",
+      "source": "work.html:51",
+      "fix": "Verify the card↔destination mapping — the card name shares no tokens with the destination page."
+    },
+    {
+      "id": 43,
+      "severity": "MEDIUM",
+      "category": "links",
+      "page": "41 distinct targets across 42 pages",
+      "url": "",
+      "issue": "Internal links use non-canonical .html URLs (the server 301s every one of them)",
+      "evidence": "/ai-solutions.html, /seo-service.html, /website-redesign.html, /pricing.html, /start-a-project.html, /dashboard.html, /admin-analytics.html, /admin-leads.html, /admin-lead-sources.html, /admin-projects.html, /admin-articles.html, /admin-media.html …",
+      "source": "site/_nav.html, site/_footer.html + proto pages",
+      "fix": "Point links at clean routes (e.g. /ai-solutions, /seo-service, /website-redesign). The shared partials fix most pages in one edit."
+    },
+    {
+      "id": 44,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "index.html:130",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 45,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/404",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "404.html:12",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 46,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/500",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "500.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 47,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/accessibility",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "accessibility.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 48,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/accessibility-scanner",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "accessibility-scanner.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 49,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/accessibility-scanner",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "accessibility-scanner.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 50,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-ai-writer",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-ai-writer.html:50",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 51,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-analytics",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-analytics.html:181",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 52,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-articles",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-articles.html:201",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 53,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-categories",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-categories.html:80",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 54,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-invoices",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-invoices.html:190",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 55,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-lead-sources",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-lead-sources.html:95",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 56,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-leads",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-leads.html:151",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 57,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-media",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-media.html:218",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 58,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-projects",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-projects.html:202",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 59,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-settings",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-settings.html:218",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 60,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-system-health",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-system-health.html:35",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 61,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-tags",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-tags.html:79",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 62,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-testimonials",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-testimonials.html:93",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 63,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/admin-users",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "admin-users.html:263",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 64,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/ai-chat-assistant",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "ai-chat-assistant.html:108",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 65,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/ai-solutions",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "ai-solutions.html:92",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 66,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/audit-analysis",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "audit-analysis.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 67,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/audit-analysis",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "audit-analysis.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 68,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/calendar",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "calendar.html:40",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 69,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/capabilities",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "capabilities.html:87",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 70,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/careers",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "careers.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 71,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/case-studies",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "case-studies.html:20",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 72,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/client-review",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "client-review.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 73,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/contact",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "contact.html:20",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 74,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/contact",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "contact.html:144",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 75,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/cookies-policy",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "cookies-policy.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 76,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/dashboard",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "dashboard.html:180",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 77,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/design-brief-analyzer",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "design-brief-analyzer.html:36",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 78,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/discovery-call",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "discovery-call.html:23",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 79,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/discovery-call",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "discovery-call.html:195",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 80,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/feedback",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "feedback.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 81,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/files-deliverables",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "files-deliverables.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 82,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/forgot-password",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "forgot-password.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 83,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/forms",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "forms.html:137",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 84,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/knowledge-base",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "knowledge-base.html:126",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 85,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/leads",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "leads.html:153",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 86,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/login",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "login.html:12",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 87,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/login",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "login.html:67",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 88,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/maintenance",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "maintenance.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 89,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/meeting-notes",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "meeting-notes.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 90,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/messages",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "messages.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 91,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/performance-analyzer",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "performance-analyzer.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 92,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/performance-analyzer",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "performance-analyzer.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 93,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/pricing",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "pricing.html:97",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 94,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/pricing",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "pricing.html:160",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 95,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/privacy-policy",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "privacy-policy.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 96,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/process",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "process.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 97,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/project-timeline",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "project-timeline.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 98,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/proposal",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "proposal.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 99,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/proposal-generator",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "proposal-generator.html:170",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 100,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/proposal-request",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "proposal-request.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 101,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/reset-password",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "reset-password.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 102,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/rss-feed",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "rss-feed.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 103,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/search",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "search.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 104,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/seo-analyzer",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "seo-analyzer.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 105,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/seo-analyzer",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "seo-analyzer.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 106,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/seo-service",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "seo-service.html:25",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 107,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/seo-service",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "seo-service.html:94",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 108,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/signup",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "signup.html:12",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 109,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/signup",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "signup.html:115",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 110,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/sitemap-tool",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "sitemap-tool.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 111,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/start-a-project",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "start-a-project.html:25",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 112,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/start-a-project",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "start-a-project.html:137",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 113,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/studio",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "studio.html:17",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 114,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/studio",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "studio.html:37",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 115,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/subscriptions",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "subscriptions.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 116,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/tasks",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "tasks.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 117,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/terms-of-service",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "terms-of-service.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 118,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/verify-email",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "verify-email.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 119,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/website-audit-tool",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "website-audit-tool.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 120,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/website-audit-tool",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "website-audit-tool.html:2",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 121,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/website-redesign",
+      "url": "",
+      "issue": "Heading level skips h1 → h3",
+      "evidence": "",
+      "source": "website-redesign.html:37",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 122,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/website-redesign",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "website-redesign.html:94",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 123,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work.html:53",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 124,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/kora-health",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "work/kora-health.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 125,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/kora-health",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work/kora-health.html:30",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 126,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/kora-health",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work/kora-health.html:89",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 127,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/luminary-financial",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "work/luminary-financial.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 128,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/luminary-financial",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work/luminary-financial.html:34",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 129,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/luminary-financial",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work/luminary-financial.html:89",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 130,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/vertex",
+      "url": "",
+      "issue": "Heading level skips h1 → h4",
+      "evidence": "",
+      "source": "work/vertex.html:1",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 131,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/vertex",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work/vertex.html:30",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 132,
+      "severity": "LOW",
+      "category": "a11y",
+      "page": "/work/vertex",
+      "url": "",
+      "issue": "Heading level skips h2 → h4",
+      "evidence": "",
+      "source": "work/vertex.html:89",
+      "fix": "Use consecutive heading levels for a coherent outline."
+    },
+    {
+      "id": 133,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/01_concrete_stairwell.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 134,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/03_skylight_stairwell.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 135,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/05_sculptural_stairwell.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 136,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/07_finance_tablet.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 137,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/08_finance_phone.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 138,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/09_abstract_spiral.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 139,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/500_error.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 140,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/analytics.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 141,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/capabilities_01_hero_background.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 142,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/error_alt.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 143,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/maintenance.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 144,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/studio_01_hero_background(1).png",
+      "issue": "Asset is not referenced by any page (untracked in git — likely work-in-progress by the visual workstream)",
+      "evidence": "untracked file — do not delete, likely mid-task",
+      "source": "—",
+      "fix": "Leave for the visual agent; re-run the audit after their task lands."
+    },
+    {
+      "id": 145,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/Website-Redesign-02.png",
+      "issue": "Asset is not referenced by any page (untracked in git — likely work-in-progress by the visual workstream)",
+      "evidence": "untracked file — do not delete, likely mid-task",
+      "source": "—",
+      "fix": "Leave for the visual agent; re-run the audit after their task lands."
+    },
+    {
+      "id": 146,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/images/assets/Website-Redesign-Hero.png",
+      "issue": "Asset is not referenced by any page (untracked in git — likely work-in-progress by the visual workstream)",
+      "evidence": "untracked file — do not delete, likely mid-task",
+      "source": "—",
+      "fix": "Leave for the visual agent; re-run the audit after their task lands."
+    },
+    {
+      "id": 147,
+      "severity": "LOW",
+      "category": "assets",
+      "page": "—",
+      "url": "/og-image.png",
+      "issue": "Asset is not referenced by any page",
+      "evidence": "no references found in HTML/CSS",
+      "source": "—",
+      "fix": "Delete if truly abandoned, or wire it up."
+    },
+    {
+      "id": 148,
+      "severity": "LOW",
+      "category": "forms",
+      "page": "/forgot-password",
+      "url": "",
+      "issue": "Form is intentionally inert (onsubmit=\"return false\", no endpoint)",
+      "evidence": "",
+      "source": "forgot-password.html:3",
+      "fix": "Prototype only — wire an endpoint before shipping as functional."
+    },
+    {
+      "id": 149,
+      "severity": "LOW",
+      "category": "forms",
+      "page": "/reset-password",
+      "url": "",
+      "issue": "Form is intentionally inert (onsubmit=\"return false\", no endpoint)",
+      "evidence": "",
+      "source": "reset-password.html:3",
+      "fix": "Prototype only — wire an endpoint before shipping as functional."
+    },
+    {
+      "id": 150,
+      "severity": "LOW",
+      "category": "forms",
+      "page": "/signup",
+      "url": "",
+      "issue": "Form is intentionally inert (onsubmit=\"return false\", no endpoint)",
+      "evidence": "",
+      "source": "signup.html:71",
+      "fix": "Prototype only — wire an endpoint before shipping as functional."
+    },
+    {
+      "id": 151,
+      "severity": "LOW",
+      "category": "forms",
+      "page": "/verify-email",
+      "url": "",
+      "issue": "Form is intentionally inert (onsubmit=\"return false\", no endpoint)",
+      "evidence": "",
+      "source": "verify-email.html:3",
+      "fix": "Prototype only — wire an endpoint before shipping as functional."
+    }
+  ]
+}

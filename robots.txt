@@ -22,6 +22,8 @@ Disallow: /design-brief-analyzer
 Disallow: /subscriptions
 Disallow: /ai-chat-assistant
 Disallow: /brand-audit-tool
+Disallow: /design-system
+Disallow: /knowledge-base
 Disallow: /login
 Disallow: /signup
 Disallow: /forgot-password

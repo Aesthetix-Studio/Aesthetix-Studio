@@ -78,21 +78,21 @@
       <div class="aw-body">
         <div class="aw-card">
           <h3>Brief</h3>
-          <div class="aw-field"><label>Template</label><select id="aw-tpl">
+          <div class="aw-field"><label for="aw-tpl">Template</label><select id="aw-tpl">
             <option value="blog">Blog article</option>
             <option value="landing">Landing page</option>
             <option value="email">Outreach email</option>
             <option value="outline">Content outline</option>
           </select></div>
-          <div class="aw-field"><label>Topic</label><input id="aw-topic" type="text" placeholder="e.g. luxury web design trends"></div>
-          <div class="aw-field"><label>Audience</label><input id="aw-aud" type="text" placeholder="e.g. boutique founders"></div>
-          <div class="aw-field"><label>Tone</label><select id="aw-tone">
+          <div class="aw-field"><label for="aw-topic">Topic</label><input id="aw-topic" type="text" placeholder="e.g. luxury web design trends"></div>
+          <div class="aw-field"><label for="aw-aud">Audience</label><input id="aw-aud" type="text" placeholder="e.g. boutique founders"></div>
+          <div class="aw-field"><label for="aw-tone">Tone</label><select id="aw-tone">
             <option>Confident and direct</option>
             <option>Warm and friendly</option>
             <option>Formal and precise</option>
             <option>Playful and bold</option>
           </select></div>
-          <div class="aw-field"><label>Key points (one per line)</label><textarea id="aw-points" rows="4" placeholder="Faster load times&#10;Trust signals above the fold"></textarea></div>
+          <div class="aw-field"><label for="aw-points">Key points (one per line)</label><textarea id="aw-points" rows="4" placeholder="Faster load times&#10;Trust signals above the fold"></textarea></div>
           <button class="btn-new" id="aw-build" style="width:100%;justify-content:center">✦ Assemble Draft</button>
           <button class="pj-btn" id="aw-generate" style="width:100%;justify-content:center;margin-top:8px">✦ Generate with AI</button>
           <p class="aw-hint">Assembles a structured starting draft from your brief and template — edit freely, nothing leaves this browser.</p>
@@ -103,7 +103,7 @@
             <span style="margin-left:auto"></span>
             <button class="pj-btn" id="aw-clear" style="font-size:11px;padding:6px 12px">Clear</button>
           </div>
-          <textarea class="aw-editor" id="aw-editor" placeholder="Start writing, or assemble a draft from the brief…"></textarea>
+          <textarea class="aw-editor" id="aw-editor" aria-label="Draft editor" placeholder="Start writing, or assemble a draft from the brief…"></textarea>
         </div>
         <div class="aw-card aw-stats-col">
           <h3>Readability <span class="dash-link" id="aw-stats-info">live</span></h3>

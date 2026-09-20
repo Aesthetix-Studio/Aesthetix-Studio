@@ -81,6 +81,10 @@ const server = createServer(async (req, res) => {
     return res.writeHead(400, { 'content-type': 'text/plain' }).end('Bad request');
   }
   const clean = url === '/' ? '/index.html' : url.replace(/\/+$/, '');
+  // templates/partials are source, not site content — never serve them. The HTML session
+  // gate matches clean routes only, so /site/proto/*.html would leak raw admin chrome.
+  // Runs before the .html→clean 301 so the redirect can't sneak it through either.
+  if (clean === '/site' || clean.startsWith('/site/')) return res.writeHead(404, { 'content-type': 'text/plain' }).end('Not found');
   // 301 to the clean URL so /work.html → /work (canonical wins for SEO)
   if (url !== '/' && clean.endsWith('.html')) {
     const target = clean === '/index.html' ? '/' : clean.slice(0, -5);
@@ -105,8 +109,7 @@ const server = createServer(async (req, res) => {
   }
   const file = resolve(root, '.' + clean);
   // serve only files inside the project root
-  if (relative(root, file).split(/[\\/]/)[0] === '..') return res.writeHead(403, { 'content-type': 'text/plain' }).end('Forbidden');
-  // clean URLs like Vercel: /work serves /work.html (also /work/ → /work.html)
+  if (relative(root, file).split(/[\\/]/)[0] === '..') return res.writeHead(403, { 'content-type': 'text/plain' }).end('Forbidden');  // clean URLs like Vercel: /work serves /work.html (also /work/ → /work.html)
   const candidates = extname(clean) ? [file] : [file, `${file}.html`];
   let body, mime;
   for (const f of candidates) {
@@ -137,10 +140,12 @@ if (check) {
       ['/llms.txt', 200, 'text/plain', '', ['Aesthetix Studio', 'case-studies']], // GEO: guide for answer engines
       ['/work/luminary-financial', 200, 'text/html', '', ['cs-split', 'process-bar']], // nested clean URL + case-study content
       ['/case-studies', 200, 'text/html', '', ['cs-row', 'Luminary Financial']],
-      ['/journal', 200, 'text/html', '', ['journal-grid', '/api/public/articles']], // live articles seam (static grid stays as no-JS fallback)
+      ['/capabilities', 200, 'text/html', '', ['cap-split', 'Capabilities-hero.png', 'capabilities_04_ai_abstract', 'What we do']], // golden page: real hero + panel art
+      ['/journal', 200, 'text/html', '', ['journal-grid', 'journal_02_featured_article']], // static article grid with real thumbnails
       ['/pricing', 200, 'text/html', '', ['faq-item', 'FAQPage', 'Questions about pricing', '₹29,999']], // GEO: Q&A + FAQPage schema
-      ['/seo-service', 200, 'text/html', '', ['faq-item', 'FAQPage']],
-      ['/website-redesign', 200, 'text/html', '', ['faq-item', 'FAQPage']],
+      ['/ai-solutions', 200, 'text/html', '', ['ai-hero', 'AI-Solutions-Hero.png', 'AI-Solutions-Card-01.png', 'Intelligent solutions']], // golden page: real hero + case art
+      ['/seo-service', 200, 'text/html', '', ['seo-hero', 'SEO-Service-Hero.png', 'SEO-Service-02.png', 'Rank higher']], // golden page: real dashboard + chart art
+      ['/website-redesign', 200, 'text/html', '', ['rd-hero', 'rd-shots', 'rd-compare', 'rd-metrics', 'rebuilt to']], // golden page: bespoke sections, no template FAQ
       ['/work/', 200, 'text/html'], // trailing slash
       ['/css/aesthetix.css', 200, 'text/css', '', ['work-hero', 'process-bar', 'tablet-side', 'adm-modal', '@font-face']], // stylesheet tail intact (a parse break silently drops it)
       ['/js/admin.js', 200, 'text/javascript', '', ['fillStat', 'modal', 'toast', 'thread=file:']], // shared admin wiring + files change-note join
@@ -160,6 +165,7 @@ if (check) {
       ['/settings', 404, 'text/plain'],
       ['/media-library', 404, 'text/plain'],
       ['/../etc/passwd', 403, 'text/plain'], // path traversal blocked
+      ['/site/proto/dashboard.html', 404, 'text/plain'], // template source never served (gate bypass)
       ['/contact', 200, 'text/html', '', ['id="contact-form"', '/api/contact']], // form + submit endpoint present
       ['/start-a-project', 200, 'text/html', '', ['id="start-project-form"', '/api/contact', 'name="timeline"', 'name="budget"']], // brief form posts to the leads API with timeline/budget intact
       ['/login', 200, 'text/html', '', ['auth-card', 'Sign in']], // auth screen
@@ -428,7 +434,7 @@ if (check) {
     /* FAQ blocks: the visible questions and the FAQPage JSON-LD must stay in step. A
        mismatch between the two is invisible in the browser and is exactly the kind of
        thing a search engine treats as misleading markup. */
-    const FAQ_PAGES = ['pricing', 'capabilities', 'ai-solutions', 'seo-service', 'website-redesign'];
+    const FAQ_PAGES = ['pricing'];
     const vFaq = [];
     for (const f of FAQ_PAGES) {
       const html = readFileSync(resolve(root, `${f}.html`), 'utf8');

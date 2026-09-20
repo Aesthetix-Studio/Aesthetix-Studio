@@ -126,7 +126,7 @@
         <h4 data-adm="name">—</h4>
         <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
       </div>
-      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out" aria-label="Sign out">⌄</button>
     </div>
 
     <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-projects.html"></nav>
@@ -150,7 +150,7 @@
       <div class="dash-topbar-right">
         <div class="dash-search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="pj-search" placeholder="Search projects...">
+          <input type="text" id="pj-search" aria-label="Search projects" placeholder="Search projects...">
         </div>
         <button class="pj-btn" id="pj-filter-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="22 3 2 3 10 12.5 10 19 14 21 14 12.5"/></svg> Filter</button>
         <button class="pj-btn" id="pj-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
@@ -199,9 +199,9 @@
             <button class="pj-tab" data-tab="completed">Completed</button>
             <button class="pj-tab" data-tab="cancelled">Cancelled</button>
             <div class="pj-toolbar">
-              <button class="pj-viewbtn active" id="pj-list-btn" title="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
-              <button class="pj-viewbtn" id="pj-grid-btn" title="Grid view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
-              <select class="pj-sort" id="pj-sort">
+              <button class="pj-viewbtn active" id="pj-list-btn" title="List view" aria-label="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+              <button class="pj-viewbtn" id="pj-grid-btn" title="Grid view" aria-label="Grid view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+              <select class="pj-sort" id="pj-sort" aria-label="Sort projects">
                 <option value="featured">Sort by: Featured</option>
                 <option value="latest">Sort by: Latest</option>
                 <option value="oldest">Sort by: Oldest</option>
@@ -352,8 +352,8 @@
     <td class="pj-due">${esc(due(p))}</td>
     <td class="pj-upd">${esc(updated(p))}</td>
     <td style="text-align:right;padding-right:16px"><div class="pj-act" style="justify-content:flex-end">
-      <button class="pj-icbtn" data-act="view" data-id="${p.id}" title="View">👁</button>
-      <button class="pj-icbtn" data-act="menu" data-id="${p.id}" title="More">⋮</button>
+      <button class="pj-icbtn" data-act="view" data-id="${p.id}" title="View" aria-label="View">👁</button>
+      <button class="pj-icbtn" data-act="menu" data-id="${p.id}" title="More" aria-label="More">⋮</button>
     </div></td>
   </tr>`;
 

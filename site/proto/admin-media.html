@@ -139,7 +139,7 @@
         <h4 data-adm="name">—</h4>
         <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
       </div>
-      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out" aria-label="Sign out">⌄</button>
     </div>
 
     <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-media.html"></nav>
@@ -163,16 +163,16 @@
       <div class="dash-topbar-right">
         <div class="dash-search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="md-search" placeholder="Search media...">
+          <input type="text" id="md-search" aria-label="Search media" placeholder="Search media...">
           <span class="dash-search-kbd">⌘K</span>
         </div>
         <button class="md-btn" id="md-filter"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="22 3 2 3 10 12.5 10 19 14 21 14 12.5"/></svg> Filter</button>
         <button class="md-btn" id="md-sort"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Sort</button>
         <div class="btn-up-split">
           <button class="btn-up-main" id="md-upload">⤒ Upload Media</button>
-          <button class="btn-up-chev" id="md-upload-chev" title="More options">⌄</button>
+          <button class="btn-up-chev" id="md-upload-chev" title="More options" aria-label="More options">⌄</button>
         </div>
-        <button class="md-icbtn" id="md-refresh" title="Refresh"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+        <button class="md-icbtn" id="md-refresh" title="Refresh" aria-label="Refresh"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
       </div>
     </div>
 
@@ -213,11 +213,11 @@
             <button class="md-tab" data-tab="audio">Audio</button>
             <button class="md-tab" data-tab="other">Others</button>
             <div class="md-toolbar">
-              <button class="md-viewbtn active" id="md-grid-btn" title="Grid view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
-              <button class="md-viewbtn" id="md-list-btn" title="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
-              <button class="md-viewbtn" id="md-del-btn" title="Delete selected"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
-              <button class="md-viewbtn" id="md-more-btn" title="More actions"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
-              <button class="md-viewbtn" id="md-compact-btn" title="Compact tiles"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <button class="md-viewbtn active" id="md-grid-btn" title="Grid view" aria-label="Grid view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+              <button class="md-viewbtn" id="md-list-btn" title="List view" aria-label="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+              <button class="md-viewbtn" id="md-del-btn" title="Delete selected" aria-label="Delete selected"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+              <button class="md-viewbtn" id="md-more-btn" title="More actions" aria-label="More actions"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
+              <button class="md-viewbtn" id="md-compact-btn" title="Compact tiles" aria-label="Compact tiles"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
             </div>
           </div>
 
@@ -299,7 +299,7 @@
 
 <div class="md-menu" id="md-menu"></div>
 <div id="md-modal-root"></div>
-<input type="file" id="md-file" multiple style="display:none">
+<input type="file" id="md-file" multiple aria-label="Upload files" style="display:none">
 
 <script>
 // ── Media library: live rows from /api/media (+ generated demo rows) ──

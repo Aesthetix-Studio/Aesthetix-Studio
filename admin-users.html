@@ -370,9 +370,9 @@ body{background:var(--st-bg)!important}
       <td><div style="color:#D4D4D8">${u.last || u.last_active || '—'}</div>${u.sub ? `<div class="u-sub green">${u.sub}</div>` : ''}</td>
       <td><div style="color:#D4D4D8">${u.joined || (u.created_at ? fmtDate(u.created_at) : '—')}</div><div class="u-sub dim">${u.jtime || ''}</div></td>
       <td><div class="u-actions">
-        <button class="u-act row-view" data-id="${u.id}" title="View"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        <button class="u-act row-edit" data-id="${u.id}" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button>
-        <button class="u-act" title="More"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+        <button class="u-act row-view" data-id="${u.id}" title="View" aria-label="View"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button class="u-act row-edit" data-id="${u.id}" title="Edit" aria-label="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button>
+        <button class="u-act" title="More" aria-label="More"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
       </div></td>
     </tr>`;
   };
