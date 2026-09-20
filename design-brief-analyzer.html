@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design Brief Analyzer — Scoping Help — Aesthetix Studio</title>
+<meta name="description" content="Paste any client brief and get scope, budget and timeline pulled into one structured summary — ready to review, send, or save as a lead.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.dba-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}
+.dba-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.dba-card h3{font-size:13.5px;font-weight:700;margin:0 0 4px;color:#fff;font-family:'Manrope'}
+.dba-card p{font-size:11.5px;color:#8E8E9A;margin:0 0 14px}
+.dba-card textarea,.dba-card input{width:100%;box-sizing:border-box;background:#181824;border:1px solid #2A2A38;border-radius:8px;color:#EDEDF2;font-size:12px;padding:10px 12px;font-family:inherit;outline:none}
+.dba-card textarea:focus,.dba-card input:focus{border-color:#7C3AED}
+.dba-card textarea{min-height:220px;resize:vertical}
+.dba-card label{display:block;font-size:11px;font-weight:600;color:#B9B9C4;margin:12px 0 6px}
+.dba-slot{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #1B1B26;font-size:12px}
+.dba-slot:last-child{border-bottom:0}
+.dba-slot b{width:90px;flex-shrink:0;color:#8E8E9A;font-weight:600;font-size:11px}
+.dba-slot span{color:#EDEDF2}
+.dba-slot .miss{color:#5E5E6E}
+.dba-bar{height:6px;border-radius:3px;background:#262633;overflow:hidden;margin:8px 0 4px}
+.dba-bar i{display:block;height:100%;background:#7C3AED;border-radius:3px}
+.dba-points{margin:10px 0 0;padding-left:18px;font-size:12px;color:#C9C9D2}
+.dba-points li{margin-bottom:6px}
+.dba-row{display:flex;gap:10px;margin-top:14px}
+.dba-row .btn-disc-continue{margin-top:0;flex:1}
+@media(max-width:900px){.dba-wrap{grid-template-columns:1fr}}
+</style>
+<link rel="canonical" href="https://aesthetixstudio.com/design-brief-analyzer"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Design Brief Analyzer — Scoping Help — Aesthetix Studio"><meta property="og:description" content="Paste any client brief and get scope, budget and timeline pulled into one structured summary — ready to review, send, or save as a lead."><meta property="og:url" content="https://aesthetixstudio.com/design-brief-analyzer"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Design Brief Analyzer — Scoping Help — Aesthetix Studio"><meta name="twitter:description" content="Paste any client brief and get scope, budget and timeline pulled into one structured summary — ready to review, send, or save as a lead."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/design-brief-analyzer.html"></nav>
+
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn" onclick="location.href='/'">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle">
+        <span>🌙&nbsp; Dark Mode</span>
+        <div class="toggle-switch"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Design Brief Analyzer</h1>
+        <p>Paste a brief — get scope, budget and timeline back.</p>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="dba-wrap">
+        <div class="dba-card">
+          <h3>Client brief</h3>
+          <p>Paste the enquiry email or brief as received. Nothing leaves this browser until you save it.</p>
+          <textarea id="dba-text" placeholder="Paste the brief here…"></textarea>
+          <label for="dba-email">Reply-to email (only needed to save as lead)</label>
+          <input id="dba-email" type="email" placeholder="client@company.com">
+          <div class="dba-row">
+            <button class="btn-disc-continue" id="dba-run">✦ Analyze brief</button>
+          </div>
+        </div>
+        <div class="dba-card">
+          <h3>Structured summary</h3>
+          <p id="dba-src">Rule-based first pass — connect an agent for deeper reads.</p>
+          <div class="dba-slot"><b>Project type</b><span id="dba-type" class="miss">—</span></div>
+          <div class="dba-slot"><b>Budget</b><span id="dba-budget" class="miss">—</span></div>
+          <div class="dba-slot"><b>Timeline</b><span id="dba-timeline" class="miss">—</span></div>
+          <div style="margin-top:12px;font-size:11px;color:#8E8E9A">Completeness <b id="dba-pct" style="color:#fff">0%</b></div>
+          <div class="dba-bar"><i id="dba-bar" style="width:0%"></i></div>
+          <ul class="dba-points" id="dba-points"></ul>
+          <div class="dba-row">
+            <button class="pj-btn" id="dba-save" style="flex:1;justify-content:center">＋ Save as lead</button>
+          </div>
+          <p id="dba-status" role="status" aria-live="polite" style="display:none;margin-top:12px;font-size:12px"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ponytail: agent seam — window.AesthetixAgent.analyzeBrief({text}) resolves
+// {type?, budget?, timeline?, points[], completeness?}; otherwise the honest
+// rule-based pass below stands in. Save-as-lead posts to /api/contact.
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const TYPES = [
+    ['E-commerce', /e-?commerce|online store|shopify|cart/i],
+    ['Web application', /web app|webapp|dashboard|portal|platform|saas/i],
+    ['Mobile app', /mobile app|android|\bios\b|flutter|react native/i],
+    ['Website', /website|landing page|web design|redesign|site\b/i],
+    ['Brand identity', /brand|logo|identity|guidelines/i],
+    ['AI solution', /\bAI\b|chatbot|automation|machine learning|\bML\b|LLM/i],
+    ['SEO', /\bseo\b|ranking|organic traffic/i],
+  ];
+  const analyzeLocal = (text) => {
+    const money = text.match(/(₹\s?[\d,.]+(?:\s?(?:L|lakh|k|K|crore))?|Rs\.?\s?[\d,.]+|[\d,.]+\s?(?:lakh|L|crore)\b|\$\s?[\d,.]+(?:\s?k)?)/);
+    const time = text.match(/\b(ASAP|immediately|urgent|\d+\s?(?:day|week|month)s?|next\s+month|this\s+quarter|Q[1-4]|flexible|no rush)\b/i);
+    const type = (TYPES.find(([, re]) => re.test(text)) || [])[0] || null;
+    const pts = [];
+    const sents = text.split(/[.\n]+/).map((s) => s.trim()).filter((s) => s.length > 40);
+    if (/(goal|objective|want|need|looking)/i.test(text) && sents[0]) pts.push(sents[0].slice(0, 140));
+    if (/(must|should|requirement|important)/i.test(text) && sents[1]) pts.push(sents[1].slice(0, 140));
+    const filled = [type, money, time, text.trim().length > 60].filter(Boolean).length;
+    return { type, budget: money ? money[0].trim() : null, timeline: time ? time[0].trim() : null,
+             points: pts.slice(0, 3), completeness: Math.round((filled / 4) * 100), sample: true };
+  };
+  const analyzeWithAgent = async (text) => {
+    try {
+      const a = window.AesthetixAgent;
+      if (a && typeof a.analyzeBrief === 'function') return await a.analyzeBrief({ text });
+    } catch {}
+    return analyzeLocal(text);
+  };
+  let last = null, lastText = '';
+  const setSlot = (id, v) => { const el = $(id); el.textContent = v || '—'; el.classList.toggle('miss', !v); };
+  $('dba-run').addEventListener('click', async () => {
+    const text = $('dba-text').value.trim();
+    const status = $('dba-status');
+    if (!text) { status.style.display = 'block'; status.style.color = '#B91C1C'; status.textContent = 'Paste a brief first.'; return; }
+    const btn = $('dba-run');
+    btn.disabled = true;
+    try {
+      last = await analyzeWithAgent(text);
+      lastText = text;
+      setSlot('dba-type', last.type);
+      setSlot('dba-budget', last.budget);
+      setSlot('dba-timeline', last.timeline);
+      $('dba-pct').textContent = `${last.completeness || 0}%`;
+      $('dba-bar').style.width = `${last.completeness || 0}%`;
+      $('dba-points').innerHTML = (last.points || []).map((p) => `<li>${p.replace(/</g, '&lt;')}</li>`).join('');
+      $('dba-src').textContent = last.sample === false ? 'Analyzed by your connected agent.' : 'Rule-based first pass — connect an agent for deeper reads.';
+      status.style.display = 'none';
+    } finally { btn.disabled = false; }
+  });
+  $('dba-save').addEventListener('click', async () => {
+    const status = $('dba-status');
+    const email = $('dba-email').value.trim();
+    if (!lastText) { status.style.display = 'block'; status.style.color = '#B91C1C'; status.textContent = 'Analyze a brief first.'; return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.style.display = 'block'; status.style.color = '#B91C1C'; status.textContent = 'Add a reply-to email to save this as a lead.'; return; }
+    const btn = $('dba-save');
+    btn.disabled = true;
+    try {
+      const lines = [`Type: ${last.type || '—'}`, `Budget: ${last.budget || '—'}`, `Timeline: ${last.timeline || '—'}`];
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name: 'Inbound brief', email, source: 'Design Brief', message: `${lines.join('\n')}\n\n---\n${lastText.slice(0, 2000)}` }) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+      status.style.display = 'block';
+      status.style.color = '#15803D';
+      status.textContent = 'Saved as a lead — find it on the leads board.';
+    } catch (err) {
+      status.style.display = 'block';
+      status.style.color = '#B91C1C';
+      status.textContent = err.message || 'Something went wrong — please try again.';
+    } finally { btn.disabled = false; }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+# Aesthetix Studio
+
+> A digital product studio in Hyderabad, India. We design and build digital experiences,
+> web applications and AI solutions that create measurable business impact.
+
+Aesthetix Studio is a small product studio. Typical engagements are marketing websites
+and landing pages, web applications and internal platforms, and AI features embedded in
+existing products. We work as an embedded team from discovery through launch.
+
+Contact: mohdabraralikhan@gmail.com · Hyderabad, India
+
+## Services
+
+- [Capabilities](https://aesthetixstudio.com/capabilities): What we do and how we help, across design, engineering and strategy.
+- [AI Solutions](https://aesthetixstudio.com/ai-solutions): Automations and insights embedded directly in your product.
+- [Website Redesign](https://aesthetixstudio.com/website-redesign): Reimagine an existing site around your business goals.
+- [SEO Service](https://aesthetixstudio.com/seo-service): Technical SEO, content and authority building.
+- [Website Audit Tool](https://aesthetixstudio.com/website-audit-tool): Technical, UX and content issues across a site.
+- [Performance Analyzer](https://aesthetixstudio.com/performance-analyzer): Core Web Vitals and load performance per page.
+- [Design System](https://aesthetixstudio.com/design-system): Our design tokens and components.
+- [Process](https://aesthetixstudio.com/process): How an engagement runs, from discovery to launch.
+
+## Work
+
+- [Case Studies](https://aesthetixstudio.com/case-studies): The work, in depth.
+- [Luminary Financial](https://aesthetixstudio.com/work/luminary-financial): A wealth management platform built for clarity and trust.
+- [Kora Health](https://aesthetixstudio.com/work/kora-health): A patient-first platform for complex healthcare journeys.
+- [Vertex](https://aesthetixstudio.com/work/vertex): An analytics platform that turns operational data into decisions.
+
+## Company
+
+- [Studio](https://aesthetixstudio.com/studio): We design and build digital products with purpose.
+- [Pricing](https://aesthetixstudio.com/pricing): Plans that scale with the size of the engagement.
+- [Careers](https://aesthetixstudio.com/careers): Join the studio.
+- [Contact](https://aesthetixstudio.com/contact): Start a conversation about a project.
+- [Start a Project](https://aesthetixstudio.com/start-a-project): Tell us about your project and goals.
+- [Discovery Call](https://aesthetixstudio.com/discovery-call): Understand the problem before proposing the work.
+
+## Journal
+
+- [Journal](https://aesthetixstudio.com/journal): Thinking about the work.
+
+## Optional
+
+- [Proposal](https://aesthetixstudio.com/proposal): Scope, timeline and investment for a client.
+- [Proposal Request](https://aesthetixstudio.com/proposal-request): A new request, ready to review.
+- [Accessibility](https://aesthetixstudio.com/accessibility): WCAG-aligned checks across the experience.
+- [Knowledge Base](https://aesthetixstudio.com/knowledge-base): Self-serve answers for clients and the team.
+- [RSS Feed](https://aesthetixstudio.com/rss-feed): Journal posts for subscribers and readers.
+- [Privacy Policy](https://aesthetixstudio.com/privacy-policy)
+- [Terms of Service](https://aesthetixstudio.com/terms-of-service)
+- [Cookies Policy](https://aesthetixstudio.com/cookies-policy)

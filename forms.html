@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Forms — Aesthetix Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Forms — Every Submission in One Place — Aesthetix Studio</title>
+<meta name="description" content="Form submissions from across the site collected in one view, with the page each came from, the date received and a spam-blocked count.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/aesthetix.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script src="/js/admin.js"></script>
@@ -35,7 +36,7 @@
 .conv-bar{height:4px;border-radius:2px;background:var(--surface-3)}
 .conv-fill{height:4px;border-radius:2px}
 </style>
-</head>
+<link rel="canonical" href="https://aesthetixstudio.com/forms"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Forms — Every Submission in One Place — Aesthetix Studio"><meta property="og:description" content="Form submissions from across the site collected in one view, with the page each came from, the date received and a spam-blocked count."><meta property="og:url" content="https://aesthetixstudio.com/forms"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Forms — Every Submission in One Place — Aesthetix Studio"><meta name="twitter:description" content="Form submissions from across the site collected in one view, with the page each came from, the date received and a spam-blocked count."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
 <body style="overflow:hidden">
 <div class="dash-layout">
 
@@ -45,9 +46,9 @@
     <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
   </div>
   <div class="dash-user">
-    <div class="dash-avatar">RM</div>
-    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
-    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+    <div class="dash-avatar" data-adm="initials">—</div>
+    <div class="dash-user-info"><h4 data-adm="name">—</h4><span><span data-adm="role">—</span> &nbsp;<span class="dash-user-badge">● Online</span></span></div>
+    <button type="button" class="dash-signout" data-adm="signout" title="Sign out">Sign out</button>
   </div>
   <nav class="dash-nav">
     <div class="dash-nav-section">
@@ -105,31 +106,27 @@
         <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></div>
         <div class="dash-stat-label">Total Forms</div>
         <div class="dash-stat-value" id="stat-forms">—</div>
-        <div class="dash-stat-delta delta-up">↑ 12.5% vs last month</div>
       </div>
       <div class="dash-stat-card">
         <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
         <div class="dash-stat-label">Total Submissions</div>
         <div class="dash-stat-value" id="stat-subs">—</div>
-        <div class="dash-stat-delta delta-up">↑ 18.7% vs last month</div>
       </div>
       <div class="dash-stat-card">
         <div class="dash-stat-icon" style="color:#3b82f6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
         <div class="dash-stat-label">Conversion Rate</div>
         <div class="dash-stat-value" id="stat-conv">—</div>
-        <div class="dash-stat-delta delta-up">↑ 4.3% vs last month</div>
       </div>
       <div class="dash-stat-card">
         <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div class="dash-stat-label">Avg. Submissions</div>
         <div class="dash-stat-value" id="stat-avg">—</div>
-        <div class="dash-stat-delta delta-up">↑ 9.2% vs last month</div>
       </div>
       <div class="dash-stat-card">
         <div class="dash-stat-icon" style="color:#ec4899"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <div class="dash-stat-label">Spam Blocked</div>
-        <div class="dash-stat-value">142</div>
-        <div class="dash-stat-delta delta-down">↓ 8.6% vs last month</div>
+        <div class="dash-stat-value">—</div>
+        <!-- ponytail: no spam field exists on /api/forms, so this card stays “—” until one does -->
       </div>
     </div>
 

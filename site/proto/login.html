@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Login — Aesthetix Studio</title>
-<meta name="description" content="Sign in to your Aesthetix Studio account.">
+<title>Login — Access Your Studio Workspace — Aesthetix Studio</title>
+<meta name="description" content="Sign in to the Aesthetix Studio workspace to reach your projects, proposals, invoices and client dashboard. Access is limited to the studio team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
         <h2>Login to your account</h2>
         <p class="auth-subtitle">Enter your credentials to continue</p>
 
-        <form onsubmit="return false">
+        <form id="login-form">
           <div class="auth-field">
             <label for="l-email">Email address</label>
             <div class="auth-input-wrap">
@@ -61,10 +61,10 @@
           </div>
 
           <div class="auth-field">
-            <label for="l-pass">Password</label>
+            <label for="l-pass">Access token</label>
             <div class="auth-input-wrap">
               <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-              <input type="password" id="l-pass" placeholder="Enter your password">
+              <input type="password" id="l-pass" placeholder="Enter your ADMIN_TOKEN">
               <span class="auth-input-icon-right"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
             </div>
           </div>
@@ -75,6 +75,8 @@
             </label>
             <a class="auth-forgot" href="/forgot-password.html">Forgot password?</a>
           </div>
+
+          <p id="login-error" role="alert" style="margin:0 0 10px;font-size:12px;color:#ef4444"></p>
 
           <button type="submit" class="btn-auth">Login →</button>
 
@@ -105,7 +107,7 @@
       <a class="logo" href="/">Aesthetix<small>STUDIO</small></a>
       <p class="tagline">We design and build digital products that create measurable business impact.</p>
       <a class="text-link" href="/">Visit our website <span class="arrow">↗</span></a>
-      <p style="margin-top:18px">hello@aesthetixstudio.com<br>Hyderabad, India</p>
+      <p style="margin-top:18px">mohdabraralikhan@gmail.com<br>Hyderabad, India</p>
     </div>
     <div>
       <h4>Studio</h4>
@@ -144,6 +146,39 @@
     <span>Privacy Policy &nbsp;·&nbsp; Terms of Service</span>
   </div>
 </footer>
+
+<script>
+// Exchanges the ADMIN_TOKEN for the session cookie the server gate reads, then
+// continues to ?next — serve.mjs bounces an unauthenticated admin page here.
+// ponytail: there is one shared token, not per-user passwords, so the "access
+// token" field carries it. Swap for real per-user auth before this is public.
+(() => {
+  const form = document.getElementById('login-form');
+  const err = document.getElementById('login-error');
+  // same-origin paths only, so ?next= can't bounce the user off-site
+  const raw = new URLSearchParams(location.search).get('next') || '';
+  const next = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/dashboard';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-auth');
+    err.textContent = '';
+    btn.disabled = true;
+    try {
+      const res = await fetch('/api/session', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ token: document.getElementById('l-pass').value.trim() }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Sign in failed');
+      location.replace(next);
+    } catch (e2) {
+      err.textContent = e2.message;
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
 
 </body>
 </html>

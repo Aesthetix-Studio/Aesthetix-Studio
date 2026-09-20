@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Categories — Content Groups and Counts — Aesthetix Studio</title>
+<meta name="description" content="Article categories with live article counts, total views and publishing activity, plus custom categories created right on this board.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.ct-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.ct-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.ct-kpi-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.ct-kpi-val{font-size:24px;font-weight:800;color:#fff;font-family:'Manrope';line-height:1.1}
+.ct-kpi-label{font-size:11px;color:#B9B9C4;margin-top:2px}
+.ct-kpi-sub{font-size:10.5px;color:#7A7A88;margin-top:5px}
+.ct-body{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+.ct-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ct-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.ct-top{display:flex;align-items:center;gap:12px}
+.ct-ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex-shrink:0;font-weight:800;font-size:15px}
+.ct-top b{display:block;font-size:13.5px;color:#fff}
+.ct-top span{font-size:10.5px;color:#7A7A88}
+.ct-top .n{margin-left:auto;font-size:22px;font-weight:800;color:#fff}
+.ct-bar{height:5px;border-radius:3px;background:#262633;overflow:hidden;margin-top:12px}
+.ct-bar i{display:block;height:100%;border-radius:3px}
+.ct-meta{display:flex;gap:14px;font-size:10.5px;color:#7A7A88;margin-top:10px}
+.ct-meta b{color:#C9C9D2}
+.ct-act{display:flex;gap:6px;margin-top:12px}
+@media(max-width:1280px){.ct-kpis{grid-template-columns:repeat(2,1fr)}.ct-body{grid-template-columns:1fr}.ct-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-categories.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Categories</h1>
+        <p>Content groups with live article counts and views.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="ct-search" placeholder="Search categories...">
+        </div>
+        <button class="pj-btn" id="ct-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+        <button class="btn-new" id="ct-new">＋ New Category</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="ct-kpis">
+        <div class="ct-kpi">
+          <div class="ct-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></div>
+          <div><div class="ct-kpi-val" id="kpi-cats">—</div><div class="ct-kpi-label">Categories</div><div class="ct-kpi-sub">including custom ones</div></div>
+        </div>
+        <div class="ct-kpi">
+          <div class="ct-kpi-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div><div class="ct-kpi-val" id="kpi-arts">—</div><div class="ct-kpi-label">Categorized Articles</div><div class="ct-kpi-sub">with a category set</div></div>
+        </div>
+        <div class="ct-kpi">
+          <div class="ct-kpi-ic" style="background:rgba(34,197,94,.13);color:#4ADE80"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><div class="ct-kpi-val" id="kpi-views">—</div><div class="ct-kpi-label">Category Views</div><div class="ct-kpi-sub">summed across articles</div></div>
+        </div>
+        <div class="ct-kpi">
+          <div class="ct-kpi-ic" style="background:rgba(251,191,36,.13);color:#FBBF24"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="ct-kpi-val" id="kpi-top">—</div><div class="ct-kpi-label">Top Category</div><div class="ct-kpi-sub" id="kpi-top-sub">by article count</div></div>
+        </div>
+      </div>
+
+      <div class="ct-body">
+        <div class="ct-grid" id="ct-grid"></div>
+        <div style="min-width:0">
+          <div class="dash-panel">
+            <h3>Share of Views</h3>
+            <div class="ls-donut-wrap" style="display:flex;align-items:center;gap:16px">
+              <div class="ls-donut" id="ct-pie" style="width:120px;height:120px;border-radius:50%;flex-shrink:0;display:grid;place-items:center"><div class="ls-hole" style="width:78px;height:78px;border-radius:50%;background:#12121A;display:flex;flex-direction:column;align-items:center;justify-content:center"><b id="ct-total" style="font-size:20px;font-weight:800;color:#fff">—</b><span style="font-size:9px;color:#8E8E9A">Views</span></div></div>
+              <div id="ct-legend" style="display:grid;gap:8px;flex:1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Categories board: live groups from /api/articles (+ local custom cats) ──
+(() => {
+  const COLORS = ['#7C5CFF', '#3B82F6', '#22C55E', '#FBBF24', '#EC4899', '#FB923C', '#2DD4BF', '#A78BFA', '#F472B6', '#60A5FA'];
+  const customCats = () => { try { return JSON.parse(localStorage.getItem('ar_cats') || '[]'); } catch { return []; } };
+  let all = [], query = '';
+
+  const groups = () => {
+    const g = {};
+    all.forEach((a) => {
+      const name = (a.category || '').trim() || 'Uncategorized';
+      g[name] = g[name] || { name, n: 0, views: 0, pub: 0, latest: '' };
+      g[name].n++;
+      g[name].views += Number(a.views) || 0;
+      if (a.status === 'published') g[name].pub++;
+      if (!g[name].latest || String(a.created_at || '') > g[name].latest) g[name].latest = a.created_at || '';
+    });
+    customCats().forEach((c) => { if (!g[c]) g[c] = { name: c, n: 0, views: 0, pub: 0, latest: '', custom: true }; });
+    let list = Object.values(g);
+    if (query) list = list.filter((x) => x.name.toLowerCase().includes(query.toLowerCase()));
+    list.sort((a, b) => b.n - a.n);
+    return list;
+  };
+
+  const render = () => {
+    const list = groups();
+    const max = list.length ? list[0].n : 1;
+    const maxV = list.reduce((s, x) => s + x.views, 0) || 1;
+    document.getElementById('ct-grid').innerHTML = list.length ? list.map((g, i) => {
+      const col = COLORS[i % COLORS.length];
+      return `<div class="ct-card"><div class="ct-top">
+        <div class="ct-ic" style="background:${col}22;color:${col}">${esc(g.name.trim()[0].toUpperCase())}</div>
+        <div><b>${esc(g.name)}</b><span>${g.pub} published${g.custom && !g.n ? ' · custom' : ''}</span></div>
+        <span class="n">${g.n}</span></div>
+        <div class="ct-bar"><i style="width:${Math.max(4, Math.round((g.n / max) * 100))}%;background:${col}"></i></div>
+        <div class="ct-meta"><span><b>${g.views.toLocaleString('en-IN')}</b> views</span><span>updated <b>${g.latest ? esc(dashAgo(g.latest)) : '—'}</b></span></div>
+        <div class="ct-act">
+          <button class="pj-btn" data-view="${esc(g.name)}" style="font-size:11px;padding:7px 12px">View Articles</button>
+          ${g.custom && !g.n ? `<button class="pj-btn" data-del="${esc(g.name)}" style="font-size:11px;padding:7px 12px;color:#F87171">Delete</button>` : ''}
+        </div></div>`;
+    }).join('') : `<div style="grid-column:1/-1;text-align:center;color:#5E5E6E;padding:28px">No categories match.</div>`;
+    document.getElementById('kpi-cats').textContent = list.length;
+    const cat = all.filter((a) => (a.category || '').trim()).length;
+    document.getElementById('kpi-arts').textContent = cat.toLocaleString('en-IN');
+    document.getElementById('kpi-views').textContent = all.reduce((s, a) => s + (Number(a.views) || 0), 0).toLocaleString('en-IN');
+    document.getElementById('kpi-top').textContent = list.length ? list[0].n : '—';
+    document.getElementById('kpi-top-sub').textContent = list.length ? list[0].name : 'by article count';
+    document.getElementById('ct-total').textContent = maxV >= 1000 ? (Math.round(maxV / 100) / 10) + 'K' : maxV;
+    dashDonut(
+      document.getElementById('ct-pie'),
+      document.getElementById('ct-legend'),
+      list.slice(0, 7).map((g, i) => ({ label: g.name, display: g.views.toLocaleString('en-IN'), share: g.views, color: COLORS[i % COLORS.length] })),
+    );
+  };
+
+  document.getElementById('ct-search').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
+  document.getElementById('ct-grid').addEventListener('click', (e) => {
+    const v = e.target.closest('[data-view]');
+    if (v) { location.href = '/admin-articles.html'; return; }
+    const d = e.target.closest('[data-del]');
+    if (d) {
+      const cats = customCats().filter((x) => x !== d.dataset.del);
+      localStorage.setItem('ar_cats', JSON.stringify(cats));
+      render();
+    }
+  });
+  document.getElementById('ct-export').addEventListener('click', () => {
+    const rows = [['Category', 'Articles', 'Published', 'Views']];
+    groups().forEach((g) => rows.push([g.name, g.n, g.pub, g.views]));
+    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'categories.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  document.getElementById('ct-new').addEventListener('click', () => modal({
+    title: 'New Category',
+    fields: [{ name: 'name', label: 'Category name', required: true }],
+    onSubmit: async (d) => {
+      const name = d.name.trim();
+      const cats = customCats();
+      if (name && !cats.includes(name)) {
+        cats.push(name);
+        localStorage.setItem('ar_cats', JSON.stringify(cats));
+        toast(`Category "${name}" added — pick it in the New Article form.`);
+      }
+      render();
+    },
+  }));
+
+  const load = async () => {
+    try { all = (await api('/api/articles')).data; render(); }
+    catch (e) { toast(e.message, false); }
+  };
+  load();
+})();
+</script>
+</body>
+</html>

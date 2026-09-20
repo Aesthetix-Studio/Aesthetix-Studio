@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tags — Labels Across All Content — Aesthetix Studio</title>
+<meta name="description" content="Content tags with live usage counts across articles, plus suggestions from existing categories and one-click tagging for editors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.tg-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.tg-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.tg-kpi-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.tg-kpi-val{font-size:24px;font-weight:800;color:#fff;font-family:'Manrope';line-height:1.1}
+.tg-kpi-label{font-size:11px;color:#B9B9C4;margin-top:2px}
+.tg-kpi-sub{font-size:10.5px;color:#7A7A88;margin-top:5px}
+.tg-body{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+.tg-list{display:grid;gap:10px}
+.tg-row{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.tg-pill{font-size:12px;font-weight:700;padding:5px 13px;border-radius:8px;white-space:nowrap}
+.tg-row .c{font-size:11px;color:#7A7A88}
+.tg-row .c b{color:#fff}
+.tg-bar{flex:1;height:5px;border-radius:3px;background:#262633;overflow:hidden;min-width:60px}
+.tg-bar i{display:block;height:100%;border-radius:3px}
+.tg-act{margin-left:auto;display:flex;gap:6px;flex-shrink:0}
+.tg-sug{display:flex;flex-wrap:wrap;gap:8px}
+.tg-sug button{background:#181824;border:1px dashed #2E2E3E;border-radius:8px;color:#B9B9C4;font-size:11px;padding:7px 12px;cursor:pointer;font-family:inherit}
+.tg-sug button:hover{border-color:#7C3AED;color:#fff}
+@media(max-width:1280px){.tg-kpis{grid-template-columns:repeat(2,1fr)}.tg-body{grid-template-columns:1fr}}
+</style>
+</head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-tags.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Tags</h1>
+        <p>Labels across content, with live usage counts.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="tg-search" placeholder="Search tags...">
+        </div>
+        <button class="pj-btn" id="tg-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+        <button class="btn-new" id="tg-new">＋ New Tag</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="tg-kpis">
+        <div class="tg-kpi">
+          <div class="tg-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.59 13.41 11 3H4v7l9.59 9.59a2 2 0 0 0 2.82 0l4.18-4.18a2 2 0 0 0 0-2.82z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+          <div><div class="tg-kpi-val" id="kpi-tags">—</div><div class="tg-kpi-label">Total Tags</div><div class="tg-kpi-sub">custom labels</div></div>
+        </div>
+        <div class="tg-kpi">
+          <div class="tg-kpi-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div><div class="tg-kpi-val" id="kpi-tagged">—</div><div class="tg-kpi-label">Tagged Articles</div><div class="tg-kpi-sub">matching at least one tag</div></div>
+        </div>
+        <div class="tg-kpi">
+          <div class="tg-kpi-ic" style="background:rgba(34,197,94,.13);color:#4ADE80"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="tg-kpi-val" id="kpi-top">—</div><div class="tg-kpi-label">Top Tag Uses</div><div class="tg-kpi-sub" id="kpi-top-sub">most matched tag</div></div>
+        </div>
+        <div class="tg-kpi">
+          <div class="tg-kpi-ic" style="background:rgba(251,191,36,.13);color:#FBBF24"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><div class="tg-kpi-val" id="kpi-untagged">—</div><div class="tg-kpi-label">Untagged</div><div class="tg-kpi-sub">articles matching no tag</div></div>
+        </div>
+      </div>
+
+      <div class="tg-body">
+        <div class="tg-list" id="tg-list"></div>
+        <div style="min-width:0">
+          <div class="dash-panel">
+            <h3>Suggested Tags</h3>
+            <p style="font-size:11px;color:#7A7A88;margin:0 0 12px">From article categories — one click to add.</p>
+            <div class="tg-sug" id="tg-sug"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Tags board: localStorage tags + live article-match counts ──
+(() => {
+  const COLORS = ['#7C5CFF', '#3B82F6', '#22C55E', '#FBBF24', '#EC4899', '#2DD4BF', '#A78BFA', '#FB923C'];
+  const loadTags = () => { try { return JSON.parse(localStorage.getItem('ar_tags_full') || '[]'); } catch { return []; } };
+  const saveTags = (t) => localStorage.setItem('ar_tags_full', JSON.stringify(t));
+  const colorFor = (name) => COLORS[[...name].reduce((a, c) => a + c.charCodeAt(0), 0) % COLORS.length];
+  let articles = [], query = '';
+
+  const matchCount = (tag) => {
+    const q = tag.toLowerCase();
+    return articles.filter((a) => ((a.title || '') + ' ' + (a.category || '')).toLowerCase().includes(q)).length;
+  };
+  const rows = () => {
+    let list = loadTags().map((t) => typeof t === 'string'
+      ? { name: t, color: colorFor(t) }
+      : { name: t.name, color: t.color || colorFor(t.name) });
+    if (query) list = list.filter((t) => t.name.toLowerCase().includes(query.toLowerCase()));
+    return list.map((t) => ({ ...t, n: matchCount(t.name) })).sort((a, b) => b.n - a.n);
+  };
+
+  const render = () => {
+    const list = rows();
+    const max = list.length ? Math.max(1, ...list.map((t) => t.n)) : 1;
+    document.getElementById('tg-list').innerHTML = list.length ? list.map((t) => `<div class="tg-row">
+      <span class="tg-pill" style="color:${t.color};background:${t.color}1F"># ${esc(t.name)}</span>
+      <span class="c"><b>${t.n}</b> article${t.n === 1 ? '' : 's'}</span>
+      <div class="tg-bar"><i style="width:${Math.max(3, Math.round((t.n / max) * 100))}%;background:${t.color}"></i></div>
+      <div class="tg-act">
+        <button class="pj-icbtn" data-act="rename" data-name="${esc(t.name)}" title="Rename">✎</button>
+        <button class="pj-icbtn" data-act="del" data-name="${esc(t.name)}" title="Delete">🗑</button>
+      </div></div>`).join('')
+      : `<div class="tg-row" style="justify-content:center;color:#5E5E6E">No tags yet — create one or add a suggestion.</div>`;
+    const tagged = new Set();
+    articles.forEach((a) => {
+      const hay = ((a.title || '') + ' ' + (a.category || '')).toLowerCase();
+      if (loadTags().some((t) => hay.includes((typeof t === 'string' ? t : t.name).toLowerCase()))) tagged.add(a.id);
+    });
+    document.getElementById('kpi-tags').textContent = loadTags().length;
+    document.getElementById('kpi-tagged').textContent = tagged.size;
+    document.getElementById('kpi-top').textContent = list.length ? list[0].n : '—';
+    document.getElementById('kpi-top-sub').textContent = list.length ? '#' + list[0].name : 'most matched tag';
+    document.getElementById('kpi-untagged').textContent = articles.length - tagged.size;
+    const have = new Set(loadTags().map((t) => (typeof t === 'string' ? t : t.name).toLowerCase()));
+    const sug = [...new Set(articles.map((a) => (a.category || '').trim()).filter((c) => c && !have.has(c.toLowerCase())))].slice(0, 8);
+    document.getElementById('tg-sug').innerHTML = sug.length ? sug.map((c) =>
+      `<button data-add="${esc(c)}">＋ ${esc(c)}</button>`).join('')
+      : `<span style="font-size:11px;color:#5E5E6E">Every category is already a tag.</span>`;
+  };
+
+  const upsert = (name, color) => {
+    const tags = loadTags().map((t) => (typeof t === 'string' ? { name: t, color: colorFor(t) } : t));
+    const i = tags.findIndex((t) => t.name.toLowerCase() === name.toLowerCase());
+    if (i >= 0) tags[i] = { name, color: color || tags[i].color };
+    else tags.push({ name, color: color || colorFor(name) });
+    saveTags(tags);
+    render();
+  };
+  document.getElementById('tg-new').addEventListener('click', () => modal({
+    title: 'New Tag',
+    fields: [{ name: 'name', label: 'Tag name (without #)', required: true }],
+    onSubmit: async (d) => { upsert(d.name.trim().replace(/^#+/, '')); },
+  }));
+  document.getElementById('tg-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const name = btn.dataset.name;
+    if (btn.dataset.act === 'del') {
+      if (!confirm(`Delete tag "#${name}"?`)) return;
+      saveTags(loadTags().filter((t) => (typeof t === 'string' ? t : t.name) !== name));
+      render();
+    } else {
+      modal({
+        title: 'Rename Tag',
+        fields: [{ name: 'name', label: 'Tag name', value: name, required: true }],
+        onSubmit: async (d) => {
+          const nn = d.name.trim().replace(/^#+/, '');
+          if (nn && nn !== name) {
+            saveTags(loadTags().map((t) => {
+              const cur = typeof t === 'string' ? t : t.name;
+              return cur === name ? { name: nn, color: colorFor(nn) } : t;
+            }));
+            render();
+          }
+        },
+      });
+    }
+  });
+  document.getElementById('tg-sug').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-add]');
+    if (b) upsert(b.dataset.add);
+  });
+  document.getElementById('tg-search').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
+  document.getElementById('tg-export').addEventListener('click', () => {
+    const rows = [['Tag', 'Articles']];
+    rows().forEach((t) => rows.push(['#' + t.name, t.n]));
+    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'tags.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  const load = async () => {
+    try { articles = (await api('/api/articles')).data; } catch (e) { toast(e.message, false); articles = []; }
+    render();
+  };
+  load();
+})();
+</script>
+</body>
+</html>

@@ -3,178 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Design System — Aesthetix Studio</title>
-<meta name="description" content="Aesthetix Studio design system — our design language, components and guidelines for building consistent experiences.">
+<title>Design System — Our Tokens and Components — Aesthetix Studio</title>
+<meta name="description" content="The Aesthetix Studio design system: colour and type tokens, the spacing scale, and the shared components that keep every page of this site consistent.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/aesthetix.css"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://aesthetixstudio.com/design-system">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Design System — Aesthetix Studio"><meta property="og:description" content="Aesthetix Studio design system — our design language, components and guidelines for building consistent experiences."><meta property="og:url" content="https://aesthetixstudio.com/design-system"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Design System — Aesthetix Studio"><meta name="twitter:description" content="Aesthetix Studio design system — our design language, components and guidelines for building consistent experiences.">
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
 <style>
-/* ── Design System page overrides ── */
-.dash-layout{grid-template-columns:220px 1fr 260px}
-.ds-tabs{display:flex;gap:0;padding:0 24px;border-bottom:1px solid var(--line);background:#111116}
-.ds-tab{font-size:11px;letter-spacing:.06em;padding:0 16px;height:44px;display:flex;align-items:center;border-bottom:2px solid transparent;color:var(--text-4);background:none;border-top:0;border-left:0;border-right:0;cursor:pointer}
-.ds-tab.active{color:var(--white);border-bottom-color:var(--brand)}
-.ds-tab:hover{color:var(--text-2)}
-
-/* Hero banner */
-.ds-hero{background:linear-gradient(135deg,#1a1530 0%,#120d24 50%,#0d0d10 100%);border:1px solid rgba(108,92,231,.25);border-radius:12px;padding:40px 36px;margin:0 24px 24px;position:relative;overflow:hidden}
-.ds-hero::after{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(108,92,231,.3),transparent 70%);pointer-events:none}
-.ds-hero h2{font:clamp(22px,2.5vw,32px)/1.1 var(--serif);letter-spacing:-.02em;margin:0 0 10px}
-.ds-hero h2 em{font-style:italic;background:linear-gradient(90deg,#8B5CF6,#6C5CE7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.ds-hero p{font-size:13px;color:var(--text-3);margin:0 0 22px;max-width:480px;line-height:1.6}
-.ds-hero-btn{background:var(--brand);border:0;color:#fff;border-radius:6px;padding:10px 20px;font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-
-/* Section headers */
-.ds-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.ds-section-header h3{font-size:15px;font-weight:600;margin:0;color:var(--white)}
-.ds-section-header a{font-size:11px;color:var(--brand);text-decoration:none}
-
-/* Cards grid */
-.ds-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px}
-.ds-card{background:var(--surface-1);border:1px solid var(--line);border-radius:10px;padding:18px;cursor:pointer;transition:border-color .2s,transform .15s}
-.ds-card:hover{border-color:var(--brand);transform:translateY(-1px)}
-.ds-card-icon{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-size:16px;margin-bottom:12px}
-.ds-card h4{font-size:13px;font-weight:600;margin:0 0 4px;color:var(--white)}
-.ds-card-sub{font-size:10px;color:var(--text-4);margin:0 0 8px}
-.ds-card p{font-size:11px;color:var(--text-3);margin:0;line-height:1.5}
-.ds-card-arrow{font-size:14px;color:var(--text-4);margin-top:10px;display:flex;justify-content:flex-end}
-
-/* Buttons preview */
-.ds-btn-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.ds-btn-swatch{height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:#fff;padding:0 10px}
-
-/* Badges preview */
-.ds-badge-preview{display:flex;gap:6px;margin-top:10px}
-.ds-badge-chip{font-size:9px;padding:3px 8px;border-radius:4px;font-weight:500}
-
-/* Explore bar */
-.ds-explore{background:linear-gradient(90deg,rgba(108,92,231,.12),rgba(139,92,246,.06));border:1px solid rgba(108,92,231,.25);border-radius:10px;padding:20px 28px;margin:0 0 28px;display:flex;align-items:center;justify-content:space-between}
-.ds-explore h4{font-size:14px;font-weight:600;margin:0;color:var(--white)}
-.ds-explore p{font-size:12px;color:var(--text-3);margin:2px 0 0}
-.ds-explore-btn{background:var(--brand);border:0;color:#fff;border-radius:6px;padding:10px 18px;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap}
-
-/* Right panel */
-.ds-panel{background:#111116;border-left:1px solid var(--line);padding:20px;overflow-y:auto;height:calc(100vh - 65px);position:sticky;top:65px}
-.ds-panel-section{margin-bottom:24px}
-.ds-panel-title{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-4);margin-bottom:12px}
-
-/* Quick links */
-.ds-quick-links{display:grid;gap:6px}
-.ds-ql{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-1);border:1px solid var(--line);border-radius:6px;font-size:11px;color:var(--text-2);cursor:pointer;transition:border-color .15s}
-.ds-ql:hover{border-color:var(--brand);color:var(--brand)}
-.ds-ql-icon{width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:grid;place-items:center;font-size:12px;color:var(--text-3);flex-shrink:0}
-
-/* Color palette */
-.ds-colors{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.ds-color-swatch{aspect-ratio:1;border-radius:8px;position:relative;cursor:pointer;border:2px solid transparent;transition:border-color .15s}
-.ds-color-swatch:hover{border-color:var(--white)}
-.ds-color-swatch.active{border-color:var(--brand)}
-.ds-color-label{position:absolute;bottom:-14px;left:0;right:0;text-align:center;font-size:7px;color:var(--text-4)}
-
-/* Typography scale */
-.ds-type-row{display:flex;align-items:baseline;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
-.ds-type-row:last-child{border-bottom:0}
-.ds-type-label{font-size:10px;color:var(--text-4);min-width:48px}
-.ds-type-sample{flex:1;text-align:right;color:var(--text-2)}
-.ds-type-spec{font-size:9px;color:var(--text-4);margin-left:10px;white-space:nowrap}
-
-/* Version */
-.ds-version{background:var(--surface-1);border:1px solid var(--line);border-radius:8px;padding:14px}
-.ds-version h5{font-size:13px;font-weight:600;margin:0 0 6px;color:var(--white)}
-.ds-version p{font-size:11px;color:var(--text-3);margin:0 0 2px}
-.ds-version a{font-size:11px;color:var(--brand);text-decoration:none}
-.ds-version a:hover{text-decoration:underline}
+.ds-tabs{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap}
+.ds-tab{background:none;border:0;color:#8E8E9A;font-size:12.5px;font-weight:500;padding:9px 16px;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit}
+.ds-tab:hover{color:#fff}
+.ds-tab.active{color:#fff;border-bottom-color:#7C3AED;font-weight:600}
+.ds-body{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+.ds-hero{position:relative;overflow:hidden;border-radius:14px;border:1px solid #1F1F2B;background:radial-gradient(100% 130% at 78% 30%,#241A4E 0%,#0B0B12 60%);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;min-height:300px}
+.ds-hero h2{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:clamp(30px,3.2vw,44px);line-height:1.08;margin:0 0 14px;color:#fff}
+.ds-hero h2 em{font-style:normal;background:linear-gradient(90deg,#A78BFA,#F59E0B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ds-hero p{font-size:12.5px;color:#9A9AA8;line-height:1.7;margin:0 0 20px;max-width:380px}
+.ds-visual{position:relative;height:230px}
+.ds-ring{position:absolute;right:56px;top:18px;width:150px;height:150px;border-radius:50%;background:conic-gradient(from 200deg,#3B2A6B,#B8860B,#3B2A6B);-webkit-mask:radial-gradient(circle,transparent 52px,#000 54px);mask:radial-gradient(circle,transparent 52px,#000 54px);box-shadow:0 0 60px rgba(139,92,246,.25)}
+.ds-cube{position:absolute;left:30px;top:60px;width:64px;height:64px;background:linear-gradient(135deg,#4C1D95,#2A1650);transform:rotate(12deg) skewY(-8deg);border-radius:8px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.ds-dots{position:absolute;right:0;top:0;width:110px;height:170px;background-image:radial-gradient(rgba(167,139,250,.5) 1px,transparent 1.4px);background-size:11px 11px;opacity:.6}
+.ds-spark{position:absolute;color:#C4B5FD;font-size:15px}
+.ds-tokgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.ds-tok{background:#181824;border:1px solid #23232F;border-radius:11px;padding:16px;cursor:pointer;min-width:0}
+.ds-tok:hover{border-color:#7C3AED}
+.ds-tok .ti{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;margin-bottom:10px}
+.ds-tok b{display:block;font-size:12px;color:#fff}
+.ds-tok .n{font-size:10.5px;color:#7A7A88}
+.ds-tok p{font-size:10.5px;color:#8E8E9A;line-height:1.55;margin:8px 0 10px;min-height:48px}
+.ds-tok .go{font-size:12px;color:#5E5E6E}
+.ds-compgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.ds-comp{background:#181824;border:1px solid #23232F;border-radius:11px;padding:14px;min-width:0}
+.ds-comp b{display:block;font-size:11.5px;color:#fff;margin-bottom:10px}
+.ds-demo{min-height:86px;display:grid;place-items:center;gap:6px;align-content:center}
+.ds-comp .v{font-size:10px;color:#7A7A88;margin-top:10px}
+.ds-mini-table{width:100%;border-collapse:collapse;font-size:9px;color:#B9B9C4}
+.ds-mini-table td{padding:5px 7px;border:1px solid #2A2A38}
+.ds-mini-table tr:first-child td{color:#7A7A88}
+.ds-banner{display:flex;align-items:center;gap:14px;background:#181824;border:1px solid #23232F;border-radius:11px;padding:16px 18px;margin-top:10px}
+.ds-banner b{display:block;font-size:12.5px;color:#fff}
+.ds-banner span{font-size:11px;color:#7A7A88}
+.ds-queued{background:#181824;border:1px dashed #2E2E3E;border-radius:11px;padding:22px}
+.ds-queued b{font-size:12.5px;color:#fff}
+.ds-queued ul{margin:10px 0 0;padding-left:18px;font-size:11.5px;color:#8E8E9A;line-height:1.9}
+.ds-tag{font-size:9.5px;font-weight:700;color:#A78BFA;background:rgba(139,92,246,.13);padding:2px 8px;border-radius:5px;margin-left:8px;white-space:nowrap}
+.ds-swrow{display:flex;gap:8px;margin:10px 0}
+.ds-sw{width:30px;height:30px;border-radius:7px;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
+.ds-typerow{display:flex;align-items:baseline;gap:12px;padding:8px 0;border-top:1px solid #1B1B26;font-size:11px}
+.ds-typerow:first-of-type{border-top:0}
+.ds-typerow .k{color:#8E8E9A;width:44px;flex-shrink:0}
+.ds-typerow .v{color:#C9C9D2}
+.ds-typerow .s{margin-left:auto;color:#5E5E6E;white-space:nowrap}
+.ds-linkrow{display:flex;align-items:center;gap:11px;padding:10px 0;border-top:1px solid #1B1B26;cursor:pointer}
+.ds-linkrow:first-of-type{border-top:0}
+.ds-linkrow:hover b{color:#fff}
+.ds-linkrow b{display:block;font-size:12px;color:#EDEDF2}
+.ds-linkrow span{font-size:10.5px;color:#7A7A88}
+.ds-linkrow .go{margin-left:auto;color:#5E5E6E}
+.ds-ver{display:flex;justify-content:space-between;font-size:11px;color:#7A7A88;padding:6px 0}
+.ds-ver b{color:#C9C9D2}
+.ds-verpill{font-size:10px;font-weight:700;color:#4ADE80;background:rgba(34,197,94,.12);padding:2px 8px;border-radius:5px}
+.ds-tokrow{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #1B1B26;font-size:11.5px;cursor:pointer}
+.ds-tokrow:first-of-type{border-top:0}
+.ds-tokrow:hover .tv{color:#fff}
+.ds-tokrow .tk{color:#8E8E9A;min-width:150px}
+.ds-tokrow .tv{color:#C9C9D2;font-family:monospace;font-size:11px}
+.ds-tokrow .cp{margin-left:auto;color:#5E5E6E;font-size:10px}
+@media(max-width:1280px){.ds-body{grid-template-columns:1fr}.ds-tokgrid{grid-template-columns:repeat(3,1fr)}.ds-compgrid{grid-template-columns:repeat(3,1fr)}.ds-hero{grid-template-columns:1fr}.ds-visual{display:none}}
 </style>
 </head>
 <body style="overflow:hidden">
 
 <div class="dash-layout">
-
-  <!-- ── Sidebar ── -->
   <aside class="dash-sidebar">
     <div class="dash-logo-wrap">
-      <div>
-        <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
-      </div>
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
       <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
     </div>
-
     <div class="dash-user">
-      <div class="dash-avatar">RM</div>
+      <div class="dash-avatar" data-adm="initials">—</div>
       <div class="dash-user-info">
-        <h4>Rohit Malhotra</h4>
-        <span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span>
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
       </div>
-      <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
     </div>
-
-    <nav class="dash-nav">
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">MAIN</div>
-        <a class="dash-nav-item" href="/dashboard.html">
-          <span class="dash-nav-icon">⊞</span> Dashboard
-        </a>
-        <a class="dash-nav-item" href="/admin-projects.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">KNOWLEDGE</div>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Knowledge Base
-        </a>
-        <a class="dash-nav-item active" href="/design-system.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Design System
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">COMMUNICATION</div>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Meetings
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Meeting Notes
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Calendar
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">BILLING</div>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span> Payments
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span> Subscriptions
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">RESOURCES</div>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Documents
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Support
-        </a>
-      </div>
-    </nav>
-
+    <nav class="dash-nav" data-dash-nav="knowledge" data-active="/design-system.html"></nav>
     <div class="dash-sidebar-bottom">
-      <button class="dash-visit-btn">Visit Website ↗</button>
-      <div class="dash-dark-toggle">
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
-        <div class="toggle-switch"></div>
-      </div>
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+      <button class="pj-btn" id="ds-support" style="width:100%;justify-content:center;margin-top:10px">🎧 Contact Support</button>
     </div>
   </aside>
 
-  <!-- ── Main content ── -->
   <div class="dash-main">
     <div class="dash-topbar">
       <div>
@@ -183,247 +106,308 @@
       </div>
       <div class="dash-topbar-right">
         <div class="dash-search">
-          <span style="font-size:12px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-          <input type="text" placeholder="Search tokens, components...">
-          <span class="dash-search-kbd">Ctrl / K</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="ds-search" placeholder="Search design system...">
+          <span class="dash-search-kbd">⌘K</span>
         </div>
-        <button class="btn-create-new">Export Assets ↗</button>
+        <button class="btn-new" id="ds-export">⤓ Export Assets</button>
       </div>
     </div>
 
-    <!-- Tabs -->
-    <div class="ds-tabs">
-      <button class="ds-tab active">Overview</button>
-      <button class="ds-tab">Foundations</button>
-      <button class="ds-tab">Components</button>
-      <button class="ds-tab">Patterns</button>
-      <button class="ds-tab">Icons</button>
-      <button class="ds-tab">Motion</button>
-      <button class="ds-tab">Brand</button>
-    </div>
-
-    <!-- Scrollable content -->
-    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px - 44px)">
-
-      <!-- Hero banner -->
-      <div class="ds-hero">
-        <h2>A unified system for<br><em>beautiful experiences</em></h2>
-        <p>Design tokens, components, and patterns that power every product at Aesthetix Studio. Built for speed, consistency, and scale.</p>
-        <button class="ds-hero-btn">Get Started →</button>
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="ds-tabs" id="ds-tabs">
+        <button class="ds-tab active" data-tab="overview">Overview</button>
+        <button class="ds-tab" data-tab="foundations">Foundations</button>
+        <button class="ds-tab" data-tab="components">Components</button>
+        <button class="ds-tab" data-tab="patterns">Patterns</button>
+        <button class="ds-tab" data-tab="icons">Icons</button>
+        <button class="ds-tab" data-tab="motion">Motion</button>
+        <button class="ds-tab" data-tab="brand">Brand</button>
       </div>
 
-      <!-- Design Tokens -->
-      <div style="padding:0 0 8px">
-        <div class="ds-section-header">
-          <h3>Design Tokens</h3>
-          <a href="#">View all tokens →</a>
-        </div>
-        <div class="ds-cards">
-          <div class="ds-card">
-            <div class="ds-card-icon" style="background:rgba(108,92,231,.15);color:#6C5CE7">🎨</div>
-            <h4>Colors</h4>
-            <div class="ds-card-sub">42 tokens</div>
-            <p>Brand, neutral, semantic, and accent palettes</p>
-            <div class="ds-card-arrow">→</div>
-          </div>
-          <div class="ds-card">
-            <div class="ds-card-icon" style="background:rgba(59,130,246,.15);color:#3b82f6">Aa</div>
-            <h4>Typography</h4>
-            <div class="ds-card-sub">28 tokens</div>
-            <p>Font families, sizes, weights, and line heights</p>
-            <div class="ds-card-arrow">→</div>
-          </div>
-          <div class="ds-card">
-            <div class="ds-card-icon" style="background:rgba(34,197,94,.15);color:#22c55e">⊞</div>
-            <h4>Spacing</h4>
-            <div class="ds-card-sub">16 tokens</div>
-            <p>Consistent rhythm and spacing scale</p>
-            <div class="ds-card-arrow">→</div>
-          </div>
-          <div class="ds-card">
-            <div class="ds-card-icon" style="background:rgba(245,158,11,.15);color:#f59e0b">◕</div>
-            <h4>Radius</h4>
-            <div class="ds-card-sub">8 tokens</div>
-            <p>Border radius for buttons, cards, inputs</p>
-            <div class="ds-card-arrow">→</div>
-          </div>
-          <div class="ds-card">
-            <div class="ds-card-icon" style="background:rgba(236,72,153,.15);color:#ec4899">▓</div>
-            <h4>Shadows</h4>
-            <div class="ds-card-sub">12 tokens</div>
-            <p>Elevation levels and depth system</p>
-            <div class="ds-card-arrow">→</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- UI Components -->
-      <div style="padding:0 0 8px">
-        <div class="ds-section-header">
-          <h3>UI Components</h3>
-          <a href="#">Browse all components →</a>
-        </div>
-        <div class="ds-cards">
-          <div class="ds-card">
-            <h4>Buttons</h4>
-            <div class="ds-card-sub">12 variants</div>
-            <div class="ds-btn-preview">
-              <div class="ds-btn-swatch" style="background:var(--brand)">Primary</div>
-              <div class="ds-btn-swatch" style="background:var(--surface-2);border:1px solid var(--line)">Secondary</div>
+      <div class="ds-body">
+        <div style="display:flex;flex-direction:column;gap:14px;min-width:0" id="ds-main">
+          <div class="ds-hero" data-sec="overview">
+            <div>
+              <h2>A unified system for <em>beautiful experiences</em></h2>
+              <p>Aesthetix Design System helps us build products faster, with consistency, accessibility and elegance.</p>
+              <button class="btn-new" id="ds-start">Get Started <span>→</span></button>
+            </div>
+            <div class="ds-visual">
+              <div class="ds-dots"></div>
+              <div class="ds-cube"></div>
+              <div class="ds-ring"></div>
+              <span class="ds-spark" style="top:8px;left:44%">✦</span>
+              <span class="ds-spark" style="bottom:26px;right:22%;font-size:11px">✦</span>
             </div>
           </div>
-          <div class="ds-card">
-            <h4>Inputs</h4>
-            <div class="ds-card-sub">8 variants</div>
-            <div style="margin-top:10px">
-              <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:6px 8px;font-size:10px;color:var(--text-4)">Text, select, checkbox...</div>
-            </div>
-          </div>
-          <div class="ds-card">
-            <h4>Cards</h4>
-            <div class="ds-card-sub">6 variants</div>
-            <div style="margin-top:10px">
-              <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:6px;height:36px"></div>
-            </div>
-          </div>
-          <div class="ds-card">
-            <h4>Tables</h4>
-            <div class="ds-card-sub">4 variants</div>
-            <div style="margin-top:10px">
-              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;font-size:8px;color:var(--text-4)">
-                <div style="background:var(--surface-2);padding:3px">Name</div>
-                <div style="background:var(--surface-2);padding:3px">Status</div>
-                <div style="background:var(--surface-2);padding:3px">Date</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-card">
-            <h4>Modals</h4>
-            <div class="ds-card-sub">5 variants</div>
-            <div style="margin-top:10px">
-              <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:8px;text-align:center">
-                <div style="width:40px;height:3px;background:var(--surface-3);border-radius:2px;margin:0 auto 4px"></div>
-                <div style="font-size:8px;color:var(--text-4)">Dialog, sheet, popover...</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-card">
-            <h4>Badges</h4>
-            <div class="ds-card-sub">7 variants</div>
-            <div class="ds-badge-preview">
-              <span class="ds-badge-chip" style="background:rgba(34,197,94,.15);color:#22c55e">Completed</span>
-              <span class="ds-badge-chip" style="background:rgba(245,158,11,.15);color:#f59e0b">In Progress</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Explore bar -->
-      <div class="ds-explore">
-        <div>
-          <h4>Explore all 68 components in the library</h4>
-          <p>Full documentation with usage guidelines, accessibility notes, and code snippets.</p>
-        </div>
-        <button class="ds-explore-btn">View Component Library →</button>
-      </div>
+          <div class="dash-panel" data-sec="overview foundations" id="ds-tokens-panel">
+            <h3>Design Tokens <span class="dash-link" id="ds-tokens-all">View all tokens →</span></h3>
+            <p style="font-size:11.5px;color:#8E8E9A;margin:0 0 14px">The foundation of our design system. Built for consistency and scalability.</p>
+            <div class="ds-tokgrid" id="ds-tokgrid"></div>
+          </div>
 
-    </div>
-  </div>
+          <div class="dash-panel" data-sec="overview components">
+            <h3>UI Components <span class="dash-link" id="ds-comp-all">Browse all components →</span></h3>
+            <p style="font-size:11.5px;color:#8E8E9A;margin:0 0 14px">Reusable components that build our product interface.</p>
+            <div class="ds-compgrid" id="ds-compgrid"></div>
+            <div class="ds-banner">
+              <div style="width:38px;height:38px;border-radius:10px;background:rgba(139,92,246,.15);color:#A78BFA;display:grid;place-items:center;flex-shrink:0">◈</div>
+              <div style="min-width:0"><b>Explore all 68 components in the library</b><span>From atoms to complex organisms, built to scale.</span></div>
+              <button class="btn-new" id="ds-library" style="margin-left:auto;flex-shrink:0">View Component Library</button>
+            </div>
+          </div>
 
-  <!-- ── Right Panel ── -->
-  <div class="ds-panel">
+          <div class="dash-panel" data-sec="patterns" style="display:none">
+            <h3>Patterns <span class="ds-tag">Queued for v2.2</span></h3>
+            <div class="ds-queued"><b>Documented page patterns ship next.</b>
+              <ul><li>Cards Grid — collections with filters</li><li>Empty States — first-run and no-result screens</li><li>Page Headers — titles, actions and breadcrumbs</li></ul></div>
+          </div>
+          <div class="dash-panel" data-sec="icons" style="display:none">
+            <h3>Icons <span class="ds-tag">Queued for v2.2</span></h3>
+            <div class="ds-queued"><b>24px stroke icon set, currentColor-ready.</b>
+              <ul><li>Navigation, actions and status glyphs</li><li>1.8px stroke, round caps and joins</li></ul></div>
+          </div>
+          <div class="dash-panel" data-sec="motion" style="display:none">
+            <h3>Motion <span class="ds-tag">Queued for v2.2</span></h3>
+            <div class="ds-queued"><b>Subtle motion, consistent timing.</b>
+              <ul><li>Fades and slides, 150–300ms ease-out</li><li>Hover lifts and focus rings</li></ul></div>
+          </div>
+          <div class="dash-panel" data-sec="brand" style="display:none">
+            <h3>Brand <span class="ds-tag">Queued for v2.2</span></h3>
+            <div class="ds-queued"><b>Logo, voice and usage rules.</b>
+              <ul><li>Clear-space and minimum sizes</li><li>Voice: confident, plain, precise</li></ul></div>
+          </div>
+        </div>
 
-    <!-- Quick Links -->
-    <div class="ds-panel-section">
-      <div class="ds-panel-title">Quick Links</div>
-      <div class="ds-quick-links">
-        <div class="ds-ql">
-          <div class="ds-ql-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
-          Figma File
-        </div>
-        <div class="ds-ql">
-          <div class="ds-ql-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          Storybook
-        </div>
-        <div class="ds-ql">
-          <div class="ds-ql-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-          Changelog
-        </div>
-        <div class="ds-ql">
-          <div class="ds-ql-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-          Contributing
+        <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+          <div class="dash-panel">
+            <h3>Quick Links</h3>
+            <div class="ds-linkrow" data-qlink="figma"><div style="font-size:18px">◈</div><div><b>Figma File</b><span>Open in Figma</span></div><span class="go">→</span></div>
+            <div class="ds-linkrow" data-qlink="storybook"><div style="font-size:18px;color:#F87171">S</div><div><b>Storybook</b><span>View Components</span></div><span class="go">→</span></div>
+            <div class="ds-linkrow" data-qlink="changelog"><div style="font-size:18px">◷</div><div><b>Changelog</b><span>What's new in v2.1</span></div><span class="go">→</span></div>
+            <div class="ds-linkrow" data-qlink="contributing"><div style="font-size:18px">✎</div><div><b>Contributing</b><span>Guidelines &amp; best practices</span></div><span class="go">→</span></div>
+          </div>
+          <div class="dash-panel">
+            <h3>Color Palette <span class="dash-link" id="ds-pal-all">View all</span></h3>
+            <div class="ds-swrow" id="ds-swrow"></div>
+            <div style="display:flex;align-items:center;gap:10px;background:#181824;border:1px solid #23232F;border-radius:8px;padding:8px 10px;cursor:pointer" id="ds-primary">
+              <span style="width:22px;height:22px;border-radius:6px;background:#7C3AED;flex-shrink:0"></span>
+              <span style="font-size:10.5px;color:#8E8E9A;font-family:monospace">--color-primary<br>#7C3AED</span>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <h3>Typography Scale <span class="dash-link" id="ds-type-all">View all</span></h3>
+            <div id="ds-typerows"></div>
+          </div>
+          <div class="dash-panel">
+            <h3>Version</h3>
+            <div class="ds-ver"><span>Current Version</span><span class="ds-verpill">v2.1.0</span></div>
+            <div class="ds-ver"><span>Last updated</span><b>May 20, 2025</b></div>
+            <button class="pj-btn" id="ds-release" style="width:100%;justify-content:center;margin-top:10px">View Release Notes <span>↗</span></button>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Color Palette -->
-    <div class="ds-panel-section">
-      <div class="ds-panel-title">Color Palette</div>
-      <div class="ds-colors">
-        <div class="ds-color-swatch active" style="background:#7C3AED"><span class="ds-color-label">Primary</span></div>
-        <div class="ds-color-swatch" style="background:#6C5CE7"></div>
-        <div class="ds-color-swatch" style="background:#18181B"></div>
-        <div class="ds-color-swatch" style="background:#27272A"></div>
-        <div class="ds-color-swatch" style="background:#22c55e"></div>
-        <div class="ds-color-swatch" style="background:#f59e0b"></div>
-        <div class="ds-color-swatch" style="background:#ef4444"></div>
-        <div class="ds-color-swatch" style="background:#3b82f6"></div>
-      </div>
-      <div style="margin-top:20px;font-size:10px;color:var(--text-4);display:flex;align-items:center;gap:8px">
-        <div style="width:12px;height:12px;border-radius:3px;background:#7C3AED"></div>
-        Primary <span style="color:var(--text-3)">#7C3AED</span>
-      </div>
-    </div>
-
-    <!-- Typography Scale -->
-    <div class="ds-panel-section">
-      <div class="ds-panel-title">Typography Scale</div>
-      <div>
-        <div class="ds-type-row">
-          <span class="ds-type-label">H1</span>
-          <span class="ds-type-sample" style="font:20px/1.15 var(--serif)">Heading</span>
-          <span class="ds-type-spec">48/56</span>
-        </div>
-        <div class="ds-type-row">
-          <span class="ds-type-label">H2</span>
-          <span class="ds-type-sample" style="font:17px/1.2 var(--serif)">Heading</span>
-          <span class="ds-type-spec">36/44</span>
-        </div>
-        <div class="ds-type-row">
-          <span class="ds-type-label">H3</span>
-          <span class="ds-type-sample" style="font:15px/1.2 var(--serif)">Heading</span>
-          <span class="ds-type-spec">28/36</span>
-        </div>
-        <div class="ds-type-row">
-          <span class="ds-type-label">Body 1</span>
-          <span class="ds-type-sample" style="font:13px/1.5 var(--sans)">Body text</span>
-          <span class="ds-type-spec">16/24</span>
-        </div>
-        <div class="ds-type-row">
-          <span class="ds-type-label">Body 2</span>
-          <span class="ds-type-sample" style="font:12px/1.45 var(--sans)">Body text</span>
-          <span class="ds-type-spec">14/20</span>
-        </div>
-        <div class="ds-type-row">
-          <span class="ds-type-label">Caption</span>
-          <span class="ds-type-sample" style="font:10px/1.4 var(--sans)">Caption text</span>
-          <span class="ds-type-spec">12/16</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Version -->
-    <div class="ds-panel-section">
-      <div class="ds-panel-title">Version</div>
-      <div class="ds-version">
-        <h5>v2.1.0</h5>
-        <p>Last updated May 20, 2025</p>
-        <a href="#">View Release Notes →</a>
-      </div>
-    </div>
-
   </div>
 </div>
 
+<div id="ds-modal-root"></div>
+
+<script>
+// ── Design System board: live token/component reference ──
+(() => {
+  const COLORS = [
+    { n: 'Ink', v: '#0A0A0F' }, { n: 'Surface', v: '#12121A' }, { n: 'Primary', v: '#7C3AED' },
+    { n: 'Primary Light', v: '#A78BFA' }, { n: 'Accent', v: '#F59E0B' }, { n: 'Success', v: '#22C55E' },
+    { n: 'Info', v: '#3B82F6' }, { n: 'Danger', v: '#F87171' },
+  ];
+  const TYPE = [
+    ['H1', 'Heading 1', '48/56'], ['H2', 'Heading 2', '36/44'], ['H3', 'Heading 3', '28/36'],
+    ['Body 1', 'Body Large', '16/24'], ['Body 2', 'Body Medium', '14/20'], ['Caption', 'Caption', '12/16'],
+  ];
+  const SPACE = ['4', '8', '12', '16', '24', '32', '48', '64'];
+  const RADIUS = ['4', '6', '8', '12', '16', '999'];
+  const SHADOW = [['sm', '0 1px 2px rgba(0,0,0,.4)'], ['md', '0 4px 14px rgba(0,0,0,.45)'], ['lg', '0 12px 32px rgba(0,0,0,.5)']];
+  const TOKENS = [
+    { id: 'colors', name: 'Colors', count: '42 tokens', desc: 'Semantic color palette with light & dark mode.', icon: '◍', color: '#A78BFA' },
+    { id: 'type', name: 'Typography', count: '28 tokens', desc: 'Font families, sizes, weights & line heights.', icon: 'Ag', color: '#8B5CF6' },
+    { id: 'space', name: 'Spacing', count: '16 tokens', desc: 'Spacing scale based on 8px grid system.', icon: '☰', color: '#4ADE80' },
+    { id: 'radius', name: 'Radius', count: '8 tokens', desc: 'Border radius scale for components.', icon: '▢', color: '#60A5FA' },
+    { id: 'shadow', name: 'Shadows', count: '12 tokens', desc: 'Elevation system using layered shadows.', icon: '☀', color: '#FBBF24' },
+  ];
+  const COMPS = [
+    { name: 'Buttons', demo: '<button class="btn-new" style="padding:8px 18px">Primary Button</button><button class="pj-btn">Secondary</button>', variants: '12 variants' },
+    { name: 'Inputs', demo: '<div style="text-align:left;font-size:10px;color:#8E8E9A;margin-bottom:4px">Label</div><div style="border:1px solid #2A2A38;border-radius:7px;padding:7px 10px;font-size:10px;color:#5E5E6E;display:flex;justify-content:space-between">Placeholder text <span>+</span></div>', variants: '8 variants' },
+    { name: 'Cards', demo: '<div style="text-align:left"><b style="font-size:11px;color:#fff">Card Title</b><p style="font-size:9.5px;color:#8E8E9A;margin:4px 0 0">Card description goes here.</p></div>', variants: '6 variants' },
+    { name: 'Tables', demo: '<table class="ds-mini-table"><tr><td>Name</td><td>Role</td></tr><tr><td>Rohit Malhotra</td><td>Owner</td></tr><tr><td>Priya Sharma</td><td>Designer</td></tr></table>', variants: '4 variants' },
+    { name: 'Modals', demo: '<div style="text-align:left"><b style="font-size:11px;color:#fff">Modal Title</b><p style="font-size:9.5px;color:#8E8E9A;margin:4px 0 0">This is a modal description area.</p></div>', variants: '5 variants' },
+    { name: 'Badges', demo: '<span style="font-size:9.5px;color:#4ADE80;background:rgba(34,197,94,.12);padding:3px 9px;border-radius:6px">● Completed</span> <span style="font-size:9.5px;color:#FBBF24;background:rgba(251,191,36,.12);padding:3px 9px;border-radius:6px">● In Progress</span>', variants: '7 variants' },
+    { name: 'Alerts', demo: '<div style="font-size:10px;color:#4ADE80;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:7px;padding:7px 10px">✓ Changes saved successfully.</div>', variants: '5 variants', extra: true },
+    { name: 'Avatars', demo: '<div style="display:flex;gap:6px"><span style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#C4B5FD,#6D28D9);display:grid;place-items:center;font-size:9px;font-weight:800;color:#fff">RM</span><span style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#6D28D9,#7C3AED);display:grid;place-items:center;font-size:9px;font-weight:800;color:#fff">AS</span></div>', variants: '6 variants', extra: true },
+    { name: 'Tooltips', demo: '<span style="font-size:10px;color:#C9C9D2;background:#262633;border-radius:6px;padding:5px 10px">Hover for details ⓘ</span>', variants: '4 variants', extra: true },
+    { name: 'Tabs', demo: '<div style="display:flex;gap:10px;font-size:10px"><b style="color:#fff;border-bottom:2px solid #7C3AED;padding-bottom:3px">Active</b><span style="color:#7A7A88">Idle</span></div>', variants: '8 variants', extra: true },
+    { name: 'Progress', demo: '<div style="width:120px;height:5px;border-radius:3px;background:#262633"><i style="display:block;width:68%;height:100%;background:linear-gradient(90deg,#6D28D9,#8B5CF6);border-radius:3px"></i></div>', variants: '3 variants', extra: true },
+    { name: 'Dropdowns', demo: '<div style="font-size:10px;color:#C9C9D2;background:#181824;border:1px solid #2A2A38;border-radius:7px;padding:7px 12px;display:flex;gap:14px">Select option <span>⌄</span></div>', variants: '7 variants', extra: true },
+  ];
+  let tab = 'overview', query = '', showAll = false;
+
+  const tokenRows = (group) => {
+    if (group === 'colors') return COLORS.map((c) => [c.n, c.v]);
+    if (group === 'type') return TYPE.map(([a, b, s]) => [a + ' / ' + b, s + 'px']);
+    if (group === 'space') return SPACE.map((s) => ['space-' + s, s + 'px']);
+    if (group === 'radius') return RADIUS.map((s) => ['radius-' + s, s === '999' ? 'pill' : s + 'px']);
+    return SHADOW.map(([a, b]) => ['shadow-' + a, b]);
+  };
+  const tokensModal = (group) => {
+    const root = document.getElementById('ds-modal-root');
+    const title = group ? TOKENS.find((t) => t.id === group).name : 'All Design Tokens';
+    const groups = group ? [group] : ['colors', 'type', 'space', 'radius', 'shadow'];
+    root.innerHTML = `<div class="dash-overlay"><div class="dash-modal" style="width:520px">
+      <h3>${title}</h3><p class="sub">Click any row to copy its value.</p>
+      ${groups.map((g) => `<div style="font-size:11px;font-weight:700;color:#A78BFA;margin:12px 0 4px">${TOKENS.find((t) => t.id === g).name}</div>` +
+        tokenRows(g).map(([k, v]) => `<div class="ds-tokrow" data-copy="${esc(v)}"><span class="tk">${esc(k)}</span><span class="tv">${esc(v)}</span><span class="cp">copy</span></div>`).join('')).join('')}
+      <div style="margin-top:16px;text-align:right"><button class="pj-btn" id="ds-mclose">Close</button></div></div></div>`;
+    const ov = root.querySelector('.dash-overlay');
+    ov.addEventListener('click', async (e) => {
+      if (e.target === ov || e.target.id === 'ds-mclose') { root.innerHTML = ''; return; }
+      const row = e.target.closest('[data-copy]');
+      if (row) {
+        try { await navigator.clipboard.writeText(row.dataset.copy); toast(`Copied ${row.dataset.copy}.`); }
+        catch { toast('Copy failed in this browser.', false); }
+      }
+    });
+  };
+
+  const renderToks = () => {
+    const q = query.toLowerCase();
+    document.getElementById('ds-tokgrid').innerHTML = TOKENS.filter((t) =>
+      !q || (t.name + t.desc).toLowerCase().includes(q)).map((t) =>
+      `<div class="ds-tok" data-tok="${t.id}"><div class="ti" style="background:${t.color}22;color:${t.color}">${t.icon}</div>
+      <b>${t.name}</b><div class="n">${t.count}</div><p>${t.desc}</p><span class="go">→</span></div>`).join('') ||
+      `<p style="font-size:11px;color:#5E5E6E">No token groups match.</p>`;
+  };
+  const renderComps = () => {
+    const q = query.toLowerCase();
+    const list = COMPS.filter((c) => (!c.extra || showAll) && (!q || c.name.toLowerCase().includes(q)));
+    document.getElementById('ds-compgrid').innerHTML = list.map((c) =>
+      `<div class="ds-comp"><b>${c.name}</b><div class="ds-demo">${c.demo}</div><div class="v">${c.variants}</div></div>`).join('') ||
+      `<p style="font-size:11px;color:#5E5E6E">No components match.</p>`;
+  };
+  const render = () => { renderToks(); renderComps(); };
+  const setTab = (t) => {
+    tab = t;
+    document.querySelectorAll('#ds-tabs .ds-tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === t));
+    document.querySelectorAll('#ds-main [data-sec]').forEach((s) =>
+      (s.style.display = (t === 'overview' || s.dataset.sec.split(' ').includes(t)) ? '' : 'none'));
+  };
+
+  document.getElementById('ds-tokgrid').addEventListener('click', (e) => {
+    const t = e.target.closest('[data-tok]');
+    if (t) tokensModal(t.dataset.tok);
+  });
+  document.getElementById('ds-tokens-all').addEventListener('click', () => tokensModal(null));
+  document.getElementById('ds-pal-all').addEventListener('click', () => tokensModal('colors'));
+  document.getElementById('ds-type-all').addEventListener('click', () => tokensModal('type'));
+  const moreComps = () => {
+    showAll = !showAll;
+    renderComps();
+    document.getElementById('ds-comp-all').textContent = showAll ? 'Show fewer components →' : 'Browse all components →';
+  };
+  document.getElementById('ds-comp-all').addEventListener('click', moreComps);
+  document.getElementById('ds-library').addEventListener('click', moreComps);
+  document.querySelectorAll('#ds-tabs .ds-tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  document.getElementById('ds-start').addEventListener('click', () =>
+    document.getElementById('ds-tokens-panel').scrollIntoView({ behavior: 'smooth', block: 'center' }));
+  document.getElementById('ds-search').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
+  document.getElementById('ds-swrow').innerHTML = COLORS.map((c) =>
+    `<span class="ds-sw" data-c="${c.v}" title="${esc(c.n)} ${c.v}" style="background:${c.v}"></span>`).join('');
+  document.querySelectorAll('#ds-swrow .ds-sw').forEach((s) => s.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(s.dataset.c); toast(`Copied ${s.dataset.c}.`); }
+    catch { toast('Copy failed in this browser.', false); }
+  }));
+  document.getElementById('ds-primary').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('#7C3AED'); toast('Copied #7C3AED.'); }
+    catch { toast('Copy failed in this browser.', false); }
+  });
+  document.getElementById('ds-typerows').innerHTML = TYPE.map(([a, b, s]) =>
+    `<div class="ds-typerow"><span class="k">${a}</span><span class="v">${b}</span><span class="s">${s}</span></div>`).join('');
+  const linkModal = (key) => {
+    const saved = (k) => { try { return localStorage.getItem(k) || ''; } catch { return ''; } };
+    if (key === 'changelog') {
+      return modal({
+        title: 'Changelog', fields: [{ name: 'x', label: 'v2.1.0 (May 20, 2025) — icon set pass, motion tokens. v2.0.0 (Apr 28) — dark mode scale, radius tokens. v1.4.0 (Mar 15) — first spacing scale.', type: 'textarea', value: '' }],
+        onSubmit: async () => {},
+      });
+    }
+    if (key === 'contributing') {
+      return modal({
+        title: 'Contributing', fields: [{ name: 'x', label: 'Use tokens, never raw values. One component, one owner. Document variants with examples.', type: 'textarea', value: '' }],
+        onSubmit: async () => {},
+      });
+    }
+    const storeKey = key === 'figma' ? 'ds_figma' : 'ds_storybook';
+    const cur = saved(storeKey);
+    modal({
+      title: key === 'figma' ? 'Figma File' : 'Storybook',
+      fields: [{ name: 'url', label: cur ? 'Linked workspace URL (edit to change)' : 'Workspace URL (https://…)', value: cur }],
+      onSubmit: async (d) => {
+        const u = d.url.trim();
+        if (!u) return;
+        try { localStorage.setItem(storeKey, /^https?:/i.test(u) ? u : 'https://' + u); } catch {}
+        toast('Workspace linked — click again to open it.');
+      },
+    });
+  };
+  document.querySelectorAll('[data-qlink]').forEach((r) => r.addEventListener('click', () => {
+    const k = r.dataset.qlink;
+    if (k === 'figma' || k === 'storybook') {
+      const u = (() => { try { return localStorage.getItem(k === 'figma' ? 'ds_figma' : 'ds_storybook') || ''; } catch { return ''; } })();
+      if (u) { window.open(u, '_blank', 'noopener'); return; }
+    }
+    linkModal(k);
+  }));
+  document.getElementById('ds-release').addEventListener('click', () => linkModal('changelog'));
+  document.getElementById('ds-export').addEventListener('click', () => {
+    const root = document.getElementById('ds-modal-root');
+    root.innerHTML = `<div class="dash-overlay"><div class="dash-modal" style="width:380px">
+      <h3>Export Assets</h3><p class="sub">Generated live from the token tables on this page.</p>
+      <div style="display:grid;gap:8px">
+        <button class="pj-btn" id="ex-json">⤓&nbsp; tokens.json</button>
+        <button class="pj-btn" id="ex-svg">⤓&nbsp; palette.svg</button>
+        <button class="pj-btn" id="ex-css">⧉&nbsp; Copy CSS variables</button>
+      </div>
+      <div style="margin-top:16px;text-align:right"><button class="pj-btn" id="ex-x">Close</button></div></div></div>`;
+    const ov = root.querySelector('.dash-overlay');
+    const dl = (name, text, type) => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([text], { type }));
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+    ov.addEventListener('click', async (e) => {
+      if (e.target === ov || e.target.id === 'ex-x') { root.innerHTML = ''; return; }
+      if (e.target.id === 'ex-json') {
+        dl('tokens.json', JSON.stringify({ colors: Object.fromEntries(COLORS.map((c) => [c.n, c.v])), typography: Object.fromEntries(TYPE.map(([a, b, s]) => [a, s])), spacing: SPACE, radius: RADIUS, shadows: Object.fromEntries(SHADOW) }, null, 2), 'application/json');
+      } else if (e.target.id === 'ex-svg') {
+        dl('palette.svg', `<svg xmlns="http://www.w3.org/2000/svg" width="${COLORS.length * 70}" height="90">${COLORS.map((c, i) => `<rect x="${i * 70 + 5}" y="5" width="60" height="60" rx="10" fill="${c.v}"/><text x="${i * 70 + 35}" y="80" font-size="9" text-anchor="middle" fill="#888">${c.v}</text>`).join('')}</svg>`, 'image/svg+xml');
+      } else if (e.target.id === 'ex-css') {
+        try { await navigator.clipboard.writeText(':root{' + COLORS.map((c) => `--color-${c.n.toLowerCase().replace(/[^a-z]+/g, '-')}:${c.v};`).join('') + '}'); toast('CSS variables copied.'); }
+        catch { toast('Copy failed in this browser.', false); }
+      }
+    });
+  });
+  const helpModal = () => modal({
+    title: 'Contact Support',
+    fields: [{ name: 'note', label: 'Support is at mohdabraralikhan@gmail.com — anything else?', type: 'textarea' }],
+    onSubmit: async () => { toast('Thanks — the studio will reply by email.'); },
+  });
+  document.getElementById('ds-support').addEventListener('click', helpModal);
+  setTab('overview');
+  render();
+})();
+</script>
 </body>
 </html>

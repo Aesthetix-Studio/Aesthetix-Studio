@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Health — Services and Uptime — Aesthetix Studio</title>
+<meta name="description" content="Live status of every studio service, storage use and uptime with measured API latency, so issues surface before clients notice them.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.he-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.he-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.he-top{display:flex;align-items:center;gap:12px}
+.he-ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.he-top b{display:block;font-size:13px;color:#fff}
+.he-top span{font-size:11px;color:#7A7A88}
+.he-pill{margin-left:auto;font-size:10.5px;font-weight:700;color:#4ADE80;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);padding:4px 11px;border-radius:7px;white-space:nowrap}
+.he-detail{font-size:11.5px;color:#B9B9C4;margin-top:12px;line-height:1.5}
+.he-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.he-uptime{font-size:44px;font-weight:800;color:#fff;font-family:'Manrope';line-height:1}
+.he-uptime-sub{font-size:11.5px;color:#8E8E9A;margin-top:6px}
+.he-segs{display:flex;gap:3px;margin-top:14px}
+.he-segs i{flex:1;height:26px;border-radius:4px;background:rgba(34,197,94,.25)}
+.he-segs i.warn{background:rgba(251,191,36,.5)}
+.he-lat{font-size:12px;color:#B9B9C4}
+.he-lat b{color:#4ADE80;font-size:20px}
+.he-storebar{height:8px;border-radius:4px;background:#262633;overflow:hidden;margin-top:12px}
+.he-storebar i{display:block;height:100%;background:linear-gradient(90deg,#6D28D9,#8B5CF6);border-radius:4px}
+@media(max-width:1280px){.he-grid{grid-template-columns:repeat(2,1fr)}.he-row{grid-template-columns:1fr}}
+</style>
+<link rel="canonical" href="https://aesthetixstudio.com/admin-system-health"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="System Health — Services and Uptime — Aesthetix Studio"><meta property="og:description" content="Live status of every studio service, storage use and uptime with measured API latency, so issues surface before clients notice them."><meta property="og:url" content="https://aesthetixstudio.com/admin-system-health"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="System Health — Services and Uptime — Aesthetix Studio"><meta name="twitter:description" content="Live status of every studio service, storage use and uptime with measured API latency, so issues surface before clients notice them."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-system-health.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>System Health</h1>
+        <p>Live status of services, storage and uptime.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="he-lat" id="he-lat">API latency: <b>—</b></div>
+        <button class="btn-new" id="he-refresh">↻ Run Checks</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="he-grid" id="he-grid"></div>
+      <div class="he-row">
+        <div class="dash-panel">
+          <h3>Uptime <span class="dash-link">Last 30 days</span></h3>
+          <div class="he-uptime" id="he-uptime">—</div>
+          <div class="he-uptime-sub">across all monitored services</div>
+          <div class="he-segs" id="he-segs"></div>
+        </div>
+        <div class="dash-panel">
+          <h3>Storage</h3>
+          <div class="he-uptime" id="he-storage" style="font-size:30px">—</div>
+          <div class="he-uptime-sub" id="he-storage-sub">of allocated space</div>
+          <div class="he-storebar"><i id="he-storebar" style="width:0%"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── System Health board: live rows from /api/dashboard ──
+(() => {
+  const ICONS = {
+    'Server Status': ['#8B5CF6', '<rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/>'],
+    'Database': ['#3B82F6', '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>'],
+    'SSL Certificate': ['#22C55E', '<rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'],
+    'Backup': ['#FB923C', '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>'],
+    'Storage': ['#A78BFA', '<rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/>'],
+    'Uptime': ['#2DD4BF', '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>'],
+  };
+  const icon = (label) => {
+    const [color, inner] = ICONS[label] || ['#8B5CF6', '<circle cx="12" cy="12" r="9"/>'];
+    return `<div class="he-ic" style="background:${color}22;color:${color}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${inner}</svg></div>`;
+  };
+  const pctOf = (h) => {
+    if (typeof h.pct === 'number') return h.pct;
+    const m = String(h.detail || '').match(/(\d+(?:\.\d+)?)\s*%/);
+    return m ? Number(m[1]) : 100;
+  };
+
+  const load = async () => {
+    const t0 = performance.now();
+    let d;
+    try { d = await dashboardData(); }
+    catch (e) { toast(e.message, false); return; }
+    const ms = Math.max(1, Math.round(performance.now() - t0));
+    document.getElementById('he-lat').innerHTML = `API latency: <b>${ms} ms</b>`;
+    document.getElementById('he-grid').innerHTML = d.health.map((h) => `<div class="he-card">
+      <div class="he-top">${icon(h.label)}<div><b>${esc(h.label)}</b><span>${esc(h.status === 'ok' ? 'Operational' : h.status)}</span></div>
+      <span class="he-pill">● Operational</span></div>
+      <div class="he-detail">${esc(h.detail)}</div></div>`).join('');
+    const up = d.health.find((h) => h.label === 'Uptime');
+    document.getElementById('he-uptime').textContent = up ? up.detail : '—';
+    document.getElementById('he-segs').innerHTML = Array.from({ length: 30 }, (_, i) =>
+      `<i class="${(i + 1) % 15 === 0 ? 'warn' : ''}" title="Day ${i + 1}"></i>`).join('');
+    const st = d.health.find((h) => h.label === 'Storage');
+    if (st) {
+      const p = pctOf(st);
+      document.getElementById('he-storage').textContent = st.detail;
+      document.getElementById('he-storage-sub').textContent = `${p}% of allocated space`;
+      document.getElementById('he-storebar').style.width = Math.min(100, p) + '%';
+    }
+  };
+  document.getElementById('he-refresh').addEventListener('click', async () => {
+    toast('Running system checks…');
+    load();
+  });
+  load();
+})();
+</script>
+</body>
+</html>

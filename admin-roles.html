@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roles & Permissions — Access Control — Aesthetix Studio</title>
+<meta name="description" content="Studio roles with live member counts and a permission matrix for dashboards, content, media and settings, saved per role.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.ro-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.ro-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.ro-kpi-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.ro-kpi-val{font-size:24px;font-weight:800;color:#fff;font-family:'Manrope';line-height:1.1}
+.ro-kpi-label{font-size:11px;color:#B9B9C4;margin-top:2px}
+.ro-kpi-sub{font-size:10.5px;color:#7A7A88;margin-top:5px}
+.ro-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;min-width:0;overflow-x:auto}
+.ro-table{width:100%;border-collapse:collapse;min-width:640px}
+.ro-table th{font-size:10.5px;font-weight:600;color:#8E8E9A;text-align:center;padding:12px 8px;border-bottom:1px solid #1B1B26;white-space:nowrap}
+.ro-table th:first-child,.ro-table td:first-child{text-align:left;padding-left:16px}
+.ro-table td{padding:11px 8px;border-bottom:1px solid #1B1B26;vertical-align:middle;text-align:center}
+.ro-table tr:last-child td{border-bottom:0}
+.ro-role{display:flex;align-items:center;gap:10px}
+.ro-av{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:10px;font-weight:800;flex-shrink:0}
+.ro-role b{display:block;font-size:12.5px;color:#fff;text-transform:capitalize}
+.ro-role span{font-size:10.5px;color:#7A7A88}
+.ro-sw{width:38px;height:21px;border-radius:11px;background:#262633;position:relative;cursor:pointer;border:0;transition:background .15s}
+.ro-sw:after{content:'';width:15px;height:15px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .15s}
+.ro-sw.on{background:#7C3AED}
+.ro-sw.on:after{left:20px}
+.ro-note{font-size:10.5px;color:#5E5E6E;margin:12px 4px 20px;line-height:1.6}
+@media(max-width:1280px){.ro-kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="canonical" href="https://aesthetixstudio.com/admin-roles"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Roles & Permissions — Access Control — Aesthetix Studio"><meta property="og:description" content="Studio roles with live member counts and a permission matrix for dashboards, content, media and settings, saved per role."><meta property="og:url" content="https://aesthetixstudio.com/admin-roles"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Roles & Permissions — Access Control — Aesthetix Studio"><meta name="twitter:description" content="Studio roles with live member counts and a permission matrix for dashboards, content, media and settings, saved per role."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-roles.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Roles &amp; Permissions</h1>
+        <p>Who can do what across the studio workspace.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="ro-search" placeholder="Search roles...">
+        </div>
+        <button class="pj-btn" id="ro-reset"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Reset Defaults</button>
+        <button class="btn-new" id="ro-new">＋ New Role</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="ro-kpis">
+        <div class="ro-kpi">
+          <div class="ro-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="ro-kpi-val" id="kpi-roles">—</div><div class="ro-kpi-label">Roles</div><div class="ro-kpi-sub">including custom ones</div></div>
+        </div>
+        <div class="ro-kpi">
+          <div class="ro-kpi-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="ro-kpi-val" id="kpi-members">—</div><div class="ro-kpi-label">Members</div><div class="ro-kpi-sub">users across roles</div></div>
+        </div>
+        <div class="ro-kpi">
+          <div class="ro-kpi-ic" style="background:rgba(34,197,94,.13);color:#4ADE80"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="ro-kpi-val" id="kpi-perms">—</div><div class="ro-kpi-label">Permissions</div><div class="ro-kpi-sub">controlled per role</div></div>
+        </div>
+        <div class="ro-kpi">
+          <div class="ro-kpi-ic" style="background:rgba(251,191,36,.13);color:#FBBF24"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
+          <div><div class="ro-kpi-val" id="kpi-full">—</div><div class="ro-kpi-label">Full-Access Roles</div><div class="ro-kpi-sub">every permission on</div></div>
+        </div>
+      </div>
+
+      <div class="ro-card">
+        <table class="adm-table ro-table">
+          <thead id="ro-head"></thead>
+          <tbody id="ro-tbody"></tbody>
+        </table>
+      </div>
+      <p class="ro-note">Permission changes save in this browser and apply to how boards treat each role. Member counts are live from the Users board.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Roles board: live member counts + persisted permission matrix ──
+(() => {
+  const PERMS = ['View Dashboard', 'Manage Projects', 'Publish Content', 'Manage Media', 'Manage Users', 'Manage Settings'];
+  const DEFAULTS = {
+    admin: [1, 1, 1, 1, 1, 1], editor: [1, 1, 1, 1, 0, 0], team: [1, 1, 0, 1, 0, 0],
+    designer: [1, 1, 1, 1, 0, 0], developer: [1, 1, 0, 0, 0, 0], client: [1, 0, 0, 0, 0, 0],
+  };
+  const COLORS = ['#7C5CFF', '#3B82F6', '#22C55E', '#FBBF24', '#EC4899', '#2DD4BF', '#A78BFA'];
+  const colorFor = (r) => COLORS[[...r].reduce((a, c) => a + c.charCodeAt(0), 0) % COLORS.length];
+  const loadMatrix = () => { try { return JSON.parse(localStorage.getItem('ro_matrix') || '{}'); } catch { return {}; } };
+  const saveMatrix = (m) => localStorage.setItem('ro_matrix', JSON.stringify(m));
+  const loadCustom = () => { try { return JSON.parse(localStorage.getItem('ro_custom') || '[]'); } catch { return []; } };
+  const saveCustom = (c) => localStorage.setItem('ro_custom', JSON.stringify(c));
+  const grants = (role) => {
+    const saved = loadMatrix()[role.toLowerCase()];
+    if (saved) return PERMS.map((_, i) => !!saved[i]);
+    const d = DEFAULTS[role.toLowerCase()];
+    if (d) return d.map(Boolean);
+    return PERMS.map((_, i) => i === 0);
+  };
+  let users = [], query = '';
+
+  const roles = () => {
+    const counts = {};
+    users.forEach((u) => {
+      const r = (u.role || 'member').toLowerCase();
+      counts[r] = (counts[r] || 0) + 1;
+    });
+    loadCustom().forEach((r) => { counts[r.toLowerCase()] = counts[r.toLowerCase()] || 0; });
+    let list = Object.entries(counts).map(([role, n]) => ({ role, n }));
+    if (query) list = list.filter((x) => x.role.includes(query.toLowerCase()));
+    list.sort((a, b) => b.n - a.n || a.role.localeCompare(b.role));
+    return list;
+  };
+
+  const render = () => {
+    const list = roles();
+    document.getElementById('ro-head').innerHTML = `<tr><th>Role</th>${PERMS.map((p) => `<th>${esc(p)}</th>`).join('')}<th></th></tr>`;
+    document.getElementById('ro-tbody').innerHTML = list.length ? list.map(({ role, n }) => {
+      const g = grants(role), col = colorFor(role);
+      const custom = loadCustom().map((x) => x.toLowerCase()).includes(role);
+      return `<tr><td><div class="ro-role"><div class="ro-av" style="background:${col}22;color:${col}">${esc(role.slice(0, 2).toUpperCase())}</div>
+        <div><b>${esc(role)}</b><span>${n} member${n === 1 ? '' : 's'}${custom ? ' · custom' : ''}</span></div></div></td>` +
+        PERMS.map((_, i) => `<td><button class="ro-sw ${g[i] ? 'on' : ''}" data-role="${esc(role)}" data-perm="${i}" aria-label="${esc(role)} ${esc(PERMS[i])}"></button></td>`).join('') +
+        `<td>${custom ? `<button class="pj-icbtn" data-delrole="${esc(role)}" title="Delete role">🗑</button>` : ''}</td></tr>`;
+    }).join('') : `<tr><td colspan="${PERMS.length + 2}" style="text-align:center;color:#5E5E6E;padding:28px">No roles match.</td></tr>`;
+    document.getElementById('kpi-roles').textContent = list.length;
+    document.getElementById('kpi-members').textContent = users.length;
+    document.getElementById('kpi-perms').textContent = PERMS.length;
+    document.getElementById('kpi-full').textContent = list.filter(({ role }) => grants(role).every(Boolean)).length;
+  };
+
+  document.getElementById('ro-search').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
+  document.getElementById('ro-tbody').addEventListener('click', (e) => {
+    const sw = e.target.closest('[data-role]');
+    if (sw) {
+      const m = loadMatrix();
+      const g = grants(sw.dataset.role);
+      g[Number(sw.dataset.perm)] = !g[Number(sw.dataset.perm)];
+      m[sw.dataset.role.toLowerCase()] = g.map(Number);
+      saveMatrix(m);
+      render();
+      toast(`Permission ${g[Number(sw.dataset.perm)] ? 'granted' : 'revoked'} (this browser).`);
+      return;
+    }
+    const del = e.target.closest('[data-delrole]');
+    if (del) {
+      if (!confirm(`Delete role "${del.dataset.delrole}"? Members keep their accounts.`)) return;
+      saveCustom(loadCustom().filter((x) => x.toLowerCase() !== del.dataset.delrole.toLowerCase()));
+      render();
+    }
+  });
+  document.getElementById('ro-new').addEventListener('click', () => modal({
+    title: 'New Role',
+    fields: [{ name: 'name', label: 'Role name', required: true }],
+    onSubmit: async (d) => {
+      const name = d.name.trim().toLowerCase();
+      const customs = loadCustom();
+      if (name && !customs.map((x) => x.toLowerCase()).includes(name)
+        && !users.some((u) => (u.role || '').toLowerCase() === name)) customs.push(d.name.trim());
+      saveCustom(customs);
+      render();
+    },
+  }));
+  document.getElementById('ro-reset').addEventListener('click', () => {
+    if (!confirm('Reset all permission changes to defaults?')) return;
+    localStorage.removeItem('ro_matrix');
+    render();
+    toast('Permissions reset to defaults.');
+  });
+
+  const load = async () => {
+    try { users = (await api('/api/users')).data; } catch (e) { toast(e.message, false); users = []; }
+    render();
+  };
+  load();
+})();
+</script>
+</body>
+</html>

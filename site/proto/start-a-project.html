@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Start a Project — Aesthetix Studio</title>
-<meta name="description" content="Let's build something remarkable together. Tell us about your project.">
+<title>Start a Project — Tell Us What You Need — Aesthetix Studio</title>
+<meta name="description" content="Share your goals, timeline and budget range in a short brief. We will come back with an approach, a rough timeline and next steps for the project.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,14 +29,14 @@
 
 <!-- Hero -->
 <section class="page-hero" style="min-height:440px;padding:150px 9.8vw 70px">
-  <img class="hero-image" src="/images/assets/03_skylight_stairwell.png" alt="" style="opacity:.35;filter:grayscale(1) contrast(1.2)">
+  <img class="hero-image" src="/images/assets/02_circular_stairwell.png" alt="" style="opacity:.5;filter:grayscale(1) contrast(1.15)">
   <div class="hero-content" style="max-width:560px">
     <div class="eyebrow">Start a Project</div>
     <h1>
       <span>Let's build<br>something<br>remarkable<br>together.</span>
     </h1>
     <p class="lede">Tell us about your project and we'll get back to you within 24 hours.</p>
-    <a class="nav-cta" href="mailto:hello@aesthetixstudio.com"><span class="arrow">↗</span> Prefer email? hello@aesthetixstudio.com</a>
+    <div class="sap-mail"><span class="arrow" style="width:34px;height:34px;font-size:15px">↗</span><div><strong>Prefer email?</strong><a href="mailto:mohdabraralikhan@gmail.com">mohdabraralikhan@gmail.com</a></div></div>
   </div>
 </section>
 
@@ -86,27 +86,27 @@
     <h2>Tell us about your project</h2>
     <p class="form-note-top">All fields are optional</p>
 
-    <form onsubmit="return false">
+    <form id="start-project-form">
       <div class="form-grid">
         <div class="field">
           <label for="s-name">Your name</label>
-          <input type="text" id="s-name" placeholder="John Doe">
+          <input type="text" id="s-name" name="name" placeholder="John Doe">
         </div>
         <div class="field">
           <label for="s-email">Email address</label>
-          <input type="email" id="s-email" placeholder="john@example.com">
+          <input type="email" id="s-email" name="email" placeholder="john@example.com">
         </div>
         <div class="field">
           <label for="s-company">Company name</label>
-          <input type="text" id="s-company" placeholder="Your company">
+          <input type="text" id="s-company" name="company" placeholder="Your company">
         </div>
         <div class="field">
           <label for="s-website">Website (if any)</label>
-          <input type="url" id="s-website" placeholder="yourcompany.com">
+          <input type="url" id="s-website" name="website" placeholder="yourcompany.com">
         </div>
         <div class="field full">
           <label for="s-type">What type of project is this?</label>
-          <select id="s-type">
+          <select id="s-type" name="project_type">
             <option value="">Select project type</option>
             <option>Website Design</option>
             <option>Web Application</option>
@@ -117,11 +117,11 @@
         </div>
         <div class="field full">
           <label for="s-message">Tell us about your project</label>
-          <textarea id="s-message" placeholder="Describe your goals, challenges, and what success looks like..."></textarea>
+          <textarea id="s-message" name="message" placeholder="Describe your goals, challenges, and what success looks like..."></textarea>
         </div>
         <div class="field">
           <label for="s-timeline">Project timeline</label>
-          <select id="s-timeline">
+          <select id="s-timeline" name="timeline">
             <option value="">Select timeline</option>
             <option>ASAP</option>
             <option>1–3 months</option>
@@ -131,7 +131,7 @@
         </div>
         <div class="field">
           <label for="s-budget">Budget range</label>
-          <select id="s-budget">
+          <select id="s-budget" name="budget">
             <option value="">Select budget</option>
             <option>Under ₹1L</option>
             <option>₹1L – ₹5L</option>
@@ -149,7 +149,49 @@
       </div>
       <button type="submit" class="submit-btn">Submit project inquiry <span class="arrow" style="border-color:#fff">↗</span></button>
       <p class="form-note">By submitting, you agree to our <a href="/privacy-policy.html">Privacy Policy</a>.</p>
+      <p id="start-project-status" role="status" aria-live="polite" style="display:none;margin-top:14px;font-size:12px;color:#15803D"></p>
     </form>
+    <script>
+      // ponytail: leads has no timeline/budget columns, so they ride inside message —
+      // no migration, and the admin leads board shows the full brief unmodified.
+      document.getElementById('start-project-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const status = document.getElementById('start-project-status');
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        try {
+          const d = Object.fromEntries(new FormData(form).entries());
+          const extras = [
+            ['Plan', new URLSearchParams(location.search).get('plan')],
+            ['Timeline', d.timeline],
+            ['Budget', d.budget],
+          ].filter(([, v]) => String(v || '').trim()).map(([k, v]) => `${k}: ${v}`).join('\n');
+          if (extras) d.message = [d.message, '', extras].join('\n');
+          d.source = 'Start a Project';
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(d)
+          });
+          const data = await res.json();
+          if (res.ok) {
+            status.style.display = 'block';
+            status.style.color = '#15803D';
+            status.textContent = 'Thanks — your inquiry is in. We\'ll reply within 24 hours.';
+            form.reset();
+          } else {
+            throw new Error(data.error || 'Submission failed');
+          }
+        } catch (err) {
+          status.style.display = 'block';
+          status.style.color = '#B91C1C';
+          status.textContent = err.message || 'Something went wrong — please try again or email mohdabraralikhan@gmail.com.';
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    </script>
   </div>
 
 </div>
@@ -160,12 +202,10 @@
     <h2>Not sure where to start?</h2>
     <p>Book a no-obligation discovery call. We'll help you clarify your ideas and explore possibilities.</p>
   </div>
-  <div class="sap-book-cta">
-    <a class="sap-book-link" href="/discovery-call.html">
-      <span class="arrow" style="width:24px;height:24px;font-size:13px">↗</span> Book a discovery call
-    </a>
-    <span class="sap-book-meta">30 minutes · No commitment</span>
-  </div>
+  <a class="sap-book-cta" href="/discovery-call.html">
+    <span class="arrow" style="width:34px;height:34px;font-size:15px">↗</span>
+    <div><strong>Book a discovery call</strong><span class="sap-book-meta">30 minutes · No commitment</span></div>
+  </a>
 </div>
 
 </main>
@@ -176,7 +216,7 @@
       <a class="logo" href="/">Aesthetix<small>STUDIO</small></a>
       <p class="tagline">We design and build digital products that create measurable business impact.</p>
       <a class="text-link" href="/start-a-project.html"><span class="arrow">↗</span> Start a project</a>
-      <p style="margin-top:18px">hello@aesthetixstudio.com<br>Hyderabad, India</p>
+      <p style="margin-top:18px">mohdabraralikhan@gmail.com<br>Hyderabad, India</p>
     </div>
     <div>
       <h4>Studio</h4>
@@ -185,6 +225,7 @@
         <a href="/capabilities.html">Capabilities</a>
         <a href="/journal.html">Journal</a>
         <a href="/studio.html">Studio</a>
+        <a href="/start-a-project.html">Start a project</a>
       </div>
     </div>
     <div>

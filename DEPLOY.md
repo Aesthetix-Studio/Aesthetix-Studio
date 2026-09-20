@@ -56,6 +56,9 @@ same port. Point `DB_PATH` at a persistent volume if the VM's disk isn't durable
 | `PORT` | `4173` | HTTP port (Render/Railway set this) |
 | `DB_PATH` | `data/app.sqlite` | Where the SQLite database lives — point at a mounted volume so data survives redeploys |
 | `ADMIN_TOKEN` | unset (API open) | Bearer token gate for `/api/*` except `POST /api/contact`. **Set on any public deploy** |
+| `AI_API_KEY` | unset (assistant dormant) | Enables the AI chat assistant. Works with any OpenAI-compatible provider |
+| `AI_BASE_URL` | `https://api.openai.com/v1` | Point at another OpenAI-compatible endpoint, e.g. Gemini: `https://generativelanguage.googleapis.com/v1beta/openai` |
+| `AI_MODEL` | `gpt-4o-mini` | Model id sent to the provider (e.g. `gemini-2.0-flash` on Gemini) |
 
 ## Notes
 

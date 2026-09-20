@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Writer — Drafts, Tone and Readability — Aesthetix Studio</title>
+<meta name="description" content="A focused writing workspace with brief templates, live readability stats and local drafts, so studio copy starts structured every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.aw-body{display:grid;grid-template-columns:320px 1fr 280px;gap:14px;align-items:start}
+.aw-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.aw-card h3{font-size:13.5px;font-weight:700;margin:0 0 14px;color:#fff;font-family:'Manrope'}
+.aw-field{margin-bottom:12px}
+.aw-field label{display:block;font-size:10.5px;color:#8E8E9A;margin-bottom:6px;font-weight:600}
+.aw-field input,.aw-field select,.aw-field textarea{width:100%;background:#181824;border:1px solid #2A2A38;border-radius:8px;color:#EDEDF2;font-size:12px;padding:9px 11px;font-family:inherit;outline:none;box-sizing:border-box}
+.aw-field input:focus,.aw-field select:focus,.aw-field textarea:focus{border-color:#7C3AED}
+.aw-field select option{background:#181824}
+.aw-editor{width:100%;min-height:380px;background:#0E0E14;border:1px solid #23232F;border-radius:12px;color:#EDEDF2;font-size:13.5px;line-height:1.75;padding:18px;font-family:'Manrope',Arial,sans-serif;outline:none;box-sizing:border-box;resize:vertical}
+.aw-editor:focus{border-color:#7C3AED}
+.aw-toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.aw-stat{display:flex;justify-content:space-between;font-size:11.5px;color:#8E8E9A;padding:7px 0;border-top:1px solid #1B1B26}
+.aw-stat:first-of-type{border-top:0}
+.aw-stat b{color:#fff}
+.aw-draft{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #1B1B26;cursor:pointer}
+.aw-draft:first-of-type{border-top:0}
+.aw-draft:hover b{color:#fff}
+.aw-draft b{display:block;font-size:12px;color:#C9C9D2;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aw-draft span{font-size:10px;color:#7A7A88}
+.aw-draft .del{margin-left:auto;background:none;border:0;color:#5E5E6E;font-size:14px;cursor:pointer;flex-shrink:0}
+.aw-draft .del:hover{color:#F87171}
+.aw-hint{font-size:10.5px;color:#5E5E6E;line-height:1.6;margin:12px 0 0}
+@media(max-width:1280px){.aw-body{grid-template-columns:1fr 1fr}.aw-stats-col{grid-column:1/-1}}
+@media(max-width:800px){.aw-body{grid-template-columns:1fr}}
+</style>
+</head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-ai-writer.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>AI Writer</h1>
+        <p>Briefs, outlines and readability in one workspace.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <button class="pj-btn" id="aw-copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+        <button class="pj-btn" id="aw-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export .md</button>
+        <button class="btn-new" id="aw-save">＋ Save Draft</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="aw-body">
+        <div class="aw-card">
+          <h3>Brief</h3>
+          <div class="aw-field"><label>Template</label><select id="aw-tpl">
+            <option value="blog">Blog article</option>
+            <option value="landing">Landing page</option>
+            <option value="email">Outreach email</option>
+            <option value="outline">Content outline</option>
+          </select></div>
+          <div class="aw-field"><label>Topic</label><input id="aw-topic" type="text" placeholder="e.g. luxury web design trends"></div>
+          <div class="aw-field"><label>Audience</label><input id="aw-aud" type="text" placeholder="e.g. boutique founders"></div>
+          <div class="aw-field"><label>Tone</label><select id="aw-tone">
+            <option>Confident and direct</option>
+            <option>Warm and friendly</option>
+            <option>Formal and precise</option>
+            <option>Playful and bold</option>
+          </select></div>
+          <div class="aw-field"><label>Key points (one per line)</label><textarea id="aw-points" rows="4" placeholder="Faster load times&#10;Trust signals above the fold"></textarea></div>
+          <button class="btn-new" id="aw-build" style="width:100%;justify-content:center">✦ Assemble Draft</button>
+          <button class="pj-btn" id="aw-generate" style="width:100%;justify-content:center;margin-top:8px">✦ Generate with AI</button>
+          <p class="aw-hint">Assembles a structured starting draft from your brief and template — edit freely, nothing leaves this browser.</p>
+        </div>
+        <div class="aw-card">
+          <div class="aw-toolbar">
+            <span style="font-size:12px;font-weight:700;color:#fff" id="aw-title">Untitled draft</span>
+            <span style="margin-left:auto"></span>
+            <button class="pj-btn" id="aw-clear" style="font-size:11px;padding:6px 12px">Clear</button>
+          </div>
+          <textarea class="aw-editor" id="aw-editor" placeholder="Start writing, or assemble a draft from the brief…"></textarea>
+        </div>
+        <div class="aw-card aw-stats-col">
+          <h3>Readability <span class="dash-link" id="aw-stats-info">live</span></h3>
+          <div class="aw-stat"><span>Words</span><b id="st-words">0</b></div>
+          <div class="aw-stat"><span>Sentences</span><b id="st-sent">0</b></div>
+          <div class="aw-stat"><span>Reading time</span><b id="st-time">0 min</b></div>
+          <div class="aw-stat"><span>Avg words / sentence</span><b id="st-avg">0</b></div>
+          <div class="aw-stat"><span>Long sentences (&gt;20w)</span><b id="st-long">0</b></div>
+          <div class="aw-stat"><span>Top keyword</span><b id="st-kw">—</b></div>
+          <h3 style="margin-top:16px">Drafts <span class="dash-link" id="aw-count"></span></h3>
+          <div id="aw-drafts"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── AI Writer: template assembly + live readability, drafts in localStorage ──
+(() => {
+  const ed = document.getElementById('aw-editor');
+  const loadDrafts = () => { try { return JSON.parse(localStorage.getItem('aw_drafts') || '[]'); } catch { return []; } };
+  const saveDrafts = (d) => localStorage.setItem('aw_drafts', JSON.stringify(d));
+  const STOP = new Set(('the,a,an,and,or,to,of,in,on,for,with,is,are,was,were,it,its,this,that,these,those,as,at,by,from,you,your,we,our,they,their,be,have,has,will,can,not,no,so,if,then,than,into,out,up,about,over,after,before,between,through,during,each,more,most,other,such,only,own,same,too,very,just,our,yours,his,her,my,me,him,us,them,what,which,who,whom,when,where,why,how,all,any,both,few,our,isn,aren,wasn,weren,hasn,haven,hadn,doesn,don,didn,won,wouldn,shouldn,couldn,and').split(','));
+
+  const stats = () => {
+    const text = ed.value.trim();
+    const words = text ? text.split(/\s+/) : [];
+    const sents = text ? text.split(/[.!?]+/).map((s) => s.trim()).filter(Boolean) : [];
+    const long = sents.filter((s) => s.split(/\s+/).length > 20).length;
+    const freq = {};
+    words.forEach((w) => {
+      const k = w.toLowerCase().replace(/[^a-z0-9-]/g, '');
+      if (k.length > 3 && !STOP.has(k)) freq[k] = (freq[k] || 0) + 1;
+    });
+    const top = Object.entries(freq).sort((a, b) => b[1] - a[1])[0];
+    document.getElementById('st-words').textContent = words.length.toLocaleString('en-IN');
+    document.getElementById('st-sent').textContent = sents.length;
+    document.getElementById('st-time').textContent = Math.max(1, Math.ceil(words.length / 200)) + ' min';
+    document.getElementById('st-avg').textContent = sents.length ? (words.length / sents.length).toFixed(1) : 0;
+    document.getElementById('st-long').textContent = long;
+    document.getElementById('st-kw').textContent = top ? `${top[0]} ×${top[1]}` : '—';
+  };
+  const renderDrafts = () => {
+    const ds = loadDrafts();
+    document.getElementById('aw-count').textContent = ds.length ? `${ds.length} saved` : '';
+    document.getElementById('aw-drafts').innerHTML = ds.length ? ds.map((d, i) => `<div class="aw-draft" data-i="${i}">
+      <div style="min-width:0"><b>${esc(d.title)}</b><span>${esc(dashAgo(d.ts))} · ${esc(String(d.text).split(/\s+/).filter(Boolean).length)} words</span></div>
+      <button class="del" data-del="${i}" title="Delete">×</button></div>`).join('')
+      : `<p style="font-size:11px;color:#5E5E6E">No saved drafts yet.</p>`;
+  };
+  const TPL = {
+    blog: (t, a, tone, pts) => `# ${t}\n\n${a ? `Written for ${a}. ` : ''}Tone: ${tone.toLowerCase()}.\n\n## Why this matters\n\n...\n\n## What to do about it\n\n${pts.map((p) => `### ${p}\n\n...\n`).join('\n')}## Takeaway\n\n...`,
+    landing: (t, a, tone, pts) => `# ${t}\n\n**For ${a || 'teams who want results'}.**\n\n${pts.map((p) => `- ${p}`).join('\n')}\n\n## Get started\n\n[Tone: ${tone.toLowerCase()}] …`,
+    email: (t, a, tone, pts) => `Subject: ${t}\n\nHi ${a || 'there'},\n\n${pts.map((p) => `${p}.`).join(' ')}\n\nWorth a 15-minute call?\n\n[Tone: ${tone.toLowerCase()}]`,
+    outline: (t, a, tone, pts) => `# ${t} — outline\n\nAudience: ${a || '—'} · Tone: ${tone.toLowerCase()}\n\n${pts.map((p, i) => `${i + 1}. ${p}\n   - point\n   - example`).join('\n')}`,
+  };
+  document.getElementById('aw-build').addEventListener('click', () => {
+    const topic = document.getElementById('aw-topic').value.trim() || 'Untitled piece';
+    const aud = document.getElementById('aw-aud').value.trim();
+    const tone = document.getElementById('aw-tone').value;
+    const pts = document.getElementById('aw-points').value.split('\n').map((s) => s.trim()).filter(Boolean);
+    const fn = TPL[document.getElementById('aw-tpl').value] || TPL.blog;
+    ed.value = (ed.value.trim() ? ed.value.trim() + '\n\n---\n\n' : '') + fn(topic, aud, tone, pts.length ? pts : ['Opening', 'Detail', 'Close']);
+    document.getElementById('aw-title').textContent = topic.slice(0, 40);
+    stats();
+    toast('Draft assembled from template — edit freely.');
+  });
+  // ponytail: agent seam — window.AesthetixAgent.complete(prompt, {tone, template})
+  // resolves draft text from your own agents; otherwise the offline template above
+  // stays the way to draft. No backend needed.
+  document.getElementById('aw-generate').addEventListener('click', async () => {
+    const topic = document.getElementById('aw-topic').value.trim() || 'Untitled piece';
+    const aud = document.getElementById('aw-aud').value.trim();
+    const tone = document.getElementById('aw-tone').value;
+    const tpl = document.getElementById('aw-tpl').value;
+    const pts = document.getElementById('aw-points').value.split('\n').map((s) => s.trim()).filter(Boolean);
+    const btn = document.getElementById('aw-generate');
+    btn.disabled = true;
+    try {
+      const a = window.AesthetixAgent;
+      if (!a || typeof a.complete !== 'function') throw new Error('no-agent');
+      const out = await a.complete(
+        `Type: ${tpl}\nAudience: ${aud || '—'}\nTone: ${tone}\nTopic: ${topic}\nPoints:\n${pts.length ? pts.map((p) => `- ${p}`).join('\n') : '—'}`,
+        { tone, template: tpl }
+      );
+      ed.value = (ed.value.trim() ? ed.value.trim() + '\n\n---\n\n' : '') + String(out).trim();
+      document.getElementById('aw-title').textContent = topic.slice(0, 40);
+      stats();
+      toast('Generated with your connected agent — edit freely.');
+    } catch {
+      toast('No agent connected yet — Assemble Draft works offline.', false);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+  ed.addEventListener('input', () => {
+    const first = ed.value.trim().split('\n')[0].replace(/^#+\s*/, '').slice(0, 40);
+    document.getElementById('aw-title').textContent = first || 'Untitled draft';
+    stats();
+  });
+  document.getElementById('aw-clear').addEventListener('click', () => {
+    if (!ed.value.trim() || confirm('Clear the editor?')) { ed.value = ''; stats(); }
+  });
+  document.getElementById('aw-copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(ed.value); toast('Copied to clipboard.'); }
+    catch { toast('Copy failed in this browser.', false); }
+  });
+  document.getElementById('aw-export').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ed.value], { type: 'text/markdown' }));
+    a.download = 'draft.md';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  document.getElementById('aw-save').addEventListener('click', () => {
+    if (!ed.value.trim()) { toast('Nothing to save yet.', false); return; }
+    const ds = loadDrafts();
+    ds.unshift({ title: document.getElementById('aw-title').textContent, text: ed.value, ts: new Date().toISOString() });
+    saveDrafts(ds.slice(0, 30));
+    renderDrafts();
+    toast('Draft saved in this browser.');
+  });
+  document.getElementById('aw-drafts').addEventListener('click', (e) => {
+    const del = e.target.closest('[data-del]');
+    const ds = loadDrafts();
+    if (del) {
+      saveDrafts(ds.filter((_, i) => i !== Number(del.dataset.del)));
+      renderDrafts();
+      return;
+    }
+    const row = e.target.closest('[data-i]');
+    if (row) {
+      const d = ds[Number(row.dataset.i)];
+      if (d && (!ed.value.trim() || confirm('Replace the editor with this draft?'))) {
+        ed.value = d.text;
+        document.getElementById('aw-title').textContent = d.title;
+        stats();
+      }
+    }
+  });
+  document.getElementById('aw-stats-info').addEventListener('click', () => toast('Stats update as you type.'));
+  stats();
+  renderDrafts();
+})();
+</script>
+</body>
+</html>

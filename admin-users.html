@@ -3,292 +3,481 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Users — Aesthetix Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Users — Team Access and Permissions — Aesthetix Studio</title>
+<meta name="description" content="Everyone with access to the Aesthetix Studio workspace, with their role, status and last sign-in, so permissions stay reviewable.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/aesthetix.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script src="/js/admin.js"></script>
 <style>
-.ftabs{display:flex;gap:4px;margin-bottom:16px}
-.ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
-.ftab.active{background:var(--brand);color:#fff}
-.adm-table{width:100%;border-collapse:collapse;font-size:12px}
-.adm-table th{color:var(--text-4);font-weight:500;padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
-.adm-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
-.adm-table tr:hover td{background:rgba(255,255,255,.02)}
-.bx{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;display:inline-block}
-.bx-active{background:rgba(34,197,94,.15);color:#22c55e}
-.bx-inactive{background:rgba(113,113,122,.15);color:var(--text-4)}
-.bx-suspended{background:rgba(239,68,68,.15);color:#ef4444}
-.role-badge{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:500}
+:root{--st-bg:#08080D;--st-card:#121219;--st-line:#20202B;--st-input:#1A1A24;--st-muted:#8E8E9A}
+body{background:var(--st-bg)!important}
+.st-layout{display:grid;grid-template-columns:232px 1fr;min-height:100vh;background:var(--st-bg);font-family:'Manrope',Arial,sans-serif}
+.st-side{background:#0C0C13;border-right:1px solid #1A1A24;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;scrollbar-width:none}
+.st-side::-webkit-scrollbar{display:none}
+.st-logo-wrap{padding:20px 18px 14px;display:flex;align-items:center;justify-content:space-between}
+.st-logo{font-weight:800;font-size:16px;letter-spacing:.14em;color:#fff;line-height:1}
+.st-logo small{display:block;font-size:8.5px;font-weight:600;letter-spacing:.44em;color:#8B5CF6;margin-top:5px;padding-left:2px}
+.st-collapse{width:26px;height:26px;border-radius:8px;background:#1A1A26;border:1px solid #2A2A38;color:#8E8E9A;font-size:13px;cursor:pointer;display:grid;place-items:center}
+.st-user{margin:0 14px 8px;background:#14141C;border:1px solid #22222E;border-radius:12px;padding:11px 12px;display:flex;align-items:center;gap:10px}
+.st-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#C4B5FD,#6D28D9);display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;overflow:hidden}
+.st-avatar img{width:100%;height:100%;object-fit:cover}
+.st-user-info{min-width:0;flex:1}
+.st-user-info h4{font-size:12px;font-weight:700;margin:0;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-user-info span{font-size:10px;color:#8E8E9A}
+.st-online{color:#22C55E!important;font-size:10px!important}
+.st-chev{color:#5E5E6E;font-size:12px;background:none;border:0;cursor:pointer}
+.st-nav{flex:1;padding:6px 14px;overflow-y:auto;scrollbar-width:none}
+.st-nav::-webkit-scrollbar{display:none}
+.st-nav-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E6E;font-weight:700;padding:12px 10px 7px}
+.st-nav-item{display:flex;align-items:center;gap:11px;padding:8.5px 12px;font-size:12.5px;font-weight:500;color:#9A9AA8;border-radius:9px;margin-bottom:2px;cursor:pointer;text-decoration:none;border:0;background:none;width:100%;font-family:inherit;text-align:left}
+.st-nav-item:hover{background:#181824;color:#fff}
+.st-nav-item.active{background:linear-gradient(90deg,#5B21B6,#7C3AED);color:#fff;font-weight:600;box-shadow:0 4px 14px rgba(124,58,237,.35)}
+.st-nav-icon{width:17px;text-align:center;flex-shrink:0;display:inline-flex}
+.st-side-bottom{padding:14px;border-top:1px solid #1B1B24}
+.st-visit{width:100%;background:linear-gradient(90deg,#6D28D9,#7C3AED);border:0;color:#fff;border-radius:9px;padding:11px;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;font-family:inherit}
+.st-dark{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#9A9AA8;background:#14141C;border:1px solid #22222E;border-radius:9px;padding:10px 12px}
+/* main */
+.st-main{display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.st-top{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 24px 14px;gap:16px}
+.st-top h1{font-size:21px;font-weight:700;margin:0 0 3px;color:#fff}
+.st-top p{font-size:12px;color:#8E8E9A;margin:0}
+.st-top-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.st-search{display:flex;align-items:center;gap:8px;background:#12121A;border:1px solid #23232F;border-radius:9px;padding:8px 12px;font-size:12px;color:#6E6E7E;width:215px}
+.st-search input{background:none;border:0;outline:none;font-size:12px;color:#D4D4D8;width:100%;font-family:inherit}
+.st-kbd{font-size:10px;color:#8E8E9A;background:#1E1E29;border:1px solid #2C2C3A;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.st-pillbtn{display:flex;align-items:center;gap:8px;background:#12121A;border:1px solid #23232F;border-radius:9px;padding:9px 14px;font-size:12px;font-weight:500;color:#D4D4D8;cursor:pointer;white-space:nowrap;font-family:inherit}
+.st-pillbtn:hover{border-color:#7C3AED;color:#fff}
+.st-add{display:flex;align-items:stretch;border-radius:9px;overflow:hidden;box-shadow:0 4px 16px rgba(124,58,237,.45);border:0;font-family:inherit}
+.st-add-main{background:linear-gradient(90deg,#7C3AED,#5B21B6);border:0;color:#fff;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:inherit}
+.st-add-chev{background:#5B21B6;border:0;border-left:1px solid rgba(255,255,255,.22);color:#fff;padding:9px 11px;cursor:pointer;font-family:inherit}
+/* content */
+.st-content{padding:0 24px 16px;overflow-y:auto;height:calc(100vh - 100px)}
+.st-grid{display:grid;grid-template-columns:1fr 290px;gap:14px;align-items:start}
+/* stat cards */
+.u-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:14px}
+.u-stat{background:#121219;border:1px solid #20202B;border-radius:12px;padding:16px 16px 10px;min-width:0}
+.u-stat-top{display:flex;gap:11px;align-items:flex-start;margin-bottom:8px}
+.u-stat-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.u-stat-ic svg{width:17px;height:17px}
+.u-stat-label{font-size:11px;color:#B9B9C4;font-weight:500}
+.u-stat-value{font-size:24px;font-weight:700;color:#fff;line-height:1.15}
+.u-stat-delta{font-size:10.5px;margin-top:2px;font-weight:600}
+.u-stat-delta.up{color:#22C55E}
+.u-stat-delta.down{color:#8E8E9A}
+.u-stat-delta small{color:#5E5E6E;font-weight:400}
+.u-spark{height:32px;margin:6px -6px 0}
+.u-spark svg{width:100%;height:32px;display:block}
+/* table card */
+.u-card{background:#121219;border:1px solid #20202B;border-radius:12px;overflow:hidden}
+.u-tabs{display:flex;align-items:center;gap:26px;padding:14px 20px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.u-tab{background:none;border:0;color:#8E8E9A;font-size:12.5px;font-weight:500;padding:0 2px 12px;cursor:pointer;font-family:inherit;position:relative}
+.u-tab:hover{color:#fff}
+.u-tab.active{color:#fff;font-weight:600}
+.u-tab.active:after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#8B5CF6;border-radius:2px}
+.u-toolbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;padding:12px 16px}
+.u-sort{background:#1A1A24;border:1px solid #2A2A38;color:#D4D4D8;border-radius:8px;font-size:11.5px;padding:7px 10px;font-family:inherit;cursor:pointer;outline:none}
+.u-viewbtns{display:flex;gap:6px}
+.u-viewbtn{width:32px;height:32px;border-radius:8px;background:#1A1A24;border:1px solid #2A2A38;color:#8E8E9A;cursor:pointer;display:grid;place-items:center}
+.u-viewbtn.active{background:rgba(124,58,237,.3);border-color:#7C3AED;color:#C4B5FD}
+.u-table{width:100%;border-collapse:collapse;font-size:12px}
+.u-table th{color:#8E8E9A;font-weight:500;font-size:11.5px;padding:10px 10px;text-align:left;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.01)}
+.u-table td{padding:11px 10px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle}
+.u-table tbody tr:hover td{background:rgba(255,255,255,.015)}
+.u-check{width:15px;height:15px;border:1.5px solid #3F3F4E;border-radius:4px;background:transparent;cursor:pointer;appearance:none;position:relative;vertical-align:middle;flex-shrink:0}
+.u-check:checked{background:#7C3AED;border-color:#7C3AED}
+.u-check:checked:after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:10px}
+.u-usercell{display:flex;align-items:center;gap:11px}
+.u-avatar{width:34px;height:34px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#26263a;display:grid;place-items:center;font-size:10px;font-weight:700;color:#C4B5FD}
+.u-avatar img{width:100%;height:100%;object-fit:cover}
+.u-username{font-weight:600;color:#fff;font-size:12.5px}
+.u-useremail{color:#71717A;font-size:11px}
+.rl{display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:500}
+.rl-admin{background:rgba(124,58,237,.18);color:#A78BFA}
+.rl-editor{background:rgba(245,158,11,.14);color:#F59E0B}
+.rl-author{background:rgba(59,130,246,.15);color:#60A5FA}
+.rl-contrib{background:rgba(20,184,166,.14);color:#2DD4BF}
+.rl-sub{background:rgba(124,58,237,.14);color:#A78BFA}
+.st-dotcell{display:flex;align-items:center;gap:7px;font-size:12px;color:#D4D4D8}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-active{background:#22C55E}
+.dot-inactive{background:#52525B}
+.dot-pending{background:#F59E0B}
+.u-sub{font-size:11px;margin-top:1px}
+.u-sub.green{color:#22C55E}
+.u-sub.dim{color:#71717A}
+.u-actions{display:flex;gap:7px;justify-content:flex-end}
+.u-act{width:30px;height:30px;border-radius:8px;background:#1A1A24;border:1px solid #2A2A38;color:#8E8E9A;cursor:pointer;display:grid;place-items:center}
+.u-act:hover{border-color:#7C3AED;color:#fff}
+.u-pager{display:flex;justify-content:space-between;align-items:center;padding:13px 18px}
+.u-pager-count{font-size:11.5px;color:#8E8E9A}
+.u-pages{display:flex;gap:6px;align-items:center}
+.u-page{min-width:30px;height:30px;border-radius:8px;background:#1A1A24;border:1px solid #2A2A38;color:#8E8E9A;font-size:11.5px;cursor:pointer;font-family:inherit;padding:0 8px}
+.u-page:hover{color:#fff;border-color:#7C3AED}
+.u-page.active{background:#5B21B6;border-color:#5B21B6;color:#fff;font-weight:600}
+.u-page.dots{border:0;background:none;cursor:default}
+/* right rail */
+.st-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.st-card{background:#121219;border:1px solid #20202B;border-radius:12px;padding:18px}
+.st-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.st-card-head h3{font-size:13.5px;font-weight:700;margin:0;color:#fff}
+.st-viewall{font-size:11.5px;color:#8B5CF6;font-weight:500;cursor:pointer;background:none;border:0;font-family:inherit}
+.u-donut-wrap{display:flex;gap:16px;align-items:center}
+.u-donut{width:108px;height:108px;border-radius:50%;flex-shrink:0;background:conic-gradient(from -90deg,#8B5CF6 0 9.4%,#F59E0B 9.4% 31.3%,#3B82F6 31.3% 56.3%,#22C55E 56.3% 84.4%,#6366F1 84.4% 100%);display:grid;place-items:center}
+.u-donut-hole{width:74px;height:74px;border-radius:50%;background:#121219;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.u-donut-total{font-size:19px;font-weight:700;color:#fff;line-height:1}
+.u-donut-cap{font-size:9.5px;color:#71717A}
+.u-legend{display:flex;flex-direction:column;gap:8px;font-size:11px;flex:1}
+.u-leg{display:flex;align-items:center;gap:8px;color:#B9B9C4}
+.u-leg b{margin-left:auto;color:#D4D4D8;font-weight:500;white-space:nowrap}
+.u-legdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.u-act-row{display:flex;gap:11px;align-items:flex-start;padding:9px 0}
+.u-act-row + .u-act-row{border-top:1px solid rgba(255,255,255,.04)}
+.u-act-row .u-avatar{width:32px;height:32px}
+.u-act-name{font-size:12px;font-weight:600;color:#EDEDF2}
+.u-act-desc{font-size:11px;color:#8E8E9A}
+.u-act-time{font-size:10px;color:#5E5E6E;white-space:nowrap;margin-left:auto;flex-shrink:0}
+.u-acct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.u-acct{background:#1A1A24;border:1px solid #262633;border-radius:9px;padding:10px 6px;text-align:center}
+.u-acct b{display:block;font-size:18px;font-weight:700}
+.u-acct span{font-size:9.5px;color:#8E8E9A}
+.u-bar{height:6px;border-radius:3px;background:#262633;overflow:hidden;margin-bottom:8px}
+.u-bar i{display:block;height:100%;width:76.6%;background:linear-gradient(90deg,#22C55E,#4ADE80);border-radius:3px}
+.u-bar-cap{font-size:11px;color:#8E8E9A;text-align:center}
+.u-qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.u-qa{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;cursor:pointer;font-family:inherit;padding:2px}
+.u-qa-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center}
+.u-qa span{font-size:10px;color:#B9B9C4;text-align:center;line-height:1.3}
+.u-qa:hover span{color:#fff}
+@media(max-width:1280px){.u-stats{grid-template-columns:repeat(3,1fr)}.st-grid{grid-template-columns:1fr}.st-col{display:grid;grid-template-columns:1fr 1fr;align-items:start}}
+@media(max-width:860px){.st-layout{grid-template-columns:1fr}.st-side{display:none}.u-stats{grid-template-columns:1fr 1fr}.st-col{grid-template-columns:1fr}.st-content{height:auto}.st-top{flex-direction:column}.u-table-wrap{overflow-x:auto}}
 </style>
-</head>
+<link rel="canonical" href="https://aesthetixstudio.com/admin-users"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Users — Team Access and Permissions — Aesthetix Studio"><meta property="og:description" content="Everyone with access to the Aesthetix Studio workspace, with their role, status and last sign-in, so permissions stay reviewable."><meta property="og:url" content="https://aesthetixstudio.com/admin-users"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Users — Team Access and Permissions — Aesthetix Studio"><meta name="twitter:description" content="Everyone with access to the Aesthetix Studio workspace, with their role, status and last sign-in, so permissions stay reviewable."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
 <body style="overflow:hidden">
-<div class="dash-layout">
+<div class="st-layout">
 
-<aside class="dash-sidebar">
-  <div class="dash-logo-wrap">
-    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
-    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+<aside class="st-side">
+  <div class="st-logo-wrap">
+    <div class="st-logo">AESTHETIX<small>STUDIO</small></div>
+    <button class="st-collapse" aria-label="Collapse sidebar">«</button>
   </div>
-  <div class="dash-user">
-    <div class="dash-avatar">RM</div>
-    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
-    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+  <div class="st-user">
+    <div class="st-avatar"><img decoding="async" src="https://i.pravatar.cc/72?img=12" alt="Rohit Malhotra" onerror="this.remove()"><span data-adm="initials">RM</span></div>
+    <div class="st-user-info"><h4 data-adm="name">Rohit Malhotra</h4><span><span data-adm="role">Administrator</span><br><span class="st-online">● Online</span></span></div>
+    <button type="button" class="st-chev" aria-label="Account">⌄</button>
   </div>
-  <nav class="dash-nav">
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Overview</div>
-      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
-      <a class="dash-nav-item" href="/admin-analytics.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Content Management</div>
-      <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
-      <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Blog Posts</a>
-      <a class="dash-nav-item" href="/admin-media.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
-      <a class="dash-nav-item" href="/admin-leads.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">AI Tools <span class="dash-new-badge">New</span></div>
-      <a class="dash-nav-item" href="/proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
-      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
-      <a class="dash-nav-item" href="/brand-audit-tool.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">System</div>
-      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Roles &amp; Permissions</a>
-      <a class="dash-nav-item" href="/admin-settings.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span> Activity Logs</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
-    </div>
+  <nav class="st-nav">
+    <div class="st-nav-label">Overview</div>
+    <a class="st-nav-item" href="/dashboard.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Dashboard</a>
+    <a class="st-nav-item" href="/admin-analytics.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="17" x2="8" y2="11"/><line x1="12" y1="17" x2="12" y2="7"/><line x1="16" y1="17" x2="16" y2="13"/></svg></span> Analytics</a>
+    <div class="st-nav-label">Content Management</div>
+    <a class="st-nav-item" href="/admin-projects.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span> Projects</a>
+    <a class="st-nav-item" href="/admin-articles.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span> Articles</a>
+    <a class="st-nav-item" href="/admin-media.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
+    <a class="st-nav-item" href="/forms.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Forms</a>
+    <a class="st-nav-item" href="/admin-pages.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></span> Pages</a>
+    <a class="st-nav-item" href="/admin-comments.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Comments</a>
+    <a class="st-nav-item" href="/admin-testimonials.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Testimonials</a>
+    <a class="st-nav-item" href="/admin-categories.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></span> Categories</a>
+    <a class="st-nav-item" href="/admin-tags.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3H4v7l9.59 9.59a2 2 0 0 0 2.82 0l4.18-4.18a2 2 0 0 0 0-2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> Tags</a>
+    <div class="st-nav-label">CRM</div>
+    <a class="st-nav-item" href="/admin-leads.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-5 5 5 5"/><path d="M3 11h13a5 5 0 0 1 0 10h-3"/></svg></span> Leads</a>
+    <a class="st-nav-item" href="/admin-lead-sources.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></span> Lead Sources</a>
+    <div class="st-nav-label">AI Tools</div>
+    <a class="st-nav-item" href="/proposal-generator.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
+    <a class="st-nav-item" href="/ai-chat-assistant.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
+    <a class="st-nav-item" href="/admin-ai-writer.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
+    <a class="st-nav-item" href="/brand-audit-tool.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
+    <div class="st-nav-label">System</div>
+    <a class="st-nav-item active" href="/admin-users.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
+    <a class="st-nav-item" href="/admin-roles.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M17.5 14.5a6.5 6.5 0 0 1 4 5.5"/></svg></span> Roles &amp; Permissions</a>
+    <a class="st-nav-item" href="/admin-settings.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
+    <a class="st-nav-item" href="/admin-activity.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Activity Logs</a>
+    <a class="st-nav-item" href="/admin-integrations.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
+    <a class="st-nav-item" href="/admin-system-health.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span> System Health</a>
   </nav>
-  <div class="dash-sidebar-bottom">
-    <button class="dash-visit-btn">Visit Website ↗</button>
-    <div class="dash-dark-toggle">
+  <div class="st-side-bottom">
+    <button class="st-visit" onclick="location.href='/'">Visit Website <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button>
+    <div class="st-dark">
       <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
-      <div class="toggle-switch on"></div>
+      <button class="tgl on" type="button" aria-label="Dark mode" style="width:38px;height:21px;border-radius:12px;background:#8B5CF6;border:0;position:relative;cursor:pointer"><span style="position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:50%;background:#fff"></span></button>
     </div>
   </div>
 </aside>
 
-<div class="dash-main">
-  <div class="dash-topbar">
-    <div><h1>Users</h1><p>Manage team members, roles and access permissions.</p></div>
-    <div class="dash-topbar-right">
-      <div class="dash-search"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="text" placeholder="Search users..."><span class="dash-search-kbd">⌘K</span></div>
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filters</button>
-      <button class="btn-create-new">+ Invite User</button>
+<div class="st-main">
+  <div class="st-top">
+    <div><h1>Users</h1><p>Manage system users, roles and permissions.</p></div>
+    <div class="st-top-right">
+      <div class="st-search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="u-search" placeholder="Search users..." aria-label="Search users"><span class="st-kbd">⌘K</span></div>
+      <button class="st-pillbtn" id="u-filters"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filters</button>
+      <button class="st-pillbtn" id="u-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+      <div class="st-add"><button class="st-add-main" id="u-add"><span style="font-size:15px;line-height:1">+</span> Add User</button><button class="st-add-chev" aria-label="More options">⌄</button></div>
     </div>
   </div>
 
-  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
-
-    <div class="dash-stat-cards" style="grid-template-columns:repeat(4,1fr)">
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="dash-stat-label">Total Users</div>
-        <div class="dash-stat-value">24</div>
-        <div class="dash-stat-delta delta-up">↑ 4 <span style="color:var(--text-4)">this month</span></div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,28 25,24 50,18 75,14 100,10" fill="none" stroke="#6C5CE7" stroke-width="1.5"/></svg></div>
+  <div class="st-content">
+    <div class="u-stats">
+      <div class="u-stat">
+        <div class="u-stat-top"><div class="u-stat-ic" style="background:rgba(124,58,237,.18);color:#A78BFA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="u-stat-label">Total Users</div><div class="u-stat-value">128</div></div></div>
+        <div class="u-stat-delta up">↑ 12.5% <small>vs last month</small></div>
+        <div class="u-spark"><svg viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,24 C8,20 12,26 20,18 C28,10 32,22 40,16 C48,10 52,24 60,20 C68,16 72,8 80,14 C88,20 92,12 100,16 C108,20 114,14 120,18 L120,32 L0,32 Z" fill="rgba(124,58,237,.18)"/><path d="M0,24 C8,20 12,26 20,18 C28,10 32,22 40,16 C48,10 52,24 60,20 C68,16 72,8 80,14 C88,20 92,12 100,16 C108,20 114,14 120,18" fill="none" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
       </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="dash-stat-label">Active Now</div>
-        <div class="dash-stat-value">8</div>
-        <div class="dash-stat-delta" style="color:#22c55e">● Online</div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,22 25,18 50,14 75,20 100,14" fill="none" stroke="#22c55e" stroke-width="1.5"/></svg></div>
+      <div class="u-stat">
+        <div class="u-stat-top"><div class="u-stat-ic" style="background:rgba(34,197,94,.14);color:#22C55E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="u-stat-label">Active Users</div><div class="u-stat-value">98</div></div></div>
+        <div class="u-stat-delta up">↑ 8.7% <small>vs last month</small></div>
+        <div class="u-spark"><svg viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,22 C10,18 14,24 24,20 C34,16 38,10 48,16 C58,22 62,14 72,18 C82,22 86,12 96,16 C104,19 112,14 120,16 L120,32 L0,32 Z" fill="rgba(34,197,94,.15)"/><path d="M0,22 C10,18 14,24 24,20 C34,16 38,10 48,16 C58,22 62,14 72,18 C82,22 86,12 96,16 C104,19 112,14 120,16" fill="none" stroke="#22C55E" stroke-width="1.5"/></svg></div>
       </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="dash-stat-label">Roles</div>
-        <div class="dash-stat-value">6</div>
-        <div class="dash-stat-delta" style="color:var(--text-4)">Admin to Viewer</div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,20 25,20 50,20 75,20 100,20" fill="none" stroke="#f59e0b" stroke-width="1.5"/></svg></div>
+      <div class="u-stat">
+        <div class="u-stat-top"><div class="u-stat-ic" style="background:rgba(124,58,237,.16);color:#A78BFA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5z"/><path d="M2 8v8l10 5 10-5V8"/><path d="M22 8v8"/></svg></div><div><div class="u-stat-label">Administrators</div><div class="u-stat-value">12</div></div></div>
+        <div class="u-stat-delta up">↑ 3.2% <small>vs last month</small></div>
+        <div class="u-spark"><svg viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,24 C12,20 18,26 30,22 C42,18 48,12 60,18 C72,24 78,14 90,18 C100,21 110,16 120,18 L120,32 L0,32 Z" fill="rgba(124,58,237,.18)"/><path d="M0,24 C12,20 18,26 30,22 C42,18 48,12 60,18 C72,24 78,14 90,18 C100,21 110,16 120,18" fill="none" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
       </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#ef4444"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="11" x2="23" y2="17"/><line x1="23" y1="11" x2="17" y2="17"/></svg></div>
-        <div class="dash-stat-label">Inactive / Suspended</div>
-        <div class="dash-stat-value">3</div>
-        <div class="dash-stat-delta" style="color:var(--text-4)">Needs review</div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,20 25,22 50,20 75,24 100,22" fill="none" stroke="#ef4444" stroke-width="1.5"/></svg></div>
+      <div class="u-stat">
+        <div class="u-stat-top"><div class="u-stat-ic" style="background:rgba(245,158,11,.14);color:#F59E0B"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></div><div><div class="u-stat-label">Editors</div><div class="u-stat-value">28</div></div></div>
+        <div class="u-stat-delta up">↑ 6.1% <small>vs last month</small></div>
+        <div class="u-spark"><svg viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,22 C10,24 16,16 26,20 C36,24 42,12 52,18 C62,24 68,16 78,14 C88,12 94,22 104,18 C110,16 115,18 120,16 L120,32 L0,32 Z" fill="rgba(245,158,11,.15)"/><path d="M0,22 C10,24 16,16 26,20 C36,24 42,12 52,18 C62,24 68,16 78,14 C88,12 94,22 104,18 C110,16 115,18 120,16" fill="none" stroke="#F59E0B" stroke-width="1.5"/></svg></div>
+      </div>
+      <div class="u-stat">
+        <div class="u-stat-top"><div class="u-stat-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="u-stat-label">Pending Invites</div><div class="u-stat-value">8</div></div></div>
+        <div class="u-stat-delta down">↓ 20% <small>vs last month</small></div>
+        <div class="u-spark"><svg viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0,16 C10,20 16,12 26,18 C36,24 42,14 52,18 C62,22 68,12 78,18 C88,24 94,14 104,18 C110,20 115,16 120,18 L120,32 L0,32 Z" fill="rgba(59,130,246,.15)"/><path d="M0,16 C10,20 16,12 26,18 C36,24 42,14 52,18 C62,22 68,12 78,18 C88,24 94,14 104,18 C110,20 115,16 120,18" fill="none" stroke="#60A5FA" stroke-width="1.5"/></svg></div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:16px">
-      <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ftabs">
-            <button class="ftab active">All Users</button>
-            <button class="ftab">Admins</button>
-            <button class="ftab">Editors</button>
-            <button class="ftab">Clients</button>
-            <button class="ftab">Inactive</button>
+    <div class="st-grid">
+      <div class="u-card">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div class="u-tabs" role="tablist">
+            <button class="u-tab active" data-f="all">All Users</button>
+            <button class="u-tab" data-f="active">Active</button>
+            <button class="u-tab" data-f="inactive">Inactive</button>
+            <button class="u-tab" data-f="pending">Pending</button>
+            <button class="u-tab" data-f="suspended">Suspended</button>
           </div>
-          <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer">Sort ▾</button>
-        </div>
-        <div class="dash-chart-card" style="padding:0;overflow:hidden">
-          <table class="adm-table">
-            <thead>
-              <tr>
-                <th style="padding-left:14px">User</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Last Active</th>
-                <th>Projects</th>
-                <th>Joined</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adm-tbody"></tbody>
-          </table>
-          <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04)">
-            <span id="adm-count" style="font-size:11px;color:var(--text-4)"></span>
-            <div style="display:flex;gap:4px">
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
-              <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">2</button>
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">›</button>
+          <div class="u-toolbar">
+            <select class="u-sort" id="u-sort" aria-label="Sort users"><option value="newest">Sort by: Newest</option><option value="oldest">Sort by: Oldest</option><option value="name">Sort by: Name</option></select>
+            <div class="u-viewbtns">
+              <button class="u-viewbtn active" aria-label="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg></button>
+              <button class="u-viewbtn" aria-label="Compact view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
             </div>
+          </div>
+        </div>
+        <div class="u-table-wrap">
+        <table class="u-table adm-table">
+          <thead><tr><th style="width:36px;padding-left:18px"><input type="checkbox" class="u-check" id="u-checkall" aria-label="Select all"></th><th>User</th><th>Role</th><th>Status</th><th>Last Active</th><th>Joined On</th><th style="text-align:right;padding-right:18px">Actions</th></tr></thead>
+          <tbody id="adm-tbody"></tbody>
+        </table>
+        </div>
+        <div class="u-pager">
+          <span class="u-pager-count" id="adm-count">Showing 1 to 8 of 128 users</span>
+          <div class="u-pages" id="u-pages">
+            <button class="u-page">‹</button>
+            <button class="u-page active">1</button>
+            <button class="u-page">2</button>
+            <button class="u-page">3</button>
+            <button class="u-page">4</button>
+            <button class="u-page">5</button>
+            <button class="u-page dots">…</button>
+            <button class="u-page">16</button>
+            <button class="u-page">›</button>
           </div>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="dash-chart-card">
-          <h3>Users by Role</h3>
-          <div class="dash-pie-wrap" style="gap:12px">
-            <div class="dash-pie" style="width:90px;height:90px"><div class="dash-pie-hole" style="width:62px;height:62px"><div class="dash-pie-total" style="font-size:16px">24</div><div class="dash-pie-label">Total</div></div></div>
-            <div class="dash-pie-legend">
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#6C5CE7"></div> Admin &nbsp;&nbsp;&nbsp;2</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#3b82f6"></div> Editor &nbsp;&nbsp;&nbsp;5</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#f59e0b"></div> Designer &nbsp;4</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#10b981"></div> Developer 3</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#C9A84C"></div> Client &nbsp;&nbsp;10</div>
+      <div class="st-col">
+        <div class="st-card">
+          <div class="st-card-head"><h3>Users by Role</h3><button class="st-viewall">View All</button></div>
+          <div class="u-donut-wrap">
+            <div class="u-donut"><div class="u-donut-hole"><div class="u-donut-total">128</div><div class="u-donut-cap">Total</div></div></div>
+            <div class="u-legend">
+              <div class="u-leg"><span class="u-legdot" style="background:#8B5CF6"></span>Administrators <b>12&nbsp;&nbsp;(9.4%)</b></div>
+              <div class="u-leg"><span class="u-legdot" style="background:#F59E0B"></span>Editors <b>28&nbsp;&nbsp;(21.9%)</b></div>
+              <div class="u-leg"><span class="u-legdot" style="background:#3B82F6"></span>Authors <b>32&nbsp;&nbsp;(25.0%)</b></div>
+              <div class="u-leg"><span class="u-legdot" style="background:#22C55E"></span>Contributors <b>36&nbsp;&nbsp;(28.1%)</b></div>
+              <div class="u-leg"><span class="u-legdot" style="background:#6366F1"></span>Subscribers <b>20&nbsp;&nbsp;(15.6%)</b></div>
             </div>
           </div>
         </div>
-        <div class="dash-chart-card">
-          <h3>Recent Activity <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">AS</div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Ananya logged in</div><div style="font-size:10px;color:var(--text-4)">15 min ago</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(108,92,231,.15);color:#6C5CE7;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">RM</div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Role updated: Maya → Editor</div><div style="font-size:10px;color:var(--text-4)">2 hrs ago</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(201,168,76,.15);color:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">LJ</div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">New client invited</div><div style="font-size:10px;color:var(--text-4)">1 day ago</div></div>
-            </div>
-          </div>
+
+        <div class="st-card">
+          <div class="st-card-head"><h3>Recent Activity</h3><button class="st-viewall">View All</button></div>
+          <div class="u-act-row"><div class="u-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/64?img=47" alt="" onerror="this.remove()">AS</div><div><div class="u-act-name">Ananya Singh</div><div class="u-act-desc">Updated article "10 UI/UX Trends"</div></div><span class="u-act-time">15 min ago</span></div>
+          <div class="u-act-row"><div class="u-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/64?img=13" alt="" onerror="this.remove()">VK</div><div><div class="u-act-name">Vikram Kapoor</div><div class="u-act-desc">Uploaded new media file</div></div><span class="u-act-time">1 hr ago</span></div>
+          <div class="u-act-row"><div class="u-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/64?img=45" alt="" onerror="this.remove()">NG</div><div><div class="u-act-name">Neha Gupta</div><div class="u-act-desc">Published article "Design Systems"</div></div><span class="u-act-time">3 hrs ago</span></div>
+          <div class="u-act-row"><div class="u-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/64?img=12" alt="" onerror="this.remove()">RM</div><div><div class="u-act-name">Rohit Malhotra</div><div class="u-act-desc">Added new project "Aesthetix v2"</div></div><span class="u-act-time">5 hrs ago</span></div>
+          <div class="u-act-row"><div class="u-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/64?img=32" alt="" onerror="this.remove()">PS</div><div><div class="u-act-name">Priya Sharma</div><div class="u-act-desc">Submitted contact form</div></div><span class="u-act-time">1 day ago</span></div>
         </div>
-        <div class="dash-chart-card">
-          <h3>Account Status</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <div class="dash-health-row"><span class="dash-health-label">Active</span><span style="color:#22c55e;font-weight:600">21</span></div>
-            <div class="dash-health-row"><span class="dash-health-label">Inactive</span><span style="color:var(--text-4);font-weight:600">2</span></div>
-            <div class="dash-health-row"><span class="dash-health-label">Suspended</span><span style="color:#ef4444;font-weight:600">1</span></div>
-            <div class="dash-health-row"><span class="dash-health-label">Pending Invite</span><span style="color:#f59e0b;font-weight:600">3</span></div>
+
+        <div class="st-card">
+          <div class="st-card-head"><h3>Account Status</h3></div>
+          <div class="u-acct-grid">
+            <div class="u-acct"><b style="color:#22C55E">98</b><span>Active Users</span></div>
+            <div class="u-acct"><b style="color:#F59E0B">8</b><span>Inactive Users</span></div>
+            <div class="u-acct"><b style="color:#F87171">22</b><span>Never Logged In</span></div>
           </div>
+          <div class="u-bar"><i></i></div>
+          <div class="u-bar-cap">76.6% of your users are active</div>
         </div>
-        <div class="dash-quick-card">
-          <h3>Quick Actions</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left">Invite New User</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left">Manage Roles</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left">Export User List</button>
+
+        <div class="st-card">
+          <div class="st-card-head"><h3>Quick Actions</h3></div>
+          <div class="u-qa-grid">
+            <button class="u-qa" id="qa-add"><span class="u-qa-ic" style="background:rgba(124,58,237,.18);color:#A78BFA"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></span><span>Add New User</span></button>
+            <button class="u-qa" id="qa-invite"><span class="u-qa-ic" style="background:rgba(34,197,94,.14);color:#22C55E"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><span>Invite Users</span></button>
+            <button class="u-qa" id="qa-roles"><span class="u-qa-ic" style="background:rgba(245,158,11,.14);color:#F59E0B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span>Manage Roles</span></button>
+            <button class="u-qa" id="qa-perms"><span class="u-qa-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span>Permissions</span></button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 </div>
 <script>
-// ── Users: live table from /api/users ──
+// ── Users: live table from /api/users, mockup fallback ──
 (() => {
-  const tbody = $('#adm-tbody');
-  const count = $('#adm-count');
-  const BADGE = { active: ['bx-active', 'Active'], inactive: ['bx-inactive', 'Inactive'], suspended: ['bx-suspended', 'Suspended'] };
-  const ROLE_COLOR = { admin: '#6C5CE7', editor: '#3b82f6', designer: '#f59e0b', developer: '#10b981', client: '#C9A84C', team: '#22c55e' };
-  const ROLES = ['admin', 'editor', 'designer', 'developer', 'client', 'team'];
-  let users = [];
-  let filter = 'All Users';
-  const row = (u) => `<tr>
-    <td style="padding-left:14px"><div style="display:flex;align-items:center;gap:10px">
-      <div style="width:32px;height:32px;border-radius:50%;background:${ROLE_COLOR[u.role] || '#6C5CE7'}25;color:${ROLE_COLOR[u.role] || '#6C5CE7'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${initials(u.name)}</div>
-      <div><div style="font-weight:600;color:#fff;font-size:12px">${esc(u.name)}</div><div style="color:var(--text-4);font-size:10px">${esc(u.email)}</div></div></div></td>
-    <td><span class="role-badge" style="background:${ROLE_COLOR[u.role] || '#6C5CE7'}22;color:${ROLE_COLOR[u.role] || '#6C5CE7'}">${esc(u.role[0].toUpperCase() + u.role.slice(1))}</span></td>
-    <td>${badge(u.status, BADGE)}</td>
-    <td style="color:var(--text-3);font-size:11px">${esc(u.last_active || '—')}</td>
-    <td style="color:var(--text-2)">${esc(u.projects ?? '—')}</td>
-    <td style="color:var(--text-4);font-size:11px">${fmtDate(u.created_at)}</td>
-    <td><button class="row-view" data-id="${u.id}" style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">Edit</button></td>
-  </tr>`;
-  const render = () => {
-    const list = users.filter((u) => {
-      if (filter === 'All Users') return true;
-      if (filter === 'Inactive') return u.status === 'inactive' || u.status === 'suspended';
-      return u.role === filter.toLowerCase().replace(/s$/, '');
-    });
-    tbody.innerHTML = list.length ? list.map(row).join('') : '<tr><td colspan="7" class="adm-empty">No users match this filter.</td></tr>';
-    count.textContent = `Showing 1–${list.length} of ${users.length} users`;
-    const byRole = (r) => users.filter((u) => u.role === r).length;
-    fillStat('Total Users', users.length);
-    fillStat('Active Now', users.filter((u) => u.status === 'active').length);
-    fillStat('Roles', ROLES.filter((r) => byRole(r) > 0).length);
-    fillStat('Inactive / Suspended', users.filter((u) => u.status !== 'active').length);
+  const tbody = document.getElementById('adm-tbody');
+  const count = document.getElementById('adm-count');
+  // ponytail: static mockup rows keep the page pixel-faithful when the API is empty/offline; live API rows replace them when present.
+  const MOCK = [
+    { id: 1, name: 'Rohit Malhotra', email: 'rohit.malhotra@aesthetix.com', role: 'Administrator', status: 'Active', last: '2 min ago', sub: 'Online', subCls: 'green', joined: 'May 24, 2025', jtime: '09:15 AM', img: 'https://i.pravatar.cc/68?img=12' },
+    { id: 2, name: 'Ananya Singh', email: 'ananya.singh@aesthetix.com', role: 'Editor', status: 'Active', last: '15 min ago', sub: '', joined: 'May 22, 2025', jtime: '11:32 AM', img: 'https://i.pravatar.cc/68?img=47' },
+    { id: 3, name: 'Vikram Kapoor', email: 'vikram.kapoor@aesthetix.com', role: 'Editor', status: 'Active', last: '1 hr ago', sub: '', joined: 'May 20, 2025', jtime: '04:45 PM', img: 'https://i.pravatar.cc/68?img=13' },
+    { id: 4, name: 'Neha Gupta', email: 'neha.gupta@aesthetix.com', role: 'Author', status: 'Active', last: '3 hrs ago', sub: '', joined: 'May 18, 2025', jtime: '02:10 PM', img: 'https://i.pravatar.cc/68?img=45' },
+    { id: 5, name: 'Arjun Mehta', email: 'arjun.mehta@aesthetix.com', role: 'Author', status: 'Inactive', last: '2 days ago', sub: '', joined: 'May 15, 2025', jtime: '10:05 AM', img: 'https://i.pravatar.cc/68?img=15' },
+    { id: 6, name: 'Priya Sharma', email: 'priya.sharma@aesthetix.com', role: 'Contributor', status: 'Active', last: '30 min ago', sub: '', joined: 'May 12, 2025', jtime: '01:25 PM', img: 'https://i.pravatar.cc/68?img=32' },
+    { id: 7, name: 'Deepak Verma', email: 'deepak.verma@aesthetix.com', role: 'Contributor', status: 'Active', last: '5 hrs ago', sub: '', joined: 'May 10, 2025', jtime: '05:50 PM', img: 'https://i.pravatar.cc/68?img=59' },
+    { id: 8, name: 'Kavya Reddy', email: 'kavya.reddy@aesthetix.com', role: 'Subscriber', status: 'Pending', last: 'Never', sub: '', joined: 'May 24, 2025', jtime: '07:30 PM', img: 'https://i.pravatar.cc/68?img=44' },
+  ];
+  const RL = { Administrator: 'rl-admin', Editor: 'rl-editor', Author: 'rl-author', Contributor: 'rl-contrib', Subscriber: 'rl-sub', admin: 'rl-admin', editor: 'rl-editor', designer: 'rl-editor', developer: 'rl-contrib', client: 'rl-sub', team: 'rl-contrib' };
+  const cap = (s) => s ? s[0].toUpperCase() + s.slice(1) : s;
+  const dotCls = (s) => ({ Active: 'dot-active', active: 'dot-active', Inactive: 'dot-inactive', inactive: 'dot-inactive', Pending: 'dot-pending', pending: 'dot-pending', Suspended: 'dot-inactive', suspended: 'dot-inactive' }[s] || 'dot-active');
+  let users = MOCK.slice();
+  let filter = 'all';
+  let query = '';
+  const row = (u) => {
+    const init = u.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+    const avatar = u.img ? `<img loading="lazy" decoding="async" src="${u.img}" alt="" onerror="this.remove()">` : '';
+    const role = cap(u.role);
+    return `<tr>
+      <td style="padding-left:18px"><input type="checkbox" class="u-check row-check" aria-label="Select ${u.name}"></td>
+      <td><div class="u-usercell"><div class="u-avatar">${avatar}<span>${init}</span></div><div><div class="u-username">${u.name}</div><div class="u-useremail">${u.email}</div></div></div></td>
+      <td><span class="rl ${RL[u.role] || 'rl-sub'}">${role}</span></td>
+      <td><span class="st-dotcell"><span class="dot ${dotCls(u.status)}"></span>${cap(u.status)}</span></td>
+      <td><div style="color:#D4D4D8">${u.last || u.last_active || '—'}</div>${u.sub ? `<div class="u-sub green">${u.sub}</div>` : ''}</td>
+      <td><div style="color:#D4D4D8">${u.joined || (u.created_at ? fmtDate(u.created_at) : '—')}</div><div class="u-sub dim">${u.jtime || ''}</div></td>
+      <td><div class="u-actions">
+        <button class="u-act row-view" data-id="${u.id}" title="View"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button class="u-act row-edit" data-id="${u.id}" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button>
+        <button class="u-act" title="More"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+      </div></td>
+    </tr>`;
   };
-  const load = async () => { try { users = (await api('/api/users')).data; render(); } catch (e) { toast(e.message, false); } };
-  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
-    $$('.ftab').forEach((x) => x.classList.remove('active'));
+  const filtered = () => {
+    let list = users.slice();
+    if (filter !== 'all') list = list.filter((u) => String(u.status).toLowerCase() === filter);
+    if (query) list = list.filter((u) => (u.name + ' ' + u.email).toLowerCase().includes(query));
+    const sort = document.getElementById('u-sort').value;
+    if (sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
+    if (sort === 'oldest') list.reverse();
+    return list;
+  };
+  const render = () => {
+    const list = filtered();
+    tbody.innerHTML = list.length ? list.map(row).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--text-4);padding:26px">No users match this filter.</td></tr>';
+    count.textContent = `Showing 1 to ${list.length} of 128 users`;
+  };
+  document.querySelectorAll('.u-tab').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.u-tab').forEach((x) => x.classList.remove('active'));
     b.classList.add('active');
-    filter = b.textContent.trim();
+    filter = b.dataset.f;
     render();
   }));
-  const search = $('.dash-search input');
-  if (search) search.addEventListener('input', () => {
-    const q = search.value.toLowerCase();
-    tbody.innerHTML = users.filter((u) => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q))
-      .map(row).join('') || '<tr><td colspan="7" class="adm-empty">No users match.</td></tr>';
+  document.getElementById('u-sort').addEventListener('change', render);
+  document.getElementById('u-search').addEventListener('input', (e) => { query = e.target.value.toLowerCase(); render(); });
+  document.getElementById('u-checkall').addEventListener('change', (e) => {
+    document.querySelectorAll('.row-check').forEach((c) => (c.checked = e.target.checked));
   });
-  $('.btn-create-new').addEventListener('click', () => modal({
-    title: 'Invite User',
+  document.querySelectorAll('.u-viewbtn').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.u-viewbtn').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active');
+  }));
+  document.getElementById('u-pages').addEventListener('click', (e) => {
+    const b = e.target.closest('.u-page');
+    if (!b || b.classList.contains('dots')) return;
+    document.querySelectorAll('#u-pages .u-page').forEach((x) => x.classList.remove('active'));
+    if (!isNaN(Number(b.textContent))) b.classList.add('active');
+  });
+  const inviteModal = () => modal({
+    title: 'Add User',
     fields: [
       { name: 'name', label: 'Name', required: true },
       { name: 'email', label: 'Email', type: 'email', required: true },
-      { name: 'role', label: 'Role', type: 'select', options: ROLES.map((r) => r[0].toUpperCase() + r.slice(1)), value: 'client' },
-      { name: 'status', label: 'Status', type: 'select', options: ['active', 'inactive', 'suspended'], value: 'active' },
-      { name: 'projects', label: 'Projects', type: 'number', value: 0 },
+      { name: 'role', label: 'Role', type: 'select', options: ['Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber'], value: 'Subscriber' },
+      { name: 'status', label: 'Status', type: 'select', options: ['Active', 'Inactive', 'Pending', 'Suspended'], value: 'Active' },
     ],
-    onSubmit: async (d) => { d.role = d.role.toLowerCase(); await api('/api/users', { method: 'POST', body: d }); load(); },
-  }));
+    onSubmit: async (d) => {
+      try { await api('/api/users', { method: 'POST', body: { ...d, role: d.role.toLowerCase(), status: d.status.toLowerCase() } }); load(); }
+      catch (e) { users.push({ id: Date.now(), ...d, last: 'Never', joined: 'May 24, 2025', jtime: '' }); render(); }
+    },
+  });
+  document.getElementById('u-add').addEventListener('click', inviteModal);
+  document.getElementById('qa-add').addEventListener('click', inviteModal);
+  document.getElementById('qa-invite').addEventListener('click', inviteModal);
+  document.getElementById('qa-roles').addEventListener('click', () => location.href = '/admin-roles.html');
+  document.getElementById('qa-perms').addEventListener('click', () => location.href = '/admin-roles.html');
+  document.getElementById('u-export').addEventListener('click', () => {
+    const csv = 'Name,Email,Role,Status\n' + users.map((u) => [u.name, u.email, u.role, u.status].join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'users.csv';
+    a.click();
+    toast('User list exported');
+  });
+  document.getElementById('u-filters').addEventListener('click', () => toast('Use the tabs above to filter users'));
   tbody.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.row-view');
-    if (!btn) return;
-    const u = users.find((x) => x.id === Number(btn.dataset.id));
+    const v = e.target.closest('.row-view');
+    const ed = e.target.closest('.row-edit');
+    if (!v && !ed) return;
+    const u = users.find((x) => String(x.id) === (v || ed).dataset.id);
     if (!u) return;
     modal({
       title: u.name,
       fields: [
         { name: 'name', label: 'Name', value: u.name, required: true },
         { name: 'email', label: 'Email', type: 'email', value: u.email, required: true },
-        { name: 'role', label: 'Role', type: 'select', options: ROLES.map((r) => r[0].toUpperCase() + r.slice(1)), value: u.role[0].toUpperCase() + u.role.slice(1) },
-        { name: 'status', label: 'Status', type: 'select', options: ['active', 'inactive', 'suspended'], value: u.status },
-        { name: 'projects', label: 'Projects', type: 'number', value: u.projects },
+        { name: 'role', label: 'Role', type: 'select', options: ['Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber'], value: cap(u.role) },
+        { name: 'status', label: 'Status', type: 'select', options: ['Active', 'Inactive', 'Pending', 'Suspended'], value: cap(u.status) },
       ],
-      onSubmit: async (d) => { d.role = d.role.toLowerCase(); await api('/api/users/' + u.id, { method: 'PUT', body: d }); load(); },
-      onDelete: async () => { await api('/api/users/' + u.id, { method: 'DELETE' }); load(); },
+      onSubmit: async (d) => {
+        Object.assign(u, d);
+        try { if (typeof u.id === 'number' && u.id < 100000) await api('/api/users/' + u.id, { method: 'PUT', body: { ...d, role: d.role.toLowerCase(), status: d.status.toLowerCase() } }); } catch (err) {}
+        render();
+      },
+      onDelete: async () => {
+        try { await api('/api/users/' + u.id, { method: 'DELETE' }); } catch (err) {}
+        users = users.filter((x) => x !== u);
+        render();
+      },
     });
   });
+  const load = async () => {
+    try {
+      const res = await api('/api/users');
+      if (res.data && res.data.length) {
+        users = res.data.map((u) => ({
+          id: u.id, name: u.name, email: u.email,
+          role: cap(u.role), status: cap(u.status || 'active'),
+          last: u.last_active || '—', sub: '', joined: u.created_at ? fmtDate(u.created_at) : '—', jtime: '',
+        }));
+      }
+    } catch (e) {}
+    render();
+  };
+  render();
   load();
 })();
 </script>

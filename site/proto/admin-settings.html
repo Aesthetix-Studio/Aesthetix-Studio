@@ -3,215 +3,335 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Settings — Aesthetix Studio</title>
+<title>Settings — Studio and Site Configuration — Aesthetix Studio</title>
+<meta name="description" content="Configuration for the Aesthetix Studio workspace: account details, notification preferences and the options that control the public site.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/aesthetix.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script src="/js/admin.js"></script>
 <style>
-.settings-tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:20px}
-.stab{padding:8px 16px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3);border-bottom:2px solid transparent;margin-bottom:-1px}
-.stab.active{color:var(--brand);border-bottom-color:var(--brand)}
-.stab:hover:not(.active){color:var(--text-2)}
-.form-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.form-row label{font-size:11px;font-weight:600;color:var(--text-3)}
-.form-row input,.form-row select,.form-row textarea{background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;font-family:inherit;width:100%}
-.form-row textarea{resize:vertical;height:70px}
-.toggle-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.toggle-row:last-child{border-bottom:none}
-.toggle-row-label{font-size:12px;font-weight:500;color:var(--text-2)}
-.toggle-row-desc{font-size:11px;color:var(--text-4);margin-top:2px}
-.theme-option{width:60px;height:44px;border-radius:6px;cursor:pointer;border:2px solid transparent;position:relative}
-.theme-option.selected{border-color:var(--brand)}
-.section-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+:root{--st-bg:#08080D;--st-card:#121219;--st-card2:#14141D;--st-line:#22222E;--st-line2:#262633;--st-input:#17171F;--st-purple:#7C3AED;--st-purple2:#8B5CF6;--st-green:#22C55E;--st-muted:#8E8E9A;--st-muted2:#5E5E6E}
+body{background:var(--st-bg)!important}
+.st-layout{display:grid;grid-template-columns:232px 1fr;min-height:100vh;background:var(--st-bg);font-family:'Manrope',Arial,sans-serif}
+/* sidebar */
+.st-side{background:#0C0C13;border-right:1px solid #1A1A24;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;scrollbar-width:none}
+.st-side::-webkit-scrollbar{display:none}
+.st-logo-wrap{padding:20px 18px 14px;display:flex;align-items:center;justify-content:space-between}
+.st-logo{font-weight:800;font-size:16px;letter-spacing:.14em;color:#fff;line-height:1}
+.st-logo small{display:block;font-size:8.5px;font-weight:600;letter-spacing:.44em;color:#8B5CF6;margin-top:5px;padding-left:2px}
+.st-collapse{width:26px;height:26px;border-radius:8px;background:#1A1A26;border:1px solid #2A2A38;color:#8E8E9A;font-size:13px;cursor:pointer;display:grid;place-items:center}
+.st-user{margin:0 14px 8px;background:#14141C;border:1px solid #22222E;border-radius:12px;padding:11px 12px;display:flex;align-items:center;gap:10px}
+.st-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#C4B5FD,#6D28D9);display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;overflow:hidden}
+.st-avatar img{width:100%;height:100%;object-fit:cover}
+.st-user-info{min-width:0;flex:1}
+.st-user-info h4{font-size:12px;font-weight:700;margin:0;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-user-info span{font-size:10px;color:#8E8E9A}
+.st-online{color:#22C55E!important;font-size:10px!important}
+.st-chev{color:#5E5E6E;font-size:12px;background:none;border:0;cursor:pointer}
+.st-nav{flex:1;padding:6px 14px;overflow-y:auto;scrollbar-width:none}
+.st-nav::-webkit-scrollbar{display:none}
+.st-nav-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E6E;font-weight:700;padding:12px 10px 7px}
+.st-nav-item{display:flex;align-items:center;gap:11px;padding:8.5px 12px;font-size:12.5px;font-weight:500;color:#9A9AA8;border-radius:9px;margin-bottom:2px;cursor:pointer;text-decoration:none;border:0;background:none;width:100%;font-family:inherit;text-align:left}
+.st-nav-item:hover{background:#181824;color:#fff}
+.st-nav-item.active{background:linear-gradient(90deg,#5B21B6,#7C3AED);color:#fff;font-weight:600;box-shadow:0 4px 14px rgba(124,58,237,.35)}
+.st-nav-icon{width:17px;text-align:center;flex-shrink:0;display:inline-flex}
+.st-side-bottom{padding:14px;border-top:1px solid #1B1B24}
+.st-visit{width:100%;background:linear-gradient(90deg,#6D28D9,#7C3AED);border:0;color:#fff;border-radius:9px;padding:11px;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;font-family:inherit}
+.st-dark{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#9A9AA8;background:#14141C;border:1px solid #22222E;border-radius:9px;padding:10px 12px}
+/* main */
+.st-main{display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.st-top{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 24px 14px;gap:16px}
+.st-top h1{font-size:21px;font-weight:700;margin:0 0 3px;color:#fff}
+.st-top p{font-size:12px;color:#8E8E9A;margin:0}
+.st-top-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.st-search{display:flex;align-items:center;gap:8px;background:#12121A;border:1px solid #23232F;border-radius:9px;padding:8px 12px;font-size:12px;color:#6E6E7E;width:215px}
+.st-search input{background:none;border:0;outline:none;font-size:12px;color:#D4D4D8;width:100%;font-family:inherit}
+.st-kbd{font-size:10px;color:#8E8E9A;background:#1E1E29;border:1px solid #2C2C3A;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.st-iconbtn{width:36px;height:36px;background:#12121A;border:1px solid #23232F;border-radius:9px;display:grid;place-items:center;cursor:pointer;color:#C4C4CE;flex-shrink:0}
+.st-viewsite{display:flex;align-items:center;gap:8px;background:#12121A;border:1px solid #23232F;border-radius:9px;padding:9px 14px;font-size:12px;font-weight:500;color:#D4D4D8;cursor:pointer;white-space:nowrap;font-family:inherit}
+.st-save{display:flex;align-items:stretch;border-radius:9px;overflow:hidden;box-shadow:0 4px 16px rgba(124,58,237,.45);border:0;font-family:inherit}
+.st-save-main{background:linear-gradient(90deg,#7C3AED,#6D28D9);border:0;color:#fff;padding:9px 16px;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:inherit}
+.st-save-chev{background:#6D28D9;border:0;border-left:1px solid rgba(255,255,255,.22);color:#fff;padding:9px 11px;cursor:pointer;font-family:inherit}
+/* tabs */
+.st-tabs{display:flex;align-items:center;gap:4px;background:#111118;border:1px solid #20202B;border-radius:11px;padding:7px 9px;margin:0 24px 14px;overflow-x:auto;scrollbar-width:none}
+.st-tabs::-webkit-scrollbar{display:none}
+.st-tab{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:12px;font-weight:500;color:#9A9AA8;border:0;background:none;border-radius:8px;cursor:pointer;white-space:nowrap;font-family:inherit;position:relative}
+.st-tab:hover{color:#fff}
+.st-tab.active{color:#fff;background:rgba(124,58,237,.18);box-shadow:inset 0 -2px 0 #7C3AED}
+.st-tab.active .st-tab-ic{background:rgba(124,58,237,.35);color:#C4B5FD}
+.st-tab-ic{width:22px;height:22px;border-radius:6px;background:#1C1C26;display:grid;place-items:center;color:#8E8E9A;flex-shrink:0}
+/* content */
+.st-content{padding:0 24px 10px;overflow-y:auto;height:calc(100vh - 150px)}
+.st-grid{display:grid;grid-template-columns:1fr 1fr 290px;gap:14px;align-items:start}
+.st-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.st-card{background:var(--st-card);border:1px solid #20202B;border-radius:12px;padding:18px}
+.st-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px}
+.st-card-head h3{font-size:13.5px;font-weight:700;margin:0 0 3px;color:#fff}
+.st-card-head p{font-size:11px;color:#8E8E9A;margin:0;line-height:1.45}
+.st-btn-purple{background:rgba(124,58,237,.28);border:1px solid rgba(124,58,237,.4);color:#C4B5FD;border-radius:8px;padding:7px 13px;font-size:11.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap;font-family:inherit}
+.st-btn-purple:hover{background:rgba(124,58,237,.4)}
+.st-chev-right{color:#5E5E6E;background:none;border:0;cursor:pointer;font-size:15px;padding:2px}
+.st-field{margin-bottom:12px}
+.st-field label{display:block;font-size:11px;font-weight:500;color:#9A9AA8;margin-bottom:6px}
+.st-field input,.st-field select{background:#1A1A24;border:1px solid #2A2A38;color:#D4D4D8;padding:8px 12px;border-radius:8px;font-size:12px;font-family:inherit;width:100%;outline:none}
+.st-field input:focus,.st-field select:focus{border-color:#7C3AED}
+.st-field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238E8E9A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;padding-right:30px}
+.st-site-row{display:flex;gap:14px;align-items:flex-start}
+.st-logo-circle{width:96px;height:96px;border-radius:50%;border:1px solid #2C2C3A;background:#17171F;display:grid;place-items:center;flex-shrink:0;position:relative;margin-top:22px}
+.st-logo-circle .edit-badge{position:absolute;bottom:2px;right:2px;width:26px;height:26px;border-radius:50%;background:#1E1E29;border:1px solid #33333F;display:grid;place-items:center;color:#C4C4CE;cursor:pointer}
+.st-loc-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.st-loc-row label{font-size:12px;color:#B9B9C4;flex-shrink:0;width:86px}
+.st-loc-sel{flex:1;display:flex;align-items:center;gap:8px;background:#1A1A24;border:1px solid #2A2A38;border-radius:8px;padding:8px 12px;font-size:12px;color:#D4D4D8;cursor:pointer}
+.st-loc-sel select{background:none;border:0;color:#D4D4D8;font-size:12px;font-family:inherit;width:100%;outline:none;cursor:pointer;appearance:none}
+.st-loc-sel select option{background:#1A1A24}
+.st-status-sub{font-size:11px;color:#8E8E9A;margin:-10px 0 6px}
+.st-status-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
+.st-status-row:last-of-type{border-bottom:0}
+.st-status-ic{width:15px;color:#8E8E9A;display:inline-flex;flex-shrink:0}
+.st-status-row span:first-of-type{color:#B9B9C4}
+.st-status-row b{margin-left:auto;font-weight:500;font-size:11.5px;color:#22C55E}
+.st-health-link{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:12px;color:#8B5CF6;font-weight:500;cursor:pointer;background:none;border:0;width:100%;font-family:inherit}
+/* toggles */
+.tgl{width:38px;height:21px;border-radius:12px;position:relative;cursor:pointer;flex-shrink:0;border:0;transition:background .15s}
+.tgl.on{background:#8B5CF6}
+.tgl:not(.on){background:#2A2A36}
+.tgl:after{content:'';width:15px;height:15px;border-radius:50%;background:#fff;position:absolute;top:3px;transition:left .15s}
+.tgl.on:after{right:3px}
+.tgl:not(.on):after{left:3px;background:#8E8E9A}
+.st-sec-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.st-sec-row:last-child{border-bottom:0}
+.st-sec-ic{width:30px;height:30px;border-radius:8px;background:#1B1B26;border:1px solid #2A2A38;display:grid;place-items:center;color:#9A9AA8;flex-shrink:0}
+.st-sec-txt{flex:1;min-width:0}
+.st-sec-txt b{display:block;font-size:12px;font-weight:600;color:#EDEDF2}
+.st-sec-txt span{font-size:11px;color:#71717A}
+.st-mini-select{background:#1A1A24;border:1px solid #2A2A38;color:#D4D4D8;border-radius:7px;font-size:11px;padding:5px 8px;font-family:inherit;cursor:pointer}
+/* appearance */
+.st-theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.st-theme{border:1px solid #2A2A38;border-radius:10px;overflow:hidden;cursor:pointer;background:#17171F;position:relative;padding:0}
+.st-theme.sel{border-color:#8B5CF6;box-shadow:0 0 0 1px #8B5CF6}
+.st-theme-thumb{height:52px;margin:6px 6px 0;border-radius:6px;overflow:hidden;position:relative}
+.st-theme-check{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:#8B5CF6;display:grid;place-items:center;color:#fff}
+.st-theme span{display:block;font-size:11px;color:#B9B9C4;text-align:center;padding:7px 0 8px}
+.st-theme.sel span{color:#fff}
+.st-theme-label{font-size:11px;font-weight:600;color:#9A9AA8;margin-bottom:8px}
+.st-appear-bottom{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.st-colors{display:flex;gap:8px}
+.st-color{width:26px;height:26px;border-radius:7px;cursor:pointer;display:grid;place-items:center;color:#fff;border:2px solid transparent;flex-shrink:0}
+.st-color.sel{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.15)}
+.st-seg{display:flex;background:#1A1A24;border:1px solid #2A2A38;border-radius:8px;padding:3px;gap:2px}
+.st-seg button{flex:1;border:0;background:none;color:#8E8E9A;font-size:11px;font-weight:500;padding:6px 10px;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.st-seg button.sel{background:#5B21B6;color:#fff;font-weight:600}
+/* quick actions */
+.st-qa{display:flex;align-items:center;gap:11px;padding:10px 6px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;background:none;border-top:0;border-left:0;border-right:0;width:100%;font-family:inherit;text-align:left}
+.st-qa:last-child{border-bottom:0}
+.st-qa-ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+.st-qa-txt{flex:1}
+.st-qa-txt b{display:block;font-size:12px;color:#EDEDF2;font-weight:600}
+.st-qa-txt span{font-size:11px;color:#71717A}
+.st-qa-arrow{color:#5E5E6E;font-size:14px}
+/* maintenance */
+.st-maint{display:flex;align-items:center;gap:14px}
+.st-maint-ic{width:56px;height:56px;border-radius:50%;background:rgba(124,58,237,.2);display:grid;place-items:center;color:#A78BFA;flex-shrink:0}
+.st-maint-txt b{display:block;font-size:12.5px;color:#fff}
+.st-maint-txt span{font-size:11.5px;color:#8E8E9A}
+/* recent */
+.st-viewall{font-size:11.5px;color:#8B5CF6;font-weight:500;cursor:pointer;background:none;border:0;font-family:inherit}
+.st-recent{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.st-recent:last-child{border-bottom:0}
+.st-recent-ic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+.st-recent b{display:block;font-size:12px;color:#EDEDF2;font-weight:600}
+.st-recent span{font-size:10.5px;color:#71717A;display:block}
+.st-foot{display:flex;justify-content:space-between;align-items:center;padding:14px 24px 16px;font-size:11px;color:#5E5E6E}
+.st-ver{display:flex;align-items:center;gap:6px}
+.st-dot{width:7px;height:7px;border-radius:50%;background:#22C55E}
+@media(max-width:1200px){.st-grid{grid-template-columns:1fr 1fr}.st-col.right{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start}}
+@media(max-width:860px){.st-layout{grid-template-columns:1fr}.st-side{display:none}.st-grid,.st-col.right{grid-template-columns:1fr}.st-content{height:auto}.st-top{flex-direction:column}}
 </style>
 </head>
 <body style="overflow:hidden">
-<div class="dash-layout">
+<div class="st-layout">
 
-<aside class="dash-sidebar">
-  <div class="dash-logo-wrap">
-    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
-    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+<aside class="st-side">
+  <div class="st-logo-wrap">
+    <div class="st-logo">AESTHETIX<small>STUDIO</small></div>
+    <button class="st-collapse" aria-label="Collapse sidebar">☰</button>
   </div>
-  <div class="dash-user">
-    <div class="dash-avatar">RM</div>
-    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
-    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+  <div class="st-user">
+    <div class="st-avatar" data-adm="initials">RM</div>
+    <div class="st-user-info"><h4 data-adm="name">Rohit Malhotra</h4><span><span data-adm="role">Administrator</span><br><span class="st-online">● Online</span></span></div>
+    <button type="button" class="st-chev" aria-label="Account">⌄</button>
   </div>
-  <nav class="dash-nav">
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Overview</div>
-      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
-      <a class="dash-nav-item" href="/admin-analytics.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Content Management</div>
-      <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
-      <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Blog Posts</a>
-      <a class="dash-nav-item" href="/admin-media.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
-      <a class="dash-nav-item" href="/admin-leads.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">System</div>
-      <a class="dash-nav-item" href="/admin-users.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Roles &amp; Permissions</a>
-      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span> Activity Logs</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
-    </div>
+  <nav class="st-nav">
+    <div class="st-nav-label">Main Menu</div>
+    <a class="st-nav-item" href="/dashboard.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Dashboard</a>
+    <a class="st-nav-item" href="/admin-analytics.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="17" x2="8" y2="11"/><line x1="12" y1="17" x2="12" y2="7"/><line x1="16" y1="17" x2="16" y2="13"/></svg></span> Analytics</a>
+    <a class="st-nav-item" href="/admin-leads.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Leads</a>
+    <a class="st-nav-item" href="/admin-lead-sources.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></span> Lead Sources</a>
+    <div class="st-nav-label">Content</div>
+    <a class="st-nav-item" href="/admin-projects.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span> Projects</a>
+    <a class="st-nav-item" href="/admin-articles.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span> Articles</a>
+    <a class="st-nav-item" href="/admin-media.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
+    <a class="st-nav-item" href="/forms.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Forms</a>
+    <a class="st-nav-item" href="/admin-pages.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></span> Pages</a>
+    <a class="st-nav-item" href="/admin-comments.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Comments</a>
+    <a class="st-nav-item" href="/admin-testimonials.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Testimonials</a>
+    <a class="st-nav-item" href="/admin-categories.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></span> Categories</a>
+    <a class="st-nav-item" href="/admin-tags.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3H4v7l9.59 9.59a2 2 0 0 0 2.82 0l4.18-4.18a2 2 0 0 0 0-2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> Tags</a>
+    <div class="st-nav-label">AI Tools</div>
+    <a class="st-nav-item" href="/proposal-generator.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
+    <a class="st-nav-item" href="/ai-chat-assistant.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
+    <a class="st-nav-item" href="/admin-ai-writer.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
+    <a class="st-nav-item" href="/brand-audit-tool.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
+    <div class="st-nav-label">System</div>
+    <a class="st-nav-item" href="/admin-users.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
+    <a class="st-nav-item" href="/admin-roles.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Roles &amp; Permissions</a>
+    <a class="st-nav-item active" href="/admin-settings.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
+    <a class="st-nav-item" href="/admin-activity.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Activity Logs</a>
+    <a class="st-nav-item" href="/admin-integrations.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
+    <a class="st-nav-item" href="/admin-system-health.html"><span class="st-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span> System Health</a>
   </nav>
-  <div class="dash-sidebar-bottom">
-    <button class="dash-visit-btn">Visit Website ↗</button>
-    <div class="dash-dark-toggle">
+  <div class="st-side-bottom">
+    <button class="st-visit" onclick="location.href='/'">Visit Website <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button>
+    <div class="st-dark">
       <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
-      <div class="toggle-switch on"></div>
+      <button class="tgl on" aria-label="Dark mode" type="button"></button>
     </div>
   </div>
 </aside>
 
-<div class="dash-main">
-  <div class="dash-topbar">
-    <div><h1>Settings</h1><p>Manage your website and application preferences.</p></div>
-    <div class="dash-topbar-right">
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer" id="discard-btn">Discard Changes</button>
-      <button class="btn-create-new" id="save-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg> Save Changes</button>
+<div class="st-main">
+  <div class="st-top">
+    <div><h1>Settings</h1><p>Manage and configure your application preferences.</p></div>
+    <div class="st-top-right">
+      <div class="st-search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Search settings..." aria-label="Search settings"><span class="st-kbd">⌘K</span></div>
+      <button class="st-iconbtn" aria-label="Help"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
+      <button class="st-viewsite"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> View Site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button>
+      <div class="st-save"><button class="st-save-main" id="save-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Save Changes</button><button class="st-save-chev" aria-label="More save options">⌄</button></div>
     </div>
   </div>
 
-  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
+  <div class="st-tabs" role="tablist">
+    <button class="st-tab active"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> General</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Site Identity</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span> Email Settings</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> SEO &amp; Analytics</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span> Notifications</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Security</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</button>
+    <button class="st-tab"><span class="st-tab-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg></span> Advanced</button>
+  </div>
 
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:16px">
-
-      <!-- Main settings panel -->
-      <div class="dash-chart-card">
-        <!-- Tab bar -->
-        <div class="settings-tabs">
-          <button class="stab active">General</button>
-          <button class="stab">Site Identity</button>
-          <button class="stab">Email</button>
-          <button class="stab">SEO</button>
-          <button class="stab">Notifications</button>
-          <button class="stab">Security</button>
-          <button class="stab">Integrations</button>
-          <button class="stab">Advanced</button>
-        </div>
-
-        <!-- General tab content -->
-        <div class="section-title">Site Information</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div class="form-row"><label>Site Name</label><input name="site_name" type="text" value="Aesthetix Studio"></div>
-          <div class="form-row"><label>Tagline</label><input name="tagline" type="text" value="Design that drives results."></div>
-        </div>
-        <div class="form-row"><label>Site URL</label><input name="site_url" type="text" value="https://aesthetixstudio.com"></div>
-        <div class="form-row"><label>Site Description</label><textarea name="site_description">A premium design & development studio crafting exceptional digital experiences for ambitious brands.</textarea></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div class="form-row"><label>Admin Email</label><input name="admin_email" type="text" value="rohit@aesthetixstudio.com"></div>
-          <div class="form-row"><label>Contact Phone</label><input name="contact_phone" type="text" value="+91 98765 43210"></div>
-        </div>
-
-        <div class="section-title" style="margin-top:20px">Localization</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-          <div class="form-row"><label>Language</label><select name="language"><option>English (India)</option><option>Hindi</option></select></div>
-          <div class="form-row"><label>Timezone</label><select name="timezone"><option>Asia/Kolkata (IST)</option><option>UTC</option></select></div>
-          <div class="form-row"><label>Currency</label><select name="currency"><option>INR (&#8377;)</option><option>USD ($)</option></select></div>
-        </div>
-
-        <div class="section-title" style="margin-top:20px">Appearance</div>
-        <div style="margin-bottom:14px">
-          <div style="font-size:11px;font-weight:600;color:var(--text-3);margin-bottom:10px">Theme</div>
-          <div style="display:flex;gap:10px">
-            <div style="text-align:center">
-              <div class="theme-option selected" style="background:#09090B;border-color:var(--brand)"></div>
-              <div style="font-size:10px;color:var(--brand);margin-top:4px">Dark</div>
+  <div class="st-content">
+    <div class="st-grid">
+      <!-- LEFT -->
+      <div class="st-col">
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Site Information</h3><p>Update your website details and basic information.</p></div><button class="st-btn-purple"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg> Edit</button></div>
+          <div class="st-site-row">
+            <div class="st-logo-circle">
+              <svg width="52" height="52" viewBox="0 0 48 48" fill="none"><path d="M24 6 L40 38 L33.5 38 L24 18 L14.5 38 L8 38 Z" fill="#fff"/><path d="M28 28 L38 40 L32 40 L24 32 Z" fill="#8B5CF6"/></svg>
+              <span class="edit-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></span>
             </div>
-            <div style="text-align:center">
-              <div class="theme-option" style="background:#FAFAFA"></div>
-              <div style="font-size:10px;color:var(--text-4);margin-top:4px">Light</div>
-            </div>
-            <div style="text-align:center">
-              <div class="theme-option" style="background:linear-gradient(135deg,#09090B 50%,#FAFAFA 50%)"></div>
-              <div style="font-size:10px;color:var(--text-4);margin-top:4px">Auto</div>
+            <div style="flex:1;min-width:0">
+              <div class="st-field"><label>Site Name</label><input name="site_name" value="Aesthetix Studio"></div>
+              <div class="st-field"><label>Tagline</label><input name="tagline" value="Digital Experience Lab"></div>
+              <div class="st-field"><label>Site URL</label><input name="site_url" value="https://aesthetixstudio.com"></div>
+              <div class="st-field" style="margin-bottom:0"><label>Admin Email</label><input name="admin_email" value="mohdabraralikhan@gmail.com"></div>
             </div>
           </div>
         </div>
 
-        <div class="section-title" style="margin-top:20px">Security &amp; Access</div>
-        <div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">Two-Factor Authentication</div><div class="toggle-row-desc">Require 2FA for all admin logins</div></div>
-            <div class="toggle-switch on"></div>
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Appearance</h3><p>Customize the look and feel of your admin panel.</p></div><button class="st-btn-purple"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg> Customize</button></div>
+          <div class="st-theme-label">Theme</div>
+          <div class="st-theme-grid">
+            <div class="st-theme sel"><div class="st-theme-thumb" style="background:#0B0B12"><div style="padding:8px"><div style="height:6px;background:#2A2A38;border-radius:3px;width:60%;margin-bottom:5px"></div><div style="display:flex;gap:4px"><div style="width:22px;height:16px;background:rgba(124,58,237,.4);border-radius:3px"></div><div style="width:22px;height:16px;background:#1E1E29;border-radius:3px"></div></div></div><span class="st-theme-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Default</span></div>
+            <div class="st-theme"><div class="st-theme-thumb" style="background:#08080C"><div style="padding:8px"><div style="height:6px;background:#1E1E29;border-radius:3px;width:55%;margin-bottom:5px"></div><div style="display:flex;gap:4px"><div style="width:22px;height:16px;background:#1A1A24;border-radius:3px"></div><div style="width:22px;height:16px;background:#1A1A24;border-radius:3px"></div></div></div></div><span>Dark</span></div>
+            <div class="st-theme"><div class="st-theme-thumb" style="background:#EDEDF2"><div style="padding:8px"><div style="display:flex;gap:4px;align-items:center"><div style="width:14px;height:14px;border-radius:50%;background:#8B5CF6"></div><div style="height:6px;background:#C9C9D2;border-radius:3px;width:55%"></div></div><div style="display:flex;gap:4px;margin-top:5px"><div style="width:22px;height:14px;background:#fff;border-radius:3px;border:1px solid #D4D4D8"></div><div style="width:22px;height:14px;background:#FEF3C7;border-radius:3px"></div></div></div></div><span>Light</span></div>
+            <div class="st-theme"><div class="st-theme-thumb" style="background:#101018"><div style="padding:8px;display:flex;gap:5px"><div style="width:14px;height:32px;background:#1E1E29;border-radius:3px"></div><div style="flex:1"><div style="height:6px;background:#2A2A38;border-radius:3px;width:70%;margin-bottom:5px"></div><div style="height:16px;background:rgba(124,58,237,.25);border-radius:3px"></div></div></div></div><span>System</span></div>
           </div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">Login Notifications</div><div class="toggle-row-desc">Email alert on new device login</div></div>
-            <div class="toggle-switch on"></div>
-          </div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">Session Timeout</div><div class="toggle-row-desc">Auto-logout after 30 minutes of inactivity</div></div>
-            <div class="toggle-switch"></div>
-          </div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">Maintenance Mode</div><div class="toggle-row-desc">Show maintenance page to visitors</div></div>
-            <div class="toggle-switch"></div>
+          <div class="st-appear-bottom">
+            <div><div class="st-theme-label">Primary Color</div><div class="st-colors"><span class="st-color sel" style="background:#7C3AED"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><span class="st-color" style="background:#2563EB"></span><span class="st-color" style="background:#047857"></span><span class="st-color" style="background:#D97706"></span><span class="st-color" style="background:#EC4899"></span><span class="st-color" style="background:#EF4444"></span></div></div>
+            <div><div class="st-theme-label">Sidebar Style</div><div class="st-seg"><button class="sel">Full</button><button>Compact</button><button>Minimal</button></div></div>
           </div>
         </div>
 
-        <div class="section-title" style="margin-top:20px">Performance</div>
-        <div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">Image Optimization</div><div class="toggle-row-desc">Auto compress uploaded images</div></div>
-            <div class="toggle-switch on"></div>
-          </div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">CDN Enabled</div><div class="toggle-row-desc">Serve assets from Cloudflare CDN</div></div>
-            <div class="toggle-switch on"></div>
-          </div>
-          <div class="toggle-row">
-            <div><div class="toggle-row-label">Browser Caching</div><div class="toggle-row-desc">Cache static assets for 30 days</div></div>
-            <div class="toggle-switch on"></div>
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Maintenance Mode</h3><p>Put your site in maintenance mode while you make updates.</p></div></div>
+          <div class="st-maint">
+            <div class="st-maint-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <div class="st-maint-txt" style="flex:1"><b>Maintenance Mode</b><span>Your site is live and accessible to visitors.</span></div>
+            <button class="tgl" type="button" aria-label="Maintenance mode"></button>
           </div>
         </div>
       </div>
 
-      <!-- Right sidebar -->
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="dash-health-card">
-          <h3>System Status</h3>
-          <div class="dash-health-row"><span class="dash-health-label">Server</span><span class="status-ok">● Operational</span></div>
-          <div class="dash-health-row"><span class="dash-health-label">Database</span><span class="status-ok">● Healthy</span></div>
-          <div class="dash-health-row"><span class="dash-health-label">SSL</span><span class="status-ok">● Valid 89d</span></div>
-          <div class="dash-health-row"><span class="dash-health-label">CDN</span><span class="status-ok">● Active</span></div>
-          <div class="dash-health-row"><span class="dash-health-label">Backups</span><span class="status-ok">● 2 hrs ago</span></div>
-          <div class="dash-health-row"><span class="dash-health-label">Uptime</span><span style="color:#fff;font-size:11px">99.96%</span></div>
+      <!-- MIDDLE -->
+      <div class="st-col">
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Localization</h3><p>Set your language and regional preferences.</p></div></div>
+          <div class="st-loc-row"><label>Language</label><div class="st-loc-sel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E8E9A" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><select name="language"><option>English (US)</option><option>English (India)</option><option>Hindi</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row"><label>Timezone</label><div class="st-loc-sel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E8E9A" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><select name="timezone"><option>Asia/Kolkata (UTC +05:30)</option><option>UTC</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row"><label>Date Format</label><div class="st-loc-sel"><select name="date_format"><option>May 24, 2025</option><option>24 May 2025</option><option>2025-05-24</option></select><span style="color:#5E5E6E">⌄</span></div></div>
+          <div class="st-loc-row" style="margin-bottom:0"><label>Time Format</label><div class="st-loc-sel"><select name="time_format"><option>12 Hour (03:45 PM)</option><option>24 Hour (15:45)</option></select><span style="color:#5E5E6E">⌄</span></div></div>
         </div>
-        <div class="dash-quick-card">
-          <h3>Quick Actions</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg> Clear Cache</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export Data</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5v4l4-4h9V2z"/></svg> View Changelog</button>
-          </div>
+
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Security Settings</h3><p>Manage your security and access preferences.</p></div><button class="st-chev-right">›</button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="st-sec-txt"><b>Two-Factor Authentication</b><span>Add an extra layer of security</span></div><button class="tgl on" type="button"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="st-sec-txt"><b>Login Session Timeout</b><span>Automatically log out inactive users</span></div><select class="st-mini-select"><option>30 min</option><option>1 hour</option><option>8 hours</option></select></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="st-sec-txt"><b>Password Policy</b><span>Enforce strong password rules</span></div><button class="st-chev-right">›</button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="st-sec-txt"><b>Login Attempts</b><span>Limit failed login attempts</span></div><button class="tgl on" type="button"></button></div>
         </div>
-        <div class="dash-chart-card">
-          <h3>Recent Changes</h3>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
-            <div style="font-size:11px"><div style="color:var(--text-2);font-weight:500">2FA enabled</div><div style="color:var(--text-4)">by Rohit · 2 hrs ago</div></div>
-            <div style="font-size:11px"><div style="color:var(--text-2);font-weight:500">CDN config updated</div><div style="color:var(--text-4)">by Rohit · 1 day ago</div></div>
-            <div style="font-size:11px"><div style="color:var(--text-2);font-weight:500">Email settings saved</div><div style="color:var(--text-4)">by Rohit · 3 days ago</div></div>
-          </div>
+
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Performance</h3><p>Optimize your site performance and speed.</p></div></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="st-sec-txt"><b>Cache System</b><span>Speed up your website</span></div><button class="tgl on" type="button"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="st-sec-txt"><b>Image Optimization</b><span>Automatically optimize images</span></div><button class="tgl on" type="button"></button></div>
+          <div class="st-sec-row"><div class="st-sec-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="st-sec-txt"><b>Minify Assets</b><span>Minify CSS, JS and HTML files</span></div><button class="tgl" type="button"></button></div>
         </div>
       </div>
 
+      <!-- RIGHT -->
+      <div class="st-col right">
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>System Status</h3></div></div>
+          <div class="st-status-sub">Your system is running smoothly.</div>
+          <div class="st-status-row"><span class="st-status-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span><span>Server Status</span><b>Operational</b></div>
+          <div class="st-status-row"><span class="st-status-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span><span>Database</span><b>Connected</b></div>
+          <div class="st-status-row"><span class="st-status-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span><span>Storage</span><b>68% Used</b></div>
+          <div class="st-status-row"><span class="st-status-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span>PHP Version</span><b>8.2.15</b></div>
+          <div class="st-status-row"><span class="st-status-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span>Environment</span><b>Production</b></div>
+          <button class="st-health-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> View System Health <span>→</span></button>
+        </div>
+
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Quick Actions</h3></div></div>
+          <button class="st-qa"><span class="st-qa-ic" style="background:rgba(124,58,237,.18);color:#A78BFA"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="st-qa-txt"><b>Clear Cache</b><span>Improve performance</span></span><span class="st-qa-arrow">›</span></button>
+          <button class="st-qa"><span class="st-qa-ic" style="background:rgba(34,197,94,.15);color:#22C55E"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span><span class="st-qa-txt"><b>Backup Database</b><span>Last backup: 2 days ago</span></span><span class="st-qa-arrow">›</span></button>
+          <button class="st-qa"><span class="st-qa-ic" style="background:rgba(245,158,11,.15);color:#F59E0B"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span><span class="st-qa-txt"><b>Export Settings</b><span>Download current settings</span></span><span class="st-qa-arrow">›</span></button>
+          <button class="st-qa"><span class="st-qa-ic" style="background:rgba(239,68,68,.15);color:#F87171"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></span><span class="st-qa-txt"><b>Reset Settings</b><span>Restore default settings</span></span><span class="st-qa-arrow">›</span></button>
+        </div>
+
+        <div class="st-card">
+          <div class="st-card-head"><div><h3>Recent Changes</h3></div><button class="st-viewall">View All</button></div>
+          <div class="st-recent"><span class="st-recent-ic" style="background:rgba(124,58,237,.18);color:#A78BFA"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><div><b>General Settings Updated</b><span>2 min ago<br>by Rohit Malhotra</span></div></div>
+          <div class="st-recent"><span class="st-recent-ic" style="background:rgba(34,197,94,.15);color:#22C55E"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><div><b>Email Configuration</b><span>1 day ago<br>by Admin</span></div></div>
+          <div class="st-recent"><span class="st-recent-ic" style="background:rgba(245,158,11,.15);color:#F59E0B"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div><b>User Permissions Updated</b><span>2 days ago<br>by Rohit Malhotra</span></div></div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="st-foot"><span>© 2025 Aesthetix Studio. All rights reserved.</span><span class="st-ver">Version 2.1.0 <span class="st-dot"></span></span></div>
 </div>
 </div>
 <script>
 // ── Settings: load from /api/settings, save via PUT ──
 (() => {
-  const FIELDS = ['site_name', 'tagline', 'site_url', 'site_description', 'admin_email', 'contact_phone', 'language', 'timezone', 'currency'];
+  const FIELDS = ['site_name', 'tagline', 'site_url', 'admin_email', 'language', 'timezone'];
+  const extra = { date_format: 'date_format', time_format: 'time_format' };
   const load = async () => {
     try {
       const { data } = await api('/api/settings');
@@ -221,15 +341,40 @@
         const el = document.querySelector(`[name="${f}"]`);
         if (el && map[f] !== undefined) el.value = map[f];
       });
+      Object.entries(extra).forEach(([k, n]) => {
+        const el = document.querySelector(`[name="${n}"]`);
+        if (el && map[k] !== undefined) el.value = map[k];
+      });
     } catch (e) { toast(e.message, false); }
   };
   const save = async () => {
     const body = {};
     FIELDS.forEach((f) => { const el = document.querySelector(`[name="${f}"]`); if (el) body[f] = el.value; });
+    Object.values(extra).forEach((n) => { const el = document.querySelector(`[name="${n}"]`); if (el) body[n] = el.value; });
     try { await api('/api/settings', { method: 'PUT', body }); toast('Settings saved'); } catch (e) { toast(e.message, false); }
   };
-  $('#save-btn').addEventListener('click', save);
-  $('#discard-btn').addEventListener('click', load);
+  document.getElementById('save-btn').addEventListener('click', save);
+  // toggles
+  document.querySelectorAll('.tgl').forEach((t) => t.addEventListener('click', () => t.classList.toggle('on')));
+  // theme + colors + segments (visual only)
+  document.querySelectorAll('.st-theme').forEach((t) => t.addEventListener('click', () => {
+    document.querySelectorAll('.st-theme').forEach((x) => x.classList.remove('sel'));
+    t.classList.add('sel');
+  }));
+  document.querySelectorAll('.st-color').forEach((c) => c.addEventListener('click', () => {
+    document.querySelectorAll('.st-color').forEach((x) => x.classList.remove('sel'));
+    c.classList.add('sel');
+    c.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+    document.querySelectorAll('.st-color:not(.sel)').forEach((x) => (x.innerHTML = ''));
+  }));
+  document.querySelectorAll('.st-seg button').forEach((b) => b.addEventListener('click', () => {
+    b.parentElement.querySelectorAll('button').forEach((x) => x.classList.remove('sel'));
+    b.classList.add('sel');
+  }));
+  document.querySelectorAll('.st-tab').forEach((t) => t.addEventListener('click', () => {
+    document.querySelectorAll('.st-tab').forEach((x) => x.classList.remove('active'));
+    t.classList.add('active');
+  }));
   load();
 })();
 </script>

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Media Library — Aesthetix Studio</title>
+<title>Media — Images, Files and Storage Use — Aesthetix Studio</title>
+<meta name="description" content="Every image and uploaded asset with its type, size and dimensions, plus a breakdown of how much storage each category is using.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,291 +12,719 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script src="/js/admin.js"></script>
 <style>
-.ftabs{display:flex;gap:4px;margin-bottom:14px}
-.ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
-.ftab.active{background:var(--brand);color:#fff}
-.media-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.media-card{background:var(--surface-2);border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;position:relative}
-.media-card:hover{border-color:var(--brand)}
-.media-card.selected{border-color:var(--brand)}
-.media-thumb{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
-.media-check{position:absolute;top:6px;left:6px;width:16px;height:16px;border-radius:4px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center}
-.media-info{padding:6px 8px}
-.media-name{font-size:10px;color:var(--text-2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.media-size{font-size:9px;color:var(--text-4)}
+.md-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+.md-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start}
+.md-kpi-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.md-kpi-label{font-size:11px;color:#B9B9C4;margin-bottom:4px}
+.md-kpi-val{font-size:21px;font-weight:800;color:#fff;font-family:'Manrope'}
+.md-kpi-sub{font-size:10.5px;margin-top:5px;font-weight:500}
+.md-body{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+.md-tabs{display:flex;align-items:center;gap:2px;margin-bottom:12px}
+.md-tab{background:none;border:0;color:#8E8E9A;font-size:12.5px;font-weight:500;padding:9px 14px;cursor:pointer;border-radius:8px;font-family:inherit}
+.md-tab:hover{color:#fff}
+.md-tab.active{color:#fff;background:rgba(124,58,237,.22);font-weight:600}
+.md-toolbar{margin-left:auto;display:flex;align-items:center;gap:8px}
+.md-viewbtn{width:32px;height:32px;border-radius:8px;background:#12121A;border:1px solid #23232F;color:#8E8E9A;cursor:pointer;display:grid;place-items:center}
+.md-viewbtn.active{background:rgba(124,58,237,.2);border-color:#7C3AED;color:#A78BFA}
+.md-viewbtn:disabled{opacity:.4;cursor:default}
+.md-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;min-width:0}
+.md-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:14px}
+.md-grid.compact{grid-template-columns:repeat(6,1fr);gap:8px}
+.md-tile{background:#181824;border:1.5px solid #23232F;border-radius:12px;overflow:hidden;cursor:pointer;min-width:0}
+.md-tile:hover{border-color:#3b3b52}
+.md-tile.sel{border-color:#7C3AED}
+.md-grid.compact .md-thumb{height:74px}
+.md-thumb{height:128px;position:relative;display:grid;place-items:center;overflow:hidden;background:#20202c}
+.md-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.md-check{position:absolute;top:8px;left:8px;width:22px;height:22px;border-radius:6px;border:1.5px solid rgba(255,255,255,.45);background:rgba(10,10,15,.45);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:800;cursor:pointer}
+.md-tile.sel .md-check{background:#7C3AED;border-color:#7C3AED}
+.md-ticon{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(10,10,15,.55);display:grid;place-items:center;color:#C9C9D2}
+.md-play{width:44px;height:44px;border-radius:50%;background:rgba(10,10,15,.6);border:1.5px solid rgba(255,255,255,.5);display:grid;place-items:center;color:#fff}
+.md-dur{position:absolute;bottom:8px;right:8px;background:rgba(10,10,15,.7);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px}
+.md-wave{display:flex;align-items:center;gap:2px;height:40px}
+.md-wave i{width:3px;border-radius:2px;background:#8B5CF6}
+.md-docic{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:800}
+.md-glyph{font-size:44px;font-weight:800;color:rgba(255,255,255,.9)}
+.md-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 0}
+.md-name{font-size:12px;color:#EDEDF2;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.md-kebab{background:none;border:0;color:#8E8E9A;font-size:15px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.md-kebab:hover{color:#fff}
+.md-sub{font-size:10.5px;color:#7A7A88;padding:2px 12px 11px;white-space:nowrap}
+.md-listrow{display:flex;align-items:center;gap:12px;padding:10px 16px;border-top:1px solid #1B1B26;cursor:pointer}
+.md-listrow:first-child{border-top:0}
+.md-listrow:hover{background:rgba(255,255,255,.015)}
+.md-listthumb{width:44px;height:44px;border-radius:8px;flex-shrink:0;display:grid;place-items:center;overflow:hidden;font-weight:800;color:rgba(255,255,255,.9)}
+.md-listthumb img{width:100%;height:100%;object-fit:cover}
+.md-listrow b{font-size:12.5px;color:#fff;display:block}
+.md-listrow span{font-size:10.5px;color:#7A7A88}
+.md-listrow .sz{margin-left:auto;font-size:11.5px;color:#C9C9D2;white-space:nowrap}
+.md-bulk{display:flex;align-items:center;gap:8px;background:#181824;border:1px solid #2A2A38;border-radius:11px;padding:10px 14px;margin:0 14px 4px;font-size:11.5px}
+.md-bulk .n{color:#fff;font-weight:700}
+.md-bulk .s{color:#7A7A88}
+.md-bbtn{display:flex;align-items:center;gap:6px;background:none;border:1px solid #2E2E3E;border-radius:7px;color:#C9C9D2;font-size:11px;padding:6px 11px;cursor:pointer;font-family:inherit}
+.md-bbtn:hover{border-color:#7C3AED;color:#fff}
+.md-bbtn.danger{color:#F87171;border-color:rgba(248,113,113,.35)}
+.md-bulk .sp{margin-left:auto;display:flex;gap:8px}
+.md-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.md-count{font-size:11px;color:#7A7A88}
+.md-pages{display:flex;gap:6px;align-items:center}
+.md-page{min-width:30px;height:30px;border-radius:8px;background:#181824;border:1px solid #262633;color:#9A9AA8;font-size:11.5px;cursor:pointer;display:grid;place-items:center;padding:0 8px;font-family:inherit}
+.md-page:hover{border-color:#7C3AED;color:#fff}
+.md-page.active{background:#7C3AED;border-color:#7C3AED;color:#fff;font-weight:700}
+.md-rail{display:flex;flex-direction:column;gap:14px;min-width:0}
+.md-panel{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.md-panel h3{font-size:13.5px;font-weight:700;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;color:#fff;font-family:'Manrope'}
+.md-link{font-size:11.5px;color:#8B5CF6;font-weight:500;cursor:pointer;white-space:nowrap}
+.md-donut-wrap{display:flex;align-items:center;gap:16px}
+.md-donut{width:120px;height:120px;border-radius:50%;flex-shrink:0;display:grid;place-items:center}
+.md-hole{width:78px;height:78px;border-radius:50%;background:#12121A;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.md-hole b{font-size:16px;font-weight:800;color:#fff}
+.md-hole span{font-size:8.5px;color:#8E8E9A}
+.md-leg{display:grid;gap:8px;flex:1}
+.md-legrow{display:flex;align-items:center;gap:7px;font-size:11px;color:#B9B9C4}
+.md-legrow b{margin-left:auto;color:#fff;font-weight:600;white-space:nowrap}
+.md-legrow .dim{color:#7A7A88;font-weight:400}
+.md-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.md-storebar{height:5px;border-radius:3px;background:#262633;overflow:hidden;margin-top:12px}
+.md-storebar i{display:block;height:100%;background:linear-gradient(90deg,#6D28D9,#8B5CF6);border-radius:3px}
+.md-storerow{display:flex;justify-content:space-between;font-size:10.5px;color:#7A7A88;margin-top:6px}
+.md-folder{display:flex;align-items:center;gap:10px;font-size:12px;color:#C9C9D2;padding:8px 0;border-top:1px solid #1B1B26}
+.md-folder:first-of-type{border-top:0}
+.md-folder .fic{color:#8B5CF6;flex-shrink:0;display:inline-flex}
+.md-folder b{margin-left:auto;font-size:11px;color:#8E8E9A;font-weight:500;white-space:nowrap}
+.md-newfolder{width:100%;margin-top:10px;background:none;border:1px dashed #2E2E3E;border-radius:9px;color:#8E8E9A;font-size:11.5px;padding:9px;cursor:pointer;font-family:inherit}
+.md-newfolder:hover{border-color:#7C3AED;color:#fff}
+.md-recent{display:flex;gap:11px;align-items:center;padding:8px 0;border-top:1px solid #1B1B26}
+.md-recent:first-of-type{border-top:0}
+.md-recthumb{width:40px;height:40px;border-radius:8px;flex-shrink:0;display:grid;place-items:center;overflow:hidden;font-weight:800;color:rgba(255,255,255,.9);font-size:13px}
+.md-recent b{display:block;font-size:11.5px;color:#EDEDF2;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.md-recent span{font-size:10px;color:#7A7A88}
+.md-qa{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.md-qabtn{background:#181824;border:1px solid #23232F;border-radius:10px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:9.5px;font-weight:500;color:#C9C9D2;cursor:pointer;text-align:center;font-family:inherit}
+.md-qabtn:hover{border-color:#7C3AED;color:#fff}
+.md-qaic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center}
+.md-menu{position:fixed;z-index:60;background:#1A1A26;border:1px solid #2E2E3E;border-radius:10px;padding:5px;min-width:170px;box-shadow:0 12px 32px rgba(0,0,0,.5);display:none}
+.md-menu button{display:flex;width:100%;gap:9px;align-items:center;background:none;border:0;color:#C9C9D2;font-size:12px;padding:9px 11px;border-radius:7px;cursor:pointer;font-family:inherit;text-align:left}
+.md-menu button:hover{background:#26263a;color:#fff}
+.md-menu button.danger{color:#F87171}
+.md-menu button:disabled{opacity:.4;cursor:default}
+.md-overlay{position:fixed;inset:0;z-index:70;background:rgba(5,5,8,.7);display:grid;place-items:center;padding:20px}
+.md-modal{background:#14141C;border:1px solid #2A2A38;border-radius:14px;padding:0;width:460px;max-width:100%;max-height:85vh;overflow:hidden}
+.md-preview-thumb{height:220px;display:grid;place-items:center;overflow:hidden;position:relative}
+.md-preview-thumb img{width:100%;height:100%;object-fit:cover}
+.md-modal-body{padding:20px 24px 24px}
+.md-modal-body h3{margin:0 0 4px;font-size:16px;color:#fff;word-break:break-all}
+.md-modal-body .sub{font-size:12px;color:#8E8E9A;margin:0 0 12px}
+.md-kv{display:flex;justify-content:space-between;gap:12px;font-size:12px;padding:8px 0;border-top:1px solid #1B1B26}
+.md-kv span{color:#7A7A88}
+.md-kv b{color:#EDEDF2}
+.md-modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+@media(max-width:1280px){.md-kpis{grid-template-columns:repeat(3,1fr)}.md-body{grid-template-columns:1fr}.md-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body style="overflow:hidden">
+
 <div class="dash-layout">
 
-<aside class="dash-sidebar">
-  <div class="dash-logo-wrap">
-    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
-    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
-  </div>
-  <div class="dash-user">
-    <div class="dash-avatar">RM</div>
-    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
-    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
-  </div>
-  <nav class="dash-nav">
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Overview</div>
-      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
-      <a class="dash-nav-item" href="/admin-analytics.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</a>
+  <!-- ── Sidebar ── -->
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
     </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Content Management</div>
-      <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
-      <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Blog Posts</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Pages</a>
-      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
-      <a class="dash-nav-item" href="/admin-leads.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">AI Tools <span class="dash-new-badge">New</span></div>
-      <a class="dash-nav-item" href="/proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
-      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">System</div>
-      <a class="dash-nav-item" href="/admin-users.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
-      <a class="dash-nav-item" href="/admin-settings.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span> Activity Logs</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
-    </div>
-  </nav>
-  <div class="dash-sidebar-bottom">
-    <button class="dash-visit-btn">Visit Website ↗</button>
-    <div class="dash-dark-toggle">
-      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
-      <div class="toggle-switch on"></div>
-    </div>
-  </div>
-</aside>
 
-<div class="dash-main">
-  <div class="dash-topbar">
-    <div><h1>Media Library</h1><p>Manage all your images, videos and files in one place.</p></div>
-    <div class="dash-topbar-right">
-      <div class="dash-search"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="text" placeholder="Search media..."><span class="dash-search-kbd">⌘K</span></div>
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filters</button>
-      <button class="btn-create-new"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Files</button>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
     </div>
-  </div>
 
-  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-media.html"></nav>
 
-    <!-- Stat cards -->
-    <div class="dash-stat-cards" style="grid-template-columns:repeat(4,1fr)">
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-        <div class="dash-stat-label">Total Files</div>
-        <div class="dash-stat-value">1,284</div>
-        <div class="dash-stat-delta delta-up">↑ 142 <span style="color:var(--text-4)">this month</span></div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#3b82f6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
-        <div class="dash-stat-label">Images</div>
-        <div class="dash-stat-value">892</div>
-        <div class="dash-stat-delta" style="color:var(--text-4)">69.5% of total</div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
-        <div class="dash-stat-label">Videos</div>
-        <div class="dash-stat-value">124</div>
-        <div class="dash-stat-delta" style="color:var(--text-4)">9.7% of total</div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2"/><path d="M12 2v20"/><path d="M17 7l-5-5-5 5"/></svg></div>
-        <div class="dash-stat-label">Storage Used</div>
-        <div class="dash-stat-value">45%</div>
-        <div class="dash-stat-delta" style="color:var(--text-4)">228 GB / 500 GB</div>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle">
+        <span>🌙&nbsp; Dark Mode</span>
+        <div class="toggle-switch"></div>
       </div>
     </div>
+  </aside>
 
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:16px">
-
-      <!-- Media grid area -->
+  <!-- ── Main ── -->
+  <div class="dash-main">
+    <div class="dash-topbar">
       <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ftabs">
-            <button class="ftab active">All Files</button>
-            <button class="ftab">Images</button>
-            <button class="ftab">Videos</button>
-            <button class="ftab">Documents</button>
-            <button class="ftab">Other</button>
-          </div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <span style="font-size:11px;color:var(--text-4)">Sort by:</span>
-            <select style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);font-size:11px;border-radius:5px;padding:4px 8px">
-              <option>Latest</option><option>Oldest</option><option>Size</option>
-            </select>
-          </div>
+        <h1>Media Library</h1>
+        <p>Organize, manage and optimize your media assets.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="md-search" placeholder="Search media...">
+          <span class="dash-search-kbd">⌘K</span>
         </div>
-
-        <!-- Bulk action bar (shown when items selected) -->
-        <div style="background:rgba(108,92,231,.1);border:1px solid rgba(108,92,231,.3);border-radius:8px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:12px">
-          <span style="color:var(--brand);font-weight:600">3 items selected</span>
-          <div style="display:flex;gap:8px">
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:3px 10px;border-radius:4px;font-size:11px;cursor:pointer">Download</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:3px 10px;border-radius:4px;font-size:11px;cursor:pointer">Move to</button>
-            <button style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:3px 10px;border-radius:4px;font-size:11px;cursor:pointer">Delete</button>
-          </div>
+        <button class="md-btn" id="md-filter"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="22 3 2 3 10 12.5 10 19 14 21 14 12.5"/></svg> Filter</button>
+        <button class="md-btn" id="md-sort"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Sort</button>
+        <div class="btn-up-split">
+          <button class="btn-up-main" id="md-upload">⤒ Upload Media</button>
+          <button class="btn-up-chev" id="md-upload-chev" title="More options">⌄</button>
         </div>
+        <button class="md-icbtn" id="md-refresh" title="Refresh"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+      </div>
+    </div>
 
-        <div class="media-grid" id="adm-grid"></div>
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
 
-        <div style="padding:14px 0;display:flex;justify-content:space-between;align-items:center">
-          <span id="adm-count" style="font-size:11px;color:var(--text-4)"></span>
-          <div style="display:flex;gap:4px">
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
-            <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">2</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">›</button>
-          </div>
+      <!-- KPI cards -->
+      <div class="md-kpis">
+        <div class="md-kpi">
+          <div class="md-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div><div class="md-kpi-label">Total Files</div><div class="md-kpi-val" id="kpi-total">—</div><div class="md-kpi-sub" style="color:#22C55E">↑ 12.4% vs last month</div></div>
+        </div>
+        <div class="md-kpi">
+          <div class="md-kpi-ic" style="background:rgba(34,197,94,.13);color:#4ADE80"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div><div class="md-kpi-label">Images</div><div class="md-kpi-val" id="kpi-images">—</div><div class="md-kpi-sub" style="color:#7A7A88" id="kpi-images-sub">—</div></div>
+        </div>
+        <div class="md-kpi">
+          <div class="md-kpi-ic" style="background:rgba(236,72,153,.13);color:#F472B6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><polygon points="10 9 15 12 10 15" fill="currentColor" stroke="none"/></svg></div>
+          <div><div class="md-kpi-label">Videos</div><div class="md-kpi-val" id="kpi-videos">—</div><div class="md-kpi-sub" style="color:#7A7A88" id="kpi-videos-sub">—</div></div>
+        </div>
+        <div class="md-kpi">
+          <div class="md-kpi-ic" style="background:rgba(251,146,60,.13);color:#FB923C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg></div>
+          <div><div class="md-kpi-label">Documents</div><div class="md-kpi-val" id="kpi-docs">—</div><div class="md-kpi-sub" style="color:#7A7A88" id="kpi-docs-sub">—</div></div>
+        </div>
+        <div class="md-kpi">
+          <div class="md-kpi-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <div><div class="md-kpi-label">Total Size</div><div class="md-kpi-val" id="kpi-size">—</div><div class="md-kpi-sub" style="color:#22C55E">↑ 8.2% vs last month</div></div>
         </div>
       </div>
 
-      <!-- Right sidebar -->
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="dash-chart-card">
-          <h3>Storage Overview</h3>
-          <div class="dash-pie-wrap" style="gap:12px">
-            <div class="dash-pie" style="width:90px;height:90px"><div class="dash-pie-hole" style="width:62px;height:62px"><div class="dash-pie-total" style="font-size:14px">45%</div><div class="dash-pie-label">Used</div></div></div>
-            <div class="dash-pie-legend">
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#6C5CE7"></div> Images &nbsp;148 GB</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#f59e0b"></div> Videos &nbsp;&nbsp;64 GB</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#22c55e"></div> Docs &nbsp;&nbsp;&nbsp;&nbsp;16 GB</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#3b82f6"></div> Other &nbsp;&nbsp;&nbsp;&nbsp;0 GB</div>
+      <div class="md-body">
+        <!-- Board -->
+        <div style="min-width:0">
+          <div class="md-tabs" id="md-tabs">
+            <button class="md-tab active" data-tab="all">All Media</button>
+            <button class="md-tab" data-tab="image">Images</button>
+            <button class="md-tab" data-tab="video">Videos</button>
+            <button class="md-tab" data-tab="document">Documents</button>
+            <button class="md-tab" data-tab="audio">Audio</button>
+            <button class="md-tab" data-tab="other">Others</button>
+            <div class="md-toolbar">
+              <button class="md-viewbtn active" id="md-grid-btn" title="Grid view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+              <button class="md-viewbtn" id="md-list-btn" title="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+              <button class="md-viewbtn" id="md-del-btn" title="Delete selected"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+              <button class="md-viewbtn" id="md-more-btn" title="More actions"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
+              <button class="md-viewbtn" id="md-compact-btn" title="Compact tiles"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
             </div>
           </div>
-          <div style="margin-top:8px">
-            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-4);margin-bottom:4px"><span>228 GB used</span><span>500 GB total</span></div>
-            <div style="height:6px;background:var(--surface-3);border-radius:3px"><div style="width:45%;height:6px;background:var(--brand);border-radius:3px"></div></div>
-          </div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Folders</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:4px 0">
-              <div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span style="font-size:12px;color:var(--text-2)">Projects</span></div><span style="font-size:11px;color:var(--text-4)">486 files</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:4px 0">
-              <div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span style="font-size:12px;color:var(--text-2)">Blog</span></div><span style="font-size:11px;color:var(--text-4)">214 files</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:4px 0">
-              <div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span style="font-size:12px;color:var(--text-2)">Brand Assets</span></div><span style="font-size:11px;color:var(--text-4)">98 files</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:4px 0">
-              <div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span style="font-size:12px;color:var(--text-2)">Videos</span></div><span style="font-size:11px;color:var(--text-4)">124 files</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:4px 0">
-              <div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span style="font-size:12px;color:var(--text-2)">Miscellaneous</span></div><span style="font-size:11px;color:var(--text-4)">362 files</span>
-            </div>
-          </div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Recent Uploads <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <div style="display:flex;gap:8px;align-items:center">
-              <div style="width:32px;height:32px;border-radius:4px;background:linear-gradient(135deg,#6C5CE7,#3b82f6);flex-shrink:0"></div>
-              <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:500;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">luxore-hero.jpg</div><div style="font-size:10px;color:var(--text-4)">2.4 MB · 5 min ago</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:center">
-              <div style="width:32px;height:32px;border-radius:4px;background:linear-gradient(135deg,#f59e0b,#ef4444);flex-shrink:0"></div>
-              <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:500;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">brand-logo-dark.png</div><div style="font-size:10px;color:var(--text-4)">128 KB · 22 min ago</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:center">
-              <div style="width:32px;height:32px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#10b981);flex-shrink:0"></div>
-              <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:500;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">portfolio-nexa.jpg</div><div style="font-size:10px;color:var(--text-4)">1.8 MB · 1 hr ago</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="dash-quick-card">
-          <h3>Quick Actions</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload New Files</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> New Folder</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg> Optimize Images</button>
-          </div>
-        </div>
-      </div>
 
+          <div class="md-card">
+            <div class="md-grid" id="adm-grid"></div>
+            <div id="md-list" style="display:none"></div>
+            <div class="md-bulk" id="md-bulk" style="display:none">
+              <span class="n" id="md-bulk-n"></span><span class="s" id="md-bulk-s"></span>
+              <button class="md-bbtn" id="md-bulk-dl">⤓ Download</button>
+              <button class="md-bbtn" id="md-bulk-move">⚄ Move</button>
+              <button class="md-bbtn" id="md-bulk-copy">🔗 Copy Link</button>
+              <button class="md-bbtn danger" id="md-bulk-del">🗑 Delete</button>
+              <span class="sp"><button class="md-bbtn" id="md-bulk-clear">Clear</button><button class="md-bbtn" id="md-bulk-desel">Deselect All</button></span>
+            </div>
+            <div class="md-foot">
+              <span class="md-count" id="md-range"></span>
+              <div class="md-pages" id="md-pages"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right rail -->
+        <div class="md-rail">
+          <div class="md-panel">
+            <h3>Storage Overview <span class="md-link">View details</span></h3>
+            <div class="md-donut-wrap">
+              <div class="md-donut" id="st-pie"><div class="md-hole"><b id="st-total">—</b><span id="st-quota">of 50 GB used</span></div></div>
+              <div class="md-leg" id="st-legend"></div>
+            </div>
+            <div class="md-storebar"><i id="st-bar" style="width:0%"></i></div>
+            <div class="md-storerow"><span id="st-used-pct">—</span><span id="st-free">—</span></div>
+          </div>
+
+          <div class="md-panel">
+            <h3>Folders <span class="md-link" id="folders-manage">Manage Folders</span></h3>
+            <div id="md-folders"></div>
+            <button class="md-newfolder" id="folder-new">＋ New Folder</button>
+          </div>
+
+          <div class="md-panel">
+            <h3>Recent Uploads <span class="md-link" id="ru-all">View all</span></h3>
+            <div class="md-recent">
+              <div class="md-recthumb" style="background:linear-gradient(135deg,#3B2F1A,#B8860B)">L</div>
+              <div style="min-width:0"><b>luxore-ring-hero.jpg</b><span>2.4 MB · 2h ago</span></div>
+            </div>
+            <div class="md-recent">
+              <div class="md-recthumb" style="background:linear-gradient(135deg,#1E3A5F,#3B82F6)">B</div>
+              <div style="min-width:0"><b>brand-film-intro.mp4</b><span>24.5 MB · 4h ago</span></div>
+            </div>
+            <div class="md-recent">
+              <div class="md-recthumb" style="background:linear-gradient(135deg,#7F1D1D,#EF4444)">P</div>
+              <div style="min-width:0"><b>Brand-Guidelines.pdf</b><span>4.6 MB · 6h ago</span></div>
+            </div>
+            <div class="md-recent">
+              <div class="md-recthumb" style="background:linear-gradient(135deg,#4A4440,#8A7F70)">I</div>
+              <div style="min-width:0"><b>interior-living-room.jpg</b><span>1.8 MB · 1d ago</span></div>
+            </div>
+            <div class="md-recent">
+              <div class="md-recthumb" style="background:linear-gradient(135deg,#2A1B4E,#7C3AED)">A</div>
+              <div style="min-width:0"><b>app-ui-mockup.jpg</b><span>2.7 MB · 1d ago</span></div>
+            </div>
+          </div>
+
+          <div class="md-panel">
+            <h3>Quick Actions</h3>
+            <div class="md-qa">
+              <button class="md-qabtn" id="qa-upload"><span class="md-qaic" style="background:rgba(139,92,246,.15);color:#A78BFA"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>Upload Media</button>
+              <button class="md-qabtn" id="qa-url"><span class="md-qaic" style="background:rgba(34,197,94,.14);color:#4ADE80"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>Add from URL</button>
+              <button class="md-qabtn" id="qa-folder"><span class="md-qaic" style="background:rgba(139,92,246,.15);color:#A78BFA"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Create Folder</button>
+              <button class="md-qabtn" id="qa-bulk"><span class="md-qaic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>Bulk Edit</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
-</div>
+
+<div class="md-menu" id="md-menu"></div>
+<div id="md-modal-root"></div>
+<input type="file" id="md-file" multiple style="display:none">
+
 <script>
-// ── Media library: live grid from /api/media ──
+// ── Media library: live rows from /api/media (+ generated demo rows) ──
 (() => {
-  const grid = $('#adm-grid');
-  const count = $('#adm-count');
-  const GRADS = ['linear-gradient(135deg,#6C5CE7,#3b82f6)', 'linear-gradient(135deg,#f59e0b,#ef4444)', 'linear-gradient(135deg,#22c55e,#10b981)', 'linear-gradient(135deg,#8b5cf6,#ec4899)', 'linear-gradient(135deg,#06b6d4,#3b82f6)', 'linear-gradient(135deg,#f97316,#f59e0b)', 'linear-gradient(135deg,#14b8a6,#22c55e)', 'linear-gradient(135deg,#ec4899,#8b5cf6)'];
-  let media = [];
-  let filter = 'All Files';
-  const TYPE_ICON = (t) => t === 'document' ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-4)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : t === 'video' ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" style="position:absolute"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>' : '';
-  const card = (m, i) => `<div class="media-card" data-id="${m.id}" style="cursor:pointer">
-    <div class="media-thumb" style="background:${m.type === 'document' ? 'var(--surface-2)' : GRADS[i % GRADS.length]};display:flex;align-items:center;justify-content:center">${TYPE_ICON(m.type)}</div>
-    <div class="media-info"><div class="media-name">${esc(m.name)}</div><div class="media-size">${esc(m.size || '—')} · ${esc(m.type)}</div></div>
-  </div>`;
-  const render = () => {
-    const list = media.filter((m) => {
-      if (filter === 'All Files') return true;
-      if (filter === 'Documents') return m.type === 'document';
-      if (filter === 'Other') return !['image', 'video', 'document'].includes(m.type);
-      return m.type === filter.toLowerCase().replace(/s$/, '');
-    });
-    grid.innerHTML = list.length ? list.map(card).join('') : '<div class="adm-empty" style="grid-column:1/-1">No files match this filter.</div>';
-    count.textContent = `Showing 1–${list.length} of ${media.length} files`;
-    const n = (t) => media.filter((m) => m.type === t).length;
-    fillStat('Total Files', media.length);
-    fillStat('Images', n('image'));
-    fillStat('Videos', n('video'));
-    fillStat('Storage Used', Math.min(99, Math.round((media.length / 20) * 100)) + '%');
+  const PER = 12, QUOTA_GB = 50;
+  const TYPE_G = {
+    image: ['#312E81', '#6D28D9'], video: ['#1E3A5F', '#3B82F6'],
+    document: ['#3B2F1A', '#B8860B'], audio: ['#2A1B4E', '#8B5CF6'], other: ['#27272A', '#52525B'],
   };
-  const load = async () => { try { media = (await api('/api/media')).data; render(); } catch (e) { toast(e.message, false); } };
-  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
-    $$('.ftab').forEach((x) => x.classList.remove('active'));
-    b.classList.add('active');
-    filter = b.textContent.trim();
-    render();
-  }));
-  const search = $('.dash-search input');
-  if (search) search.addEventListener('input', () => {
-    const q = search.value.toLowerCase();
-    grid.innerHTML = media.filter((m) => m.name.toLowerCase().includes(q)).map(card).join('') || '<div class="adm-empty" style="grid-column:1/-1">No files match.</div>';
-  });
-  // upload → create
-  $$('.btn-create-new').forEach((btn) => btn.addEventListener('click', () => modal({
-    title: 'Upload File',
-    fields: [
-      { name: 'name', label: 'File name', required: true },
-      { name: 'type', label: 'Type', type: 'select', options: ['image', 'video', 'document', 'audio', 'archive'], value: 'image' },
-      { name: 'size', label: 'Size' },
-      { name: 'usage', label: 'Usage', type: 'select', options: ['used', 'unused'], value: 'unused' },
-    ],
-    onSubmit: async (d) => { await api('/api/media', { method: 'POST', body: d }); load(); },
-  })));
-  // click card → edit / delete
-  grid.addEventListener('click', async (e) => {
-    const cardEl = e.target.closest('.media-card');
-    if (!cardEl) return;
-    const m = media.find((x) => x.id === Number(cardEl.dataset.id));
-    if (!m) return;
-    modal({
-      title: m.name,
-      fields: [
-        { name: 'name', label: 'File name', value: m.name, required: true },
-        { name: 'type', label: 'Type', type: 'select', options: ['image', 'video', 'document', 'audio', 'archive'], value: m.type },
-        { name: 'size', label: 'Size', value: m.size },
-        { name: 'usage', label: 'Usage', type: 'select', options: ['used', 'unused'], value: m.usage },
-      ],
-      onSubmit: async (d) => { await api('/api/media/' + m.id, { method: 'PUT', body: d }); load(); },
-      onDelete: async () => { await api('/api/media/' + m.id, { method: 'DELETE' }); load(); },
+  const DOC_COLOR = { pdf: '#EF4444', pptx: '#F59E0B', ppt: '#F59E0B', doc: '#3B82F6', docx: '#3B82F6', xls: '#22C55E', zip: '#8B5CF6', fig: '#A78BFA' };
+  const BASE_FOLDERS = ['Project Assets', 'Blog Images', 'Brand Logos', 'Testimonials', 'Downloads'];
+  const extOf = (n) => (String(n).split('.').pop() || '').toLowerCase();
+  const UPPER_EXT = (n) => extOf(n).toUpperCase() || 'FILE';
+  const sizeMB = (s) => {
+    const m = String(s || '').match(/([\d.]+)\s*(KB|MB|GB)/i);
+    if (!m) return 0;
+    const v = Number(m[1]) || 0;
+    return m[2].toUpperCase() === 'KB' ? v / 1024 : m[2].toUpperCase() === 'GB' ? v * 1024 : v;
+  };
+  const fmtMB = (mb) => (mb >= 1024 ? (Math.round(mb / 102.4) / 10) + ' GB' : (Math.round(mb * 10) / 10) + ' MB');
+  const gb1 = (mb) => (Math.round((mb / 1024) * 10) / 10).toFixed(1);
+  const bucketOf = (t) => (t === 'image' ? 'image' : t === 'video' ? 'video' : t === 'document' ? 'document' : 'other');
+  const customFolders = () => { try { return JSON.parse(localStorage.getItem('md_folders') || '[]'); } catch { return []; } };
+  const overrides = () => { try { return JSON.parse(localStorage.getItem('md_folder_map') || '{}'); } catch { return {}; } };
+  const folderOf = (r, ov) => (ov || overrides())[String(r.id)] || r.folder || '';
+
+  let lib = [], uploads = [], hidden = new Set();
+  let tab = 'all', query = '', sort = 'featured', page = 1, view = 'grid', compact = false;
+  let sel = new Set();
+
+  const all = () => [...uploads, ...lib.filter((r) => !hidden.has(String(r.id)))];
+  const filtered = () => {
+    let list = all().filter((r) => (tab === 'all' ? true : r.type === tab)).filter((r) => {
+      if (!query) return true;
+      return String(r.name).toLowerCase().includes(query.toLowerCase());
     });
+    if (sort === 'latest') list = [...list].sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));
+    else if (sort === 'oldest') list = [...list].sort((a, b) => String(a.created_at || '').localeCompare(String(b.created_at || '')));
+    else if (sort === 'largest') list = [...list].sort((a, b) => sizeMB(b.size) - sizeMB(a.size));
+    else if (sort === 'name') list = [...list].sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    return list;
+  };
+
+  const ICON_IMG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+  const ICON_MUSIC = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+  const ICON_PLAY = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20"/></svg>';
+  const wave = (seed) => {
+    let s = '';
+    for (let i = 0; i < 26; i++) s += `<i style="height:${20 + ((seed * (i + 3) * 37) % 80)}%"></i>`;
+    return `<div class="md-wave">${s}</div>`;
+  };
+  const thumbInner = (r) => {
+    if (r.url && (r.type === 'image' || /\.(jpe?g|png|gif|webp|svg)$/i.test(r.name))) return `<img src="${esc(r.url)}" alt="">`;
+    const [c1, c2] = r.g || TYPE_G[r.type] || TYPE_G.other;
+    const bg = `background:linear-gradient(135deg,${c1},${c2})`;
+    if (r.type === 'video') return `<div style="position:absolute;inset:0;${bg}"></div><div class="md-play">${ICON_PLAY}</div>`;
+    if (r.type === 'audio') return `<div style="position:absolute;inset:0;${bg}"></div><div style="display:flex;align-items:center;gap:12px;position:relative">${'<div class="md-play">' + ICON_PLAY + '</div>'}${wave([...String(r.id)].reduce((a, c) => a + c.charCodeAt(0), 0))}</div>`;
+    if (r.type === 'document' || r.type === 'other') {
+      const ext = r.doc || UPPER_EXT(r.name);
+      const col = DOC_COLOR[ext.toLowerCase()] || '#6B7280';
+      return `<div style="position:absolute;inset:0;background:#1B1B24"></div><div class="md-docic" style="background:${col};position:relative">${esc(ext.slice(0, 4))}</div>`;
+    }
+    const g = String(r.name || '?').trim()[0].toUpperCase();
+    return `<div style="position:absolute;inset:0;${bg}"></div><span class="md-glyph" style="position:relative">${esc(g)}</span>`;
+  };
+  const topIcon = (r) => {
+    if (r.type === 'video') return '';
+    return `<div class="md-ticon">${r.type === 'audio' ? ICON_MUSIC : ICON_IMG}</div>`;
+  };
+
+  const tile = (r) => {
+    const id = String(r.id), on = sel.has(id);
+    return `<div class="md-tile ${on ? 'sel' : ''}" data-id="${esc(id)}">
+    <div class="md-thumb">${thumbInner(r)}
+      <div class="md-check" data-check="${esc(id)}">${on ? '✓' : ''}</div>${topIcon(r)}
+      ${r.duration ? `<span class="md-dur">${esc(r.duration)}</span>` : ''}
+    </div>
+    <div class="md-meta"><div class="md-name">${esc(r.name)}</div><button class="md-kebab" data-kebab="${esc(id)}">⋮</button></div>
+    <div class="md-sub">${esc(r.size || '—')} · ${esc(UPPER_EXT(r.name))}</div>
+  </div>`;
+  };
+  const listRow = (r) => {
+    const id = String(r.id);
+    const [c1, c2] = r.g || TYPE_G[r.type] || TYPE_G.other;
+    const th = r.url ? `<div class="md-listthumb"><img src="${esc(r.url)}" alt=""></div>`
+      : `<div class="md-listthumb" style="background:linear-gradient(135deg,${c1},${c2})">${esc(String(r.name || '?').trim()[0].toUpperCase())}</div>`;
+    return `<div class="md-listrow" data-id="${esc(id)}">${th}
+    <div style="min-width:0"><b>${esc(r.name)}</b><span>${esc(r.type)} · ${esc(folderOf(r) || 'Unsorted')}</span></div>
+    <span class="sz">${esc(r.size || '—')}</span>
+    <button class="md-kebab" data-kebab="${esc(id)}">⋮</button></div>`;
+  };
+
+  const render = () => {
+    const list = filtered();
+    const pages = Math.max(1, Math.ceil(list.length / PER));
+    if (page > pages) page = pages;
+    const slice = list.slice((page - 1) * PER, page * PER);
+    const grid = document.getElementById('adm-grid'), lr = document.getElementById('md-list');
+    grid.classList.toggle('compact', compact);
+    if (view === 'grid') {
+      grid.style.display = '';
+      lr.style.display = 'none';
+      grid.innerHTML = slice.length ? slice.map(tile).join('') : `<div style="grid-column:1/-1;text-align:center;color:#5E5E6E;padding:28px">No media found.</div>`;
+    } else {
+      grid.style.display = 'none';
+      lr.style.display = '';
+      lr.innerHTML = slice.length ? slice.map(listRow).join('') : `<div style="text-align:center;color:#5E5E6E;padding:28px">No media found.</div>`;
+    }
+    const from = list.length ? (page - 1) * PER + 1 : 0;
+    document.getElementById('md-range').textContent = `Showing ${from} to ${Math.min(page * PER, list.length)} of ${list.length.toLocaleString('en-IN')} files`;
+    const nums = [];
+    for (let i = 1; i <= pages; i++) {
+      if (pages <= 7 || i === 1 || i === pages || Math.abs(i - page) <= 1) nums.push(i);
+      else if (nums[nums.length - 1] !== '…') nums.push('…');
+    }
+    document.getElementById('md-pages').innerHTML =
+      `<button class="md-page" data-pg="${page - 1}" ${page <= 1 ? 'disabled style="opacity:.4"' : ''}>‹</button>` +
+      nums.map((n) => n === '…' ? `<span style="color:#5E5E6E;font-size:11px">…</span>` : `<button class="md-page ${n === page ? 'active' : ''}" data-pg="${n}">${n}</button>`).join('') +
+      `<button class="md-page" data-pg="${page + 1}" ${page >= pages ? 'disabled style="opacity:.4"' : ''}>›</button>`;
+    // KPIs + storage (live)
+    const rows = all();
+    const t = rows.length;
+    const c = (ty) => rows.filter((r) => r.type === ty).length;
+    const im = c('image'), vi = c('video'), dc = c('document');
+    document.getElementById('kpi-total').textContent = t.toLocaleString('en-IN');
+    document.getElementById('kpi-images').textContent = im.toLocaleString('en-IN');
+    document.getElementById('kpi-videos').textContent = vi.toLocaleString('en-IN');
+    document.getElementById('kpi-docs').textContent = dc.toLocaleString('en-IN');
+    const shr = (v) => (t ? ((v / t) * 100).toFixed(1) + '% of total' : '—');
+    document.getElementById('kpi-images-sub').textContent = shr(im);
+    document.getElementById('kpi-videos-sub').textContent = shr(vi);
+    document.getElementById('kpi-docs-sub').textContent = shr(dc);
+    const mb = (ty) => rows.filter((r) => bucketOf(r.type) === ty).reduce((s, r) => s + sizeMB(r.size), 0);
+    const mIm = mb('image'), mVi = mb('video'), mDc = mb('document');
+    const mOt = rows.filter((r) => bucketOf(r.type) === 'other').reduce((s, r) => s + sizeMB(r.size), 0);
+    const totalMB = mIm + mVi + mDc + mOt;
+    document.getElementById('kpi-size').textContent = gb1(totalMB) + ' GB';
+    const pct = (v) => (totalMB ? (v / totalMB) * 100 : 0);
+    document.getElementById('st-pie').style.background =
+      `conic-gradient(#8B5CF6 0 ${pct(mIm).toFixed(1)}%,#EC4899 ${pct(mIm).toFixed(1)}% ${(pct(mIm) + pct(mVi)).toFixed(1)}%,#F59E0B ${(pct(mIm) + pct(mVi)).toFixed(1)}% ${(pct(mIm) + pct(mVi) + pct(mDc)).toFixed(1)}%,#60A5FA ${(pct(mIm) + pct(mVi) + pct(mDc)).toFixed(1)}% 100%)`;
+    document.getElementById('st-total').textContent = gb1(totalMB) + ' GB';
+    const leg = (name, color, v) => `<div class="md-legrow"><div class="md-dot" style="background:${color}"></div> ${name} <b>${gb1(v)} <span class="dim">GB</span></b></div>`;
+    document.getElementById('st-legend').innerHTML =
+      leg('Images', '#8B5CF6', mIm) + leg('Videos', '#EC4899', mVi) + leg('Documents', '#F59E0B', mDc) + leg('Others', '#60A5FA', mOt);
+    const usedPct = (totalMB / 1024 / QUOTA_GB) * 100;
+    document.getElementById('st-bar').style.width = Math.min(100, usedPct).toFixed(1) + '%';
+    document.getElementById('st-used-pct').textContent = usedPct.toFixed(1) + '% used';
+    document.getElementById('st-free').textContent = gb1(Math.max(0, QUOTA_GB * 1024 - totalMB)) + ' GB free';
+    // folders (live)
+    const ov = overrides();
+    const counts = {};
+    rows.forEach((r) => {
+      const f = folderOf(r, ov);
+      if (f) counts[f] = (counts[f] || 0) + 1;
+    });
+    const folders = [...BASE_FOLDERS, ...customFolders().filter((f) => !BASE_FOLDERS.includes(f))];
+    document.getElementById('md-folders').innerHTML = folders.map((f) => `<div class="md-folder">
+      <span class="fic">${f === 'Downloads'
+        ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+        : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'}</span>
+      ${esc(f)}<b>${counts[f] || 0} files</b></div>`).join('');
+    // bulk bar
+    const selRows = rows.filter((r) => sel.has(String(r.id)));
+    const bulk = document.getElementById('md-bulk');
+    bulk.style.display = selRows.length ? '' : 'none';
+    document.getElementById('md-bulk-n').textContent = `${selRows.length} selected`;
+    document.getElementById('md-bulk-s').textContent = fmtMB(selRows.reduce((s, r) => s + sizeMB(r.size), 0));
+    document.getElementById('md-del-btn').disabled = !selRows.length;
+    document.getElementById('md-del-btn').style.opacity = selRows.length ? '' : '.4';
+  };
+
+  const setTab = (t) => {
+    tab = t; page = 1;
+    document.querySelectorAll('#md-tabs .md-tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === t));
+    render();
+  };
+  const setView = (v) => {
+    view = v;
+    document.getElementById('md-grid-btn').classList.toggle('active', v === 'grid');
+    document.getElementById('md-list-btn').classList.toggle('active', v === 'list');
+    render();
+  };
+  const byId = (id) => all().find((x) => String(x.id) === String(id));
+  const selRows = () => all().filter((r) => sel.has(String(r.id)));
+
+  // floating menu (single element)
+  const menu = document.getElementById('md-menu');
+  const closeMenu = () => (menu.style.display = 'none');
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#md-menu') && !e.target.closest('[data-kebab]') && !e.target.closest('#md-sort')
+      && !e.target.closest('#md-filter') && !e.target.closest('#md-upload-chev') && !e.target.closest('#md-more-btn')
+      && !e.target.closest('#md-bulk-move') && !e.target.closest('#folders-manage')) closeMenu();
   });
+  const showMenu = (anchor, items) => {
+    const r = anchor.getBoundingClientRect();
+    menu.innerHTML = items.map(([k, label, danger, dis]) => `<button data-k="${k}"${danger ? ' class="danger"' : ''}${dis ? ' disabled' : ''}>${label}</button>`).join('');
+    menu.style.display = 'block';
+    menu.style.top = Math.min(innerHeight - 220, r.bottom + 4) + 'px';
+    menu.style.left = Math.max(8, Math.min(innerWidth - 190, r.right - 180)) + 'px';
+    menu.querySelectorAll('button:not([disabled])').forEach((b) => b.addEventListener('click', () => { closeMenu(); items.find(([k]) => k === b.dataset.k).slice(-1)[0](); }));
+  };
+  const SORTS = [['featured', 'Featured'], ['latest', 'Latest'], ['oldest', 'Oldest'], ['largest', 'Largest'], ['name', 'Name A–Z']];
+  const sortMenu = (anchor) => showMenu(anchor, SORTS.map(([k, label]) => [k, `${sort === k ? '●' : '○'}&nbsp; ${label}`, false, () => { sort = k; page = 1; render(); }]));
+  const moveMenu = (anchor, rows) => {
+    const folders = [...BASE_FOLDERS, ...customFolders().filter((f) => !BASE_FOLDERS.includes(f))];
+    showMenu(anchor, folders.map((f) => [f, `▤&nbsp; ${esc(f)}`, false, () => {
+      const ov = overrides();
+      rows.forEach((r) => { ov[String(r.id)] = f; });
+      localStorage.setItem('md_folder_map', JSON.stringify(ov));
+      toast(`Moved ${rows.length} file${rows.length === 1 ? '' : 's'} to ${f}.`);
+      render();
+    }]));
+  };
+
+  const downloadRows = (rows) => {
+    const csv = [['Name', 'Size', 'Type', 'Folder']].concat(rows.map((r) => [r.name, r.size || '', r.type, folderOf(r)]))
+      .map((x) => x.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'media-manifest.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+  const copyRows = async (rows) => {
+    const urls = rows.map((r) => `${location.origin}/media/${encodeURIComponent(r.name)}`).join('\n');
+    try { await navigator.clipboard.writeText(urls); toast(`Copied ${rows.length} link${rows.length === 1 ? '' : 's'}.`); }
+    catch { toast('Copy failed in this browser.', false); }
+  };
+  const deleteRows = async (rows) => {
+    if (!rows.length) return;
+    if (!confirm(`Delete ${rows.length} file${rows.length === 1 ? '' : 's'}?`)) return;
+    for (const r of rows) {
+      if (r._upload) uploads = uploads.filter((u) => String(u.id) !== String(r.id));
+      else if (r._demo) hidden.add(String(r.id));
+      else { try { await api('/api/media/' + r.id, { method: 'DELETE' }); } catch (e) { toast(e.message, false); return; } }
+      sel.delete(String(r.id));
+    }
+    if (rows.some((r) => r._demo)) toast('Demo files removed from this view only.');
+    load();
+  };
+  const preview = (r) => {
+    const root = document.getElementById('md-modal-root');
+    root.innerHTML = `<div class="md-overlay"><div class="md-modal">
+      <div class="md-preview-thumb" style="background:linear-gradient(135deg,${(r.g || TYPE_G[r.type] || TYPE_G.other).join(',')})">${r.url ? `<img src="${esc(r.url)}" alt="">` : thumbInner(r)}</div>
+      <div class="md-modal-body"><h3>${esc(r.name)}</h3><p class="sub">${esc(r.type)} · ${esc(r.size || '—')}</p>
+      <div class="md-kv"><span>Folder</span><b>${esc(folderOf(r) || 'Unsorted')}</b></div>
+      <div class="md-kv"><span>Uploaded</span><b>${esc(fmtDate(r.created_at))}</b></div>
+      <div class="md-modal-actions">
+        <button class="md-btn" id="pv-dl">⤓ Download</button>
+        <button class="md-btn" id="pv-copy">🔗 Copy Link</button>
+        <button class="md-btn" id="pv-del" style="color:#F87171">🗑 Delete</button>
+        <button class="md-btn" id="pv-close">Close</button>
+      </div></div>
+    </div></div>`;
+    const ov = root.querySelector('.md-overlay');
+    ov.addEventListener('click', (e) => { if (e.target === ov || e.target.id === 'pv-close') root.innerHTML = ''; });
+    document.getElementById('pv-dl').addEventListener('click', () => downloadRows([r]));
+    document.getElementById('pv-copy').addEventListener('click', () => copyRows([r]));
+    document.getElementById('pv-del').addEventListener('click', () => { root.innerHTML = ''; deleteRows([r]); });
+  };
+  const kebab = (r, anchor) => showMenu(anchor, [
+    ['view', '👁&nbsp; Preview', false, () => preview(r)],
+    ['dl', '⤓&nbsp; Download', false, () => downloadRows([r])],
+    ['copy', '🔗&nbsp; Copy Link', false, () => copyRows([r])],
+    ['del', '🗑&nbsp; Delete', true, () => deleteRows([r])],
+  ]);
+
+  document.querySelector('.md-card').addEventListener('click', (e) => {
+    const pg = e.target.closest('[data-pg]');
+    if (pg && !pg.disabled) { page = Number(pg.dataset.pg); render(); return; }
+    const kb = e.target.closest('[data-kebab]');
+    if (kb) { const r = byId(kb.dataset.kebab); if (r) kebab(r, kb); return; }
+    const ck = e.target.closest('[data-check]');
+    if (ck) {
+      const id = String(ck.dataset.check);
+      sel.has(id) ? sel.delete(id) : sel.add(id);
+      render();
+      return;
+    }
+    const tile = e.target.closest('.md-tile');
+    if (tile && view === 'grid') {
+      const id = String(tile.dataset.id);
+      sel.has(id) ? sel.delete(id) : sel.add(id);
+      render();
+      return;
+    }
+    const lr = e.target.closest('.md-listrow');
+    if (lr) { const r = byId(lr.dataset.id); if (r && !e.target.closest('[data-kebab]')) preview(r); }
+  });
+  document.querySelectorAll('#md-tabs .md-tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  document.getElementById('md-search').addEventListener('input', (e) => { query = e.target.value.trim(); page = 1; render(); });
+  document.getElementById('md-filter').addEventListener('click', (e) => showMenu(e.currentTarget, [
+    ['all', 'All Media'], ['image', 'Images'], ['video', 'Videos'], ['document', 'Documents'], ['audio', 'Audio'], ['other', 'Others'],
+  ].map(([k, label]) => [k, `${tab === k ? '●' : '○'}&nbsp; ${label}`, false, () => setTab(k)])));
+  document.getElementById('md-sort').addEventListener('click', (e) => sortMenu(e.currentTarget));
+  document.getElementById('md-grid-btn').addEventListener('click', () => setView('grid'));
+  document.getElementById('md-list-btn').addEventListener('click', () => setView('list'));
+  document.getElementById('md-compact-btn').addEventListener('click', () => { compact = !compact; render(); });
+  document.getElementById('md-del-btn').addEventListener('click', () => deleteRows(selRows()));
+  document.getElementById('md-more-btn').addEventListener('click', (e) => showMenu(e.currentTarget, [
+    ['sa', '☑&nbsp; Select page', false, () => { filtered().slice((page - 1) * PER, page * PER).forEach((r) => sel.add(String(r.id))); render(); }],
+    ['de', '☐&nbsp; Deselect all', false, () => { sel.clear(); render(); }],
+    ['dl', '⤓&nbsp; Download manifest', false, () => downloadRows(selRows().length ? selRows() : filtered())],
+  ]));
+  const setView = (v) => {
+    view = v;
+    document.getElementById('md-grid-btn').classList.toggle('active', v === 'grid');
+    document.getElementById('md-list-btn').classList.toggle('active', v === 'list');
+    render();
+  };
+  document.getElementById('md-refresh').addEventListener('click', () => { sel.clear(); load(); });
+  document.getElementById('ru-all').addEventListener('click', () => { setTab('all'); sort = 'latest'; page = 1; render(); });
+  // bulk bar
+  const clearSel = () => { sel.clear(); render(); };
+  document.getElementById('md-bulk-clear').addEventListener('click', clearSel);
+  document.getElementById('md-bulk-desel').addEventListener('click', clearSel);
+  document.getElementById('md-bulk-dl').addEventListener('click', () => downloadRows(selRows()));
+  document.getElementById('md-bulk-copy').addEventListener('click', () => copyRows(selRows()));
+  document.getElementById('md-bulk-del').addEventListener('click', () => deleteRows(selRows()));
+  document.getElementById('md-bulk-move').addEventListener('click', (e) => moveMenu(e.currentTarget, selRows()));
+  // upload: real file picker + URL import (session-only rows with live previews)
+  const fileInput = document.getElementById('md-file');
+  const guessType = (name, mime) => {
+    if (/^image\//.test(mime) || /\.(jpe?g|png|gif|webp|svg|ico)$/i.test(name)) return 'image';
+    if (/^video\//.test(mime) || /\.(mp4|mov|webm|avi)$/i.test(name)) return 'video';
+    if (/^audio\//.test(mime) || /\.(mp3|wav|ogg)$/i.test(name)) return 'audio';
+    if (/\.(pdf|docx?|pptx?|xls|txt|csv)$/i.test(name)) return 'document';
+    return 'other';
+  };
+  const fmtBytes = (b) => (b >= 1048576 ? (Math.round(b / 10485.76) / 100) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB');
+  fileInput.addEventListener('change', () => {
+    const files = [...fileInput.files];
+    files.forEach((f, i) => {
+      const type = guessType(f.name, f.type || '');
+      uploads.unshift({
+        id: 'u' + Date.now() + i, name: f.name, type,
+        size: fmtBytes(f.size || 0), usage: 'unused', created_at: new Date().toISOString(),
+        folder: '', _upload: true, url: type === 'image' ? URL.createObjectURL(f) : undefined,
+      });
+    });
+    fileInput.value = '';
+    if (files.length) { toast(`Added ${files.length} file${files.length === 1 ? '' : 's'} (this session).`); page = 1; render(); }
+  });
+  const doUpload = () => fileInput.click();
+  document.getElementById('md-upload').addEventListener('click', doUpload);
+  document.getElementById('qa-upload').addEventListener('click', doUpload);
+  document.getElementById('md-upload-chev').addEventListener('click', (e) => showMenu(e.currentTarget, [
+    ['up', '⤒&nbsp; Upload Media', false, doUpload],
+    ['url', '🔗&nbsp; Add from URL', false, addFromURL],
+  ]));
+  document.getElementById('qa-url').addEventListener('click', addFromURL);
+  function addFromURL() {
+    modal({
+      title: 'Add from URL',
+      fields: [
+        { name: 'url', label: 'File URL', required: true },
+        { name: 'name', label: 'File name', required: true },
+      ],
+      onSubmit: async (d) => {
+        const type = guessType(d.name, '');
+        uploads.unshift({
+          id: 'u' + Date.now(), name: d.name, type, size: '—', usage: 'unused',
+          created_at: new Date().toISOString(), folder: '', _upload: true,
+          url: /^https?:/i.test(d.url) ? d.url : 'https://' + d.url,
+        });
+        page = 1; render();
+      },
+    });
+  }
+  // folders
+  function newFolder() {
+    modal({
+      title: 'New Folder',
+      fields: [{ name: 'name', label: 'Folder name', required: true }],
+      onSubmit: async (d) => {
+        const name = d.name.trim();
+        const customs = customFolders();
+        if (name && !BASE_FOLDERS.includes(name) && !customs.includes(name)) {
+          customs.push(name);
+          localStorage.setItem('md_folders', JSON.stringify(customs));
+          render();
+        }
+      },
+    });
+  }
+  document.getElementById('folder-new').addEventListener('click', newFolder);
+  document.getElementById('qa-folder').addEventListener('click', newFolder);
+  document.getElementById('folders-manage').addEventListener('click', (e) => {
+    const customs = customFolders();
+    const items = [['new', '＋&nbsp; New Folder', false, newFolder]].concat(customs.map((f) => [`ren:${f}`, `✎&nbsp; Rename "${esc(f)}"`, false, () => {
+      modal({
+        title: 'Rename Folder', fields: [{ name: 'name', label: 'New name', value: f, required: true }],
+        onSubmit: async (d) => {
+          const nn = d.name.trim();
+          if (!nn || BASE_FOLDERS.includes(nn)) return;
+          localStorage.setItem('md_folders', JSON.stringify(customs.map((x) => (x === f ? nn : x))));
+          const ov = overrides();
+          Object.keys(ov).forEach((k) => { if (ov[k] === f) ov[k] = nn; });
+          localStorage.setItem('md_folder_map', JSON.stringify(ov));
+          render();
+        },
+      });
+    }]])).concat(customs.map((f) => [`del:${f}`, `🗑&nbsp; Delete "${esc(f)}"`, true, () => {
+      if (!confirm(`Delete folder "${f}"? Files stay in the library.`)) return;
+      localStorage.setItem('md_folders', JSON.stringify(customs.filter((x) => x !== f)));
+      const ov = overrides();
+      Object.keys(ov).forEach((k) => { if (ov[k] === f) delete ov[k]; });
+      localStorage.setItem('md_folder_map', JSON.stringify(ov));
+      render();
+    }]]));
+    showMenu(e.currentTarget, items);
+  });
+  document.getElementById('qa-bulk').addEventListener('click', () => {
+    filtered().slice((page - 1) * PER, page * PER).forEach((r) => sel.add(String(r.id)));
+    render();
+  });
+
+  const load = async () => {
+    try {
+      const { data } = await api('/api/media');
+      const demos = data.filter((d) => d._demo), real = data.filter((d) => !d._demo);
+      lib = [...demos, ...real];
+      render();
+    } catch (e) { toast(e.message, false); }
+  };
   load();
 })();
 </script>

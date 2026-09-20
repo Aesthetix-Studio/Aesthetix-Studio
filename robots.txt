@@ -3,4 +3,30 @@ Allow: /
 Disallow: /site
 Disallow: /scripts
 
+# admin surface + auth screens — the API is bearer-gated, but keep the screens
+# out of search results too (this is a crawler hint, not access control)
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /leads
+Disallow: /forms
+Disallow: /feedback
+Disallow: /search
+Disallow: /meeting-notes
+Disallow: /project-timeline
+Disallow: /proposal-generator
+Disallow: /files-deliverables
+Disallow: /tasks
+Disallow: /messages
+Disallow: /calendar
+Disallow: /design-brief-analyzer
+Disallow: /subscriptions
+Disallow: /ai-chat-assistant
+Disallow: /brand-audit-tool
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /client-review
+
 Sitemap: https://aesthetixstudio.com/sitemap.xml

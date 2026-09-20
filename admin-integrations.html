@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Integrations — Apps and Services Linked — Aesthetix Studio</title>
+<meta name="description" content="Third-party apps linked to the studio workspace with per-app connection switches, categories and search in one directory.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.in-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.in-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.in-kpi-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.in-kpi-val{font-size:24px;font-weight:800;color:#fff;font-family:'Manrope';line-height:1.1}
+.in-kpi-label{font-size:11px;color:#B9B9C4;margin-top:2px}
+.in-kpi-sub{font-size:10.5px;color:#7A7A88;margin-top:5px}
+.in-tabs{display:flex;align-items:center;gap:2px;margin-bottom:12px}
+.in-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.in-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.in-top{display:flex;align-items:center;gap:12px}
+.in-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0;font-weight:800;font-size:15px;color:#fff}
+.in-top b{display:block;font-size:13px;color:#fff}
+.in-top span{font-size:10.5px;color:#7A7A88}
+.in-card p{font-size:11.5px;color:#B9B9C4;line-height:1.6;margin:0;flex:1}
+.in-foot{display:flex;align-items:center;gap:10px;border-top:1px solid #1B1B26;padding-top:12px}
+.in-state{font-size:10.5px;font-weight:700}
+.in-state.on{color:#4ADE80}
+.in-state.off{color:#7A7A88}
+.in-switch{margin-left:auto;width:40px;height:22px;border-radius:11px;background:#262633;position:relative;cursor:pointer;border:0;flex-shrink:0;transition:background .15s}
+.in-switch:after{content:'';width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .15s}
+.in-switch.on{background:#7C3AED}
+.in-switch.on:after{left:21px}
+.in-note{font-size:10.5px;color:#5E5E6E;margin:12px 4px 20px;line-height:1.6}
+@media(max-width:1280px){.in-kpis{grid-template-columns:repeat(2,1fr)}.in-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.in-grid{grid-template-columns:1fr}}
+</style>
+<link rel="canonical" href="https://aesthetixstudio.com/admin-integrations"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Integrations — Apps and Services Linked — Aesthetix Studio"><meta property="og:description" content="Third-party apps linked to the studio workspace with per-app connection switches, categories and search in one directory."><meta property="og:url" content="https://aesthetixstudio.com/admin-integrations"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Integrations — Apps and Services Linked — Aesthetix Studio"><meta name="twitter:description" content="Third-party apps linked to the studio workspace with per-app connection switches, categories and search in one directory."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-integrations.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Integrations</h1>
+        <p>Apps linked to the studio workspace.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="in-search" placeholder="Search integrations...">
+        </div>
+        <button class="pj-btn" id="in-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="in-kpis">
+        <div class="in-kpi">
+          <div class="in-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+          <div><div class="in-kpi-val" id="kpi-total">—</div><div class="in-kpi-label">Available</div><div class="in-kpi-sub">apps in the directory</div></div>
+        </div>
+        <div class="in-kpi">
+          <div class="in-kpi-ic" style="background:rgba(34,197,94,.13);color:#4ADE80"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div class="in-kpi-val" id="kpi-on">—</div><div class="in-kpi-label">Connected</div><div class="in-kpi-sub">currently switched on</div></div>
+        </div>
+        <div class="in-kpi">
+          <div class="in-kpi-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 2v4M16 2v4M2 10h20"/></svg></div>
+          <div><div class="in-kpi-val" id="kpi-cats">—</div><div class="in-kpi-label">Categories</div><div class="in-kpi-sub">integration types</div></div>
+        </div>
+        <div class="in-kpi">
+          <div class="in-kpi-ic" style="background:rgba(251,191,36,.13);color:#FBBF24"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
+          <div><div class="in-kpi-val" id="kpi-off">—</div><div class="in-kpi-label">Not Connected</div><div class="in-kpi-sub">ready to switch on</div></div>
+        </div>
+      </div>
+
+      <div class="in-tabs" id="in-tabs">
+        <button class="pj-tab active" data-tab="all">All Apps</button>
+        <button class="pj-tab" data-tab="on">Connected</button>
+        <button class="pj-tab" data-tab="Payments">Payments</button>
+        <button class="pj-tab" data-tab="Marketing">Marketing</button>
+        <button class="pj-tab" data-tab="Analytics">Analytics</button>
+        <button class="pj-tab" data-tab="Communication">Communication</button>
+      </div>
+      <div class="in-grid" id="in-grid"></div>
+      <p class="in-note">Connection switches are stored in this browser only — connect credentials on the provider side to go live.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Integrations board: static directory, switches persist locally ──
+(() => {
+  const APPS = [
+    { name: 'Razorpay', cat: 'Payments', color: '#3B82F6', desc: 'Accept UPI, cards and netbanking on invoices and proposals.' },
+    { name: 'Stripe', cat: 'Payments', color: '#8B5CF6', desc: 'International cards and subscriptions for global clients.' },
+    { name: 'Mailchimp', cat: 'Marketing', color: '#FBBF24', desc: 'Newsletters and drip campaigns synced with leads.' },
+    { name: 'Google Analytics', cat: 'Analytics', color: '#F97316', desc: 'Traffic and conversion data behind the Analytics board.' },
+    { name: 'Plausible', cat: 'Analytics', color: '#22C55E', desc: 'Privacy-friendly aggregate stats, no cookies needed.' },
+    { name: 'Slack', cat: 'Communication', color: '#E879F9', desc: 'New leads, feedback and deploys posted to channels.' },
+    { name: 'WhatsApp Business', cat: 'Communication', color: '#4ADE80', desc: 'Client updates and reminders over WhatsApp.' },
+    { name: 'Zapier', cat: 'Marketing', color: '#FB923C', desc: 'Glue between forms, sheets and five thousand other apps.' },
+  ];
+  const loadState = () => { try { return JSON.parse(localStorage.getItem('in_connected') || '{}'); } catch { return {}; } };
+  const saveState = (s) => localStorage.setItem('in_connected', JSON.stringify(s));
+  let tab = 'all', query = '';
+  const isOn = (name) => !!loadState()[name];
+
+  const filtered = () => APPS.filter((a) => {
+    if (tab === 'on') { if (!isOn(a.name)) return false; }
+    else if (tab !== 'all' && a.cat !== tab) return false;
+    if (query && !(a.name + ' ' + a.desc).toLowerCase().includes(query.toLowerCase())) return false;
+    return true;
+  });
+
+  const render = () => {
+    const list = filtered();
+    document.getElementById('in-grid').innerHTML = list.length ? list.map((a) => {
+      const on = isOn(a.name);
+      return `<div class="in-card"><div class="in-top">
+        <div class="in-ic" style="background:${a.color}22;color:${a.color}">${esc(a.name.trim()[0])}</div>
+        <div><b>${esc(a.name)}</b><span>${esc(a.cat)}</span></div></div>
+        <p>${esc(a.desc)}</p>
+        <div class="in-foot"><span class="in-state ${on ? 'on' : 'off'}">${on ? '● Connected' : '○ Not connected'}</span>
+        <button class="in-switch ${on ? 'on' : ''}" data-app="${esc(a.name)}" aria-label="Toggle ${esc(a.name)}"></button></div></div>`;
+    }).join('') : `<div style="grid-column:1/-1;text-align:center;color:#5E5E6E;padding:28px">No integrations match.</div>`;
+    document.getElementById('kpi-total').textContent = APPS.length;
+    document.getElementById('kpi-on').textContent = APPS.filter((a) => isOn(a.name)).length;
+    document.getElementById('kpi-cats').textContent = new Set(APPS.map((a) => a.cat)).size;
+    document.getElementById('kpi-off').textContent = APPS.filter((a) => !isOn(a.name)).length;
+  };
+  const setTab = (t) => {
+    tab = t;
+    document.querySelectorAll('#in-tabs .pj-tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === t));
+    render();
+  };
+  document.getElementById('in-grid').addEventListener('click', (e) => {
+    const sw = e.target.closest('[data-app]');
+    if (!sw) return;
+    const st = loadState();
+    st[sw.dataset.app] = !st[sw.dataset.app];
+    if (!st[sw.dataset.app]) delete st[sw.dataset.app];
+    saveState(st);
+    render();
+    toast(`${sw.dataset.app} ${st[sw.dataset.app] ? 'connected' : 'disconnected'} (this browser).`);
+  });
+  document.querySelectorAll('#in-tabs .pj-tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  document.getElementById('in-search').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
+  document.getElementById('in-export').addEventListener('click', () => {
+    const rows = [['App', 'Category', 'Connected']];
+    APPS.forEach((a) => rows.push([a.name, a.cat, isOn(a.name) ? 'yes' : 'no']));
+    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const el = document.createElement('a');
+    el.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    el.download = 'integrations.csv';
+    el.click();
+    URL.revokeObjectURL(el.href);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

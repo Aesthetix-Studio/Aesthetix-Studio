@@ -3,308 +3,583 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Projects — Aesthetix Studio</title>
+<title>Projects — Status, Progress and Dates — Aesthetix Studio</title>
+<meta name="description" content="All active and completed client projects, with category, progress, owner and deadline, and a count of which are currently on track.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/aesthetix.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script src="/js/admin.js"></script>
 <style>
-.ftabs{display:flex;gap:4px;margin-bottom:16px}
-.ftab{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text-3)}
-.ftab.active{background:var(--brand);color:#fff}
-.ftab:not(.active):hover{background:var(--surface-2);color:var(--text-2)}
-.adm-table{width:100%;border-collapse:collapse;font-size:12px}
-.adm-table th{color:var(--text-4);font-weight:500;padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
-.adm-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
-.adm-table tr:hover td{background:rgba(255,255,255,.02)}
-.prog-bar{height:5px;background:var(--surface-3);border-radius:3px;width:80px;display:inline-block;vertical-align:middle}
-.prog-fill{height:5px;border-radius:3px;background:#6C5CE7}
-.bx{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;display:inline-block}
-.bx-g{background:rgba(34,197,94,.15);color:#22c55e}
-.bx-y{background:rgba(245,158,11,.15);color:#f59e0b}
-.bx-b{background:rgba(59,130,246,.15);color:#3b82f6}
-.bx-r{background:rgba(239,68,68,.15);color:#ef4444}
+.pj-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+.pj-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:start}
+.pj-kpi-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.pj-kpi-label{font-size:11px;color:#B9B9C4;margin-bottom:4px}
+.pj-kpi-val{font-size:22px;font-weight:800;color:#fff;font-family:'Manrope'}
+.pj-kpi-delta{font-size:10.5px;font-weight:600;white-space:nowrap;text-align:right}
+.pj-kpi-delta small{display:block;font-weight:400;color:#6E6E7E;font-size:9.5px}
+.pj-body{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+.pj-tabs{display:flex;align-items:center;gap:2px;margin-bottom:12px}
+.pj-tab{background:none;border:0;color:#8E8E9A;font-size:12.5px;font-weight:500;padding:9px 16px;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit}
+.pj-tab:hover{color:#fff}
+.pj-tab.active{color:#fff;border-bottom-color:#7C3AED;font-weight:600}
+.pj-toolbar{margin-left:auto;display:flex;align-items:center;gap:8px}
+.pj-viewbtn{width:32px;height:32px;border-radius:8px;background:#12121A;border:1px solid #23232F;color:#8E8E9A;cursor:pointer;display:grid;place-items:center}
+.pj-viewbtn.active{background:rgba(124,58,237,.2);border-color:#7C3AED;color:#A78BFA}
+.pj-sort{background:#12121A;border:1px solid #23232F;border-radius:8px;color:#C9C9D2;font-size:11.5px;padding:7px 10px;font-family:inherit;cursor:pointer;outline:none}
+.pj-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;overflow:hidden;min-width:0}
+.pj-table{width:100%;border-collapse:collapse}
+.pj-table th{font-size:10.5px;font-weight:600;color:#8E8E9A;text-align:left;padding:12px 10px;border-bottom:1px solid #1B1B26;white-space:nowrap}
+.pj-table td{padding:12px 10px;border-bottom:1px solid #1B1B26;vertical-align:middle;font-size:12px}
+.pj-table tr:last-child td{border-bottom:0}
+.pj-table tbody tr:hover td{background:rgba(255,255,255,.015)}
+.pj-proj{display:flex;align-items:center;gap:12px;min-width:0}
+.pj-thumb{width:64px;height:44px;border-radius:8px;flex-shrink:0;display:grid;place-items:center;font-size:16px;font-weight:800;color:rgba(255,255,255,.85);overflow:hidden}
+.pj-proj b{display:block;font-size:12.5px;color:#fff;font-weight:600;white-space:nowrap}
+.pj-proj span{font-size:10.5px;color:#7A7A88}
+.pj-client{display:flex;align-items:center;gap:9px;white-space:nowrap;color:#C9C9D2}
+.pj-cav{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:9.5px;font-weight:800;flex-shrink:0;border:1.5px solid}
+.pj-pill{font-size:10.5px;font-weight:600;padding:4px 11px;border-radius:7px;white-space:nowrap;border:1px solid}
+.pj-prog{display:flex;align-items:center;gap:8px}
+.pj-prog .track{width:90px;height:5px;border-radius:3px;background:#262633;overflow:hidden}
+.pj-prog .track i{display:block;height:100%;border-radius:3px}
+.pj-prog b{font-size:11px;color:#C9C9D2;font-weight:600}
+.pj-due{color:#C9C9D2;white-space:nowrap}
+.pj-upd{color:#7A7A88;white-space:nowrap;font-size:11px}
+.pj-act{display:flex;gap:6px}
+.pj-icbtn{width:30px;height:30px;border-radius:8px;background:#181824;border:1px solid #262633;color:#9A9AA8;cursor:pointer;display:grid;place-items:center;font-size:13px}
+.pj-icbtn:hover{border-color:#7C3AED;color:#fff}
+.pj-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.pj-count{font-size:11px;color:#7A7A88}
+.pj-pages{display:flex;gap:6px;align-items:center}
+.pj-page{min-width:30px;height:30px;border-radius:8px;background:#181824;border:1px solid #262633;color:#9A9AA8;font-size:11.5px;cursor:pointer;display:grid;place-items:center;padding:0 8px;font-family:inherit}
+.pj-page:hover{border-color:#7C3AED;color:#fff}
+.pj-page.active{background:#7C3AED;border-color:#7C3AED;color:#fff;font-weight:700}
+.pj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pj-gcard{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;overflow:hidden;cursor:pointer}
+.pj-gcard:hover{border-color:#7C3AED}
+.pj-gthumb{height:110px;display:grid;place-items:center;font-size:34px;font-weight:800;color:rgba(255,255,255,.9)}
+.pj-gbody{padding:12px 14px}
+.pj-gbody b{font-size:12.5px;color:#fff;display:block}
+.pj-gbody span{font-size:10.5px;color:#7A7A88}
+.pj-grow{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.pj-rail{display:flex;flex-direction:column;gap:14px;min-width:0}
+.pj-panel{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.pj-panel h3{font-size:13.5px;font-weight:700;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;color:#fff;font-family:'Manrope'}
+.pj-link{font-size:11.5px;color:#8B5CF6;font-weight:500;cursor:pointer;white-space:nowrap}
+.pj-donut-wrap{display:flex;align-items:center;gap:16px}
+.pj-donut{width:120px;height:120px;border-radius:50%;flex-shrink:0;display:grid;place-items:center}
+.pj-hole{width:78px;height:78px;border-radius:50%;background:#12121A;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pj-hole b{font-size:22px;font-weight:800;color:#fff}
+.pj-hole span{font-size:10px;color:#8E8E9A}
+.pj-leg{display:grid;gap:8px;flex:1}
+.pj-legrow{display:flex;align-items:center;gap:7px;font-size:11px;color:#B9B9C4}
+.pj-legrow b{margin-left:auto;color:#fff;font-weight:600;white-space:nowrap}
+.pj-legrow .dim{color:#7A7A88;font-weight:400}
+.pj-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pj-feed{display:grid;gap:14px}
+.pj-feeditem{display:flex;gap:11px;align-items:flex-start}
+.pj-feedic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+.pj-feeditem b{display:block;font-size:12px;color:#EDEDF2;font-weight:600}
+.pj-feeditem span{font-size:10.5px;color:#7A7A88}
+.pj-feeditem time{margin-left:auto;font-size:10.5px;color:#7A7A88;white-space:nowrap;flex-shrink:0}
+.pj-client-row{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:9px 0;border-top:1px solid #1B1B26;align-items:center}
+.pj-client-row:first-of-type{border-top:0}
+.pj-client-row .who{display:flex;align-items:center;gap:9px;font-size:12px;color:#EDEDF2;font-weight:600;min-width:0}
+.pj-client-row .who small{display:block;font-size:10px;color:#7A7A88;font-weight:400}
+.pj-client-row .val{font-size:11.5px;color:#fff;font-weight:700;text-align:right}
+.pj-client-row .bar{grid-column:1/-1;height:4px;border-radius:2px;background:#262633;overflow:hidden}
+.pj-client-row .bar i{display:block;height:100%;background:linear-gradient(90deg,#6D28D9,#8B5CF6);border-radius:2px}
+.pj-qa{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pj-qabtn{background:#181824;border:1px solid #23232F;border-radius:10px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:9.5px;font-weight:500;color:#C9C9D2;cursor:pointer;text-align:center;font-family:inherit}
+.pj-qabtn:hover{border-color:#7C3AED;color:#fff}
+.pj-qaic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center}
+.pj-menu{position:fixed;z-index:60;background:#1A1A26;border:1px solid #2E2E3E;border-radius:10px;padding:5px;min-width:150px;box-shadow:0 12px 32px rgba(0,0,0,.5);display:none}
+.pj-menu button{display:flex;width:100%;gap:9px;align-items:center;background:none;border:0;color:#C9C9D2;font-size:12px;padding:9px 11px;border-radius:7px;cursor:pointer;font-family:inherit;text-align:left}
+.pj-menu button:hover{background:#26263a;color:#fff}
+.pj-menu button.danger{color:#F87171}
+.pj-overlay{position:fixed;inset:0;z-index:70;background:rgba(5,5,8,.7);display:grid;place-items:center;padding:20px}
+.pj-modal{background:#14141C;border:1px solid #2A2A38;border-radius:14px;padding:24px;width:420px;max-width:100%;max-height:85vh;overflow-y:auto}
+.pj-modal h3{margin:0 0 4px;font-size:16px;color:#fff}
+.pj-modal .sub{font-size:12px;color:#8E8E9A;margin:0 0 16px}
+.pj-kv{display:flex;justify-content:space-between;gap:12px;font-size:12px;padding:8px 0;border-top:1px solid #1B1B26}
+.pj-kv span{color:#7A7A88}
+.pj-kv b{color:#EDEDF2;text-align:right}
+@media(max-width:1280px){.pj-kpis{grid-template-columns:repeat(3,1fr)}.pj-body{grid-template-columns:1fr}.pj-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body style="overflow:hidden">
+
 <div class="dash-layout">
 
-<aside class="dash-sidebar">
-  <div class="dash-logo-wrap">
-    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
-    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
-  </div>
-  <div class="dash-user">
-    <div class="dash-avatar">RM</div>
-    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
-    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
-  </div>
-  <nav class="dash-nav">
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Overview</div>
-      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
-      <a class="dash-nav-item" href="/admin-analytics.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Content Management</div>
-      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
-      <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Blog Posts</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Pages</a>
-      <a class="dash-nav-item" href="/admin-media.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
-      <a class="dash-nav-item" href="/admin-leads.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span> Testimonials</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">AI Tools <span class="dash-new-badge">New</span></div>
-      <a class="dash-nav-item" href="/proposal-generator.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator</a>
-      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer</a>
-      <a class="dash-nav-item" href="/brand-audit-tool.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">System</div>
-      <a class="dash-nav-item" href="/admin-users.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Roles &amp; Permissions</a>
-      <a class="dash-nav-item" href="/admin-settings.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span> Activity Logs</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations</a>
-      <a class="dash-nav-item" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span> System Health</a>
-    </div>
-  </nav>
-  <div class="dash-sidebar-bottom">
-    <button class="dash-visit-btn">Visit Website ↗</button>
-    <div class="dash-dark-toggle">
-      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
-      <div class="toggle-switch on"></div>
-    </div>
-  </div>
-</aside>
-
-<div class="dash-main">
-  <div class="dash-topbar">
-    <div><h1>Projects</h1><p>Manage and track all client projects in one place.</p></div>
-    <div class="dash-topbar-right">
-      <div class="dash-search"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="text" placeholder="Search projects..."><span class="dash-search-kbd">⌘K</span></div>
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filters</button>
-      <button class="btn-create-new">+ New Project</button>
-    </div>
-  </div>
-
-  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
-
-    <!-- Stat cards -->
-    <div class="dash-stat-cards">
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="dash-stat-label">Total Projects</div>
-        <div class="dash-stat-value">48</div>
-        <div class="dash-stat-delta delta-up">↑ 8 <span style="color:var(--text-4)">this quarter</span></div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,28 20,24 40,20 60,22 80,14 100,10" fill="none" stroke="#6C5CE7" stroke-width="1.5"/></svg></div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="dash-stat-label">Active</div>
-        <div class="dash-stat-value">18</div>
-        <div class="dash-stat-delta delta-up">↑ 3 <span style="color:var(--text-4)">vs last month</span></div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,30 20,26 40,22 60,18 80,14 100,10" fill="none" stroke="#22c55e" stroke-width="1.5"/></svg></div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="dash-stat-label">On Hold</div>
-        <div class="dash-stat-value">5</div>
-        <div class="dash-stat-delta delta-down">↓ 2 <span style="color:var(--text-4)">vs last month</span></div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,14 20,18 40,16 60,22 80,24 100,20" fill="none" stroke="#f59e0b" stroke-width="1.5"/></svg></div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#3b82f6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div class="dash-stat-label">Completed</div>
-        <div class="dash-stat-value">21</div>
-        <div class="dash-stat-delta delta-up">↑ 5 <span style="color:var(--text-4)">this year</span></div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,32 20,28 40,24 60,18 80,12 100,8" fill="none" stroke="#3b82f6" stroke-width="1.5"/></svg></div>
-      </div>
-      <div class="dash-stat-card">
-        <div class="dash-stat-icon" style="color:#ec4899"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="dash-stat-label">Revenue (Active)</div>
-        <div class="dash-stat-value" style="font-size:16px">₹42.6L</div>
-        <div class="dash-stat-delta delta-up">↑ 18.4% <span style="color:var(--text-4)">vs last quarter</span></div>
-        <div class="dash-sparkline"><svg viewBox="0 0 100 36" preserveAspectRatio="none"><polyline points="0,30 20,26 40,20 60,16 80,10 100,6" fill="none" stroke="#ec4899" stroke-width="1.5"/></svg></div>
-      </div>
+  <!-- ── Sidebar ── -->
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:16px">
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
 
-      <!-- Table area -->
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-projects.html"></nav>
+
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">View Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle">
+        <span>🌙&nbsp; Dark Mode</span>
+        <div class="toggle-switch"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <div class="dash-main">
+    <div class="dash-topbar">
       <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ftabs">
-            <button class="ftab active">All</button>
-            <button class="ftab">Active</button>
-            <button class="ftab">On Hold</button>
-            <button class="ftab">Completed</button>
-            <button class="ftab">Cancelled</button>
-          </div>
-          <div style="display:flex;gap:6px">
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer">Sort ▾</button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
-          </div>
+        <h1>Projects</h1>
+        <p>Manage all your client projects in one place.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="pj-search" placeholder="Search projects...">
         </div>
-        <div class="dash-chart-card" style="padding:0;overflow:hidden">
-          <table class="adm-table">
-            <thead>
-              <tr>
-                <th style="padding-left:14px">Project</th>
-                <th>Client</th>
-                <th>Status</th>
-                <th>Progress</th>
-                <th>Budget</th>
-                <th>Deadline</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adm-tbody"></tbody>
-          </table>
-          <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04)">
-            <span id="adm-count" style="font-size:11px;color:var(--text-4)"></span>
-            <div style="display:flex;gap:4px">
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">‹</button>
-              <button style="background:var(--brand);border:none;color:#fff;width:28px;height:28px;border-radius:4px;font-size:12px">1</button>
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">2</button>
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">3</button>
-              <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);width:28px;height:28px;border-radius:4px;font-size:12px;cursor:pointer">›</button>
-            </div>
-          </div>
+        <button class="pj-btn" id="pj-filter-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="22 3 2 3 10 12.5 10 19 14 21 14 12.5"/></svg> Filter</button>
+        <button class="pj-btn" id="pj-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+        <button class="btn-new" id="pj-new">＋ New Project</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+
+      <!-- KPI cards -->
+      <div class="pj-kpis">
+        <div class="pj-kpi">
+          <div class="pj-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+          <div><div class="pj-kpi-label">Total Projects</div><div class="pj-kpi-val" id="kpi-total">—</div></div>
+          <div class="pj-kpi-delta" style="color:#22C55E">↑ 16.7%<small>vs last month</small></div>
+        </div>
+        <div class="pj-kpi">
+          <div class="pj-kpi-ic" style="background:rgba(34,197,94,.14);color:#22C55E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16" fill="currentColor" stroke="none"/></svg></div>
+          <div><div class="pj-kpi-label">Active Projects</div><div class="pj-kpi-val" id="kpi-active">—</div></div>
+          <div class="pj-kpi-delta" style="color:#22C55E">↑ 7.7%<small>vs last month</small></div>
+        </div>
+        <div class="pj-kpi">
+          <div class="pj-kpi-ic" style="background:rgba(34,197,94,.14);color:#22C55E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 15.5 9.5"/></svg></div>
+          <div><div class="pj-kpi-label">Completed Projects</div><div class="pj-kpi-val" id="kpi-completed">—</div></div>
+          <div class="pj-kpi-delta" style="color:#22C55E">↑ 22.2%<small>vs last month</small></div>
+        </div>
+        <div class="pj-kpi">
+          <div class="pj-kpi-ic" style="background:rgba(245,158,11,.14);color:#FBBF24"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="10" y1="9" x2="10" y2="13"/><line x1="14" y1="9" x2="14" y2="13"/></svg></div>
+          <div><div class="pj-kpi-label">On Hold</div><div class="pj-kpi-val" id="kpi-onhold">—</div></div>
+          <div class="pj-kpi-delta" style="color:#F87171">↓ 25%<small>vs last month</small></div>
+        </div>
+        <div class="pj-kpi">
+          <div class="pj-kpi-ic" style="background:rgba(248,113,113,.13);color:#F87171"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></div>
+          <div><div class="pj-kpi-label">Cancelled</div><div class="pj-kpi-val" id="kpi-cancelled">—</div></div>
+          <div class="pj-kpi-delta" style="color:#6E6E7E">—<small>vs last month</small></div>
         </div>
       </div>
 
-      <!-- Right sidebar -->
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="dash-chart-card">
-          <h3>Project Overview</h3>
-          <div class="dash-pie-wrap" style="gap:12px">
-            <div class="dash-pie" style="width:90px;height:90px"><div class="dash-pie-hole" style="width:62px;height:62px"><div class="dash-pie-total" style="font-size:16px">48</div><div class="dash-pie-label">Total</div></div></div>
-            <div class="dash-pie-legend">
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#22c55e"></div> Active &nbsp;&nbsp;&nbsp;&nbsp;18</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#3b82f6"></div> Completed 21</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#f59e0b"></div> On Hold &nbsp; 5</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#ef4444"></div> Cancelled &nbsp;4</div>
+      <div class="pj-body">
+        <!-- Table area -->
+        <div style="min-width:0">
+          <div class="pj-tabs" id="pj-tabs">
+            <button class="pj-tab active" data-tab="all">All Projects</button>
+            <button class="pj-tab" data-tab="active">Active</button>
+            <button class="pj-tab" data-tab="on hold">On Hold</button>
+            <button class="pj-tab" data-tab="completed">Completed</button>
+            <button class="pj-tab" data-tab="cancelled">Cancelled</button>
+            <div class="pj-toolbar">
+              <button class="pj-viewbtn active" id="pj-list-btn" title="List view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+              <button class="pj-viewbtn" id="pj-grid-btn" title="Grid view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+              <select class="pj-sort" id="pj-sort">
+                <option value="featured">Sort by: Featured</option>
+                <option value="latest">Sort by: Latest</option>
+                <option value="oldest">Sort by: Oldest</option>
+                <option value="progress">Sort by: Progress</option>
+                <option value="name">Sort by: Name</option>
+              </select>
             </div>
           </div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Recent Activity <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
-          <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Nexa project completed</div><div style="font-size:10px;color:var(--text-4)">2 days ago</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(108,92,231,.15);color:#6C5CE7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Luxoré deliverable uploaded</div><div style="font-size:10px;color:var(--text-4)">5 hrs ago</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,.15);color:#f59e0b;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Reverie put on hold</div><div style="font-size:10px;color:var(--text-4)">1 day ago</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Top Clients</h3>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
-            <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:rgba(108,92,231,.2);color:#6C5CE7;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">LJ</div><span style="font-size:12px;color:var(--text-2)">Luxoré Jewels</span></div><span style="font-size:11px;color:var(--text-3)">₹2.4L</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:rgba(59,130,246,.2);color:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">NI</div><span style="font-size:12px;color:var(--text-2)">Nexa Interiors</span></div><span style="font-size:11px;color:var(--text-3)">₹1.8L</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:rgba(34,197,94,.2);color:#22c55e;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">HL</div><span style="font-size:12px;color:var(--text-2)">Horizon Labs</span></div><span style="font-size:11px;color:var(--text-3)">₹1.4L</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,.2);color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">VT</div><span style="font-size:12px;color:var(--text-2)">Vertex Technologies</span></div><span style="font-size:11px;color:var(--text-3)">₹1.1L</span></div>
-          </div>
-        </div>
-      </div>
 
+          <div class="pj-card" id="pj-listwrap">
+            <table class="adm-table pj-table">
+              <thead>
+                <tr><th style="padding-left:16px">Project</th><th>Client</th><th>Status</th><th>Progress</th><th>Due Date</th><th>Updated</th><th style="text-align:right;padding-right:16px">Actions</th></tr>
+              </thead>
+              <tbody id="pj-tbody"></tbody>
+            </table>
+            <div class="pj-grid" id="pj-grid" style="display:none;padding:14px"></div>
+            <div class="pj-foot">
+              <span class="pj-count" id="pj-count"></span>
+              <div class="pj-pages" id="pj-pages"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right rail -->
+        <div class="pj-rail">
+          <div class="pj-panel">
+            <h3>Project Overview</h3>
+            <div class="pj-donut-wrap">
+              <div class="pj-donut" id="ov-pie"><div class="pj-hole"><b id="ov-total">—</b><span>Total</span></div></div>
+              <div class="pj-leg" id="ov-legend"></div>
+            </div>
+          </div>
+
+          <div class="pj-panel">
+            <h3>Recent Activity <span class="pj-link">View all</span></h3>
+            <div class="pj-feed">
+              <div class="pj-feeditem">
+                <div class="pj-feedic" style="background:rgba(139,92,246,.14);color:#8B5CF6"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div>
+                <div><b>New project "Luxoré Jewels Website"</b><span>Created by Rohit Malhotra</span></div>
+                <time>2h ago</time>
+              </div>
+              <div class="pj-feeditem">
+                <div class="pj-feedic" style="background:rgba(59,130,246,.13);color:#60A5FA"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+                <div><b>Project "TechCorp SaaS Platform"</b><span>Updated by Ananya Singh</span></div>
+                <time>5h ago</time>
+              </div>
+              <div class="pj-feeditem">
+                <div class="pj-feedic" style="background:rgba(245,158,11,.13);color:#FBBF24"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div><b>Project "Aroma Élite Branding"</b><span>Moved to review</span></div>
+                <time>1d ago</time>
+              </div>
+              <div class="pj-feeditem">
+                <div class="pj-feedic" style="background:rgba(251,191,36,.13);color:#FBBF24"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="10" y1="9" x2="10" y2="13"/><line x1="14" y1="9" x2="14" y2="13"/></svg></div>
+                <div><b>Project "Haven Interiors Website"</b><span>Put on hold</span></div>
+                <time>2d ago</time>
+              </div>
+            </div>
+          </div>
+
+          <div class="pj-panel">
+            <h3>Top Clients <span class="pj-link">View all</span></h3>
+            <div id="pj-clients"></div>
+          </div>
+
+          <div class="pj-panel">
+            <h3>Quick Actions</h3>
+            <div class="pj-qa">
+              <button class="pj-qabtn" id="qa-new"><span class="pj-qaic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>New Project</button>
+              <button class="pj-qabtn" id="qa-template"><span class="pj-qaic" style="background:rgba(34,197,94,.14);color:#22C55E"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>Project Template</button>
+              <button class="pj-qabtn" id="qa-import"><span class="pj-qaic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>Import Project</button>
+              <button class="pj-qabtn" id="qa-archive"><span class="pj-qaic" style="background:rgba(245,158,11,.14);color:#FBBF24"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>Project Archive</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
-</div>
+
+<div class="pj-menu" id="pj-menu"></div>
+<div id="pj-modal-root"></div>
+
 <script>
-// ── Projects: live table from /api/projects ──
+// ── Projects board: live rows from /api/projects (+ response-only demo rows) ──
 (() => {
-  const tbody = $('#adm-tbody');
-  const count = $('#adm-count');
-  const BADGE = { active: ['bx-g', 'Active'], 'on hold': ['bx-y', 'On Hold'], review: ['bx-b', 'In Review'], completed: ['bx-b', 'Completed'], cancelled: ['bx-r', 'Cancelled'] };
-  const PROG_COLOR = (s) => (s === 'completed' ? '#3b82f6' : s === 'on hold' ? '#f59e0b' : s === 'cancelled' ? '#ef4444' : '#6C5CE7');
-  const CATS = ['Web Design & Dev', 'Product Design', 'Web Application', 'UX Strategy', 'Brand Identity', 'Landing Page'];
-  let projects = [];
-  let filter = 'All';
-  const row = (p) => `<tr>
-    <td style="padding-left:14px"><div style="font-weight:600;color:#fff;font-size:12px">${esc(p.title)}</div><div style="color:var(--text-4);font-size:10px">${esc(p.category || '—')}</div></td>
-    <td style="color:var(--text-2)">${esc(p.client)}</td>
-    <td>${badge(p.status, BADGE)}</td>
-    <td><div style="display:flex;align-items:center;gap:6px"><span class="prog-bar"><span class="prog-fill" style="width:${Number(p.progress) || 0}%;display:block;background:${PROG_COLOR(p.status)}"></span></span><span style="font-size:10px;color:var(--text-3)">${Number(p.progress) || 0}%</span></div></td>
-    <td style="color:var(--text-2)">${esc(p.budget || '—')}</td>
-    <td style="color:var(--text-3);font-size:11px">${esc(p.deadline ? fmtDate(p.deadline) : 'TBD')}</td>
-    <td><button class="row-view" data-id="${p.id}" style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td>
-  </tr>`;
-  const render = () => {
-    const list = projects.filter((p) => filter === 'All' || p.status === filter);
-    tbody.innerHTML = list.length ? list.map(row).join('') : '<tr><td colspan="7" class="adm-empty">No projects match this filter.</td></tr>';
-    count.textContent = `Showing 1–${list.length} of ${projects.length} projects`;
-    const n = (s) => projects.filter((p) => p.status === s).length;
-    fillStat('Total Projects', projects.length);
-    fillStat('Active', n('active'));
-    fillStat('On Hold', n('on hold'));
-    fillStat('Completed', n('completed'));
-    const activeBudget = projects.filter((p) => p.status === 'active').reduce((s, p) => s + (Number(String(p.budget).replace(/[^\d.]/g, '')) || 0), 0);
-    fillStat('Revenue (Active)', activeBudget ? '₹' + (activeBudget / 100000).toFixed(1) + 'L' : '₹0');
+  const PER = 7;
+  // 'review' counts as active work everywhere (tabs, KPIs, donut)
+  const isActive = (p) => p.status === 'active' || p.status === 'review';
+  const PILL = {
+    active: ['In Progress', '#A78BFA', 'rgba(139,92,246,.13)'],
+    review: ['Review', '#FB923C', 'rgba(251,146,60,.12)'],
+    'on hold': ['On Hold', '#FBBF24', 'rgba(251,191,36,.12)'],
+    completed: ['Completed', '#4ADE80', 'rgba(34,197,94,.12)'],
+    cancelled: ['Cancelled', '#F87171', 'rgba(248,113,113,.12)'],
   };
-  const load = async () => { try { projects = (await api('/api/projects')).data; render(); } catch (e) { toast(e.message, false); } };
-  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
-    $$('.ftab').forEach((x) => x.classList.remove('active'));
-    b.classList.add('active');
-    const label = b.textContent.trim();
-    filter = label === 'All' ? 'All' : label.toLowerCase();
-    render();
-  }));
-  const search = $('.dash-search input');
-  if (search) search.addEventListener('input', () => {
-    const q = search.value.toLowerCase();
-    tbody.innerHTML = projects.filter((p) => p.title.toLowerCase().includes(q) || p.client.toLowerCase().includes(q))
-      .map(row).join('') || '<tr><td colspan="7" class="adm-empty">No projects match.</td></tr>';
-  });
-  $('.btn-create-new').addEventListener('click', () => modal({
-    title: 'New Project',
-    fields: [
-      { name: 'title', label: 'Project title', required: true },
-      { name: 'client', label: 'Client', required: true },
-      { name: 'category', label: 'Category', type: 'select', options: CATS },
-      { name: 'status', label: 'Status', type: 'select', options: Object.keys(BADGE), value: 'active' },
-      { name: 'progress', label: 'Progress (%)', type: 'number', value: 0 },
-      { name: 'budget', label: 'Budget' },
-      { name: 'deadline', label: 'Deadline', type: 'date' },
-      { name: 'description', label: 'Description', type: 'textarea' },
-    ],
-    onSubmit: async (d) => { await api('/api/projects', { method: 'POST', body: d }); load(); },
-  }));
-  tbody.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.row-view');
-    if (!btn) return;
-    const p = projects.find((x) => x.id === Number(btn.dataset.id));
-    if (!p) return;
-    modal({
-      title: p.title,
-      fields: [
-        { name: 'title', label: 'Project title', value: p.title, required: true },
-        { name: 'client', label: 'Client', value: p.client, required: true },
-        { name: 'category', label: 'Category', type: 'select', options: CATS, value: p.category },
-        { name: 'status', label: 'Status', type: 'select', options: Object.keys(BADGE), value: p.status },
-        { name: 'progress', label: 'Progress (%)', type: 'number', value: p.progress },
-        { name: 'budget', label: 'Budget', value: p.budget },
-        { name: 'deadline', label: 'Deadline', type: 'date', value: p.deadline },
-        { name: 'description', label: 'Description', type: 'textarea', value: p.description },
-      ],
-      onSubmit: async (d) => { await api('/api/projects/' + p.id, { method: 'PUT', body: d }); load(); },
-      onDelete: async () => { await api('/api/projects/' + p.id, { method: 'DELETE' }); load(); },
+  const BAR = { active: '#8B5CF6', review: '#FB923C', 'on hold': '#FBBF24', completed: '#22C55E', cancelled: '#F87171' };
+  const THUMBS = {
+    'Website Redesign': ['#4C1D95', '#7C3AED'], 'Web Application': ['#1E3A8A', '#3B82F6'],
+    'Brand Identity': ['#7C2D12', '#EA580C'], 'Website Design': ['#134E4A', '#14B8A6'],
+    'Mobile Application': ['#581C87', '#A855F7'], 'Landing Page': ['#0C4A6E', '#0284C7'],
+    'Product Design': ['#3B0764', '#9333EA'], 'UX Strategy': ['#422006', '#CA8A04'],
+  };
+  const initials = (client) => {
+    const parts = String(client || '?').replace(/([a-z])([A-Z])/g, '$1 $2').split(/[\s&]+/).filter(Boolean);
+    return ((parts[0] || '?')[0] + ((parts[1] || (parts[0] || '??').slice(1))[0] || '')).toUpperCase();
+  };
+  const thumb = (p, big) => {
+    const [c1, c2] = THUMBS[p.category] || ['#312E81', '#6D28D9'];
+    const g = String(p.category || 'P')[0].toUpperCase();
+    return `<div class="${big ? 'pj-gthumb' : 'pj-thumb'}" style="background:linear-gradient(135deg,${c1},${c2})">${g}</div>`;
+  };
+  const pill = (p) => {
+    const [label, color, bg] = PILL[p.status] || PILL.active;
+    return `<span class="pj-pill" style="color:${color};background:${bg};border-color:${color}44">${label}</span>`;
+  };
+  const cav = (client, color) => `<div class="pj-cav" style="color:${color};border-color:${color}66;background:${color}1A">${esc(initials(client))}</div>`;
+  const CAV_COLORS = ['#F59E0B', '#38BDF8', '#A78BFA', '#34D399', '#F472B6', '#FB923C'];
+  const cavColor = (client) => CAV_COLORS[[...String(client)].reduce((a, c) => a + c.charCodeAt(0), 0) % CAV_COLORS.length];
+  const due = (p) => (p.deadline ? fmtDate(p.deadline) : 'TBD');
+  const updated = (p) => p.updated_label || (p.created_at ? fmtDate(p.created_at) : '—');
+
+  let all = [], tab = 'all', query = '', sort = 'featured', page = 1, view = 'list';
+
+  const filtered = () => {
+    let list = all.filter((p) => {
+      if (tab === 'active') return isActive(p);
+      if (tab !== 'all') return p.status === tab;
+      return true;
+    }).filter((p) => {
+      if (!query) return true;
+      const q = query.toLowerCase();
+      return (p.title + ' ' + p.client).toLowerCase().includes(q);
     });
+    if (sort === 'latest') list = [...list].sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));
+    else if (sort === 'oldest') list = [...list].sort((a, b) => String(a.created_at || '').localeCompare(String(b.created_at || '')));
+    else if (sort === 'progress') list = [...list].sort((a, b) => (Number(b.progress) || 0) - (Number(a.progress) || 0));
+    else if (sort === 'name') list = [...list].sort((a, b) => String(a.title).localeCompare(String(b.title)));
+    return list;
+  };
+
+  const row = (p) => `<tr>
+    <td style="padding-left:16px"><div class="pj-proj">${thumb(p)}<div><b>${esc(p.title)}</b><span>${esc(p.category || '—')}</span></div></div></td>
+    <td><div class="pj-client">${cav(p.client, cavColor(p.client))}${esc(p.client)}</div></td>
+    <td>${pill(p)}</td>
+    <td><div class="pj-prog"><b>${Number(p.progress) || 0}%</b><span class="track"><i style="width:${Number(p.progress) || 0}%;background:${BAR[p.status] || '#8B5CF6'}"></i></span></div></td>
+    <td class="pj-due">${esc(due(p))}</td>
+    <td class="pj-upd">${esc(updated(p))}</td>
+    <td style="text-align:right;padding-right:16px"><div class="pj-act" style="justify-content:flex-end">
+      <button class="pj-icbtn" data-act="view" data-id="${p.id}" title="View">👁</button>
+      <button class="pj-icbtn" data-act="menu" data-id="${p.id}" title="More">⋮</button>
+    </div></td>
+  </tr>`;
+
+  const card = (p) => `<div class="pj-gcard" data-act="view" data-id="${p.id}">${thumb(p, true)}
+    <div class="pj-gbody"><b>${esc(p.title)}</b><span>${esc(p.client)} · ${esc(p.category || '')}</span>
+    <div class="pj-grow">${pill(p)}<span style="font-size:11px;color:#8E8E9A">${Number(p.progress) || 0}%</span></div></div>
+  </div>`;
+
+  const render = () => {
+    const list = filtered();
+    const pages = Math.max(1, Math.ceil(list.length / PER));
+    if (page > pages) page = pages;
+    const slice = list.slice((page - 1) * PER, page * PER);
+    const tb = document.getElementById('pj-tbody'), grid = document.getElementById('pj-grid');
+    if (view === 'list') {
+      tb.parentElement.style.display = '';
+      grid.style.display = 'none';
+      tb.innerHTML = slice.length ? slice.map(row).join('') : `<tr><td colspan="7" style="text-align:center;color:#5E5E6E;padding:28px">No projects match.</td></tr>`;
+    } else {
+      tb.parentElement.style.display = 'none';
+      grid.style.display = '';
+      grid.innerHTML = slice.length ? slice.map(card).join('') : `<div style="grid-column:1/-1;text-align:center;color:#5E5E6E;padding:28px">No projects match.</div>`;
+    }
+    const from = list.length ? (page - 1) * PER + 1 : 0;
+    document.getElementById('pj-count').textContent = `Showing ${from} to ${Math.min(page * PER, list.length)} of ${list.length} projects`;
+    const nums = [];
+    for (let i = 1; i <= pages; i++) {
+      if (pages <= 7 || i === 1 || i === pages || Math.abs(i - page) <= 1) nums.push(i);
+      else if (nums[nums.length - 1] !== '…') nums.push('…');
+    }
+    document.getElementById('pj-pages').innerHTML =
+      `<button class="pj-page" data-pg="${page - 1}" ${page <= 1 ? 'disabled style="opacity:.4"' : ''}>‹</button>` +
+      nums.map((n) => n === '…' ? `<span style="color:#5E5E6E;font-size:11px">…</span>` : `<button class="pj-page ${n === page ? 'active' : ''}" data-pg="${n}">${n}</button>`).join('') +
+      `<button class="pj-page" data-pg="${page + 1}" ${page >= pages ? 'disabled style="opacity:.4"' : ''}>›</button>`;
+    // KPIs + donut (live)
+    const n = (fn) => all.filter(fn).length;
+    const t = all.length, a = n(isActive), c = n((p) => p.status === 'completed'),
+      h = n((p) => p.status === 'on hold'), x = n((p) => p.status === 'cancelled');
+    document.getElementById('kpi-total').textContent = t;
+    document.getElementById('kpi-active').textContent = a;
+    document.getElementById('kpi-completed').textContent = c;
+    document.getElementById('kpi-onhold').textContent = h;
+    document.getElementById('kpi-cancelled').textContent = x;
+    const pct = (v) => (t ? Math.round((v / t) * 100) : 0);
+    document.getElementById('ov-pie').style.background =
+      `conic-gradient(#8B5CF6 0 ${pct(a)}%,#22C55E ${pct(a)}% ${pct(a) + pct(c)}%,#FBBF24 ${pct(a) + pct(c)}% ${pct(a) + pct(c) + pct(h)}%,#F87171 ${pct(a) + pct(c) + pct(h)}% 100%)`;
+    document.getElementById('ov-total').textContent = t;
+    const leg = (name, color, v) => `<div class="pj-legrow"><div class="pj-dot" style="background:${color}"></div> ${name} <b>${v} <span class="dim">(${pct(v)}%)</span></b></div>`;
+    document.getElementById('ov-legend').innerHTML =
+      leg('In Progress', '#8B5CF6', a) + leg('Completed', '#22C55E', c) + leg('On Hold', '#FBBF24', h) + leg('Cancelled', '#F87171', x);
+    // top clients by budget
+    const byClient = {};
+    all.forEach((p) => {
+      const sum = Number(String(p.budget || '').replace(/[^\d]/g, '')) || 0;
+      byClient[p.client] = byClient[p.client] || { n: 0, sum: 0 };
+      byClient[p.client].n++;
+      byClient[p.client].sum += sum;
+    });
+    const top = Object.entries(byClient).sort((a, b) => b[1].sum - a[1].sum).slice(0, 4);
+    const m = top.length ? top[0][1].sum : 1;
+    document.getElementById('pj-clients').innerHTML = top.map(([name, v]) => {
+      const col = cavColor(name);
+      return `<div class="pj-client-row"><div class="who">${cav(name, col)}<div>${esc(name)}<small>${v.n} Project${v.n === 1 ? '' : 's'}</small></div></div>
+      <div class="val">₹${v.sum.toLocaleString('en-IN')}</div>
+      <div class="bar"><i style="width:${Math.max(4, Math.round((v.sum / m) * 100))}%"></i></div></div>`;
+    }).join('');
+  };
+
+  const setTab = (t) => {
+    tab = t; page = 1;
+    document.querySelectorAll('#pj-tabs .pj-tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === t));
+    render();
+  };
+
+  const FIELDS = [
+    { name: 'title', label: 'Project title', required: true },
+    { name: 'client', label: 'Client', required: true },
+    { name: 'category', label: 'Category', type: 'select', options: ['Website Redesign', 'Web Application', 'Brand Identity', 'Website Design', 'Mobile Application', 'Landing Page', 'Product Design', 'UX Strategy'] },
+    { name: 'status', label: 'Status', type: 'select', options: ['active', 'review', 'on hold', 'completed', 'cancelled'], value: 'active' },
+    { name: 'progress', label: 'Progress (%)', type: 'number', value: 0 },
+    { name: 'budget', label: 'Budget (e.g. ₹80,000)' },
+    { name: 'deadline', label: 'Due date', type: 'date' },
+    { name: 'description', label: 'Description', type: 'textarea' },
+  ];
+  const newProject = () => modal({
+    title: 'New Project',
+    fields: FIELDS,
+    onSubmit: async (d) => { await api('/api/projects', { method: 'POST', body: d }); sort = 'latest'; document.getElementById('pj-sort').value = 'latest'; page = 1; load(); },
   });
+  const editProject = (p) => modal({
+    title: p.title,
+    fields: FIELDS.map((f) => ({ ...f, value: p[f.name] ?? f.value ?? '' })),
+    onSubmit: async (d) => { await api('/api/projects/' + p.id, { method: 'PUT', body: d }); load(); },
+    onDelete: async () => { await api('/api/projects/' + p.id, { method: 'DELETE' }); load(); },
+  });
+  const demoDetail = (p) => {
+    const root = document.getElementById('pj-modal-root');
+    const [label, color] = [PILL[p.status] ? PILL[p.status][0] : 'Active', PILL[p.status] ? PILL[p.status][1] : '#A78BFA'];
+    root.innerHTML = `<div class="pj-overlay"><div class="pj-modal">
+      <h3>${esc(p.title)}</h3><p class="sub">${esc(p.client)} · Demo project (read-only)</p>
+      <div class="pj-kv"><span>Status</span><b style="color:${color}">${esc(label)}</b></div>
+      <div class="pj-kv"><span>Category</span><b>${esc(p.category || '—')}</b></div>
+      <div class="pj-kv"><span>Progress</span><b>${Number(p.progress) || 0}%</b></div>
+      <div class="pj-kv"><span>Budget</span><b>${esc(p.budget || '—')}</b></div>
+      <div class="pj-kv"><span>Due date</span><b>${esc(due(p))}</b></div>
+      <div class="pj-kv"><span>Updated</span><b>${esc(updated(p))}</b></div>
+      <p class="sub" style="margin:12px 0 0">${esc(p.description || '')}</p>
+      <div style="margin-top:16px;text-align:right"><button class="pj-btn" id="pj-demo-close">Close</button></div>
+    </div></div>`;
+    root.querySelector('.pj-overlay').addEventListener('click', (e) => { if (e.target.classList.contains('pj-overlay') || e.target.id === 'pj-demo-close') root.innerHTML = ''; });
+  };
+  const openProject = (p) => (p._demo ? demoDetail(p) : editProject(p));
+
+  // row action menu (single floating element)
+  const menu = document.getElementById('pj-menu');
+  const closeMenu = () => (menu.style.display = 'none');
+  document.addEventListener('click', (e) => { if (!e.target.closest('#pj-menu') && !e.target.closest('[data-act="menu"]')) closeMenu(); });
+  const openMenu = (p, anchor) => {
+    const r = anchor.getBoundingClientRect();
+    menu.innerHTML = `<button data-m="view">👁&nbsp; View details</button>` +
+      (p._demo ? '' : `<button data-m="edit">✎&nbsp; Edit</button><button data-m="del" class="danger">🗑&nbsp; Delete</button>`);
+    menu.style.display = 'block';
+    menu.style.top = Math.min(innerHeight - 140, r.bottom + 4) + 'px';
+    menu.style.left = Math.max(8, r.right - 160) + 'px';
+    menu.querySelectorAll('button').forEach((b) => b.addEventListener('click', async () => {
+      closeMenu();
+      if (b.dataset.m === 'view' || b.dataset.m === 'edit') openProject(p);
+      if (b.dataset.m === 'del' && !p._demo && confirm(`Delete "${p.title}"?`)) {
+        try { await api('/api/projects/' + p.id, { method: 'DELETE' }); load(); }
+        catch (e) { toast(e.message, false); }
+      }
+    }));
+  };
+
+  const byId = (id) => all.find((x) => x.id === Number(id));
+  document.getElementById('pj-listwrap').addEventListener('click', (e) => {
+    const pg = e.target.closest('[data-pg]');
+    if (pg && !pg.disabled) { page = Number(pg.dataset.pg); render(); return; }
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const p = byId(btn.dataset.id);
+    if (!p) return;
+    if (btn.dataset.act === 'view') openProject(p);
+    else openMenu(p, btn);
+  });
+  document.querySelectorAll('#pj-tabs .pj-tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  document.getElementById('pj-search').addEventListener('input', (e) => { query = e.target.value.trim(); page = 1; render(); });
+  document.getElementById('pj-sort').addEventListener('change', (e) => { sort = e.target.value; page = 1; render(); });
+  document.getElementById('pj-list-btn').addEventListener('click', () => {
+    view = 'list';
+    document.getElementById('pj-list-btn').classList.add('active');
+    document.getElementById('pj-grid-btn').classList.remove('active');
+    render();
+  });
+  document.getElementById('pj-grid-btn').addEventListener('click', () => {
+    view = 'grid';
+    document.getElementById('pj-grid-btn').classList.add('active');
+    document.getElementById('pj-list-btn').classList.remove('active');
+    render();
+  });
+  document.getElementById('pj-filter-btn').addEventListener('click', (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    menu.innerHTML = ['all', 'active', 'on hold', 'completed', 'cancelled']
+      .map((t) => `<button data-f="${t}">${t === tab ? '●' : '○'}&nbsp; ${t === 'all' ? 'All Projects' : t[0].toUpperCase() + t.slice(1)}</button>`).join('');
+    menu.style.display = 'block';
+    menu.style.top = (r.bottom + 4) + 'px';
+    menu.style.left = Math.max(8, r.right - 170) + 'px';
+    menu.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => { closeMenu(); setTab(b.dataset.f); }));
+  });
+  document.getElementById('pj-export').addEventListener('click', () => {
+    const rows = [['Project', 'Client', 'Status', 'Progress', 'Budget', 'Due Date']];
+    filtered().forEach((p) => rows.push([p.title, p.client, (PILL[p.status] || ['?'])[0], (Number(p.progress) || 0) + '%', p.budget || '', due(p)]));
+    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'projects.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  const TPL = {
+    saas: { title: 'New SaaS Platform', category: 'Web Application', status: 'active', progress: 10, budget: '₹80,000' },
+    brand: { title: 'New Brand Identity', category: 'Brand Identity', status: 'active', progress: 10, budget: '₹95,000' },
+    landing: { title: 'New Landing Page', category: 'Landing Page', status: 'active', progress: 10, budget: '₹60,000' },
+  };
+  const wireNew = () => document.getElementById('pj-new').addEventListener('click', newProject);
+  document.getElementById('qa-new').addEventListener('click', newProject);
+  document.getElementById('qa-template').addEventListener('click', () => modal({
+    title: 'New Project from Template',
+    fields: [
+      { name: 'template', label: 'Template', type: 'select', options: ['saas', 'brand', 'landing'] },
+      { name: 'client', label: 'Client', required: true },
+      { name: 'deadline', label: 'Due date', type: 'date' },
+    ],
+    onSubmit: async (d) => {
+      const t = TPL[d.template] || TPL.saas;
+      await api('/api/projects', { method: 'POST', body: { ...t, client: d.client, deadline: d.deadline } });
+      sort = 'latest'; document.getElementById('pj-sort').value = 'latest'; page = 1; load();
+    },
+  }));
+  document.getElementById('qa-import').addEventListener('click', () => modal({
+    title: 'Import Projects',
+    fields: [{ name: 'lines', label: 'One per line: Title | Client', type: 'textarea', required: true }],
+    onSubmit: async (d) => {
+      const lines = String(d.lines || '').split('\n').map((l) => l.trim()).filter(Boolean);
+      let n = 0;
+      for (const line of lines) {
+        const [title, client] = line.split('|').map((s) => (s || '').trim());
+        if (!title || !client) continue;
+        await api('/api/projects', { method: 'POST', body: { title, client } });
+        n++;
+      }
+      if (!n) throw new Error('Nothing to import — use "Title | Client" per line.');
+      sort = 'latest'; document.getElementById('pj-sort').value = 'latest'; page = 1; load();
+    },
+  }));
+  document.getElementById('qa-archive').addEventListener('click', () => setTab('cancelled'));
+
+  const load = async () => {
+    try {
+      const { data } = await api('/api/projects');
+      const demos = data.filter((d) => d._demo), real = data.filter((d) => !d._demo);
+      all = [...demos, ...real];
+      render();
+    } catch (e) { toast(e.message, false); }
+  };
+  wireNew();
   load();
 })();
 </script>

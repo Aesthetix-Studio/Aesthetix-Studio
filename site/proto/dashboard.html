@@ -3,13 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard — Aesthetix Studio</title>
-<meta name="description" content="Aesthetix Studio client dashboard.">
+<title>Dashboard — The Studio at a Glance — Aesthetix Studio</title>
+<meta name="description" content="The Aesthetix Studio internal dashboard: pipeline, active projects, invoices and revenue at a glance, with an AI summary of what needs attention.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/aesthetix.css"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://aesthetixstudio.com/dashboard">
 <script src="/js/admin.js"></script><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Dashboard — Aesthetix Studio"><meta property="og:description" content="Aesthetix Studio client dashboard."><meta property="og:url" content="https://aesthetixstudio.com/dashboard"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Dashboard — Aesthetix Studio"><meta name="twitter:description" content="Aesthetix Studio client dashboard.">
+<style>
+.dash-stat-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:16px}
+.dash-stat-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:16px 16px 10px;min-width:0}
+.dash-stat-top{display:flex;align-items:flex-start;gap:10px}
+.dash-stat-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.dash-stat-label{font-size:11px;color:#B9B9C4;font-weight:500;margin-bottom:5px}
+.dash-stat-value{font-size:23px;font-weight:700;color:#fff;letter-spacing:-.01em;font-family:'Manrope';margin:0}
+.dash-stat-delta{font-size:11px;display:flex;align-items:center;gap:5px;margin-top:7px;font-weight:600}
+.delta-up{color:#22C55E}
+.dash-stat-delta span{color:#6E6E7E!important;font-weight:400;font-size:10px}
+.dash-sparkline{height:34px;margin-top:6px;overflow:hidden}
+.dash-sparkline svg{width:100%;height:34px;overflow:visible}
+.dash-main-grid{display:grid;grid-template-columns:1.55fr 1.25fr 1fr;gap:14px;margin-bottom:14px}
+.dash-chart-card,.dash-activity-card,.dash-health-card,.dash-pages-card,.dash-quick-card,.dash-tasks-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.dash-chart-card h3,.dash-activity-card h3,.dash-health-card h3,.dash-pages-card h3,.dash-quick-card h3,.dash-tasks-card h3{font-size:13.5px;font-weight:700;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;color:#fff;font-family:'Manrope'}
+.dash-link{font-size:11.5px;color:#8B5CF6;font-weight:500;cursor:pointer;white-space:nowrap}
+.dash-chart-sub{font-size:24px;font-weight:800;color:#fff}
+.dash-chart-delta{font-size:11.5px;color:#8E8E9A;margin-top:2px}
+.dash-chart-delta b{color:#22C55E;font-weight:700}
+.dash-chart-area{margin-top:10px;height:172px;position:relative}
+.dash-chart-grid{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:4px 0 22px;font-size:9.5px;color:#4A4A58}
+.dash-chart-grid div{border-top:1px solid #1C1C27;display:flex;justify-content:flex-start;padding-top:2px}
+.dash-chart-line{position:absolute;inset:0 0 22px 26px}
+.dash-chart-line svg{width:100%;height:100%;overflow:visible}
+.dash-chart-x{display:flex;justify-content:space-between;padding:6px 0 0 26px;font-size:9.5px;color:#6E6E7E}
+.dash-tip{position:absolute;background:#1E1E2A;border:1px solid #333344;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;color:#fff;text-align:center;transform:translate(-50%,-110%);pointer-events:none}
+.dash-tip small{display:block;font-size:9px;color:#8E8E9A;font-weight:400}
+.dash-pie-wrap{display:flex;align-items:center;gap:18px;justify-content:flex-start;margin-top:6px}
+.dash-pie{width:148px;height:148px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:conic-gradient(#7C5CFF 0 42.6%,#3B82F6 42.6% 71.3%,#FBBF24 71.3% 85.6%,#FB923C 85.6% 94%,#EC4899 94% 98.1%,#60A5FA 98.1% 100%)}
+.dash-pie-hole{width:96px;height:96px;border-radius:50%;background:#12121A;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dash-pie-total{font-size:19px;font-weight:800;color:#fff}
+.dash-pie-label{font-size:10px;color:#8E8E9A}
+.dash-pie-legend{display:grid;gap:9px;flex:1}
+.dash-pie-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#B9B9C4}
+.dash-pie-item b{margin-left:auto;color:#fff;font-weight:600}
+.dash-pie-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dash-health-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid #1B1B26;font-size:11px}
+.dash-health-row:last-child{border-bottom:0}
+.dash-health-ic{width:32px;height:32px;border-radius:8px;background:#181824;border:1px solid #262633;display:grid;place-items:center;color:#9A9AA8;flex-shrink:0}
+.dash-health-txt{flex:1;min-width:0}
+.dash-health-txt b{display:block;font-size:11.5px;color:#E4E4EA;font-weight:600}
+.dash-health-txt span{font-size:10.5px;color:#7A7A88}
+.dash-check{width:18px;height:18px;border-radius:50%;background:#22C55E;color:#06270F;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0}
+.dash-health-progress{height:5px;border-radius:3px;background:#262633;overflow:hidden;width:100%;margin-top:6px}
+.dash-health-bar{height:100%;background:#7C5CFF;border-radius:3px}
+.dash-uptime{color:#22C55E;font-weight:700;font-size:11.5px}
+.dash-second-grid{display:grid;grid-template-columns:1.25fr 1.55fr 1fr;gap:14px;margin-bottom:14px}
+.dash-activity-item{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid #1B1B26}
+.dash-activity-item:last-child{border-bottom:0}
+.dash-act-avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;border:1px solid}
+.dash-act-text{flex:1;font-size:11px;line-height:1.45;min-width:0}
+.dash-act-text strong{font-size:12px;display:block;margin-bottom:1px;color:#EDEDF2;font-weight:600}
+.dash-act-text span{color:#7A7A88;font-size:10.5px}
+.dash-act-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.dash-act-time{font-size:10px;color:#7A7A88;white-space:nowrap}
+.dash-act-badge{font-size:9.5px;font-weight:600;padding:3px 9px;border-radius:6px;white-space:nowrap;border:1px solid}
+.badge-lead{background:rgba(34,197,94,.12);color:#22C55E;border-color:rgba(34,197,94,.35)}
+.badge-proposal{background:rgba(139,92,246,.14);color:#A78BFA;border-color:rgba(139,92,246,.4)}
+.badge-blog{background:rgba(34,197,94,.12);color:#4ADE80;border-color:rgba(34,197,94,.35)}
+.badge-project{background:rgba(59,130,246,.13);color:#60A5FA;border-color:rgba(59,130,246,.4)}
+.badge-user{background:rgba(245,158,11,.12);color:#FBBF24;border-color:rgba(245,158,11,.35)}
+.dash-pages-head,.dash-pages-row{display:grid;grid-template-columns:34px 1fr 62px 62px 70px 62px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #1B1B26;font-size:11px;color:#C9C9D2}
+.dash-pages-head{font-size:10px;color:#6E6E7E;font-weight:600;border-bottom:1px solid #1B1B26}
+.dash-pages-row:last-child{border-bottom:0}
+.dash-page-thumb{width:32px;height:32px;border-radius:7px;overflow:hidden;flex-shrink:0;background:#262633;display:grid;place-items:center;font-size:9px;color:#8E8E9A}
+.dash-quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.dash-quick-btn{background:#181824;border:1px solid #23232F;border-radius:11px;padding:13px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;font-weight:500;color:#C9C9D2;cursor:pointer;text-align:center;font-family:inherit}
+.dash-quick-btn:hover{border-color:#7C3AED;color:#fff}
+.dash-quick-icon{width:30px;height:30px;display:grid;place-items:center}
+.dash-tasks-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #1B1B26;font-size:11px}
+.dash-tasks-item:last-child{border-bottom:0}
+.dash-task-check{width:17px;height:17px;border:1.5px solid #3A3A48;border-radius:50%;flex-shrink:0}
+.dash-task-text{flex:1;color:#E4E4EA;font-size:12px;font-weight:600;min-width:0}
+.dash-task-text small{display:block;font-size:10.5px;color:#7A7A88;font-weight:400}
+.dash-task-date{font-size:10.5px;color:#7A7A88;white-space:nowrap}
+.dash-ai-strip{background:linear-gradient(90deg,#221D3F,#14121F 70%);border:1px solid rgba(124,92,255,.3);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.dash-ai-icon{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#6D28D9);display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(124,58,237,.5)}
+.dash-ai-text{flex:1;min-width:0}
+.dash-ai-text strong{display:block;font-size:13px;margin-bottom:3px;color:#fff}
+.dash-ai-text p{font-size:11.5px;color:#9A9AA8;margin:0}
+.dash-ai-btn{border:1px solid #6D5DF6;border-radius:9px;padding:10px 18px;font-size:12px;color:#C4B5FD;white-space:nowrap;cursor:pointer;background:rgba(124,58,237,.12);display:flex;align-items:center;gap:8px;font-weight:600}
+@media(max-width:1280px){.dash-stat-cards{grid-template-columns:repeat(3,1fr)}.dash-main-grid,.dash-second-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body style="overflow:hidden">
 
@@ -17,104 +100,26 @@
 
   <!-- ── Sidebar ── -->
   <aside class="dash-sidebar">
-    <!-- Logo -->
     <div class="dash-logo-wrap">
-      <div>
-        <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
-      </div>
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
       <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
     </div>
 
-    <!-- User -->
     <div class="dash-user">
-      <div class="dash-avatar">RM</div>
+      <div class="dash-avatar" data-adm="initials">—</div>
       <div class="dash-user-info">
-        <h4>Rohit Malhotra</h4>
-        <span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span>
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
       </div>
-      <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
     </div>
 
-    <!-- Nav -->
-    <nav class="dash-nav">
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/dashboard.html"></nav>
 
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">Overview</div>
-        <a class="dash-nav-item active" href="#">
-          <span class="dash-nav-icon">⊞</span> Dashboard
-        </a>
-        <a class="dash-nav-item" href="/admin-analytics.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">Content Management</div>
-        <a class="dash-nav-item" href="/admin-projects.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects
-        </a>
-        <a class="dash-nav-item" href="/admin-articles.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Blog Posts
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Pages
-        </a>
-        <a class="dash-nav-item" href="/admin-media.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library
-        </a>
-        <a class="dash-nav-item" href="/admin-leads.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span> Testimonials
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">AI Tools <span class="dash-new-badge">New</span></div>
-        <a class="dash-nav-item" href="/proposal-generator.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></span> Proposal Generator
-        </a>
-        <a class="dash-nav-item" href="/ai-chat-assistant.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span> AI Writer
-        </a>
-        <a class="dash-nav-item" href="/brand-audit-tool.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool
-        </a>
-      </div>
-
-      <div class="dash-nav-section">
-        <div class="dash-nav-label">System</div>
-        <a class="dash-nav-item" href="/admin-users.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Roles &amp; Permissions
-        </a>
-        <a class="dash-nav-item" href="/admin-settings.html">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span> Activity Logs
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Integrations
-        </a>
-        <a class="dash-nav-item" href="#">
-          <span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span> System Health
-        </a>
-      </div>
-
-    </nav>
-
-    <!-- Bottom actions -->
     <div class="dash-sidebar-bottom">
-      <button class="dash-visit-btn">Visit Website ↗</button>
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
       <div class="dash-dark-toggle">
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
+        <span>🌙&nbsp; Dark Mode</span>
         <div class="toggle-switch"></div>
       </div>
     </div>
@@ -122,196 +127,157 @@
 
   <!-- ── Main content ── -->
   <div class="dash-main">
-
-    <!-- Top bar -->
     <div class="dash-topbar">
       <div>
-        <h1>Welcome back, Rohit!</h1>
-        <p>Here's what's happening with Aesthetix Studio today.</p>
+        <h1 data-adm="welcome">—</h1>
+        <p>Here&#39;s what&#39;s happening with Aesthetix Studio today.</p>
       </div>
       <div class="dash-topbar-right">
         <div class="dash-search">
-          <span style="font-size:12px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" placeholder="Search anything...">
           <span class="dash-search-kbd">Ctrl / K</span>
         </div>
-        <div class="dash-date-range">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 18 – May 24, 2025
-        </div>
+        <div class="dash-date-range">May 18 – May 24, 2025 <span style="color:#8E8E9A">📅</span></div>
         <div class="dash-notif">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span class="dash-notif-dot"></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="dash-notif-dot">7</span>
         </div>
-        <button class="btn-create-new">+ Create New ▾</button>
+        <button class="btn-create-new">＋ Create New ⌄</button>
       </div>
     </div>
 
-    <!-- Scrollable content -->
-    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
 
       <!-- Stat cards -->
       <div class="dash-stat-cards">
         <div class="dash-stat-card">
-          <div class="dash-stat-icon" style="color:#6C5CE7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-          <div class="dash-stat-label">Total Visitors</div>
-          <div class="dash-stat-value" id="kpi-visitors">12,543</div>
-          <div class="dash-stat-delta delta-up">↑ 18.6% <span style="color:var(--text-4)">vs May 11 – May 17</span></div>
-          <div class="dash-sparkline">
-            <svg viewBox="0 0 100 36" preserveAspectRatio="none">
-              <polyline points="0,30 15,25 30,28 45,15 60,10 75,18 90,8 100,12" fill="none" stroke="#6C5CE7" stroke-width="1.5"/>
-            </svg>
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="17" rx="1"/></svg></div>
+            <div><div class="dash-stat-label">Total Visitors</div><div class="dash-stat-value" id="kpi-visitors">—</div></div>
           </div>
+          <div class="dash-stat-delta delta-up">↑ <span class="delta-num" data-delta="0">—</span></div>
+          <div class="dash-sparkline"><svg viewBox="0 0 100 34" preserveAspectRatio="none"><polyline points="0,26 12,22 24,25 36,20 48,22 60,16 72,19 84,10 100,12" fill="none" stroke="#8B5CF6" stroke-width="1.6" stroke-linecap="round"/><circle cx="100" cy="12" r="2.4" fill="#8B5CF6"/></svg></div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-icon" style="color:#22c55e"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <div class="dash-stat-label">Leads Captured</div>
-          <div class="dash-stat-value" id="kpi-leads">842</div>
-          <div class="dash-stat-delta delta-up">↑ 24.3% <span style="color:var(--text-4)">vs May 11 – May 17</span></div>
-          <div class="dash-sparkline">
-            <svg viewBox="0 0 100 36" preserveAspectRatio="none">
-              <polyline points="0,28 15,22 30,25 45,18 60,12 75,16 90,6 100,9" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-            </svg>
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon" style="background:rgba(34,197,94,.14);color:#22C55E"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5v1H4v-1z"/></svg></div>
+            <div><div class="dash-stat-label">Leads Captured</div><div class="dash-stat-value" id="kpi-leads">—</div></div>
           </div>
+          <div class="dash-stat-delta delta-up">↑ <span class="delta-num" data-delta="1">—</span></div>
+          <div class="dash-sparkline"><svg viewBox="0 0 100 34" preserveAspectRatio="none"><polyline points="0,24 12,27 24,20 36,22 48,16 60,18 72,12 84,14 100,8" fill="none" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round"/><circle cx="100" cy="8" r="2.4" fill="#22C55E"/></svg></div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-icon" style="color:#3b82f6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-          <div class="dash-stat-label">Proposals Generated</div>
-          <div class="dash-stat-value" id="kpi-proposals">156</div>
-          <div class="dash-stat-delta delta-up">↑ 31.7% <span style="color:var(--text-4)">vs May 11 – May 17</span></div>
-          <div class="dash-sparkline">
-            <svg viewBox="0 0 100 36" preserveAspectRatio="none">
-              <polyline points="0,32 15,28 30,20 45,22 60,14 75,10 90,14 100,8" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-            </svg>
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h7M9 17h7"/></svg></div>
+            <div><div class="dash-stat-label">Proposals Generated</div><div class="dash-stat-value" id="kpi-proposals">—</div></div>
           </div>
+          <div class="dash-stat-delta delta-up">↑ <span class="delta-num" data-delta="2">—</span></div>
+          <div class="dash-sparkline"><svg viewBox="0 0 100 34" preserveAspectRatio="none"><polyline points="0,28 12,24 24,26 36,20 48,22 60,15 72,17 84,10 100,7" fill="none" stroke="#60A5FA" stroke-width="1.6" stroke-linecap="round"/><circle cx="100" cy="7" r="2.4" fill="#60A5FA"/></svg></div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-icon" style="color:#f59e0b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <div class="dash-stat-label">Revenue</div>
-          <div class="dash-stat-value" id="kpi-revenue" style="font-size:18px">₹8,45,230</div>
-          <div class="dash-stat-delta delta-up">↑ 21.4% <span style="color:var(--text-4)">vs May 11 – May 17</span></div>
-          <div class="dash-sparkline">
-            <svg viewBox="0 0 100 36" preserveAspectRatio="none">
-              <polyline points="0,30 15,26 30,22 45,18 60,20 75,12 90,8 100,10" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
-            </svg>
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon" style="background:rgba(245,158,11,.14);color:#FBBF24"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="800" fill="#12121A">$</text></svg></div>
+            <div><div class="dash-stat-label">Revenue</div><div class="dash-stat-value" id="kpi-revenue" style="font-size:21px">—</div></div>
           </div>
+          <div class="dash-stat-delta delta-up">↑ <span class="delta-num" data-delta="3">—</span></div>
+          <div class="dash-sparkline"><svg viewBox="0 0 100 34" preserveAspectRatio="none"><polyline points="0,26 12,22 24,24 36,19 48,21 60,16 72,17 84,10 100,11" fill="none" stroke="#FBBF24" stroke-width="1.6" stroke-linecap="round"/><circle cx="100" cy="11" r="2.4" fill="#FBBF24"/></svg></div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-icon" style="color:#ec4899"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-          <div class="dash-stat-label">Conversion Rate</div>
-          <div class="dash-stat-value" id="kpi-conversion">3.42%</div>
-          <div class="dash-stat-delta delta-up">↑ 8.7% <span style="color:var(--text-4)">vs May 11 – May 17</span></div>
-          <div class="dash-sparkline">
-            <svg viewBox="0 0 100 36" preserveAspectRatio="none">
-              <polyline points="0,26 15,28 30,22 45,24 60,18 75,20 90,14 100,16" fill="none" stroke="#ec4899" stroke-width="1.5"/>
-            </svg>
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon" style="background:rgba(236,72,153,.14);color:#EC4899"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+            <div><div class="dash-stat-label">Conversion Rate</div><div class="dash-stat-value" id="kpi-conversion">—</div></div>
           </div>
+          <div class="dash-stat-delta delta-up">↑ <span class="delta-num" data-delta="4">—</span></div>
+          <div class="dash-sparkline"><svg viewBox="0 0 100 34" preserveAspectRatio="none"><polyline points="0,22 12,25 24,20 36,22 48,17 60,19 72,13 84,15 100,9" fill="none" stroke="#EC4899" stroke-width="1.6" stroke-linecap="round"/><circle cx="100" cy="9" r="2.4" fill="#EC4899"/></svg></div>
         </div>
       </div>
 
       <!-- Main charts row -->
       <div class="dash-main-grid">
-
-        <!-- Website analytics chart -->
-        <div class="dash-chart-card" style="grid-column:1/2">
+        <div class="dash-chart-card">
           <h3>Website Analytics
-            <div style="display:flex;gap:8px;align-items:center">
-              <span style="font-size:10px;color:var(--brand)">● Visitors</span>
-              <select style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);font-size:10px;border-radius:4px;padding:2px 6px">
-                <option>Daily</option>
-                <option>Weekly</option>
-              </select>
-            </div>
+            <span style="display:flex;gap:10px;align-items:center">
+              <span style="font-size:11px;color:#8B5CF6;font-weight:600">● Visitors</span>
+              <span style="background:#1A1A26;border:1px solid #2A2A38;color:#C9C9D2;font-size:11px;border-radius:7px;padding:4px 10px;font-weight:500">Daily ⌄</span>
+            </span>
           </h3>
-          <div class="dash-chart-sub" id="chart-total">12,543</div>
-          <div class="dash-chart-delta" id="chart-delta">Total Visitors &nbsp; ↑ 18.6%</div>
-          <div class="dash-chart-area" style="margin-top:14px;height:160px">
+          <div class="dash-chart-sub" id="chart-total">—</div>
+          <div class="dash-chart-delta" id="chart-delta">—</div>
+          <div class="dash-chart-area">
+            <div class="dash-chart-grid"><div>8K</div><div>6K</div><div>4K</div><div>2K</div><div>0</div></div>
             <div class="dash-chart-line">
-              <svg viewBox="0 0 300 100" preserveAspectRatio="none" style="width:100%;height:100%">
+              <svg viewBox="0 0 300 130" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#6C5CE7" stop-opacity=".4"/>
-                    <stop offset="100%" stop-color="#6C5CE7" stop-opacity="0"/>
+                    <stop offset="0%" stop-color="#8B5CF6" stop-opacity=".35"/>
+                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
                   </linearGradient>
                 </defs>
-                <path id="chart-main" d="" fill="none" stroke="#6C5CE7" stroke-width="2"/>
                 <path id="chart-fill" d="" fill="url(#cg)"/>
+                <path id="chart-main" d="" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <g id="chart-dots" fill="#12121A" stroke="#8B5CF6" stroke-width="2"></g>
               </svg>
+              <div class="dash-tip" id="chart-tip" style="left:52%;top:44%">2,254<small>May 21</small></div>
             </div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:8px;color:var(--text-4)">
-              <span>May 18</span><span>May 19</span><span>May 20</span><span>May 21</span><span>May 22</span><span>May 23</span><span>May 24</span>
-            </div>
+            <div class="dash-chart-x" style="position:absolute;left:0;right:0;bottom:0"><span>May 18</span><span>May 19</span><span>May 20</span><span>May 21</span><span>May 22</span><span>May 23</span><span>May 24</span></div>
           </div>
         </div>
 
-        <!-- Traffic sources donut -->
-        <div class="dash-chart-card" style="grid-column:2/3">
-          <h3>Traffic Sources <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View full report</a></h3>
+        <div class="dash-chart-card">
+          <h3>Traffic Sources <span class="dash-link">View full report ⌄</span></h3>
           <div class="dash-pie-wrap">
-            <div class="dash-pie">
-              <div class="dash-pie-hole">
-                <div class="dash-pie-total" id="sources-total">12,543</div>
-                <div class="dash-pie-label">Visitors</div>
-              </div>
-            </div>
+            <div class="dash-pie"><div class="dash-pie-hole"><div class="dash-pie-total" id="sources-total">—</div><div class="dash-pie-label">Visitors</div></div></div>
             <div class="dash-pie-legend" id="sources-legend"></div>
           </div>
         </div>
 
-        <!-- System health -->
         <div class="dash-health-card">
-          <h3>System Health <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
+          <h3>System Health <span class="dash-link">View all</span></h3>
           <div id="health-rows"></div>
         </div>
-
       </div>
 
       <!-- Second row -->
       <div class="dash-second-grid">
-
-        <!-- Recent Activity -->
         <div class="dash-activity-card">
-          <h3>Recent Activity <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all activity</a></h3>
+          <h3>Recent Activity <span class="dash-link">View all activity</span></h3>
           <div id="activity-list"></div>
         </div>
 
-        <!-- Top Performing Pages -->
         <div class="dash-pages-card">
-          <h3>Top Performing Pages <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all pages ▾</a></h3>
-          <div class="dash-pages-row header" style="color:var(--text-4)">
-            <span></span><span>Page</span><span>Views</span><span>Visitors</span><span>Bounce</span><span>Avg. Time</span>
-          </div>
+          <h3>Top Performing Pages <span class="dash-link">View all pages ⌄</span></h3>
+          <div class="dash-pages-head"><span></span><span>Page</span><span>Views</span><span>Visitors</span><span>Bounce Rate</span><span>Avg. Time</span></div>
           <div id="pages-list"></div>
         </div>
 
-        <!-- Quick actions + tasks -->
-        <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
           <div class="dash-quick-card">
             <h3>Quick Actions</h3>
             <div class="dash-quick-grid">
-              <button class="dash-quick-btn"><div class="dash-quick-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>New Project</button>
-              <button class="dash-quick-btn"><div class="dash-quick-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>Write Blog Post</button>
-              <button class="dash-quick-btn"><div class="dash-quick-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>Generate Proposal</button>
-              <button class="dash-quick-btn"><div class="dash-quick-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>Add New Page</button>
-              <button class="dash-quick-btn"><div class="dash-quick-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>Upload Media</button>
-              <button class="dash-quick-btn"><div class="dash-quick-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>View Leads</button>
+              <button class="dash-quick-btn"><span class="dash-quick-icon" style="color:#8B5CF6"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>New Project</button>
+              <button class="dash-quick-btn"><span class="dash-quick-icon" style="color:#22C55E"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>New Article</button>
+              <button class="dash-quick-btn"><span class="dash-quick-icon" style="color:#60A5FA"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg></span>Generate Proposal</button>
+              <button class="dash-quick-btn"><span class="dash-quick-icon" style="color:#FBBF24"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>Add New Page</button>
+              <button class="dash-quick-btn"><span class="dash-quick-icon" style="color:#EC4899"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>Upload Media</button>
+              <button class="dash-quick-btn"><span class="dash-quick-icon" style="color:#2DD4BF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 2v4M16 2v4M2 10h20"/></svg></span>View Leads</button>
             </div>
           </div>
           <div class="dash-tasks-card">
-            <h3>Upcoming Tasks <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
+            <h3>Upcoming Tasks <span class="dash-link">View all</span></h3>
             <div id="tasks-list"></div>
           </div>
         </div>
-
       </div>
 
       <!-- AI insight strip -->
-      <div class="dash-ai-strip" style="margin-bottom:20px">
-        <div class="dash-ai-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <div class="dash-ai-strip">
+        <div class="dash-ai-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="dash-ai-text">
-          <strong id="ai-insight"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>AI Insight &nbsp; Your website traffic is up 18.6% this week!</strong>
+          <strong>AI Insight ✨&nbsp;&nbsp;<span id="ai-insight-text">—</span></strong>
           <p>The most popular page is your homepage. Consider optimizing your /services page which has high traffic but lower conversion.</p>
         </div>
-        <button class="dash-ai-btn">View AI Analysis →</button>
+        <button class="dash-ai-btn">View AI Analysis <span>→</span></button>
       </div>
 
     </div>
@@ -322,59 +288,111 @@
 // ── Dashboard: live aggregates from /api/dashboard ──
 (() => {
   const fmt = (n) => Number(n || 0).toLocaleString('en-IN');
-  const pathFrom = (pts, w = 300, h = 100) => {
-    const max = Math.max(...pts);
-    return pts.map((p, i) => `${i ? 'L' : 'M'}${(i / (pts.length - 1)) * w},${h - (p / max) * (h - 10) - 5}`).join(' ');
+  const HEALTH_ICONS = {
+    'Server Status': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><line x1="6" y1="6.5" x2="6" y2="6.5"/><line x1="6" y1="17.5" x2="6" y2="17.5"/></svg>',
+    'Database': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+    'SSL Certificate': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    'Backup': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+    'Storage': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/></svg>',
+    'Uptime': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>',
   };
-  const areaFrom = (d, w = 300, h = 100) => `${d} L${w},${h} L0,${h} Z`;
-  const ACT = {
-    Lead: ['badge-lead', 'New Lead'], Proposal: ['badge-proposal', 'Proposal'], Blog: ['badge-blog', 'Blog'],
-    Invoice: ['badge-project', 'Invoice'], Task: ['badge-user', 'Task'], Project: ['badge-project', 'Project'],
+  const ACT_STYLE = {
+    Lead: ['badge-lead', 'New Lead', '#EC4899', 'rgba(236,72,153,.13)'],
+    Proposal: ['badge-proposal', 'Proposal', '#8B5CF6', 'rgba(139,92,246,.13)'],
+    Blog: ['badge-blog', 'Blog', '#22C55E', 'rgba(34,197,94,.13)'],
+    Project: ['badge-project', 'Project', '#60A5FA', 'rgba(96,165,250,.13)'],
+    User: ['badge-user', 'User', '#FBBF24', 'rgba(251,191,36,.13)'],
+    Invoice: ['badge-project', 'Invoice', '#60A5FA', 'rgba(96,165,250,.13)'],
+    Task: ['badge-user', 'Task', '#FBBF24', 'rgba(251,191,36,.13)'],
+  };
+  const ACT_ICON = {
+    Lead: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    Proposal: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+    Blog: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+    Project: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
+    User: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
   };
   const load = async () => {
     let d;
-    try { d = (await api('/api/dashboard')); } catch (e) { toast(e.message, false); return; }
+    try { d = await dashboardData(); } catch (e) { toast(e.message, false); return; }
     const kpi = Object.fromEntries(d.kpis.map((k) => [k.label, k]));
     $('#kpi-visitors').textContent = (kpi['Total Visitors'] || {}).value || '—';
     $('#kpi-leads').textContent = (kpi['Leads Captured'] || {}).value || '—';
     $('#kpi-proposals').textContent = (kpi['Proposals Generated'] || {}).value || '—';
     $('#kpi-revenue').textContent = (kpi['Revenue'] || {}).value || '—';
     $('#kpi-conversion').textContent = (kpi['Conversion Rate'] || {}).value || '—';
-    // traffic chart
-    const v = pathFrom(d.traffic.series[0].points);
-    $('#chart-main').setAttribute('d', v);
-    $('#chart-fill').setAttribute('d', areaFrom(v));
+    document.querySelectorAll('.delta-num').forEach((el) => {
+      const labels = ['Total Visitors', 'Leads Captured', 'Proposals Generated', 'Revenue', 'Conversion Rate'];
+      const k = kpi[labels[+el.dataset.delta]];
+      if (k && k.delta) el.textContent = String(k.delta).replace('+', '') + (String(k.delta).includes('%') ? '' : '');
+    });
+    // main traffic chart — shape mirrors the reference (dip May 20, peak May 23)
+    const pts = (d.traffic.series[0] || {}).points || [1500, 4200, 2800, 5200, 6400, 11000, 4200];
+    const W = 300, H = 130;
+    const { line, area, X, Y } = dashSmooth(pts, W, H);
+    $('#chart-main').setAttribute('d', line);
+    $('#chart-fill').setAttribute('d', area);
+    $('#chart-dots').innerHTML = pts.map((p, i) => `<circle cx="${X(i)}" cy="${Y(p)}" r="3.2"/>`).join('');
     $('#chart-total').textContent = d.traffic.total;
-    $('#chart-delta').innerHTML = 'Total Visitors &nbsp; ' + d.traffic.delta;
+    $('#chart-delta').innerHTML = 'Total Visitors &nbsp;<b>↑ ' + esc(String(d.traffic.delta || '').replace('+', '')) + '</b>';
     // traffic sources
     $('#sources-total').textContent = d.traffic.total;
-    $('#sources-legend').innerHTML = d.sources.map((s) => `<div class="dash-pie-item"><div class="dash-pie-dot" style="background:${s.color}"></div> ${esc(s.name)} &nbsp;${s.pct}%</div>`).join('');
+    $('#sources-legend').innerHTML = d.sources.map((s) => `<div class="dash-pie-item"><div class="dash-pie-dot" style="background:${s.color}"></div> ${esc(s.name)} <b>${s.pct}%</b></div>`).join('');
     // system health
-    $('#health-rows').innerHTML = d.health.map((h) => `<div class="dash-health-row">
-      <span class="dash-health-label">${esc(h.label)}</span>
-      <div class="dash-health-status"><span class="status-ok">● ${esc(h.detail)}</span></div>
+    $('#health-rows').innerHTML = d.health.map((h) => {
+      if (h.label === 'Storage') {
+        const pct = h.pct || 45;
+        return `<div class="dash-health-row"><div class="dash-health-ic">${HEALTH_ICONS[h.label] || ''}</div>
+        <div class="dash-health-txt"><b>${esc(h.label)}</b><span>${esc(h.detail)}</span><div class="dash-health-progress"><div class="dash-health-bar" style="width:${pct}%"></div></div></div></div>`;
+      }
+      if (h.label === 'Uptime') {
+        return `<div class="dash-health-row"><div class="dash-health-ic">${HEALTH_ICONS[h.label] || ''}</div>
+        <div class="dash-health-txt"><b>${esc(h.label)}</b></div>
+        <div style="display:flex;align-items:center;gap:7px"><span class="dash-uptime">${esc(h.detail)}</span><span class="dash-check">✓</span></div></div>`;
+      }
+      return `<div class="dash-health-row"><div class="dash-health-ic">${HEALTH_ICONS[h.label] || ''}</div>
+      <div class="dash-health-txt"><b>${esc(h.label)}</b><span>${esc(h.detail)}</span></div>
+      <span class="dash-check">✓</span></div>`;
+    }).join('');
+    // activity — live lead submissions first (d.recent_leads), then the demo feed.
+    // ponytail: newest DB rows on top, unfiltered — triage happens on /admin-leads.
+    const [leadCls, , leadColor, leadBg] = ACT_STYLE.Lead;
+    const leadRows = (d.recent_leads || []).map((l) => `<div class="dash-activity-item">
+      <div class="dash-act-avatar" style="color:${leadColor};background:${leadBg};border-color:${leadColor}44">${ACT_ICON.Lead}</div>
+      <div class="dash-act-text"><strong>New enquiry from ${esc(l.name)}</strong><span>${esc([l.company, l.email].filter(Boolean).join(' • '))}</span></div>
+      <div class="dash-act-right"><span class="dash-act-time">${dashAgo(l.created_at)}</span><span class="dash-act-badge ${leadCls}">${esc(l.status || 'new')}</span></div>
     </div>`).join('');
-    // activity
-    $('#activity-list').innerHTML = d.activity.map((a) => {
-      const [cls, label] = ACT[a.type] || ['badge-user', a.type];
+    $('#activity-list').innerHTML = leadRows + d.activity.map((a) => {
+      const [cls, label, color, bg] = ACT_STYLE[a.type] || ['badge-user', a.type, '#9A9AA8', '#1A1A26'];
       return `<div class="dash-activity-item">
-      <div class="dash-act-avatar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg></div>
+      <div class="dash-act-avatar" style="color:${color};background:${bg};border-color:${color}44">${ACT_ICON[a.type] || ACT_ICON.User}</div>
       <div class="dash-act-text"><strong>${esc(a.title)}</strong><span>${esc(a.meta || '')}</span></div>
-      <span class="dash-act-time">${esc(a.time)}</span>
-      <span class="dash-act-badge ${cls}">${label}</span>
+      <div class="dash-act-right"><span class="dash-act-time">${esc(a.time)}</span><span class="dash-act-badge ${cls}">${label}</span></div>
     </div>`;
     }).join('');
     // top pages
-    $('#pages-list').innerHTML = d.top_pages.map((p) => `<div class="dash-pages-row"><div class="dash-page-thumb"></div><span>${esc(p.path)}</span><span>${fmt(p.views)}</span><span>${fmt(p.visitors)}</span><span>${p.bounce}%</span><span>${esc(p.avg_time)}</span></div>`).join('');
+    const thumbs = ['#3B2F6B', '#1F3A5F', '#3A2B1F', '#2B3A2B', '#3A1F2B'];
+    const thumbGlyph = ['⌂', '⚙', '▦', '👤', '✉'];
+    $('#pages-list').innerHTML = d.top_pages.map((p, i) => `<div class="dash-pages-row"><div class="dash-page-thumb" style="background:${thumbs[i % thumbs.length]}">${thumbGlyph[i % thumbGlyph.length]}</div><span>${esc(p.path)}</span><span>${fmt(p.views)}</span><span>${fmt(p.visitors)}</span><span>${p.bounce}%</span><span>${esc(p.avg_time)}</span></div>`).join('');
     // upcoming tasks
-    $('#tasks-list').innerHTML = d.upcoming_tasks.map((t) => `<div class="dash-tasks-item">
+    $('#tasks-list').innerHTML = d.upcoming_tasks.map((t) => {
+      const raw = String(t.due_date || '');
+      let date = raw;
+      const m = raw.match(/(\d{4})-(\d{2})-(\d{2})/);
+      if (m) date = new Date(raw + 'T00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `<div class="dash-tasks-item">
       <div class="dash-task-check"></div>
       <div class="dash-task-text">${esc(t.title)}<small>${esc(t.project || '')}</small></div>
-      <span class="dash-task-date">${esc((t.due_date || '').slice(5).replace('-', '/'))}</span>
-    </div>`).join('');
+      <span class="dash-task-date">${esc(date)}</span>
+    </div>`;
+    }).join('');
     // AI insight
     const tv = kpi['Total Visitors'];
-    if (tv && tv.delta) $('#ai-insight').innerHTML = $('#ai-insight').innerHTML.replace(/up [^!]+!/, `up ${tv.delta} this week!`);
+    $('#ai-insight-text').textContent = tv && tv.delta ? `Your website traffic is up ${String(tv.delta).replace('+', '')} this week! 🎉` : '';
+    // welcome + identity fallback handled by admin.js; ensure emoji greeting shape
+    const w = document.querySelector('[data-adm="welcome"]');
+    if (w && d.user && d.user.first && !w.textContent.includes('!')) w.textContent = `Welcome back, ${d.user.first}! 👋`;
+    else if (w && d.user && d.user.first && !w.textContent.includes('👋')) w.textContent = w.textContent.replace(/!?\s*$/, '! 👋');
   };
   load();
 })();

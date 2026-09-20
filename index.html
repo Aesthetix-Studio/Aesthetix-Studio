@@ -3,13 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aesthetix Studio — Digital Product Studio</title>
-<meta name="description" content="Digital products that create measurable business impact.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/aesthetix.css"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://aesthetixstudio.com/"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Aesthetix Studio — Digital Product Studio"><meta property="og:description" content="Digital products that create measurable business impact."><meta property="og:url" content="https://aesthetixstudio.com/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Aesthetix Studio — Digital Product Studio"><meta name="twitter:description" content="Digital products that create measurable business impact.">
-</head>
+<title>Aesthetix Studio — Digital Product Design and Development</title>
+<meta name="description" content="We make websites, applications and AI products for ambitious teams — turning ideas into measurable business outcomes, from strategy through launch.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://aesthetixstudio.com/"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Aesthetix Studio — Digital Product Design and Development"><meta property="og:description" content="We make websites, applications and AI products for ambitious teams — turning ideas into measurable business outcomes, from strategy through launch."><meta property="og:url" content="https://aesthetixstudio.com/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Aesthetix Studio — Digital Product Design and Development"><meta name="twitter:description" content="We make websites, applications and AI products for ambitious teams — turning ideas into measurable business outcomes, from strategy through launch.">
+<style>
+.home-hero{background:#050506;min-height:clamp(560px,92vh,900px);display:flex;align-items:center}
+.home-hero:after{background:linear-gradient(90deg,#050506 30%,rgba(5,5,6,.6) 52%,rgba(5,5,6,0) 78%)}
+.home-hero-img{position:absolute;top:0;right:0;height:100%;width:64%;object-fit:cover;object-position:82% center;z-index:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 30%);mask-image:linear-gradient(90deg,transparent,#000 30%)}
+.home-hero-content{max-width:680px}
+.home-hero-content h1{font-size:clamp(52px,5.2vw,84px)}
+.home-cta{margin-top:34px}
+.feat-tags{font-size:10px;color:#71717A;letter-spacing:.02em;margin:14px 0 0}
+.home-stars{color:#6D5DF6}
+.home-cta-section img{opacity:.32!important}
+@media(max-width:800px){
+  .home-hero-img{width:100%;object-position:center;opacity:.35;-webkit-mask-image:none;mask-image:none}
+  .home-hero-content h1{font-size:44px}
+}
+</style>
+<meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
 <body>
 
 <nav class="nav">
@@ -28,15 +43,15 @@
 <main>
 
 <!-- Hero -->
-<section class="page-hero home-hero" style="min-height:640px;padding:160px 9.8vw 90px">
-  <img class="hero-image" src="/images/assets/03_22_00_home_hero.png" alt="" style="opacity:.72;filter:grayscale(1) contrast(1.15)">
-  <div class="hero-content" style="max-width:660px">
+<section class="page-hero home-hero" style="padding:150px 9.8vw 90px">
+  <img decoding="async" width="1672" height="941" class="home-hero-img" src="/images/assets/03_22_00_home_hero.png" alt="">
+  <div class="hero-content home-hero-content">
     <div class="eyebrow">Digital product studio</div>
     <h1>
       <span>Designing<br>digital products</span>
-      <span style="color:var(--text-4)">that create measurable<br>business impact.</span>
+      <span style="color:#8E8E93">that create measurable<br>business impact.</span>
     </h1>
-    <a class="nav-cta" href="/start-a-project.html" style="margin-top:8px">
+    <a class="text-link home-cta" href="/start-a-project.html">
       <span class="arrow">↗</span> Start a project
     </a>
   </div>
@@ -46,24 +61,24 @@
 <div class="band">Most websites look good.<span>Very few solve business problems.</span></div>
 
 <!-- Featured project split (dark) -->
-<section style="display:grid;grid-template-columns:34% 66%;min-height:460px;background:var(--black)">
+<section style="display:grid;grid-template-columns:30% 70%;min-height:480px;background:var(--black)">
   <div class="copy" style="background:var(--black);color:var(--white)">
     <div class="index">01</div>
     <h2 style="color:var(--white)">Luminary<br>Financial</h2>
     <p class="small" style="color:var(--text-4);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px">Fintech / Web Platform</p>
     <p class="small" style="color:var(--text-3)">A high-performance digital platform for a boutique wealth management firm. Built for clarity, trust, and long-term client relationships.</p>
-    <div class="rule"></div>
+    <div class="rule" style="border-color:#27272A"></div>
     <a class="text-link" href="/work.html">View case study <span class="arrow">↗</span></a>
   </div>
   <div class="media">
-    <img src="/images/assets/06_luminary_laptop.png" alt="Luminary Financial">
+    <img loading="lazy" decoding="async" width="1920" height="1024" src="/images/assets/06_luminary_laptop.png" alt="Luminary Financial">
   </div>
 </section>
 
 <!-- What we build -->
 <section class="paper section">
-  <div class="eyebrow" style="text-align:center;display:block">What we build</div>
-  <h2 style="text-align:center;margin:0 0 50px">Digital experiences, web applications,<br>and AI solutions — designed around<br>business outcomes.</h2>
+  <div class="eyebrow">What we build</div>
+  <h2 style="margin:0 0 46px;max-width:640px">Digital experiences, web applications, and AI solutions — designed around business outcomes.</h2>
   <div class="features">
     <div class="feature">
       <div class="index">01</div>
@@ -72,11 +87,7 @@
       </div>
       <div>
         <p class="small">Marketing websites and landing pages designed to convert visitors into customers. Every page is crafted with your audience in mind — not just aesthetics.</p>
-        <div class="feature-tags">
-          <span class="feature-tag">Website Design</span>
-          <span class="feature-tag">Landing Pages</span>
-          <span class="feature-tag">Conversion Optimization</span>
-        </div>
+        <p class="feat-tags">Website Design &nbsp;·&nbsp; Landing Pages &nbsp;·&nbsp; Conversion Optimization</p>
       </div>
     </div>
     <div class="feature">
@@ -86,11 +97,7 @@
       </div>
       <div>
         <p class="small">Scalable SaaS products, dashboards, and internal platforms built for long-term growth. Modern stacks, clean architecture, performance-first.</p>
-        <div class="feature-tags">
-          <span class="feature-tag">SaaS</span>
-          <span class="feature-tag">Dashboards</span>
-          <span class="feature-tag">Internal Platforms</span>
-        </div>
+        <p class="feat-tags">SaaS &nbsp;·&nbsp; Dashboards &nbsp;·&nbsp; Internal Platforms</p>
       </div>
     </div>
     <div class="feature" style="border-bottom:0">
@@ -100,11 +107,7 @@
       </div>
       <div>
         <p class="small">Intelligent experiences that automate workflows and enhance customer interactions. We only recommend AI where it solves a real business problem.</p>
-        <div class="feature-tags">
-          <span class="feature-tag">Automation</span>
-          <span class="feature-tag">AI Integrations</span>
-          <span class="feature-tag">Data Intelligence</span>
-        </div>
+        <p class="feat-tags">Automation &nbsp;·&nbsp; AI Integrations &nbsp;·&nbsp; Data Intelligence</p>
       </div>
     </div>
   </div>
@@ -124,7 +127,7 @@
 <!-- Testimonial -->
 <section class="paper section">
   <div class="testimonial">
-    <div class="stars"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+    <div class="stars home-stars"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
     <p class="quote">"Aesthetix completely transformed how our company presents itself online. Three weeks after launch, we closed a ₹15L deal where the client specifically mentioned our website as the reason they reached out."</p>
     <div class="testimonial-author">
       <div class="t-avatar-initials">SC</div>
@@ -137,11 +140,11 @@
 </section>
 
 <!-- CTA -->
-<section class="cta" style="position:relative;overflow:hidden">
-  <img src="/images/assets/02_circular_stairwell.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;filter:grayscale(1)">
+<section class="cta home-cta-section" style="position:relative;overflow:hidden">
+  <img loading="lazy" decoding="async" width="425" height="375" src="/images/assets/02_circular_stairwell.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)">
   <div style="position:relative;z-index:1;text-align:center">
     <h2>Ready to build<br>something people<br>remember?</h2>
-    <a class="nav-cta" href="/start-a-project.html" style="margin:20px auto 0;display:inline-flex">
+    <a class="text-link" href="/start-a-project.html" style="margin:26px auto 0;display:inline-flex">
       <span class="arrow">↗</span> Book a discovery call
     </a>
   </div>
@@ -151,13 +154,13 @@
 
 <footer class="footer">
   <div class="footer-grid">
-    <div>
+    <div class="fcol">
       <a class="logo" href="/">Aesthetix<small>STUDIO</small></a>
       <p class="tagline">We design and build digital products that create measurable business impact.</p>
       <a class="text-link" href="/start-a-project.html"><span class="arrow">↗</span> Start a project</a>
-      <p style="margin-top:18px">hello@aesthetixstudio.com<br>Hyderabad, India</p>
+      <p style="margin-top:18px">mohdabraralikhan@gmail.com<br>Hyderabad, India</p>
     </div>
-    <div>
+    <div class="fcol">
       <h4>Studio</h4>
       <div class="footer-col">
         <a href="/work.html">Work</a>
@@ -166,7 +169,7 @@
         <a href="/studio.html">Studio</a>
       </div>
     </div>
-    <div>
+    <div class="fcol">
       <h4>Resources</h4>
       <div class="footer-col">
         <a href="/case-studies.html">Case Studies</a>
@@ -175,7 +178,7 @@
         <a href="/process.html">Process</a>
       </div>
     </div>
-    <div>
+    <div class="fcol">
       <h4>Connect</h4>
       <div class="footer-col">
         <a href="#">LinkedIn</a>
@@ -184,13 +187,13 @@
         <a href="#">X (Twitter)</a>
       </div>
     </div>
-    <div>
+    <div class="fcol">
       <p class="claim">Let's build products that people remember.</p>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2025 Aesthetix Studio. All rights reserved.</span>
-    <span>Privacy Policy &nbsp;·&nbsp; Terms of Service</span>
+    <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-of-service">Terms of Service</a> · <a href="/cookies-policy">Cookies Policy</a></span>
   </div>
 </footer>
 

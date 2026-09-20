@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comments — Reader Feedback and Replies — Aesthetix Studio</title>
+<meta name="description" content="Reader comments collected through the site with search, edit and moderation tools, newest first and exportable to CSV for the studio team.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.cm-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.cm-kpi{background:#12121A;border:1px solid #1F1F2B;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.cm-kpi-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+.cm-kpi-val{font-size:24px;font-weight:800;color:#fff;font-family:'Manrope';line-height:1.1}
+.cm-kpi-label{font-size:11px;color:#B9B9C4;margin-top:2px}
+.cm-kpi-sub{font-size:10.5px;color:#7A7A88;margin-top:5px}
+.cm-list{display:grid;gap:10px}
+.cm-item{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.cm-av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0}
+.cm-item .body{min-width:0;flex:1}
+.cm-item .head{display:flex;align-items:baseline;gap:8px}
+.cm-item .head b{font-size:12.5px;color:#fff}
+.cm-item .head time{font-size:10.5px;color:#7A7A88;margin-left:auto;white-space:nowrap}
+.cm-item p{font-size:12.5px;color:#C9C9D2;line-height:1.6;margin:6px 0 0}
+.cm-item .on{font-size:10.5px;color:#8B5CF6;margin-top:6px}
+.cm-act{display:flex;gap:6px;flex-shrink:0}
+@media(max-width:1280px){.cm-kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="canonical" href="https://aesthetixstudio.com/admin-comments"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Comments — Reader Feedback and Replies — Aesthetix Studio"><meta property="og:description" content="Reader comments collected through the site with search, edit and moderation tools, newest first and exportable to CSV for the studio team."><meta property="og:url" content="https://aesthetixstudio.com/admin-comments"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Comments — Reader Feedback and Replies — Aesthetix Studio"><meta name="twitter:description" content="Reader comments collected through the site with search, edit and moderation tools, newest first and exportable to CSV for the studio team."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/admin-comments.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Comments</h1>
+        <p>Reader comments with moderation in one feed.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="cm-search" placeholder="Search comments...">
+        </div>
+        <button class="pj-btn" id="cm-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+        <button class="btn-new" id="cm-new">＋ New Comment</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="cm-kpis">
+        <div class="cm-kpi">
+          <div class="cm-kpi-ic" style="background:rgba(139,92,246,.15);color:#8B5CF6"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><div class="cm-kpi-val" id="kpi-total">—</div><div class="cm-kpi-label">Total Comments</div><div class="cm-kpi-sub">across the site</div></div>
+        </div>
+        <div class="cm-kpi">
+          <div class="cm-kpi-ic" style="background:rgba(34,197,94,.13);color:#4ADE80"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
+          <div><div class="cm-kpi-val" id="kpi-week">—</div><div class="cm-kpi-label">This Week</div><div class="cm-kpi-sub">last 7 days</div></div>
+        </div>
+        <div class="cm-kpi">
+          <div class="cm-kpi-ic" style="background:rgba(59,130,246,.14);color:#60A5FA"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="cm-kpi-val" id="kpi-people">—</div><div class="cm-kpi-label">Commenters</div><div class="cm-kpi-sub">unique sources</div></div>
+        </div>
+        <div class="cm-kpi">
+          <div class="cm-kpi-ic" style="background:rgba(251,191,36,.13);color:#FBBF24"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><div class="cm-kpi-val" id="kpi-latest">—</div><div class="cm-kpi-label">Latest</div><div class="cm-kpi-sub" id="kpi-latest-sub">most recent comment</div></div>
+        </div>
+      </div>
+      <div class="cm-list" id="cm-list"></div>
+      <p style="font-size:11px;color:#5E5E6E;margin:12px 4px 20px" id="cm-count"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Comments board: feedback rows with source 'Comment' ──
+(() => {
+  const SRC = 'Comment';
+  let all = [], query = '', sort = 'latest';
+
+  const rows = () => all.filter((f) => (f.source || '') === SRC);
+  const filtered = () => {
+    let list = rows().filter((f) => {
+      if (!query) return true;
+      return ((f.message || '')).toLowerCase().includes(query.toLowerCase());
+    });
+    if (sort === 'oldest') list = [...list].sort((a, b) => String(a.created_at || '').localeCompare(String(b.created_at || '')));
+    else list = [...list].sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));
+    return list;
+  };
+
+  const render = () => {
+    const list = filtered();
+    document.getElementById('cm-list').innerHTML = list.length ? list.map((f) => {
+      const col = avatarColor('comment' + f.id);
+      return `<div class="cm-item">
+        <div class="cm-av" style="background:${col}22;color:${col}">${esc(initials('Reader ' + f.id))}</div>
+        <div class="body"><div class="head"><b>Reader #${f.id}</b><time>${esc(dashAgo(f.created_at))} · ${esc(fmtDate(f.created_at))}</time></div>
+        <p>${esc(f.message || '')}</p></div>
+        <div class="cm-act">
+          <button class="pj-icbtn" data-act="edit" data-id="${f.id}" title="Edit">✎</button>
+          <button class="pj-icbtn" data-act="del" data-id="${f.id}" title="Delete">🗑</button>
+        </div></div>`;
+    }).join('') : `<div class="cm-item" style="justify-content:center;color:#5E5E6E">No comments yet — add the first one.</div>`;
+    const mine = rows();
+    const week = mine.filter((f) => (Date.now() - new Date(f.created_at).getTime()) < 7 * 864e5).length;
+    document.getElementById('kpi-total').textContent = mine.length;
+    document.getElementById('kpi-week').textContent = week;
+    document.getElementById('kpi-people').textContent = mine.length;
+    document.getElementById('kpi-latest').textContent = mine.length ? esc(dashAgo(mine.map((f) => f.created_at).sort().reverse()[0])) : '—';
+    document.getElementById('kpi-latest-sub').textContent = mine.length ? 'most recent comment' : 'no comments yet';
+    document.getElementById('cm-count').textContent = `Showing ${list.length} of ${mine.length} comments.`;
+  };
+
+  document.getElementById('cm-search').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
+  document.getElementById('cm-new').addEventListener('click', () => modal({
+    title: 'New Comment',
+    fields: [{ name: 'message', label: 'Comment', type: 'textarea', required: true }],
+    onSubmit: async (d) => { await api('/api/feedback', { method: 'POST', body: { source: SRC, rating: 5, message: d.message } }); load(); },
+  }));
+  document.getElementById('cm-list').addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const f = all.find((x) => x.id === Number(btn.dataset.id));
+    if (!f) return;
+    if (btn.dataset.act === 'del') {
+      if (!confirm('Delete this comment?')) return;
+      try { await api('/api/feedback/' + f.id, { method: 'DELETE' }); load(); }
+      catch (err) { toast(err.message, false); }
+      return;
+    }
+    modal({
+      title: 'Edit Comment',
+      fields: [{ name: 'message', label: 'Comment', type: 'textarea', value: f.message, required: true }],
+      onSubmit: async (d) => { await api('/api/feedback/' + f.id, { method: 'PUT', body: { message: d.message } }); load(); },
+      onDelete: async () => { await api('/api/feedback/' + f.id, { method: 'DELETE' }); load(); },
+    });
+  });
+  document.getElementById('cm-export').addEventListener('click', () => {
+    const rows = [['ID', 'Message', 'Created']];
+    filtered().forEach((f) => rows.push([f.id, f.message, f.created_at]));
+    const csv = rows.map((r) => r.map((c) => `"${String(c ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'comments.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  const load = async () => {
+    try { all = (await api('/api/feedback')).data; render(); }
+    catch (e) { toast(e.message, false); }
+  };
+  load();
+})();
+</script>
+</body>
+</html>

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Brand Audit Tool — Aesthetix Studio</title>
+<title>Brand Audit Tool — Consistency, Measured — Aesthetix Studio</title>
+<meta name="description" content="Check a brand across every touchpoint — logo, colour, type and tone — and see where it drifts, with each inconsistency ranked by how visible it is.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,290 +12,409 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script src="/js/admin.js"></script>
 <style>
-.adm-table{width:100%;border-collapse:collapse;font-size:12px}
-.adm-table th{color:var(--text-4);font-weight:500;padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
-.adm-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
-.adm-table tr:hover td{background:rgba(255,255,255,.02)}
-.score-gauge{position:relative;width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.score-gauge-hole{width:110px;height:110px;border-radius:50%;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.score-gauge-value{font-size:32px;font-weight:700;color:#fff}
-.score-gauge-label{font-size:10px;color:var(--text-4)}
-.cat-card{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:6px}
-.cat-card-header{display:flex;align-items:center;justify-content:space-between}
-.cat-card-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.cat-card-score{font-size:20px;font-weight:700;color:#fff}
-.cat-card-status{font-size:10px;font-weight:600}
-.cat-bar{height:4px;border-radius:2px;background:var(--surface-3);margin-top:4px}
-.cat-bar-fill{height:4px;border-radius:2px}
-.step{display:flex;align-items:center;gap:8px;font-size:12px}
-.step-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
-.step-line{flex:1;height:2px;background:var(--line)}
-.step-line.done{background:var(--brand)}
-.detail-row{border-bottom:1px solid rgba(255,255,255,.04);padding:12px 14px;cursor:pointer}
-.detail-row:hover{background:rgba(255,255,255,.02)}
-.detail-header{display:flex;align-items:center;justify-content:space-between}
-.detail-left{display:flex;align-items:center;gap:10px}
-.detail-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px}
-.detail-score{font-size:16px;font-weight:700;color:#fff;min-width:40px;text-align:right}
-.detail-status{font-size:10px;font-weight:600;min-width:70px;text-align:right}
-.detail-body{display:none;padding:8px 0 0 38px;font-size:12px;color:var(--text-3);line-height:1.6}
-.detail-row.open .detail-body{display:block}
-.detail-row.open .detail-chevron{transform:rotate(180deg)}
-.detail-chevron{color:var(--text-4);transition:transform .2s}
-.insight-item{display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5}
-.insight-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px}
-.strength-item,.weakness-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0}
-.recent-audit{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.recent-audit:last-child{border-bottom:none}
+.ba-body{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+.ba-brand{display:flex;gap:16px;align-items:center;min-width:0}
+.ba-logo{width:76px;height:76px;border-radius:12px;background:linear-gradient(135deg,#1a1a2e,#16213e);display:grid;place-items:center;font-weight:800;color:#C9A84C;letter-spacing:1px;border:1px solid #2A2A38;flex-shrink:0;text-align:center;line-height:1.2}
+.ba-brand h2{font-size:20px;color:#fff;margin:0;font-family:'Manrope'}
+.ba-domain{font-size:12px;color:#8B5CF6;text-decoration:none}
+.ba-meta{display:flex;gap:22px;margin-top:10px;font-size:11px;color:#7A7A88;flex-wrap:wrap}
+.ba-meta b{display:block;color:#C9C9D2;font-weight:600;font-size:11.5px}
+.ba-steps{display:flex;align-items:center;gap:0;margin-top:16px}
+.ba-step{display:flex;align-items:center;gap:10px}
+.ba-num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;background:#262633;color:#7A7A88}
+.ba-step.done .ba-num{background:#7C3AED;color:#fff}
+.ba-step.run .ba-num{background:#7C3AED;color:#fff;animation:blink 1s infinite}
+.ba-step b{display:block;font-size:12px;color:#7A7A88}
+.ba-step.done b,.ba-step.run b{color:#fff}
+.ba-step span{font-size:10px;color:#5E5E6E}
+.ba-line{flex:1;height:2px;background:#262633;margin:0 12px;min-width:20px}
+.ba-line.done{background:#7C3AED}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.45}}
+.ba-over{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
+.score-gauge{position:relative;width:148px;height:148px;border-radius:50%;display:grid;place-items:center;margin:0 auto}
+.score-gauge-hole{width:108px;height:108px;border-radius:50%;background:#12121A;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-gauge-value{font-size:34px;font-weight:800;color:#fff;font-family:'Manrope'}
+.score-gauge-label{font-size:10px;color:#8E8E9A}
+.ba-ratingpill{display:inline-block;padding:4px 12px;border-radius:6px;font-size:10.5px;font-weight:700;margin-top:8px}
+.ba-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ba-cat{background:#181824;border:1px solid #23232F;border-radius:10px;padding:14px}
+.ba-cat .nm{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:#C9C9D2}
+.ba-cat .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+.ba-cat .sc{font-size:20px;font-weight:800;color:#fff;margin-top:8px}
+.ba-cat .sc small{font-size:10px;font-weight:600}
+.ba-cat .bar{height:4px;border-radius:2px;background:#262633;margin-top:8px}
+.ba-cat .bar i{display:block;height:100%;border-radius:2px}
+.ba-row{border-top:1px solid #1B1B26;padding:13px 18px;cursor:pointer}
+.ba-row:first-of-type{border-top:0}
+.ba-row:hover{background:rgba(255,255,255,.015)}
+.ba-rowhead{display:flex;align-items:center;gap:12px}
+.ba-rowic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+.ba-rowhead b{display:block;font-size:12.5px;color:#fff}
+.ba-rowhead span{font-size:10.5px;color:#7A7A88}
+.ba-score{font-size:17px;font-weight:800;color:#fff;min-width:64px;text-align:right}
+.ba-score small{font-size:10px;color:#7A7A88;font-weight:400}
+.ba-rate{font-size:10.5px;font-weight:600;min-width:76px;text-align:right}
+.ba-chev{color:#5E5E6E;transition:transform .2s;flex-shrink:0}
+.ba-row.open .ba-chev{transform:rotate(180deg)}
+.ba-rowbody{display:none;padding:10px 0 2px 44px;font-size:12px;color:#9A9AA8;line-height:1.7}
+.ba-row.open .ba-rowbody{display:block}
+.ba-insight{display:flex;gap:10px;align-items:flex-start}
+.ba-insight .ii{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:12px;font-weight:800}
+.ba-insight b{display:block;font-size:12px;color:#EDEDF2}
+.ba-insight span{font-size:10.5px;color:#7A7A88;line-height:1.5}
+.ba-check{display:flex;align-items:center;gap:9px;font-size:11.5px;color:#C9C9D2;padding:4px 0}
+.ba-check .ck{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;flex-shrink:0}
+.ba-audit{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;border:1px solid transparent;cursor:pointer}
+.ba-audit:hover{background:#181824}
+.ba-audit.sel{background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.45)}
+.ba-audit .av{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:10px;font-weight:800;flex-shrink:0}
+.ba-audit b{display:block;font-size:11.5px;color:#EDEDF2}
+.ba-audit span{font-size:10px;color:#7A7A88}
+.ba-audit .sc{margin-left:auto;font-size:15px;font-weight:800}
+@media(max-width:1280px){.ba-body{grid-template-columns:1fr}.ba-cats{grid-template-columns:repeat(2,1fr)}.ba-over{grid-template-columns:1fr}}
 </style>
 </head>
 <body style="overflow:hidden">
+
 <div class="dash-layout">
-
-<aside class="dash-sidebar">
-  <div class="dash-logo-wrap">
-    <div><div class="dash-logo">AESTHETIX<small>STUDIO</small></div></div>
-    <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
-  </div>
-  <div class="dash-user">
-    <div class="dash-avatar">RM</div>
-    <div class="dash-user-info"><h4>Rohit Malhotra</h4><span>Administrator &nbsp;<span class="dash-user-badge">● Online</span></span></div>
-    <span style="color:var(--text-4);font-size:11px;margin-left:auto">▾</span>
-  </div>
-  <nav class="dash-nav">
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Overview</div>
-      <a class="dash-nav-item" href="/dashboard.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
-      <a class="dash-nav-item" href="/admin-analytics.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</a>
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
     </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">Content</div>
-      <a class="dash-nav-item" href="/admin-projects.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Projects</a>
-      <a class="dash-nav-item" href="/admin-articles.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> Articles</a>
-      <a class="dash-nav-item" href="/admin-media.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Media Library</a>
-      <a class="dash-nav-item" href="/forms.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg></span> Forms</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">CRM</div>
-      <a class="dash-nav-item" href="/leads.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Leads</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">AI Tools</div>
-      <a class="dash-nav-item" href="/ai-chat-assistant.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span> AI Chat Assistant</a>
-      <a class="dash-nav-item active" href="#"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Brand Audit Tool</a>
-    </div>
-    <div class="dash-nav-section">
-      <div class="dash-nav-label">System</div>
-      <a class="dash-nav-item" href="/admin-users.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Users</a>
-      <a class="dash-nav-item" href="/admin-settings.html"><span class="dash-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings</a>
-    </div>
-  </nav>
-  <div class="dash-sidebar-bottom">
-    <button class="dash-visit-btn">Visit Website ↗</button>
-    <div class="dash-dark-toggle">
-      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark Mode</span>
-      <div class="toggle-switch on"></div>
-    </div>
-  </div>
-</aside>
-
-<div class="dash-main">
-  <div class="dash-topbar">
-    <div><h1>Brand Audit Tool</h1><p>Get a comprehensive analysis of your brand's strengths, weaknesses, and opportunities.</p></div>
-    <div class="dash-topbar-right">
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export Report</button>
-      <button class="btn-run-audit" style="background:var(--brand);border:none;color:#fff;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">Run New Audit ✦</button>
-    </div>
-  </div>
-
-  <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 65px)">
-
-    <!-- Client info card -->
-    <div class="dash-chart-card" style="display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:16px">
-        <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;border:1px solid var(--line)">LUXORÉ<br><span style="font-size:8px;font-weight:400;letter-spacing:0">JEWELS</span></div>
-        <div>
-          <div style="font-size:16px;font-weight:700;color:#fff">Luxoré Jewels</div>
-          <a href="#" style="font-size:11px;color:var(--brand);text-decoration:none">https://luxorejewels.com ↗</a>
-          <div style="display:flex;gap:16px;margin-top:6px;font-size:11px;color:var(--text-3)">
-            <span>🏠 Industry: <b style="color:var(--text-2)">Luxury Jewelry</b></span>
-            <span>📅 Audit Date: <b style="color:var(--text-2)">May 24, 2025</b></span>
-            <span>👤 Audited By: <b style="color:var(--text-2)">Aesthetix AI</b></span>
-          </div>
-        </div>
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
       </div>
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer">View Full Report →</button>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
     </div>
-
-    <!-- Progress stepper -->
-    <div class="dash-chart-card" style="display:flex;align-items:center;justify-content:center;gap:0;padding:20px 40px;margin-top:12px">
-      <div class="step"><div class="step-num" style="background:var(--brand);color:#fff">1</div><div><div style="font-weight:600;color:#fff">Website Input</div><div style="font-size:10px;color:var(--text-4)">luxorejewels.com</div></div></div>
-      <div class="step-line done"></div>
-      <div class="step"><div class="step-num" style="background:var(--brand);color:#fff">2</div><div><div style="font-weight:600;color:#fff">Brand Analysis</div><div style="font-size:10px;color:var(--text-4)">Running...</div></div></div>
-      <div class="step-line done"></div>
-      <div class="step"><div class="step-num" style="background:var(--brand);color:#fff">3</div><div><div style="font-weight:600;color:#fff">Scoring &amp; Insights</div><div style="font-size:10px;color:var(--text-4)">In Progress</div></div></div>
-      <div class="step-line"></div>
-      <div class="step"><div class="step-num" style="background:var(--surface-3);color:var(--text-4)">4</div><div><div style="font-weight:500;color:var(--text-4)">Report Ready</div><div style="font-size:10px;color:var(--text-4)">Complete</div></div></div>
+    <nav class="dash-nav" data-dash-nav="flow" data-active="/brand-audit-tool.html"></nav>
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle"><span>🌙&nbsp; Dark Mode</span><div class="toggle-switch"></div></div>
+      <button class="pj-btn" id="ba-help" style="width:100%;justify-content:center;margin-top:10px">🎧 Need Help?</button>
     </div>
+  </aside>
 
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:16px;margin-top:12px">
-
+  <div class="dash-main">
+    <div class="dash-topbar">
       <div>
-        <!-- Overall score + category scores -->
-        <div class="dash-chart-card" style="display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start">
-          <!-- Gauge -->
-          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-            <div class="score-gauge" id="score-gauge" style="background:conic-gradient:#6C5CE7 0% 82%,var(--surface-3) 82% 100%">
-              <div class="score-gauge-hole"><div class="score-gauge-value" id="overall-score">82</div><div class="score-gauge-label">/100</div></div>
+        <h1>Brand Audit Tool</h1>
+        <p>Get a comprehensive analysis of your brand's strengths, weaknesses, and opportunities.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <button class="pj-btn" id="ba-export">⤓ Export Report ⌄</button>
+        <button class="btn-new" id="ba-run">Run New Audit ✨</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="dash-panel" style="margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div class="ba-brand">
+            <div class="ba-logo" id="ba-monogram">LJ</div>
+            <div style="min-width:0">
+              <h2 id="ba-name">—</h2>
+              <a class="ba-domain" id="ba-domain" href="#" target="_blank" rel="noopener">—</a>
+              <div class="ba-meta">
+                <div>Industry<b id="ba-industry">—</b></div>
+                <div>Audit Date<b id="ba-date">—</b></div>
+                <div>Audited By<b>Aesthetix AI</b></div>
+              </div>
             </div>
-            <div style="font-size:12px;font-weight:600;color:var(--text-2)">Overall Brand Health</div>
-            <div style="background:rgba(108,92,231,.15);color:#6C5CE7;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:600">Very Good</div>
-            <div style="font-size:10px;color:var(--text-4);text-align:center;max-width:180px">Your brand shows strong potential. With a few strategic improvements, you can elevate your brand presence.</div>
           </div>
-          <!-- Category grid -->
-          <div id="cat-scores" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"></div>
+          <button class="pj-btn" id="ba-full" style="margin-left:auto">View Full Report <span>→</span></button>
         </div>
-
-        <!-- Detailed breakdown -->
-        <div class="dash-chart-card" style="padding:0;margin-top:12px;overflow:hidden">
-          <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)">
-            <h3 style="margin:0">Detailed Breakdown</h3>
-            <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:6px 12px;border-radius:6px;font-size:11px;cursor:pointer">View Recommendations →</button>
-          </div>
-          <div id="breakdown"></div>
-        </div>
+        <div class="ba-steps" id="ba-steps"></div>
       </div>
 
-      <!-- Right panels -->
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="dash-chart-card">
-          <h3>Quick Insights</h3>
-          <div id="insights" style="display:flex;flex-direction:column;gap:10px;margin-top:10px"></div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Top Strengths</h3>
-          <div id="strengths" style="display:flex;flex-direction:column;gap:4px;margin-top:10px"></div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Areas to Improve</h3>
-          <div id="weaknesses" style="display:flex;flex-direction:column;gap:4px;margin-top:10px"></div>
-        </div>
-        <div class="dash-chart-card">
-          <h3>Recent Audits <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
-          <div id="recent-audits" style="display:flex;flex-direction:column;gap:0;margin-top:6px"></div>
-        </div>
-        <button class="btn-run-audit" style="background:var(--brand);border:none;color:#fff;padding:10px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;width:100%">Run New Audit ✦</button>
-      </div>
+      <div class="ba-body">
+        <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+          <div class="dash-panel">
+            <div class="ba-over">
+              <div style="text-align:center">
+                <div class="score-gauge" id="ba-gauge"><div class="score-gauge-hole"><div class="score-gauge-value" id="ba-overall">—</div><div class="score-gauge-label">/100</div></div></div>
+                <div style="font-size:12px;color:#8E8E9A;margin-top:10px">Overall Score</div>
+                <div class="ba-ratingpill" id="ba-pill">—</div>
+              </div>
+              <div>
+                <h3 style="font-size:13.5px;color:#fff;margin:0 0 8px">Overall Brand Health</h3>
+                <p style="font-size:12px;color:#9A9AA8;line-height:1.7;margin:0 0 12px" id="ba-verdict">—</p>
+                <button class="pj-btn" id="ba-what" style="font-size:11px">ⓘ What does this mean?</button>
+              </div>
+            </div>
+            <h3 style="font-size:13px;color:#fff;margin:18px 0 4px;text-align:center">Category Scores</h3>
+            <div class="ba-cats" id="ba-cats" style="margin-top:12px"></div>
+          </div>
 
+          <div class="dash-panel" style="padding:0;overflow:hidden">
+            <div style="padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
+              <h3 style="font-size:13.5px;color:#fff;margin:0">Detailed Breakdown</h3>
+              <button class="pj-btn" id="ba-recs" style="font-size:11px">View Recommendations <span>→</span></button>
+            </div>
+            <div id="ba-rows"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+          <div class="dash-panel">
+            <h3>Quick Insights</h3>
+            <div id="ba-insights" style="display:grid;gap:14px"></div>
+          </div>
+          <div class="dash-panel">
+            <h3>Top Strengths</h3>
+            <div id="ba-strengths"></div>
+            <h3 style="margin-top:16px">Areas to Improve</h3>
+            <div id="ba-weak"></div>
+          </div>
+          <div class="dash-panel">
+            <h3>Recent Audits <span class="dash-link" id="ba-all">View all</span></h3>
+            <div id="ba-history"></div>
+            <button class="btn-new" id="ba-run2" style="width:100%;justify-content:center;margin-top:12px">Run New Audit ✨</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
+
+<div class="dash-menu" id="ba-menu"></div>
+<div id="ba-modal-root"></div>
+
 <script>
+// ── Brand Audit board: deterministic local scoring + saved history ──
+// ponytail: no audit API exists — scores are a stable hash of the domain (same URL
+// always scores the same) and history persists in localStorage. Upgrade path: POST
+// { domain, industry } to a real auditor and render its category breakdown instead.
 (() => {
-  // Demo data — ponytail: static audit data. Upgrade path: wire to a real audit API
-  const AUDIT = {
-    overall: 82,
-    categories: [
-      { name: 'Brand Identity', icon: '🛡️', score: 88, status: 'Excellent', color: '#22c55e', desc: 'Logo, color palette, typography, and overall visual identity.' },
-      { name: 'Visual Design', icon: '🎨', score: 84, status: 'Very Good', color: '#6C5CE7', desc: 'Layout, imagery, iconography, and visual hierarchy.' },
-      { name: 'Messaging', icon: '💬', score: 78, status: 'Good', color: '#f59e0b', desc: 'Tone of voice, clarity, value proposition, and brand storytelling.' },
-      { name: 'Website Experience', icon: '💻', score: 81, status: 'Very Good', color: '#6C5CE7', desc: 'Navigation, usability, performance, and mobile responsiveness.' },
-      { name: 'Market Positioning', icon: '🎯', score: 75, status: 'Good', color: '#f59e0b', desc: 'Competitive differentiation, target audience alignment, positioning.' },
-      { name: 'Consistency', icon: '🔗', score: 85, status: 'Very Good', color: '#6C5CE7', desc: 'Cross-platform consistency in visuals, messaging, and experience.' },
-    ],
-    insights: [
-      { icon: '↗', color: '#22c55e', bg: 'rgba(34,197,94,.15)', title: 'Strong Visual Identity', desc: 'Your logo and color palette effectively communicate luxury and elegance.' },
-      { icon: '!', color: '#f59e0b', bg: 'rgba(245,158,11,.15)', title: 'Improve Messaging Clarity', desc: 'Value proposition can be clearer on the homepage.' },
-      { icon: '⚡', color: '#6C5CE7', bg: 'rgba(108,92,231,.15)', title: 'Optimize Mobile Experience', desc: 'Some elements can be improved for better mobile UX.' },
-    ],
-    strengths: ['Elegant visual identity', 'High-quality imagery', 'Clear brand values'],
-    weaknesses: ['Messaging hierarchy', 'Mobile responsiveness', 'CTA visibility'],
-    recentAudits: [
-      { name: 'Luxoré Jewels', date: 'May 24, 2025', score: 82, color: '#6C5CE7' },
-      { name: 'Nexa Interiors', date: 'May 18, 2025', score: 74, color: '#f59e0b' },
-      { name: 'Horizon Labs', date: 'May 15, 2025', score: 79, color: '#6C5CE7' },
-    ],
+  const CATS = [
+    { key: 'identity', name: 'Brand Identity', icon: '🛡', color: '#22C55E', desc: 'Logo, color palette, typography, and overall visual identity.',
+      strength: 'A sharp, ownable identity system.', fix: 'Tighten logo clear-space and palette discipline.' },
+    { key: 'visual', name: 'Visual Design', icon: '🎨', color: '#8B5CF6', desc: 'Layout, imagery, iconography, and visual hierarchy.',
+      strength: 'Confident, contemporary art direction.', fix: 'Refresh hero imagery and unify iconography.' },
+    { key: 'messaging', name: 'Messaging', icon: '💬', color: '#FBBF24', desc: 'Tone of voice, clarity, value proposition, and brand storytelling.',
+      strength: 'A clear, differentiated voice.', fix: 'Sharpen the value proposition above the fold.' },
+    { key: 'experience', name: 'Website Experience', icon: '💻', color: '#60A5FA', desc: 'Navigation, usability, performance, and mobile responsiveness.',
+      strength: 'Fast, intuitive browsing throughout.', fix: 'Fix navigation dead-ends and slow templates.' },
+    { key: 'positioning', name: 'Market Positioning', icon: '🎯', color: '#FB923C', desc: 'Competitive differentiation, target audience alignment, positioning.',
+      strength: 'A defensible niche, clearly claimed.', fix: 'Sharpen differentiation against two rivals.' },
+    { key: 'consistency', name: 'Consistency', icon: '🔗', color: '#A78BFA', desc: 'Cross-platform consistency in visuals, messaging, and experience.',
+      strength: 'One brand everywhere it shows up.', fix: 'Audit social templates against the guidelines.' },
+  ];
+  const bandOf = (s) => s >= 86 ? ['Excellent', '#22C55E'] : s >= 80 ? ['Very Good', '#8B5CF6'] : s >= 70 ? ['Good', '#FBBF24'] : ['Needs Work', '#F87171'];
+  const verdictFor = (s) => s >= 86
+    ? 'Your brand shows exceptional strength. Keep the system tight and extend it with confidence.'
+    : s >= 80
+      ? 'Your brand shows strong potential. With a few strategic improvements, you can elevate your brand presence and consistency to an exceptional level.'
+      : s >= 70
+        ? 'A solid foundation with clear gaps. Fix the lowest categories first for the fastest lift.'
+        : 'The brand needs structural work. Start with identity and messaging before scaling spend.';
+  const SEEDS = [
+    { name: 'Luxoré Jewels', domain: 'luxorejewels.com', industry: 'Luxury Jewelry', date: 'May 24, 2025', scores: [88, 84, 78, 81, 75, 85] },
+    { name: 'Nexa Interiors', domain: 'nexainteriors.com', industry: 'Interiors', date: 'May 18, 2025', scores: [78, 76, 72, 74, 70, 74] },
+    { name: 'Horizon Labs', domain: 'horizonlabs.io', industry: 'Technology', date: 'May 15, 2025', scores: [82, 80, 77, 79, 76, 80] },
+  ];
+  const history = () => {
+    try {
+      const h = JSON.parse(localStorage.getItem('ba_history') || 'null');
+      if (Array.isArray(h) && h.length) return h;
+    } catch {}
+    return SEEDS;
+  };
+  const saveHistory = (h) => localStorage.setItem('ba_history', JSON.stringify(h.slice(0, 12)));
+  const hashScores = (domain) => {
+    let h = 0;
+    [...domain.toLowerCase()].forEach((c) => (h = (h * 31 + c.charCodeAt(0)) >>> 0));
+    const overall = 68 + (h % 25);
+    return CATS.map((_, i) => {
+      const v = overall + (((h >> (i * 3 + 1)) % 17) - 8);
+      return Math.max(60, Math.min(98, v));
+    });
+  };
+  let current = history()[0];
+  const overallOf = (a) => Math.round(a.scores.reduce((s, x) => s + x, 0) / a.scores.length);
+  const mono = (name) => name.split(/[\s&]+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+
+  const renderSteps = (running) => {
+    const steps = [['Website Input', current.domain], ['Brand Analysis', running === 1 ? 'Running…' : 'Complete'], ['Scoring & Insights', running === 2 ? 'Running…' : running ? 'In Progress' : 'Complete'], ['Report Ready', running ? 'Queued' : 'Complete']];
+    document.getElementById('ba-steps').innerHTML = steps.map(([t, s], i) => {
+      const done = !running || i < running;
+      const run = running && i === running;
+      return `${i ? '<div class="ba-line' + (done ? ' done' : '') + '"></div>' : ''}<div class="ba-step${done ? ' done' : ''}${run ? ' run' : ''}"><div class="ba-num">${i + 1}</div><div><b>${t}</b><span>${s}</span></div></div>`;
+    }).join('');
+  };
+  const render = () => {
+    const a = current, overall = overallOf(a), [band, color] = bandOf(overall);
+    document.getElementById('ba-monogram').textContent = mono(a.name);
+    document.getElementById('ba-name').textContent = a.name;
+    const dom = document.getElementById('ba-domain');
+    dom.textContent = 'https://' + a.domain + ' ↗';
+    dom.href = 'https://' + a.domain;
+    document.getElementById('ba-industry').textContent = a.industry;
+    document.getElementById('ba-date').textContent = a.date;
+    renderSteps(0);
+    const gauge = document.getElementById('ba-gauge');
+    gauge.style.background = `conic-gradient(#8B5CF6 0 ${overall}%,#262633 ${overall}% 100%)`;
+    document.getElementById('ba-overall').textContent = overall;
+    const pill = document.getElementById('ba-pill');
+    pill.textContent = band;
+    pill.style.color = color;
+    pill.style.background = color + '22';
+    document.getElementById('ba-verdict').textContent = verdictFor(overall);
+    document.getElementById('ba-cats').innerHTML = CATS.map((c, i) => {
+      const s = a.scores[i], [b, bc] = bandOf(s);
+      return `<div class="ba-cat"><div class="nm"><span class="ic" style="background:${c.color}22;color:${c.color}">${c.icon}</span>${c.name}</div>
+      <div class="sc">${s} <small style="color:${bc}">• ${b}</small></div>
+      <div class="bar"><i style="width:${s}%;background:${c.color}"></i></div></div>`;
+    }).join('');
+    document.getElementById('ba-rows').innerHTML = CATS.map((c, i) => {
+      const s = a.scores[i], [b, bc] = bandOf(s);
+      return `<div class="ba-row${i === 0 ? ' open' : ''}" data-row="${i}"><div class="ba-rowhead">
+        <div class="ba-rowic" style="background:${c.color}22;color:${c.color}">${c.icon}</div>
+        <div style="min-width:0"><b>${c.name}</b><span>${c.desc}</span></div>
+        <div style="margin-left:auto" class="ba-score">${s}<small>/100</small></div>
+        <div class="ba-rate" style="color:${bc}">• ${b}</div>
+        <svg class="ba-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="ba-rowbody">${s >= 80 ? esc(c.strength) : esc(c.fix)} ${esc(c.desc)}</div></div>`;
+    }).join('');
+    const order = CATS.map((c, i) => ({ c, s: a.scores[i] })).sort((x, y) => y.s - x.s);
+    const [top, ...rest] = order;
+    const low = [...order].sort((x, y) => x.s - y.s).slice(0, 2);
+    document.getElementById('ba-insights').innerHTML = `
+      <div class="ba-insight"><div class="ii" style="background:rgba(34,197,94,.15);color:#4ADE80">↗</div>
+        <div><b>Strong ${top.c.name}</b><span>${esc(top.c.strength)}</span></div></div>
+      <div class="ba-insight"><div class="ii" style="background:rgba(251,191,36,.15);color:#FBBF24">!</div>
+        <div><b>Improve ${low[0].c.name} Clarity</b><span>${esc(low[0].c.fix)}</span></div></div>
+      <div class="ba-insight"><div class="ii" style="background:rgba(139,92,246,.15);color:#A78BFA">⚡</div>
+        <div><b>Optimize ${low[1].c.name}</b><span>${esc(low[1].c.fix)}</span></div></div>`;
+    document.getElementById('ba-strengths').innerHTML = order.slice(0, 3).map(({ c }) =>
+      `<div class="ba-check"><span class="ck" style="background:rgba(34,197,94,.15);color:#4ADE80">✓</span>${esc(c.strength)}</div>`).join('');
+    document.getElementById('ba-weak').innerHTML = low.concat([order[order.length - 3]]).map(({ c }) =>
+      `<div class="ba-check"><span class="ck" style="background:rgba(251,191,36,.15);color:#FBBF24">●</span>${esc(c.fix)}</div>`).join('');
+    const h = history();
+    document.getElementById('ba-history').innerHTML = h.slice(0, 5).map((x) => {
+      const o = overallOf(x), col = o >= 80 ? '#8B5CF6' : o >= 75 ? '#FBBF24' : '#F87171';
+      const sel = x.domain === a.domain && x.date === a.date;
+      return `<div class="ba-audit${sel ? ' sel' : ''}" data-h="${esc(x.domain)}|${esc(x.date)}">
+        <div class="av" style="background:${col}22;color:${col}">${esc(x.name.trim()[0])}</div>
+        <div style="min-width:0"><b>${esc(x.name)}</b><span>${esc(x.date)}</span></div>
+        <div class="sc" style="color:${col}">${o}</div></div>`;
+    }).join('');
   };
 
-  const STATUS_COLOR = (s) => s === 'Excellent' ? '#22c55e' : s === 'Very Good' ? '#6C5CE7' : '#f59e0b';
-
-  // category scores
-  $('#cat-scores').innerHTML = AUDIT.categories.map((c) => `
-    <div class="cat-card">
-      <div class="cat-card-header">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="cat-card-icon" style="background:${c.color}22;color:${c.color}">${c.icon}</div>
-          <div style="font-size:11px;font-weight:600;color:var(--text-2)">${c.name}</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:4px">
-        <div class="cat-card-score">${c.score}</div>
-        <div class="cat-card-status" style="color:${STATUS_COLOR(c.status)}">• ${c.status}</div>
-      </div>
-      <div class="cat-bar"><div class="cat-bar-fill" style="width:${c.score}%;background:${c.color}"></div></div>
-    </div>
-  `).join('');
-
-  // detailed breakdown
-  $('#breakdown').innerHTML = AUDIT.categories.map((c, i) => `
-    <div class="detail-row${i === 0 ? ' open' : ''}" data-idx="${i}">
-      <div class="detail-header">
-        <div class="detail-left">
-          <div class="detail-icon" style="background:${c.color}22;color:${c.color}">${c.icon}</div>
-          <div>
-            <div style="font-weight:600;color:#fff;font-size:12px">${c.name}</div>
-            <div style="font-size:10px;color:var(--text-4)">${c.desc}</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="detail-score">${c.score}<span style="font-size:11px;color:var(--text-4);font-weight:400">/100</span></div>
-          <div class="detail-status" style="color:${STATUS_COLOR(c.status)}">• ${c.status}</div>
-          <svg class="detail-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-      </div>
-      <div class="detail-body">
-        <p style="margin:0 0 8px">${c.desc}</p>
-        <div style="display:flex;gap:8px">
-          <div style="flex:1;height:4px;border-radius:2px;background:var(--surface-3)"><div style="width:${c.score}%;height:4px;border-radius:2px;background:${c.color}"></div></div>
-          <span style="font-size:10px;color:var(--text-4)">${c.score}/100</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
-
-  // expand/collapse
-  $$('.detail-row').forEach((r) => r.addEventListener('click', () => r.classList.toggle('open')));
-
-  // insights
-  $('#insights').innerHTML = AUDIT.insights.map((i) => `
-    <div class="insight-item">
-      <div class="insight-icon" style="background:${i.bg};color:${i.color}">${i.icon}</div>
-      <div><div style="font-weight:600;color:var(--text-2)">${i.title}</div><div style="color:var(--text-4);font-size:11px">${i.desc}</div></div>
-    </div>
-  `).join('');
-
-  // strengths
-  $('#strengths').innerHTML = AUDIT.strengths.map((s) => `
-    <div class="strength-item"><div style="width:16px;height:16px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0">✓</div><span style="color:var(--text-2)">${s}</span></div>
-  `).join('');
-
-  // weaknesses
-  $('#weaknesses').innerHTML = AUDIT.weaknesses.map((w) => `
-    <div class="weakness-item"><div style="width:16px;height:16px;border-radius:50%;background:rgba(245,158,11,.15);color:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0">●</div><span style="color:var(--text-2)">${w}</span></div>
-  `).join('');
-
-  // recent audits
-  $('#recent-audits').innerHTML = AUDIT.recentAudits.map((a) => `
-    <div class="recent-audit">
-      <div style="width:28px;height:28px;border-radius:6px;background:${a.color}22;color:${a.color};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${a.name[0]}</div>
-      <div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--text-2)">${a.name}</div><div style="font-size:10px;color:var(--text-4)">${a.date}</div></div>
-      <div style="font-size:14px;font-weight:700;color:${a.color}">${a.score}</div>
-    </div>
-  `).join('');
-
-  // run audit button
-  $$('.btn-run-audit').forEach((b) => b.addEventListener('click', () => toast('Audit started — this is a demo feature')));
+  document.getElementById('ba-rows').addEventListener('click', (e) => {
+    const r = e.target.closest('[data-row]');
+    if (r) r.classList.toggle('open');
+  });
+  document.getElementById('ba-recs').addEventListener('click', () => {
+    document.querySelectorAll('#ba-rows .ba-row').forEach((r) => r.classList.add('open'));
+    document.getElementById('ba-rows').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  document.getElementById('ba-full').addEventListener('click', () => {
+    document.querySelectorAll('#ba-rows .ba-row').forEach((r) => r.classList.add('open'));
+    document.getElementById('ba-rows').scrollIntoView({ behavior: 'smooth' });
+  });
+  document.getElementById('ba-what').addEventListener('click', () => modal({
+    title: 'How scoring works',
+    fields: [{ name: 'x', label: 'Bands — Excellent 86+, Very Good 80–85, Good 70–79, Needs Work below 70. The overall is the mean of six categories.', type: 'textarea', value: '' }],
+    onSubmit: async () => {},
+  }));
+  document.getElementById('ba-history').addEventListener('click', (e) => {
+    const r = e.target.closest('[data-h]');
+    if (!r) return;
+    const [domain, date] = r.dataset.h.split('|');
+    const found = history().find((x) => x.domain === domain && x.date === date);
+    if (found) { current = found; render(); }
+  });
+  const runAudit = () => modal({
+    title: 'Run New Audit',
+    fields: [
+      { name: 'name', label: 'Brand name', required: true },
+      { name: 'domain', label: 'Domain (example.com)', required: true },
+      { name: 'industry', label: 'Industry', value: 'General' },
+    ],
+    onSubmit: async (d) => {
+      const domain = d.domain.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '').toLowerCase();
+      const name = d.name.trim(), industry = (d.industry || 'General').trim();
+      // ponytail: agent seam — window.AesthetixAgent.audit({name, domain, industry})
+      // resolves {scores:[6]} from your own agents; otherwise deterministic sample
+      // scores stand in so the report UI stays fully usable. No backend needed.
+      let scores = null;
+      try {
+        const a = window.AesthetixAgent;
+        if (a && typeof a.audit === 'function') scores = (await a.audit({ name, domain, industry })).scores;
+      } catch {}
+      const live = Array.isArray(scores) && scores.length === 6;
+      const audit = {
+        name, domain, industry,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        scores: live ? scores.map(Number) : hashScores(domain || name),
+        sample: !live,
+      };
+      renderSteps(1);
+      toast('Analyzing brand…');
+      setTimeout(() => renderSteps(2), 700);
+      setTimeout(() => {
+        current = audit;
+        saveHistory([audit, ...history()]);
+        render();
+        toast(audit.sample ? 'Sample scoring — connect an agent for a live audit.' : 'Audit complete.');
+      }, 1500);
+    },
+  });
+  document.getElementById('ba-run').addEventListener('click', runAudit);
+  document.getElementById('ba-run2').addEventListener('click', runAudit);
+  document.getElementById('ba-all').addEventListener('click', () => {
+    const h = history();
+    const rows = [['Brand', 'Domain', 'Date', 'Overall']];
+    h.forEach((x) => rows.push([x.name, x.domain, x.date, overallOf(x)]));
+    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'audits.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  const menu = document.getElementById('ba-menu');
+  const closeMenu = () => (menu.style.display = 'none');
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#ba-menu') && !e.target.closest('#ba-export')) closeMenu();
+  });
+  document.getElementById('ba-export').addEventListener('click', (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    menu.innerHTML = `<button data-x="html">⤓&nbsp; Download HTML report</button><button data-x="csv">⤓&nbsp; Download CSV</button>`;
+    menu.style.display = 'block';
+    menu.style.top = (r.bottom + 4) + 'px';
+    menu.style.left = Math.max(8, r.right - 200) + 'px';
+    menu.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+      closeMenu();
+      const a = current, o = overallOf(a);
+      if (b.dataset.x === 'csv') {
+        const rows = [['Category', 'Score']].concat(CATS.map((c, i) => [c.name, a.scores[i]]));
+        const csv = rows.map((x) => x.map((c) => `"${c}"`).join(',')).join('\n');
+        const el = document.createElement('a');
+        el.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+        el.download = 'brand-audit.csv';
+        el.click();
+        URL.revokeObjectURL(el.href);
+      } else {
+        const html = `<!doctype html><html><head><meta charset="utf-8"><title>Brand Audit — ${a.name}</title></head><body style="font-family:Arial;background:#0A0A0F;color:#fff;padding:40px"><h1>${a.name} — ${o}/100</h1><p>${a.domain} · ${a.date}</p><ul>${CATS.map((c, i) => `<li>${c.name}: ${a.scores[i]}/100</li>`).join('')}</ul></body></html>`;
+        const el = document.createElement('a');
+        el.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+        el.download = 'brand-audit.html';
+        el.click();
+        URL.revokeObjectURL(el.href);
+      }
+    }));
+  });
+  document.getElementById('ba-help').addEventListener('click', () => modal({
+    title: 'Need Help?',
+    fields: [{ name: 'note', label: 'Support is at mohdabraralikhan@gmail.com — anything else?', type: 'textarea' }],
+    onSubmit: async () => { toast('Thanks — the studio will reply by email.'); },
+  }));
+  render();
 })();
 </script>
 </body>

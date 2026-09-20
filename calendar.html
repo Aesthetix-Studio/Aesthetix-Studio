@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calendar — Meetings and Schedule — Aesthetix Studio</title>
+<meta name="description" content="Every meeting in one calendar: discovery calls, kickoffs and syncs, with attendees and outcomes, so nothing agreed is ever lost.">
+
+
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/aesthetix.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/js/admin.js"></script>
+<style>
+.cal-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}
+.cal-card{background:#12121A;border:1px solid #1F1F2B;border-radius:14px;padding:18px;min-width:0}
+.cal-card h3{font-size:13.5px;font-weight:700;margin:0 0 4px;color:#fff;font-family:'Manrope'}
+.cal-card p{font-size:11.5px;color:#8E8E9A;margin:0 0 14px}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-nav h4{font-size:13px;font-weight:700;margin:0;color:#fff}
+.cal-navbtn{background:#181824;border:1px solid #23232F;border-radius:8px;color:#C9C9D2;width:30px;height:30px;cursor:pointer;font-size:14px;font-family:inherit}
+.cal-navbtn:hover{border-color:#7C3AED;color:#fff}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{font-size:9px;letter-spacing:.08em;color:#5E5E6E;font-weight:700;text-align:center;padding:4px 0}
+.cal-day{aspect-ratio:1;border:0;background:none;border-radius:8px;font-size:11.5px;color:#C9C9D2;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-family:inherit;position:relative}
+.cal-day:hover{background:#181824;color:#fff}
+.cal-day.dim{color:#4A4A58;cursor:default}
+.cal-day.dim:hover{background:none;color:#4A4A58}
+.cal-day.sel{background:rgba(124,58,237,.18);color:#fff;box-shadow:inset 0 0 0 1px #7C3AED}
+.cal-day .dot{width:5px;height:5px;border-radius:50%;background:#8B5CF6}
+.cal-day .dot.none{visibility:hidden}
+.cal-item{border:1px solid #1B1B26;border-radius:10px;padding:11px 13px;margin-bottom:9px;background:#14141C}
+.cal-item b{display:block;font-size:12.5px;color:#EDEDF2;margin-bottom:2px}
+.cal-item span{font-size:11px;color:#8E8E9A}
+.cal-item .st{float:right;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:#1E1E29;color:#A78BFA}
+.cal-item .st.held{background:rgba(34,197,94,.12);color:#4ADE80}
+.cal-empty{font-size:12px;color:#5E5E6E;text-align:center;padding:26px 0}
+@media(max-width:900px){.cal-wrap{grid-template-columns:1fr}}
+</style>
+<link rel="canonical" href="https://aesthetixstudio.com/calendar"><meta property="og:type" content="website"><meta property="og:site_name" content="Aesthetix Studio"><meta property="og:title" content="Calendar — Meetings and Schedule — Aesthetix Studio"><meta property="og:description" content="Every meeting in one calendar: discovery calls, kickoffs and syncs, with attendees and outcomes, so nothing agreed is ever lost."><meta property="og:url" content="https://aesthetixstudio.com/calendar"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calendar — Meetings and Schedule — Aesthetix Studio"><meta name="twitter:description" content="Every meeting in one calendar: discovery calls, kickoffs and syncs, with attendees and outcomes, so nothing agreed is ever lost."><meta property="og:image" content="https://aesthetixstudio.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Aesthetix Studio — a digital product studio"><meta name="twitter:image" content="https://aesthetixstudio.com/og-image.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://aesthetixstudio.com/#org","name":"Aesthetix Studio","url":"https://aesthetixstudio.com/","logo":"https://aesthetixstudio.com/og-image.png","image":"https://aesthetixstudio.com/og-image.png","email":"mohdabraralikhan@gmail.com","telephone":"+91 8499908716","description":"Aesthetix Studio is a digital product studio in Hyderabad, India. We design and build digital experiences, web applications and AI solutions that create measurable business impact.","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"areaServed":"Worldwide","knowsAbout":["digital product design","web application development","AI solutions","technical SEO","brand strategy"]},{"@type":"WebSite","@id":"https://aesthetixstudio.com/#website","url":"https://aesthetixstudio.com/","name":"Aesthetix Studio","publisher":{"@id":"https://aesthetixstudio.com/#org"}},{"@type":"Service","@id":"https://aesthetixstudio.com/#service","name":"Digital product design and development","serviceType":"Digital product design, web application development, AI solutions","provider":{"@id":"https://aesthetixstudio.com/#org"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Digital Experiences"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web Applications"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Solutions"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Website Redesign"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO Service"}}]}}]}</script></head>
+<body style="overflow:hidden">
+
+<div class="dash-layout">
+
+  <aside class="dash-sidebar">
+    <div class="dash-logo-wrap">
+      <div class="dash-logo">AESTHETIX<small>STUDIO</small></div>
+      <button class="dash-collapse" aria-label="Collapse sidebar">«</button>
+    </div>
+
+    <div class="dash-user">
+      <div class="dash-avatar" data-adm="initials">—</div>
+      <div class="dash-user-info">
+        <h4 data-adm="name">—</h4>
+        <span><span data-adm="role">—</span><br><span class="dash-dot">●</span><span class="dash-user-badge">Online</span></span>
+      </div>
+      <button type="button" class="dash-signout" data-adm="signout" title="Sign out">⌄</button>
+    </div>
+
+    <nav class="dash-nav" data-dash-nav="suite" data-active="/calendar.html"></nav>
+
+    <div class="dash-sidebar-bottom">
+      <button class="dash-visit-btn" onclick="location.href='/'">Visit Website <span style="font-size:13px">↗</span></button>
+      <div class="dash-dark-toggle">
+        <span>🌙&nbsp; Dark Mode</span>
+        <div class="toggle-switch"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Calendar</h1>
+        <p>Meetings, calls and follow-ups — scheduled and held.</p>
+      </div>
+      <div class="dash-topbar-right">
+        <button class="btn-create-new" id="cal-new">＋ Schedule</button>
+      </div>
+    </div>
+
+    <div class="dash-content" style="overflow-y:auto;height:calc(100vh - 80px)">
+      <div class="cal-wrap">
+        <div class="cal-card">
+          <div class="cal-nav">
+            <button class="cal-navbtn" id="cal-prev" aria-label="Previous month">←</button>
+            <h4 id="cal-month">—</h4>
+            <button class="cal-navbtn" id="cal-next" aria-label="Next month">→</button>
+          </div>
+          <div class="cal-grid" id="cal-grid">
+            <div class="cal-dow">MON</div><div class="cal-dow">TUE</div><div class="cal-dow">WED</div><div class="cal-dow">THU</div><div class="cal-dow">FRI</div><div class="cal-dow">SAT</div><div class="cal-dow">SUN</div>
+          </div>
+        </div>
+        <div class="cal-card">
+          <h3 id="cal-daytitle">Today</h3>
+          <p id="cal-daycount"></p>
+          <div id="cal-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Calendar: month grid over /api/meetings, schedule via modal ──
+(() => {
+  const grid = document.getElementById('cal-grid');
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const MON3 = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const key = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const parse = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  let view = new Date(today.getFullYear(), today.getMonth(), 1);
+  let sel = key(today);
+  let rows = [];
+  const byDay = () => {
+    const map = {};
+    rows.forEach((r) => { const d = parse(r.date); if (d) (map[key(d)] ||= []).push(r); });
+    return map;
+  };
+  const renderList = () => {
+    const [y, m, d] = sel.split('-').map(Number);
+    const dt = new Date(y, m - 1, d);
+    document.getElementById('cal-daytitle').textContent =
+      sel === key(today) ? 'Today' : `${DOW[dt.getDay()]}, ${MON3[m - 1]} ${d}`;
+    const list = (byDay()[sel] || []).slice().sort((a, b) => String(a.title).localeCompare(String(b.title)));
+    document.getElementById('cal-daycount').textContent =
+      list.length ? `${list.length} meeting${list.length === 1 ? '' : 's'}` : 'Nothing scheduled';
+    document.getElementById('cal-list').innerHTML = list.length ? list.map((r) =>
+      `<div class="cal-item"><span class="st${r.status === 'held' ? ' held' : ''}">${esc(r.status || 'scheduled')}</span><b>${esc(r.title)}</b><span>${esc(r.attendees || 'No attendees listed')}${r.summary ? ' · ' + esc(r.summary) : ''}</span></div>`).join('')
+      : `<div class="cal-empty">No meetings this day.</div>`;
+  };
+  const render = () => {
+    document.getElementById('cal-month').textContent = `${MONTHS[view.getMonth()]} ${view.getFullYear()}`;
+    grid.querySelectorAll('.cal-day').forEach((n) => n.remove());
+    const y = view.getFullYear(), m = view.getMonth();
+    const map = byDay();
+    const frag = document.createDocumentFragment();
+    const mk = (num, dim, date) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'cal-day' + (dim ? ' dim' : '') + (date && key(date) === sel ? ' sel' : '');
+      const k = date ? key(date) : null;
+      b.innerHTML = `${num}<span class="dot${k && map[k] ? '' : ' none'}"></span>`;
+      if (!dim) b.addEventListener('click', () => { sel = key(date); render(); });
+      else b.disabled = true;
+      frag.appendChild(b);
+    };
+    const start = (new Date(y, m, 1).getDay() + 6) % 7;
+    const prevDim = new Date(y, m, 0).getDate();
+    for (let i = start - 1; i >= 0; i--) mk(prevDim - i, true, null);
+    const dim = new Date(y, m + 1, 0).getDate();
+    for (let d = 1; d <= dim; d++) mk(d, false, new Date(y, m, d));
+    let n = 1;
+    while (frag.childNodes.length % 7) mk(n++, true, null);
+    grid.appendChild(frag);
+    renderList();
+  };
+  document.getElementById('cal-prev').addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); render(); });
+  document.getElementById('cal-next').addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); render(); });
+  document.getElementById('cal-new').addEventListener('click', () => modal({
+    title: 'Schedule meeting',
+    fields: [
+      { name: 'title', label: 'Meeting', required: true },
+      { name: 'date', label: 'Date (YYYY-MM-DD)' },
+      { name: 'attendees', label: 'Attendees' },
+      { name: 'summary', label: 'Agenda', type: 'textarea' },
+      { name: 'status', label: 'Status', type: 'select', options: ['scheduled', 'held'] },
+    ],
+    onSubmit: async (d) => {
+      await api('/api/meetings', { method: 'POST', body: d });
+      rows = (await api('/api/meetings')).data;
+      render();
+      toast('Meeting scheduled.');
+    },
+  }));
+  (async () => {
+    try { rows = (await api('/api/meetings')).data; }
+    catch (e) { toast(e.message, false); }
+    render();
+  })();
+})();
+</script>
+</body>
+</html>
