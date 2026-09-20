@@ -89,6 +89,16 @@
   const host = document.getElementById('live-work');
   const stat = document.querySelector('.stat-num');
   if (stat) stat.textContent = String(document.querySelectorAll('.work-row').length + live.length).padStart(2, '0');
+  // ponytail: thumbnail per project, matched on client/title keywords against assets
+  // already used by the static rows and case pages. Unknown projects keep the
+  // placeholder. Ceiling: keyword matching — an `image` column on projects ends it.
+  const thumb = (p) => {
+    const hay = `${p.client || ''} ${p.title || ''}`.toLowerCase();
+    if (hay.includes('luminary')) return '/images/assets/06_luminary_laptop.png';
+    if (hay.includes('kora') || hay.includes('medix') || hay.includes('health')) return '/images/assets/work_01_medicare_tablet_mockup.png';
+    if (hay.includes('vertex') || hay.includes('nexora') || hay.includes('saas')) return '/images/assets/work_02_nexora_saas_laptop_mockup.png';
+    return '/images/placeholder.svg';
+  };
   host.innerHTML = live.map((p, i) => `
     <div class="work-row ${i % 2 ? 'dark-left' : 'light-left'}" data-cat="${esc((p.category || '').toLowerCase())}">
       <div class="work-row-copy">
@@ -99,7 +109,7 @@
           <p>${esc(p.description || '')}</p>
         </div>
       </div>
-      <div class="work-row-image"><img width="800" height="600" src="/images/placeholder.svg" alt="${esc(p.title)}" loading="lazy" decoding="async"></div>
+      <div class="work-row-image"><img src="${thumb(p)}" alt="${esc(p.title)}" loading="lazy" decoding="async"></div>
     </div>`).join('');
   // static rows carry no data-cat — derive it from their visible type text once
   document.querySelectorAll('.work-row:not([data-cat])').forEach((r) =>

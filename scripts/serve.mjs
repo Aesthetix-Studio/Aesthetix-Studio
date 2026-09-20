@@ -145,7 +145,7 @@ if (check) {
       ['/pricing', 200, 'text/html', '', ['faq-item', 'FAQPage', 'Questions about pricing', '₹29,999']], // GEO: Q&A + FAQPage schema
       ['/ai-solutions', 200, 'text/html', '', ['ai-hero', 'AI-Solutions-Hero.png', 'AI-Solutions-Card-01.png', 'Intelligent solutions']], // golden page: real hero + case art
       ['/seo-service', 200, 'text/html', '', ['seo-hero', 'SEO-Service-Hero.png', 'SEO-Service-02.png', 'Rank higher']], // golden page: real dashboard + chart art
-      ['/website-redesign', 200, 'text/html', '', ['rd-hero', 'rd-shots', 'rd-compare', 'rd-metrics', 'rebuilt to']], // golden page: bespoke sections, no template FAQ
+      ['/website-redesign', 200, 'text/html', '', ['rd-hero', 'Website-Redesign-Hero.png', 'Website-Redesign-02.png', 'rebuilt to']], // golden page: real before/after art
       ['/work/', 200, 'text/html'], // trailing slash
       ['/css/aesthetix.css', 200, 'text/css', '', ['work-hero', 'process-bar', 'tablet-side', 'adm-modal', '@font-face']], // stylesheet tail intact (a parse break silently drops it)
       ['/js/admin.js', 200, 'text/javascript', '', ['fillStat', 'modal', 'toast', 'thread=file:']], // shared admin wiring + files change-note join
