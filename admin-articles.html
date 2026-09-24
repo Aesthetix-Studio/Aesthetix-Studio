@@ -236,18 +236,7 @@
 
           <div class="ar-panel">
             <h3>Recent Drafts <span class="ar-link" id="rd-all">View all</span></h3>
-            <div class="ar-draft">
-              <div class="ar-draftic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div><b>How to Build a Strong Brand Identity</b><span>Edited 3h ago</span></div>
-            </div>
-            <div class="ar-draft">
-              <div class="ar-draftic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div><b>The Role of Color in Web Design</b><span>Edited 1d ago</span></div>
-            </div>
-            <div class="ar-draft">
-              <div class="ar-draftic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div><b>Website Redesign Checklist</b><span>Edited 2d ago</span></div>
-            </div>
+            <div id="ar-drafts"></div>
           </div>
 
           <div class="ar-panel">
@@ -393,6 +382,13 @@
     // top performing (live, by views)
     const top = [...all].sort((a, b) => (Number(b.views) || 0) - (Number(a.views) || 0)).slice(0, 4);
     document.getElementById('ar-top').innerHTML = top.map((a) => `<div class="ar-toprow">${thumb(a)}<b>${esc(a.title)}</b><span class="vw">👁 ${dashCompact(a.views)}</span></div>`).join('');
+    // recent drafts (live)
+    const drafts = all.filter((a) => ['draft', 'scheduled'].includes(String(a.status)))
+      .sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || ''))).slice(0, 3);
+    document.getElementById('ar-drafts').innerHTML = drafts.map((a) => `<div class="ar-draft">
+      <div class="ar-draftic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div><b>${esc(a.title)}</b><span>Edited ${a.created_at ? esc(dashAgo(a.created_at)) : '—'}</span></div>
+    </div>`).join('') || '<p class="small">No drafts.</p>';
   };
 
   const setTab = (t) => {

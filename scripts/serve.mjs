@@ -136,7 +136,7 @@ if (check) {
       ['/', 200, 'text/html', '', ['href="/fonts/manrope.woff2"', 'href="/fonts/dm-serif-display.woff2"', 'application/ld+json', 'og-image.png', 'href="/privacy-policy"']], // self-hosted fonts + SEO head + anchored legal links
       ['/fonts/manrope.woff2', 200, 'font/woff2'], // self-hosted, no fonts.gstatic round trip
       ['/fonts/dm-serif-display.woff2', 200, 'font/woff2'],
-      ['/work', 200, 'text/html', '', ['work-list-hero', 'filter-tab', 'Luminary', 'href="/pricing.html"', '/api/public/projects', 'id="live-work"']], // work listing + the Services footer column (proto page) + live projects seam
+      ['/work', 200, 'text/html', '', ['work-list-hero', 'filter-tab', 'Luminary', 'href="/pricing', '/api/public/projects', 'id="live-work"']], // work listing + the Services footer column (proto page) + live projects seam
       ['/llms.txt', 200, 'text/plain', '', ['Aesthetix Studio', 'case-studies']], // GEO: guide for answer engines
       ['/work/luminary-financial', 200, 'text/html', '', ['cs-split', 'process-bar']], // nested clean URL + case-study content
       ['/case-studies', 200, 'text/html', '', ['cs-row', 'Luminary Financial']],
@@ -182,25 +182,25 @@ if (check) {
       ['/admin-users', 200, 'text/html', '', ['adm-table', 'Users — Team Access and Permissions — Aesthetix Studio', 'js/admin.js', 'Proposal Generator', 'System Health', 'href="/forms.html"']], // sidebar matches the suite + no wrong Forms link
       ['/admin-settings', 200, 'text/html', '', ['Settings — Studio and Site Configuration — Aesthetix Studio', 'js/admin.js', 'save-btn', 'Proposal Generator', 'System Health', 'href="/forms.html"']], // sidebar matches the suite
       ['/forms', 200, 'text/html', '', ['Forms — Every Submission in One Place — Aesthetix Studio', 'dash-layout', 'adm-tbody']], // dashboard with live table
-      ['/feedback', 200, 'text/html', '', ['Feedback — Surveys, Ratings and Comments — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
-      ['/meeting-notes', 200, 'text/html', '', ['Meeting Notes — Summaries and Next Steps — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
+      ['/feedback', 200, 'text/html', '', ['Feedback — Surveys, Ratings and Comments — Aesthetix Studio', 'wireToolPage', 'dash-sidebar', 'ftab', 'tool-export', 'rail-pie', 'rail-legend']],
+      ['/meeting-notes', 200, 'text/html', '', ['Meeting Notes — Summaries and Next Steps — Aesthetix Studio', 'wireToolPage', 'dash-sidebar', 'ftab', 'tool-search', 'rail-recent']],
       ['/proposal-generator', 200, 'text/html', '', ['Proposal Generator — Build Proposals Fast — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
-      ['/tasks', 200, 'text/html', '', ['Tasks — Follow-ups and Delivery To-dos — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
-      ['/messages', 200, 'text/html', '', ['Messages — Threads and Chat Logs — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
+      ['/tasks', 200, 'text/html', '', ['Tasks — Follow-ups and Delivery To-dos — Aesthetix Studio', 'wireToolPage', 'dash-sidebar', 'ftab', 'tool-export', 'rail-pie']],
+      ['/messages', 200, 'text/html', '', ['Messages — Threads and Chat Logs — Aesthetix Studio', 'wireToolPage', 'dash-sidebar', 'ftab', 'tool-search', 'rail-legend']],
       ['/calendar', 200, 'text/html', '', ['Calendar — Meetings and Schedule — Aesthetix Studio', 'id="cal-grid"', '/api/meetings']],
       ['/design-brief-analyzer', 200, 'text/html', '', ['Design Brief Analyzer — Scoping Help — Aesthetix Studio', 'AesthetixAgent', '/api/contact']],
-      ['/subscriptions', 200, 'text/html', '', ['Subscriptions — Retainers and Plans — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
-      ['/files-deliverables', 200, 'text/html', '', ['Files & Deliverables — Assets per Project — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
+      ['/subscriptions', 200, 'text/html', '', ['Subscriptions — Retainers and Plans — Aesthetix Studio', 'wireToolPage', 'dash-sidebar', 'ftab', 'tool-export', 'rail-pie']],
+      ['/files-deliverables', 200, 'text/html', '', ['Files & Deliverables — Assets per Project — Aesthetix Studio', 'wireToolPage', 'dash-sidebar', 'ftab', 'tool-search', 'rail-legend']],
       // ponytail: v1 client-review slice is public (no CLIENT auth yet) but kept out of
       // the sitemap/robots — NOT in GATED. If it ever needs a session, gate it + assert 302 here.
       ['/client-review', 200, 'text/html', '', ['Client Review — Approve Deliverables Fast — Aesthetix Studio', 'needs-attention', 'client-project', '/api/files', '/api/projects', '/api/milestones', 'data-approve', '<details', 'will review your feedback']],
-      ['/project-timeline', 200, 'text/html', '', ['Project Timeline — Milestones and Dates — Aesthetix Studio', 'wireToolPage', 'dash-sidebar']],
+      ['/project-timeline', 200, 'text/html', '', ['Project Timeline — Milestones and Dates — Aesthetix Studio', 'wireTimeline', 'dash-sidebar', 'tl-gantt', 'tl-calgrid', 'tl-project']],
       ['/ai-chat-assistant', 200, 'text/html', '', ['AI Chat Assistant — Answers, Instantly — Aesthetix Studio', 'wireChat', 'AesthetixAgent']], // agent seam present, demo fallback intact
       ['/brand-audit-tool', 200, 'text/html', '', ['Brand Audit Tool — Consistency, Measured — Aesthetix Studio', 'dash-layout', 'score-gauge', 'AesthetixAgent']], // agent seam present, sample scoring disclosed
       ['/admin-ai-writer', 200, 'text/html', '', ['AI Writer — Drafts, Tone and Readability — Aesthetix Studio', 'aw-generate', 'AesthetixAgent']], // agent seam present, template fallback intact
       ['/seo-analyzer', 200, 'text/html', '', ['Request an audit', 'href="/start-a-project.html"']], // orphan analyzer pages funnel to the brief form (shared screen() band)
       ['/discovery-call', 200, 'text/html', '', ['id="disc-grid"', 'id="disc-form"', '/api/contact', 'Request received']], // 3-step slot request posts to the leads API
-      ['/search', 200, 'text/html', '', ['Search — Projects, Leads, Files and Notes — Aesthetix Studio', 'wireSearch']],
+      ['/search', 200, 'text/html', '', ['Search — Projects, Leads, Files and Notes — Aesthetix Studio', 'wireSearch', 'search-card', 'search-filters', 'dash-sidebar']],
       ['/500', 500, 'text/html', '', ['Server error', 'name="robots" content="noindex"']], // error screen: real 500, not indexed
       ['/404', 404, 'text/html', '', ['Page not', 'name="robots" content="noindex"']], // real 404, not indexed
     ];

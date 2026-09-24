@@ -332,6 +332,13 @@ body{background:var(--st-bg)!important}
 (() => {
   const FIELDS = ['site_name', 'tagline', 'site_url', 'admin_email', 'language', 'timezone'];
   const extra = { date_format: 'date_format', time_format: 'time_format' };
+  // ponytail: a stored value older than the option list (e.g. a renamed
+  // timezone) is appended rather than dropped — the DB stays the source of
+  // truth and a blank select can never silently wipe it on save.
+  const setVal = (el, v) => {
+    if (el.tagName === 'SELECT' && ![...el.options].some((o) => o.value === v)) el.append(new Option(v, v));
+    el.value = v;
+  };
   const load = async () => {
     try {
       const { data } = await api('/api/settings');
@@ -339,11 +346,11 @@ body{background:var(--st-bg)!important}
       data.forEach((s) => (map[s.key] = s.value));
       FIELDS.forEach((f) => {
         const el = document.querySelector(`[name="${f}"]`);
-        if (el && map[f] !== undefined) el.value = map[f];
+        if (el && map[f] !== undefined) setVal(el, map[f]);
       });
       Object.entries(extra).forEach(([k, n]) => {
         const el = document.querySelector(`[name="${n}"]`);
-        if (el && map[k] !== undefined) el.value = map[k];
+        if (el && map[k] !== undefined) setVal(el, map[k]);
       });
     } catch (e) { toast(e.message, false); }
   };

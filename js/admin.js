@@ -135,17 +135,23 @@ const fillStat = (label, value) => {
 // One generic live table + stat cards for the generated tool pages. cfg is serialized by
 // generate.js, so stats are declarative ops, never functions:
 //   { entity, title, tableTitle, cols:[{key,label,fmt?}], badge:{status:[cls,label]},
-//     stats:[{label,desc?,op:'count'|'pct'|'sum'|'avg',key?,value?,fmt?}], fields:[modal defs] }
+//     stats:[{label,desc?,op:'count'|'pct'|'sum'|'avg',key?,value?,fmt?}], fields:[modal defs],
+//     tabs?:[{label,value,values?}], tabKey?, searchPh?, addLabel?, rail?:{overview,
+//     group:{key,colors?,labels?},top?,recent?,actions?} }
+// ponytail: tabs/rail/search/export are progressive enhancement — every hook is
+// guarded, so pages without them (older protos) render exactly as before.
 function wireToolPage(cfg) {
   const tbody = $('#adm-tbody');
   const count = $('#adm-count');
   const addBtn = $('#tool-add');
   let rows = [];
+  const state = { tab: 'all', tabVals: [], q: '', sort: 'new', page: 1 };
   // ponytail: files-only read-only join — latest client note per file via the
   // thread=file:<id> convention (no schema change, no write path here). Ceiling:
   // two GETs and newest-wins. Upgrade path: server-side join once deliverables get FKs.
   let fileNotes = {};
-  const fmt = (c, v) => (c.fmt === 'inr' ? fmtINR(v) : c.fmt === 'date' ? fmtDate(v) : c.fmt === 'badge' ? badge(v, cfg.badge) : esc(v ?? '—'));
+  const starRow = (v) => { const n = Math.max(0, Math.min(5, Math.round(Number(v) || 0))); return `<span class="stars">${'★'.repeat(n)}${'☆'.repeat(5 - n)}</span>`; };
+  const fmt = (c, v) => (c.fmt === 'inr' ? fmtINR(v) : c.fmt === 'date' ? fmtDate(v) : c.fmt === 'badge' ? badge(v, cfg.badge) : c.fmt === 'stars' ? starRow(v) : esc(v ?? '—'));
   const row = (r) => `<tr>${cfg.cols.map((c) => {
     let v = fmt(c, r[c.key]);
     if (cfg.entity === 'files' && c.key === 'status' && r.status === 'changes_requested' && fileNotes[r.id])
@@ -160,14 +166,89 @@ function wireToolPage(cfg) {
     if (s.op === 'avg') { const v = pool.reduce((a, r) => a + (Number(r[s.key]) || 0), 0); return pool.length ? (v / pool.length).toFixed(1) : '—'; }
     return '—';
   };
+  const tabMatch = (r) => {
+    if (!cfg.tabKey || state.tab === 'all') return true;
+    const vals = state.tabVals.length ? state.tabVals : [state.tab];
+    return vals.map(String).includes(String(r[cfg.tabKey] ?? ''));
+  };
+  const searchMatch = (r) => {
+    if (!state.q) return true;
+    return cfg.cols.map((c) => String(r[c.key] ?? '')).join(' ').toLowerCase().includes(state.q);
+  };
+  const list = () => sortList(rows.filter(tabMatch).filter(searchMatch));
+  // ponytail: fixed 8-per-page, no page-size control — ceiling is arbitrary
+  // truncation on long tables. Upgrade path: a per-page select in tool-foot.
+  const PER_PAGE = 8;
+  const sortList = (arr) => {
+    const a = [...arr];
+    if (state.sort === 'az') {
+      const k = (cfg.cols[0] || {}).key;
+      a.sort((x, y) => String(x[k] ?? '').localeCompare(String(y[k] ?? '')));
+    } else if (state.sort === 'old') a.sort((x, y) => String(x.created_at || '').localeCompare(String(y.created_at || '')));
+    else a.sort((x, y) => String(y.created_at || '').localeCompare(String(x.created_at || '')));
+    return a;
+  };
+  const RAIL_COLORS = ['#8B5CF6', '#60A5FA', '#22C55E', '#FBBF24', '#EC4899'];
+  const renderRail = () => {
+    const g = (cfg.rail || {}).group;
+    if (!g) return;
+    const groups = new Map();
+    rows.forEach((r) => { const k = String(r[g.key] ?? '—'); groups.set(k, (groups.get(k) || 0) + 1); });
+    const colors = g.colors && g.colors.length ? g.colors : RAIL_COLORS;
+    const items = [...groups.entries()].map(([k, n], i) => ({ key: k, label: (g.labels || {})[k] ?? k, n, color: colors[i % colors.length] }));
+    const total = items.reduce((a, x) => a + x.n, 0);
+    const pie = $('#rail-pie'), legend = $('#rail-legend'), rTotal = $('#rail-total');
+    if (rTotal) rTotal.textContent = rows.length;
+    if (pie && total) {
+      let acc = 0;
+      pie.style.background = 'conic-gradient(' + items.map((x) => {
+        const from = (acc / total) * 100; acc += x.n;
+        return `${x.color} ${from.toFixed(1)}% ${((acc / total) * 100).toFixed(1)}%`;
+      }).join(',') + ')';
+    }
+    if (legend) legend.innerHTML = items.map((x) => `<div class="rail-leg"><div class="rail-dot" style="background:${x.color}"></div> ${esc(x.label)} <b>${x.n}${total ? ` (${Math.round((x.n / total) * 1000) / 10}%)` : ''}</b></div>`).join('') || '<p class="adm-empty">No data yet.</p>';
+    const top = $('#rail-top');
+    if (top) {
+      const max = Math.max(...items.map((x) => x.n), 1);
+      top.innerHTML = [...items].sort((a, b) => b.n - a.n).slice(0, 4).map((x) => `<div class="rail-item"><div class="tx"><b>${esc(x.label)}</b><div class="rail-bar"><i style="width:${Math.round((x.n / max) * 100)}%;background:${x.color}"></i></div></div><span style="color:var(--text-3)">${x.n}</span></div>`).join('') || '<p class="adm-empty">No data yet.</p>';
+    }
+    const recent = $('#rail-recent');
+    if (recent) {
+      const pick = [...rows].sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || ''))).slice(0, 4);
+      recent.innerHTML = pick.map((r) => {
+        const primary = String(r[(cfg.cols[0] || {}).key] ?? '—');
+        const who = String(r.name || r.title || r.client || r.source || primary || '?');
+        return `<div class="rail-item">${avatar(who)}<div class="tx"><b>${esc(primary)}</b><span>${esc(fmtDate(r.created_at) !== '—' ? fmtDate(r.created_at) : (r.status || ''))}</span></div></div>`;
+      }).join('') || '<p class="adm-empty">No records yet.</p>';
+    }
+  };
   const render = () => {
-    tbody.innerHTML = rows.length ? rows.map(row).join('') : `<tr><td colspan="${cfg.cols.length + 1}" class="adm-empty">No records yet.</td></tr>`;
-    if (count) count.textContent = rows.length + ' record' + (rows.length === 1 ? '' : 's');
+    const shown = list();
+    const totalPages = Math.max(1, Math.ceil(shown.length / PER_PAGE));
+    if (state.page > totalPages) state.page = totalPages;
+    const start = (state.page - 1) * PER_PAGE;
+    const paged = shown.slice(start, start + PER_PAGE);
+    tbody.innerHTML = paged.length ? paged.map(row).join('') : `<tr><td colspan="${cfg.cols.length + 1}" class="adm-empty">No records yet.</td></tr>`;
+    if (count) count.textContent = shown.length ? `Showing ${start + 1}–${Math.min(start + PER_PAGE, shown.length)} of ${shown.length} ${cfg.title}${shown.length === 1 ? '' : 's'}` : `No ${cfg.title}s yet`;
+    const pages = $('#tool-pages');
+    if (pages) {
+      const nums = [];
+      for (let i = 1; i <= totalPages; i++) {
+        if (totalPages <= 7 || i === 1 || i === totalPages || Math.abs(i - state.page) <= 1) nums.push(i);
+        else if (nums[nums.length - 1] !== '…') nums.push('…');
+      }
+      pages.innerHTML = totalPages > 1 ? `<button data-pg="${state.page - 1}"${state.page === 1 ? ' disabled' : ''}>‹</button>` + nums.map((n) => n === '…' ? '<button disabled>…</button>' : `<button data-pg="${n}"${n === state.page ? ' class="on"' : ''}>${n}</button>`).join('') + `<button data-pg="${state.page + 1}"${state.page === totalPages ? ' disabled' : ''}>›</button>` : '';
+      pages.querySelectorAll('button[data-pg]').forEach((b) => b.addEventListener('click', () => {
+        const p = Number(b.dataset.pg);
+        if (p >= 1 && p <= totalPages) { state.page = p; render(); }
+      }));
+    }
     $$('.scard').forEach((card) => {
       const l = $('.eyebrow', card);
       const s = l && cfg.stats.find((x) => x.label === l.textContent.trim());
       if (s) $('h3', card).textContent = stat(s, rows);
     });
+    renderRail();
   };
   const load = async () => {
     try {
@@ -190,6 +271,42 @@ function wireToolPage(cfg) {
     fields: cfg.fields,
     onSubmit: async (d) => { await api('/api/' + cfg.entity, { method: 'POST', body: d }); load(); },
   }));
+  // tabs + search + export + rail quick actions (present on the mockup-family layout only)
+  $$('.ftab').forEach((b) => b.addEventListener('click', () => {
+    $$('.ftab').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active');
+    state.tab = b.dataset.tab || 'all';
+    state.tabVals = String(b.dataset.tabvals || '').split(',').filter(Boolean);
+    state.page = 1;
+    render();
+  }));
+  const search = $('#tool-search');
+  if (search) search.addEventListener('input', () => { state.q = search.value.trim().toLowerCase(); state.page = 1; render(); });
+  const filters = $('#tool-filters'), menu = $('#tool-menu');
+  if (filters && menu) {
+    filters.addEventListener('click', (e) => { e.stopPropagation(); menu.hidden = !menu.hidden; });
+    document.addEventListener('click', (e) => { if (!menu.hidden && !e.target.closest('.tool-filterwrap')) menu.hidden = true; });
+    $$('#tool-menu button').forEach((b) => b.addEventListener('click', () => {
+      $$('#tool-menu button').forEach((x) => x.classList.remove('on'));
+      b.classList.add('on');
+      state.sort = b.dataset.sort || 'new';
+      state.page = 1;
+      menu.hidden = true;
+      render();
+    }));
+  }
+  const exp = $('#tool-export');
+  if (exp) exp.addEventListener('click', () => {
+    const head = cfg.cols.map((c) => `"${String(c.label).replace(/"/g, '""')}"`).join(',');
+    const lines = list().map((r) => cfg.cols.map((c) => `"${String(r[c.key] ?? '').replace(/"/g, '""')}"`).join(','));
+    const blob = new Blob([[head, ...lines].join('\r\n')], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = cfg.entity + '-export.csv';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+  $$('[data-act="add"]').forEach((b) => b.addEventListener('click', () => { if (addBtn) addBtn.click(); }));
   tbody.addEventListener('click', (e) => {
     const b = e.target.closest('.row-view');
     if (!b) return;
@@ -201,6 +318,193 @@ function wireToolPage(cfg) {
       onSubmit: async (d) => { await api(`/api/${cfg.entity}/${r.id}`, { method: 'PUT', body: d }); load(); },
       onDelete: async () => { await api(`/api/${cfg.entity}/${r.id}`, { method: 'DELETE' }); load(); },
     });
+  });
+  load();
+}
+
+// ── Project timeline board (Gantt + list + month grid) ──
+// Bespoke renderer for the timeline mockup: week-scale bars from start_date →
+// due_date, a month grid of due dates, and a project rail. cfg is the same
+// serialized shape as wireToolPage (entity/stats/badge/fields).
+// ponytail: bars need real ranges — a milestone with no parseable date at all
+// is list/calendar-only (no invented position); a missing start falls back to
+// due−13d and vice versa. Ceiling: free-text dates that don't parse.
+// Upgrade path: date inputs + server-side validation.
+function wireTimeline(cfg) {
+  let miles = [], projects = [], files = [];
+  const st = { project: 'all', view: 'timeline' };
+  const nowMs = Date.now(), nowD = new Date();
+  const cal = { y: nowD.getFullYear(), m: nowD.getMonth() };
+  const COLORS = { complete: '#22C55E', 'in progress': '#7C3AED', scheduled: '#52525B' };
+  const color = (s) => COLORS[String(s || '').toLowerCase()] || '#8B5CF6';
+  const parseD = (s) => { const t = Date.parse(String(s || '')); return Number.isNaN(t) ? null : t; };
+  const day = 86400000;
+  const fmtD = (t) => (t == null ? '—' : new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
+  const fmtS = (t) => (t == null ? '' : new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+  const projName = (id) => (projects.find((p) => Number(p.id) === Number(id)) || {}).title || (Number(id) ? 'Project ' + id : 'Unassigned');
+  const filtered = () => (st.project === 'all' ? miles : miles.filter((m) => Number(m.project_id) === Number(st.project)));
+  const range = (m) => {
+    let s = parseD(m.start_date), e = parseD(m.due_date);
+    if (s == null && e == null) return null;
+    if (s == null) s = e - 13 * day;
+    if (e == null) e = s + 13 * day;
+    return s <= e ? [s, e] : [e, s];
+  };
+  const renderStats = () => {
+    const rows = filtered();
+    $$('.scard').forEach((card) => {
+      const l = $('.eyebrow', card);
+      const s = l && (cfg.stats || []).find((x) => x.label === l.textContent.trim());
+      if (!s) return;
+      $('h3', card).textContent = s.key !== undefined && s.value !== undefined ? rows.filter((r) => String(r[s.key]) === String(s.value)).length : rows.length;
+    });
+  };
+  const openModal = (m) => modal({
+    title: m ? m.title : 'New Milestone',
+    fields: cfg.fields.map((f) => ({ ...f, value: m ? m[f.name] : f.value })),
+    onSubmit: async (d) => { await api(m ? '/api/' + cfg.entity + '/' + m.id : '/api/' + cfg.entity, { method: m ? 'PUT' : 'POST', body: d }); load(); },
+    onDelete: m ? async () => { await api('/api/' + cfg.entity + '/' + m.id, { method: 'DELETE' }); load(); } : undefined,
+  });
+  const renderGantt = () => {
+    const g = $('#tl-gantt');
+    if (!g) return;
+    const rows = filtered().map((m) => [m, range(m)]).filter(([, r]) => r);
+    if (!rows.length) { g.innerHTML = '<p class="adm-empty">Add start and due dates to see the timeline.</p>'; return; }
+    let lo = Math.min(...rows.map(([, r]) => r[0])), hi = Math.max(...rows.map(([, r]) => r[1]));
+    lo -= ((new Date(lo).getDay() + 6) % 7) * day;
+    hi += (6 - ((new Date(hi).getDay() + 6) % 7)) * day;
+    const weeks = [];
+    for (let t = lo; t <= hi; t += 7 * day) weeks.push(t);
+    const N = weeks.length, span = Math.max(hi - lo, 1);
+    const pct = (t) => ((t - lo) / span) * 100;
+    const today = nowMs >= lo && nowMs <= hi ? `<div class="tl-today" style="left:${pct(nowMs)}%"><span>Today</span></div>` : '';
+    g.innerHTML = `<div class="tl-ghead"><div class="tl-glabel">PHASES &amp; TASKS</div><div class="tl-weeks" style="grid-template-columns:repeat(${N},1fr)">${weeks.map((w, i) => `<div class="tl-week"><b>WEEK ${i + 1}</b>${fmtS(w)} – ${fmtS(w + 6 * day)}</div>`).join('')}</div></div>`
+      + rows.map(([m, r]) => {
+        const c = color(m.status);
+        const left = Math.max(pct(r[0]), 0), width = Math.max(pct(r[1]) - left, 1.5);
+        return `<div class="tl-grow"><div class="tl-mname"><span class="tl-dot" style="background:${c}"></span><div><b>${esc(m.title)}</b><span>${esc(m.status || '')} · ${fmtS(r[0])} – ${fmtS(r[1])}</span></div></div>`
+          + `<div class="tl-track" style="--n:${N}">${today}<div class="tl-bar" data-id="${m.id}" style="left:${left}%;width:${width}%;background:linear-gradient(90deg,${c}55,${c})" title="${esc(m.title)}">${fmtS(r[0])} – ${fmtS(r[1])}</div></div></div>`;
+      }).join('');
+  };
+  const renderList = () => {
+    const tb = $('#tl-tbody');
+    if (!tb) return;
+    const rows = filtered();
+    tb.innerHTML = rows.length ? rows.map((m) => {
+      const r = range(m);
+      return `<tr><td><div style="font-weight:600;color:#fff;font-size:12px">${esc(m.title)}</div><div style="color:var(--text-4);font-size:10px">${esc(projName(m.project_id))}</div></td>`
+        + `<td>${badge(m.status, cfg.badge)}</td><td style="color:var(--text-3);font-size:11px">${r ? fmtD(r[0]) : '—'}</td><td style="color:var(--text-3);font-size:11px">${r ? fmtD(r[1]) : fmtD(parseD(m.due_date))}</td>`
+        + `<td><button class="row-view" data-id="${m.id}" style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-3);padding:3px 10px;border-radius:4px;font-size:10px;cursor:pointer">View</button></td></tr>`;
+    }).join('') : `<tr><td colspan="5" class="adm-empty">No milestones yet.</td></tr>`;
+    const c = $('#tl-count');
+    if (c) c.textContent = `Showing ${rows.length} milestone${rows.length === 1 ? '' : 's'}`;
+  };
+  const renderCal = () => {
+    const grid = $('#tl-calgrid');
+    if (!grid) return;
+    $('#tl-cal-title').textContent = new Date(cal.y, cal.m, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const first = new Date(cal.y, cal.m, 1), dim = new Date(cal.y, cal.m + 1, 0).getDate();
+    const lead = (first.getDay() + 6) % 7;
+    const prevDim = new Date(cal.y, cal.m, 0).getDate();
+    const dues = {};
+    filtered().forEach((m) => {
+      const t = parseD(m.due_date);
+      if (t == null) return;
+      const d = new Date(t);
+      const k = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+      (dues[k] = dues[k] || []).push(m);
+    });
+    let html = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => `<div class="tl-dow">${d}</div>`).join('');
+    for (let i = lead - 1; i >= 0; i--) html += `<div class="tl-day dim"><b>${prevDim - i}</b></div>`;
+    for (let d = 1; d <= dim; d++) {
+      const evts = dues[`${cal.y}-${cal.m}-${d}`] || [];
+      html += `<div class="tl-day"><b>${d}</b>${evts.slice(0, 3).map((m) => `<div class="tl-evt${String(m.status).toLowerCase() === 'complete' ? ' done' : ''}" title="${esc(m.title)}">${esc(m.title)}</div>`).join('')}${evts.length > 3 ? `<div style="font-size:9px;color:#7A7A88">+${evts.length - 3} more</div>` : ''}</div>`;
+    }
+    grid.innerHTML = html;
+  };
+  const renderRail = () => {
+    const rows = filtered().map((m) => [m, range(m)]).filter(([, r]) => r);
+    const name = st.project === 'all' ? 'All Projects' : projName(st.project);
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('tl-ov-name', name);
+    set('tl-ov-start', rows.length ? fmtD(Math.min(...rows.map(([, r]) => r[0]))) : '—');
+    set('tl-ov-target', rows.length ? fmtD(Math.max(...rows.map(([, r]) => r[1]))) : '—');
+    const ovS = document.getElementById('tl-ov-status');
+    if (ovS) {
+      const all = filtered();
+      const txt = !all.length ? '—' : all.every((m) => String(m.status).toLowerCase() === 'complete') ? 'Complete' : all.some((m) => parseD(m.due_date) != null && parseD(m.due_date) < nowMs - day && String(m.status).toLowerCase() !== 'complete') ? 'Delayed' : 'On Track';
+      const col = txt === 'Delayed' ? '#F87171' : '#22C55E';
+      ovS.innerHTML = txt === '—' ? '—' : `<span class="bx" style="background:${col}22;color:${col}">${txt}</span>`;
+    }
+    const keys = document.getElementById('tl-keys');
+    if (keys) {
+      const up = [...filtered()].sort((a, b) => (parseD(a.due_date) ?? Infinity) - (parseD(b.due_date) ?? Infinity)).slice(0, 4);
+      keys.innerHTML = up.map((m) => `<div class="tl-key"><span class="tl-dot" style="background:${color(m.status)};margin-top:2px"></span><div class="tx"><b>${esc(m.title)}</b><span>${fmtD(parseD(m.due_date))}</span></div></div>`).join('') || '<p class="adm-empty">No milestones.</p>';
+    }
+    const box = document.getElementById('tl-files');
+    if (box) {
+      const title = st.project === 'all' ? '' : projName(st.project).toLowerCase();
+      const match = files.filter((f) => !title || String(f.project || '').toLowerCase() === title || String(f.project || '').toLowerCase().includes(title) || title.includes(String(f.project || '').toLowerCase())).slice(0, 3);
+      const icon = (t) => ({ pdf: '📕', document: '📄', design: '🔷', image: '🖼️', video: '🎬', file: '📁' }[String(t || '').toLowerCase()] || '📁');
+      box.innerHTML = match.map((f) => `<div class="tl-file"><span class="tl-fic" style="background:rgba(139,92,246,.13)">${icon(f.type)}</span><div class="tx" style="flex:1;min-width:0"><b style="display:block;font-size:11.5px;color:#E4E4EA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(f.name)}</b><span style="font-size:10px;color:#7A7A88">${esc(f.size || '')}</span></div></div>`).join('') || '<p class="adm-empty">No files linked.</p>';
+    }
+  };
+  const render = () => { renderStats(); renderGantt(); renderList(); renderCal(); renderRail(); };
+  const setView = (v) => {
+    st.view = v;
+    $$('[data-tview]').forEach((b) => b.classList.toggle('on', b.dataset.tview === v));
+    const show = (id, on) => { const el = document.getElementById(id); if (el) el.hidden = !on; };
+    show('tl-gantt', v === 'timeline');
+    show('tl-list', v === 'list');
+    show('tl-cal', v === 'cal');
+  };
+  const load = async () => {
+    try {
+      miles = (await api('/api/' + cfg.entity)).data || [];
+      try { projects = (await api('/api/projects')).data || []; } catch { projects = []; }
+      try { files = (await api('/api/files')).data || []; } catch { files = []; }
+      const sel = $('#tl-project');
+      if (sel && !sel.options.length) {
+        const opts = [`<option value="all">All Projects</option>`].concat(projects.map((p) => `<option value="${p.id}">${esc(p.title || p.client || ('Project ' + p.id))}</option>`));
+        if (miles.some((m) => !Number(m.project_id))) opts.push('<option value="0">Unassigned</option>');
+        sel.innerHTML = opts.join('');
+        sel.addEventListener('change', () => { st.project = sel.value; render(); });
+      }
+      // jump the calendar to the first upcoming due date when the current
+      // month holds none, so the grid is never an empty surprise
+      const upcoming = miles.map((m) => parseD(m.due_date)).filter((t) => t != null && t >= nowMs - day).sort((a, b) => a - b)[0];
+      if (upcoming) {
+        const d = new Date(upcoming);
+        const has = miles.some((m) => { const t = parseD(m.due_date); return t != null && new Date(t).getFullYear() === cal.y && new Date(t).getMonth() === cal.m; });
+        if (!has) { cal.y = d.getFullYear(); cal.m = d.getMonth(); }
+      }
+      render();
+    } catch (e) { toast(e.message, false); }
+  };
+  $$('[data-tview]').forEach((b) => b.addEventListener('click', () => setView(b.dataset.tview)));
+  const ka = $('#tl-keys-all');
+  if (ka) ka.addEventListener('click', () => setView('list'));
+  const add = $('#tl-add');
+  if (add) add.addEventListener('click', () => openModal(null));
+  const dl = $('#tl-download');
+  if (dl) dl.addEventListener('click', () => {
+    const head = '"Milestone","Status","Start","Due","Project"';
+    const lines = filtered().map((m) => { const r = range(m); return [m.title, m.status, r ? fmtD(r[0]) : '', r ? fmtD(r[1]) : '', projName(m.project_id)].map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(','); });
+    const blob = new Blob([[head, ...lines].join('\r\n')], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'project-timeline.csv';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+  const prev = $('#tl-prev'), next = $('#tl-next');
+  if (prev) prev.addEventListener('click', () => { cal.m--; if (cal.m < 0) { cal.m = 11; cal.y--; } renderCal(); });
+  if (next) next.addEventListener('click', () => { cal.m++; if (cal.m > 11) { cal.m = 0; cal.y++; } renderCal(); });
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('#tl-gantt [data-id], #tl-tbody [data-id]');
+    if (!t) return;
+    const m = miles.find((x) => x.id === Number(t.dataset.id));
+    if (m) openModal(m);
   });
   load();
 }
@@ -226,20 +530,56 @@ function wireChat() {
 }
 
 // ── Search (cross-entity /api/search) ──
+// Result cards + a type-filter rail mirror the Search mockup's pattern; the
+// page stays inside the admin chrome because the endpoint is workspace data.
 function wireSearch() {
-  const input = $('#search-input'), res = $('#search-results');
-  let t;
+  const input = $('#search-input'), res = $('#search-results'), filters = $('#search-filters');
+  const count = $('#search-count'), total = $('#search-total'), sort = $('#search-sort'), clear = $('#search-clear');
+  const ROUTES = { projects: '/admin-projects', leads: '/admin-leads', articles: '/admin-articles', files: '/files-deliverables', meetings: '/meeting-notes', forms: '/forms', tasks: '/tasks', milestones: '/project-timeline', messages: '/messages', invoices: '/admin-invoices', proposals: '/proposal-generator', feedback: '/feedback', users: '/admin-users', subscriptions: '/subscriptions', media: '/admin-media' };
+  const LABELS = { projects: 'Projects', leads: 'Leads', articles: 'Articles', files: 'Files', meetings: 'Meetings', forms: 'Forms', tasks: 'Tasks', milestones: 'Milestones', messages: 'Messages', invoices: 'Invoices', proposals: 'Proposals', feedback: 'Feedback', users: 'Users', subscriptions: 'Subscriptions', media: 'Media' };
+  const ICONS = { projects: '◫', leads: '✉', articles: '📄', files: '📁', meetings: '📅', forms: '📋', tasks: '✓', milestones: '◷', messages: '💬', invoices: '🧾', proposals: '📑', feedback: '★', users: '👤', subscriptions: '🔁', media: '🖼️' };
+  let all = [], off = new Set(), byAz = false, t;
+  const render = () => {
+    const shown = all.filter((r) => !off.has(r.type));
+    const ordered = byAz ? [...shown].sort((a, b) => String(a.title || '').localeCompare(String(b.title || ''))) : shown;
+    if (count) count.textContent = all.length ? `We found ${shown.length} result${shown.length === 1 ? '' : 's'} for your search.` : 'Type to search across the workspace.';
+    if (total) total.textContent = all.length ? `${all.length}` : '';
+    if (filters) {
+      const groups = new Map();
+      all.forEach((r) => groups.set(r.type, (groups.get(r.type) || 0) + 1));
+      filters.innerHTML = all.length ? `<label class="search-frow"><span>✦</span> All Results <b>${all.length}</b></label>`
+        + [...groups.entries()].map(([type, n]) => `<label class="search-frow"><input type="checkbox" data-stype="${esc(type)}"${off.has(type) ? '' : ' checked'}> ${esc(LABELS[type] || type)} <b>${n}</b></label>`).join('') : '';
+      filters.querySelectorAll('[data-stype]').forEach((c) => c.addEventListener('change', () => {
+        if (c.checked) off.delete(c.dataset.stype); else off.add(c.dataset.stype);
+        render();
+      }));
+      const head = filters.querySelector('.search-frow');
+      if (head) head.addEventListener('click', () => { off = new Set(); render(); });
+    }
+    if (!res) return;
+    res.innerHTML = !all.length ? '' : ordered.length ? ordered.map((r) => {
+      const c = avatarColor(r.type);
+      return `<div class="search-card"><div class="search-ic" style="color:${c};background:${c}22">${ICONS[r.type] || '📄'}</div>`
+        + `<div style="flex:1;min-width:0"><div class="eyebrow">${esc((LABELS[r.type] || r.type).toUpperCase())}</div><h3>${esc(r.title || ('Untitled ' + r.type))}</h3>`
+        + (r.snippet ? `<p class="small">${esc(r.snippet)}</p>` : '') + (r.label ? `<p class="small">— ${esc(r.label)}</p>` : '')
+        + `</div><a class="search-open" href="${ROUTES[r.type] || '#'}">Open →</a></div>`;
+    }).join('') : '<p class="adm-empty">No results for the selected types.</p>';
+  };
+  if (sort) sort.addEventListener('change', () => { byAz = sort.value === 'az'; render(); });
+  if (clear) clear.addEventListener('click', () => { input.value = ''; all = []; off = new Set(); render(); input.focus(); });
   input.addEventListener('input', () => {
     clearTimeout(t);
     t = setTimeout(async () => {
       const q = input.value.trim();
-      if (!q) { res.innerHTML = ''; return; }
+      if (!q) { all = []; off = new Set(); render(); return; }
       try {
-        const d = (await api('/api/search?q=' + encodeURIComponent(q))).data;
-        res.innerHTML = d.length ? d.map((r) => `<div class="search-hit"><b>${esc(r.title)}</b><span>${esc(r.type)}</span></div>`).join('') : '<p class="adm-empty">No results.</p>';
+        all = (await api('/api/search?q=' + encodeURIComponent(q))).data || [];
+        off = new Set();
+        render();
       } catch (e) { res.innerHTML = '<p class="adm-empty">' + esc(e.message) + '</p>'; }
     }, 250);
   });
+  render();
 }
 
 // ── Shared dashboard components: charts + sidebar nav ──────────────────────

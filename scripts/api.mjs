@@ -257,16 +257,16 @@ const entities = {
     ],
   },
   milestones: {
-    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, project_id INTEGER DEFAULT 0, title TEXT NOT NULL, status TEXT DEFAULT 'scheduled', due_date TEXT DEFAULT '', created_at TEXT NOT NULL",
-    fields: ['project_id', 'title', 'status', 'due_date'],
+    cols: "id INTEGER PRIMARY KEY AUTOINCREMENT, project_id INTEGER DEFAULT 0, title TEXT NOT NULL, status TEXT DEFAULT 'scheduled', due_date TEXT DEFAULT '', start_date TEXT DEFAULT '', created_at TEXT NOT NULL",
+    fields: ['project_id', 'title', 'status', 'due_date', 'start_date'],
     required: ['title'],
     defaults: { project_id: 0, status: 'scheduled' },
     statuses: ['scheduled', 'in progress', 'complete'],
     search: ['title', 'status'],
     seed: [
-      [1, 'Discovery & audit', 'complete', '2026-08-01'],
-      [1, 'Design sprint', 'in progress', '2026-08-15'],
-      [1, 'Build & QA', 'scheduled', '2026-09-10'],
+      [1, 'Discovery & audit', 'complete', '2026-08-01', '2026-07-20'],
+      [1, 'Design sprint', 'in progress', '2026-08-15', '2026-08-04'],
+      [1, 'Build & QA', 'scheduled', '2026-09-10', '2026-08-18'],
     ],
   },
   messages: {
@@ -407,6 +407,7 @@ export function createApi({ file, token = '', ai = null }) {
     users: ['status TEXT DEFAULT "active"', 'last_active TEXT DEFAULT ""', 'projects INTEGER DEFAULT 0'],
     articles: ['author TEXT DEFAULT ""', 'views INTEGER DEFAULT 0'],
     files: ['status TEXT DEFAULT "draft"'],
+    milestones: ['start_date TEXT DEFAULT ""'],
   };
   for (const [name, e] of Object.entries(entities)) {
     db.exec(`CREATE TABLE IF NOT EXISTS ${name} (${e.cols})`);
@@ -816,11 +817,17 @@ export function createApi({ file, token = '', ai = null }) {
     const q = p.get('q');
     if (!q) return send(res, 400, { ok: false, error: 'q is required.' });
     const like = `%${q}%`;
+    // ponytail: snippets are the first non-empty descriptive columns, capped
+    // at 140 chars — ceiling is no full-text ranking. Upgrade path: SQLite FTS5.
+    const SNIPPET = { projects: ['client', 'category', 'description'], leads: ['company', 'email', 'message'], articles: ['category', 'status'], files: ['project', 'type', 'size'], meetings: ['attendees', 'summary'], forms: ['email', 'message'], tasks: ['project', 'assignee'], milestones: ['status', 'due_date'], messages: ['content'], invoices: ['client', 'project'], proposals: ['client', 'scope'], feedback: ['source', 'message'], users: ['email', 'role'], subscriptions: ['client', 'plan'], media: ['type', 'usage'] };
     const out = [];
     for (const [name, e] of Object.entries(entities)) {
       if (!e.search) continue;
       const rows = db.prepare(`SELECT * FROM ${name} WHERE ${e.search.map((f) => `${f} LIKE ?`).join(' OR ')} LIMIT 3`).all(...e.search.map(() => like));
-      for (const r of rows) out.push({ type: name, id: r.id, title: r.title || r.name || r.email || r.form_name, label: r.client || r.company || '' });
+      for (const r of rows) {
+        const snippet = (SNIPPET[name] || []).map((f) => String(r[f] ?? '').trim()).filter(Boolean).join(' · ').slice(0, 140);
+        out.push({ type: name, id: r.id, title: r.title || r.name || r.email || r.form_name || snippet || name, label: r.client || r.company || '', snippet });
+      }
     }
     return send(res, 200, { ok: true, data: out });
   };

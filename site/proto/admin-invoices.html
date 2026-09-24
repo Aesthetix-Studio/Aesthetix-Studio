@@ -77,7 +77,7 @@
     <div><h1>Invoices</h1><p>Manage and track all your client invoices and payments.</p></div>
     <div class="dash-topbar-right">
       <div class="dash-search"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="text" placeholder="Search invoices..." aria-label="Search invoices"><span class="dash-search-kbd">⌘K</span></div>
-      <button style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+      <button id="inv-export" style="background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
       <button class="btn-create-new">+ New Invoice</button>
     </div>
   </div>
@@ -160,72 +160,48 @@
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
             <div>
               <div style="font-size:10px;color:var(--text-4);margin-bottom:2px">Invoice Details</div>
-              <div style="font-size:14px;font-weight:700;color:var(--brand);font-family:monospace">INV-2025-041</div>
+              <div id="inv-d-no" style="font-size:14px;font-weight:700;color:var(--brand);font-family:monospace">—</div>
             </div>
-            <span style="background:rgba(245,158,11,.15);color:#f59e0b;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:600">Pending</span>
+            <span id="inv-d-status"></span>
           </div>
 
           <div style="background:var(--surface-2);border-radius:8px;padding:12px;margin-bottom:14px">
             <div style="display:flex;justify-content:space-between;margin-bottom:8px">
               <span style="font-size:11px;color:var(--text-4)">Client</span>
-              <span style="font-size:11px;color:var(--text-2);font-weight:500">Luxoré Jewels</span>
+              <span id="inv-d-client" style="font-size:11px;color:var(--text-2);font-weight:500">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px">
               <span style="font-size:11px;color:var(--text-4)">Project</span>
-              <span style="font-size:11px;color:var(--text-2)">Website Redesign</span>
+              <span id="inv-d-project" style="font-size:11px;color:var(--text-2)">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px">
               <span style="font-size:11px;color:var(--text-4)">Issue Date</span>
-              <span style="font-size:11px;color:var(--text-2)">May 24, 2025</span>
+              <span id="inv-d-issue" style="font-size:11px;color:var(--text-2)">—</span>
             </div>
             <div style="display:flex;justify-content:space-between">
               <span style="font-size:11px;color:var(--text-4)">Due Date</span>
-              <span style="font-size:11px;color:#f59e0b;font-weight:600">Jun 7, 2025</span>
+              <span id="inv-d-due" style="font-size:11px;color:#f59e0b;font-weight:600">—</span>
             </div>
           </div>
 
           <!-- Line items -->
           <div style="margin-bottom:14px">
             <div style="font-size:11px;font-weight:600;color:var(--text-3);margin-bottom:8px">Line Items</div>
-            <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
-              <span style="color:var(--text-2)">UI Design</span><span style="color:#fff">&#8377;25,000</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
-              <span style="color:var(--text-2)">Development</span><span style="color:#fff">&#8377;30,000</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
-              <span style="color:var(--text-2)">SEO Setup</span><span style="color:#fff">&#8377;5,000</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:12px;padding:8px 0;font-weight:700">
-              <span style="color:var(--text-2)">Total</span><span style="color:#fff">&#8377;60,000</span>
-            </div>
+            <div id="inv-d-items"></div>
           </div>
 
           <div style="display:flex;flex-direction:column;gap:8px">
-            <button style="background:var(--brand);border:none;color:#fff;padding:9px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;width:100%">Mark as Paid</button>
+            <button id="inv-d-pay" style="background:var(--brand);border:none;color:#fff;padding:9px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;width:100%">Mark as Paid</button>
             <div style="display:flex;gap:8px">
-              <button style="flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 10px;border-radius:6px;font-size:11px;cursor:pointer">Send Reminder</button>
-              <button style="flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 10px;border-radius:6px;font-size:11px;cursor:pointer">Download PDF</button>
+              <button id="inv-d-remind" style="flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 10px;border-radius:6px;font-size:11px;cursor:pointer">Send Reminder</button>
+              <button id="inv-d-pdf" style="flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);padding:7px 10px;border-radius:6px;font-size:11px;cursor:pointer">Download PDF</button>
             </div>
           </div>
         </div>
 
         <div class="dash-chart-card" style="margin-top:14px">
           <h3>Payment History</h3>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">INV-2025-040</div><div style="font-size:10px;color:var(--text-4)">May 22, 2025</div></div>
-              <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">&#8377;1,40,000</div><div style="font-size:10px;color:#22c55e">Paid</div></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">INV-2025-036</div><div style="font-size:10px;color:var(--text-4)">Apr 28, 2025</div></div>
-              <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">&#8377;40,000</div><div style="font-size:10px;color:#22c55e">Paid</div></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">INV-2025-034</div><div style="font-size:10px;color:var(--text-4)">Apr 12, 2025</div></div>
-              <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">&#8377;47,500</div><div style="font-size:10px;color:#22c55e">Paid</div></div>
-            </div>
-          </div>
+          <div id="inv-history" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>
         </div>
       </div>
 
@@ -242,6 +218,30 @@
   const invNo = (i) => 'INV-2025-' + String(Number(i.id) + 30).padStart(3, '0');
   let invoices = [];
   let filter = 'All';
+  let selectedId = null;
+  const sel = () => invoices.find((i) => i.id === selectedId) || invoices[0] || null;
+  // ponytail: the invoices table has no line-items column, so the panel shows
+  // one row for the invoiced project — never invented splits. Ceiling: a
+  // line_items JSON column ends it.
+  const renderPanel = () => {
+    const i = sel();
+    if (!i) return;
+    document.getElementById('inv-d-no').textContent = invNo(i);
+    document.getElementById('inv-d-status').innerHTML = badge(i.status, BADGE);
+    document.getElementById('inv-d-client').textContent = i.client || '—';
+    document.getElementById('inv-d-project').textContent = i.project || '—';
+    document.getElementById('inv-d-issue').textContent = fmtDate(i.issue_date);
+    const due = document.getElementById('inv-d-due');
+    due.textContent = fmtDate(i.due_date);
+    due.style.color = i.status === 'overdue' ? '#ef4444' : '#f59e0b';
+    document.getElementById('inv-d-items').innerHTML =
+      `<div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--text-2)">${esc(i.project || 'Services')}</span><span style="color:#fff">${fmtINR(i.amount)}</span></div>
+       <div style="display:flex;justify-content:space-between;font-size:12px;padding:8px 0;font-weight:700"><span style="color:var(--text-2)">Total</span><span style="color:#fff">${fmtINR(i.amount)}</span></div>`;
+    document.getElementById('inv-history').innerHTML = invoices.filter((x) => x.status === 'paid')
+      .sort((a, b) => new Date(b.issue_date) - new Date(a.issue_date)).slice(0, 3).map((x) =>
+      `<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:11px;font-weight:600;color:var(--text-2)">${invNo(x)}</div><div style="font-size:10px;color:var(--text-4)">${fmtDate(x.issue_date)}</div></div><div style="text-align:right"><div style="font-size:12px;font-weight:600;color:#22c55e">${fmtINR(x.amount)}</div><div style="font-size:10px;color:#22c55e">Paid</div></div></div>`).join('')
+      || '<p class="small">No payments yet.</p>';
+  };
   const row = (i) => `<tr>
     <td style="font-weight:600;color:var(--brand);font-family:monospace">${invNo(i)}</td>
     <td style="color:var(--text-2)">${esc(i.project || '—')}</td>
@@ -261,6 +261,7 @@
     fillStat('Pending', fmtINR(sum('outstanding')));
     fillStat('Overdue', fmtINR(sum('overdue')));
     fillStat('Total Revenue (YTD)', fmtINR(sum('paid') + sum('outstanding') + sum('overdue')));
+    renderPanel();
   };
   const load = async () => { try { invoices = (await api('/api/invoices')).data; render(); } catch (e) { toast(e.message, false); } };
   $$('.ftab').forEach((b) => b.addEventListener('click', () => {
@@ -292,6 +293,8 @@
     if (!btn) return;
     const i = invoices.find((x) => x.id === Number(btn.dataset.id));
     if (!i) return;
+    selectedId = i.id;
+    renderPanel();
     modal({
       title: invNo(i),
       fields: [
@@ -306,6 +309,30 @@
       onDelete: async () => { await api('/api/invoices/' + i.id, { method: 'DELETE' }); load(); },
     });
   });
+  document.getElementById('inv-d-pay').addEventListener('click', async () => {
+    const i = sel();
+    if (!i) return;
+    if (i.status === 'paid') { toast('Already paid'); return; }
+    try { await api('/api/invoices/' + i.id, { method: 'PUT', body: { status: 'paid' } }); load(); toast('Marked as paid'); }
+    catch (e) { toast(e.message, false); }
+  });
+  document.getElementById('inv-d-remind').addEventListener('click', async () => {
+    const i = sel();
+    if (!i) return;
+    try {
+      await api('/api/messages', { method: 'POST', body: { role: 'assistant', content: `Payment reminder for ${invNo(i)} (${i.client}, ${fmtINR(i.amount)})`, thread: `invoice:${i.id}` } });
+      toast('Reminder logged');
+    } catch (e) { toast(e.message, false); }
+  });
+  document.getElementById('inv-export').addEventListener('click', () => {
+    const csv = 'Invoice,Project,Client,Issue Date,Due Date,Amount,Status\n' + invoices.map((i) => [invNo(i), i.project, i.client, i.issue_date, i.due_date, i.amount, i.status].join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'invoices.csv';
+    a.click();
+    toast('Invoices exported');
+  });
+  document.getElementById('inv-d-pdf').addEventListener('click', () => toast('PDF export is not available in this build — use Export above for CSV'));
   load();
 })();
 </script>

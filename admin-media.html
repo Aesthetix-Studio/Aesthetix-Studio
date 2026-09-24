@@ -259,26 +259,7 @@
 
           <div class="md-panel">
             <h3>Recent Uploads <span class="md-link" id="ru-all">View all</span></h3>
-            <div class="md-recent">
-              <div class="md-recthumb" style="background:linear-gradient(135deg,#3B2F1A,#B8860B)">L</div>
-              <div style="min-width:0"><b>luxore-ring-hero.jpg</b><span>2.4 MB · 2h ago</span></div>
-            </div>
-            <div class="md-recent">
-              <div class="md-recthumb" style="background:linear-gradient(135deg,#1E3A5F,#3B82F6)">B</div>
-              <div style="min-width:0"><b>brand-film-intro.mp4</b><span>24.5 MB · 4h ago</span></div>
-            </div>
-            <div class="md-recent">
-              <div class="md-recthumb" style="background:linear-gradient(135deg,#7F1D1D,#EF4444)">P</div>
-              <div style="min-width:0"><b>Brand-Guidelines.pdf</b><span>4.6 MB · 6h ago</span></div>
-            </div>
-            <div class="md-recent">
-              <div class="md-recthumb" style="background:linear-gradient(135deg,#4A4440,#8A7F70)">I</div>
-              <div style="min-width:0"><b>interior-living-room.jpg</b><span>1.8 MB · 1d ago</span></div>
-            </div>
-            <div class="md-recent">
-              <div class="md-recthumb" style="background:linear-gradient(135deg,#2A1B4E,#7C3AED)">A</div>
-              <div style="min-width:0"><b>app-ui-mockup.jpg</b><span>2.7 MB · 1d ago</span></div>
-            </div>
+            <div id="md-recent-list"></div>
           </div>
 
           <div class="md-panel">
@@ -461,6 +442,13 @@
         ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
         : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'}</span>
       ${esc(f)}<b>${counts[f] || 0} files</b></div>`).join('');
+    // recent uploads (live)
+    document.getElementById('md-recent-list').innerHTML = [...rows]
+      .sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || ''))).slice(0, 5).map((r) => {
+      const [c1, c2] = r.g || TYPE_G[r.type] || TYPE_G.other;
+      const g = String(r.name || '?').trim()[0].toUpperCase();
+      return `<div class="md-recent"><div class="md-recthumb" style="background:linear-gradient(135deg,${c1},${c2})">${esc(g)}</div><div style="min-width:0"><b>${esc(r.name)}</b><span>${esc(r.size || '—')} · ${r.created_at ? dashAgo(r.created_at) : '—'}</span></div></div>`;
+    }).join('') || '<p class="small">No uploads yet.</p>';
     // bulk bar
     const selRows = rows.filter((r) => sel.has(String(r.id)));
     const bulk = document.getElementById('md-bulk');
@@ -604,12 +592,6 @@
     ['de', '☐&nbsp; Deselect all', false, () => { sel.clear(); render(); }],
     ['dl', '⤓&nbsp; Download manifest', false, () => downloadRows(selRows().length ? selRows() : filtered())],
   ]));
-  const setView = (v) => {
-    view = v;
-    document.getElementById('md-grid-btn').classList.toggle('active', v === 'grid');
-    document.getElementById('md-list-btn').classList.toggle('active', v === 'list');
-    render();
-  };
   document.getElementById('md-refresh').addEventListener('click', () => { sel.clear(); load(); });
   document.getElementById('ru-all').addEventListener('click', () => { setTab('all'); sort = 'latest'; page = 1; render(); });
   // bulk bar
@@ -702,14 +684,14 @@
           render();
         },
       });
-    }]])).concat(customs.map((f) => [`del:${f}`, `🗑&nbsp; Delete "${esc(f)}"`, true, () => {
+    }])).concat(customs.map((f) => [`del:${f}`, `🗑&nbsp; Delete "${esc(f)}"`, true, () => {
       if (!confirm(`Delete folder "${f}"? Files stay in the library.`)) return;
       localStorage.setItem('md_folders', JSON.stringify(customs.filter((x) => x !== f)));
       const ov = overrides();
       Object.keys(ov).forEach((k) => { if (ov[k] === f) delete ov[k]; });
       localStorage.setItem('md_folder_map', JSON.stringify(ov));
       render();
-    }]]));
+    }]));
     showMenu(e.currentTarget, items);
   });
   document.getElementById('qa-bulk').addEventListener('click', () => {

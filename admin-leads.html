@@ -184,62 +184,17 @@
         <div class="dash-chart-card">
           <h3>Leads Overview</h3>
           <div class="dash-pie-wrap" style="gap:12px">
-            <div class="dash-pie" style="width:90px;height:90px"><div class="dash-pie-hole" style="width:62px;height:62px"><div class="dash-pie-total" style="font-size:16px">—</div><div class="dash-pie-label">Total</div></div></div>
-            <div class="dash-pie-legend">
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#6C5CE7"></div> New &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;58</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#3b82f6"></div> Contacted 124</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#22c55e"></div> Qualified &nbsp;87</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#10b981"></div> Converted 43</div>
-              <div class="dash-pie-item"><div class="dash-pie-dot" style="background:#ef4444"></div> Lost &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30</div>
-            </div>
+            <div class="dash-pie" id="leads-pie" style="width:90px;height:90px"><div class="dash-pie-hole" style="width:62px;height:62px"><div class="dash-pie-total" id="leads-pie-total" style="font-size:16px">—</div><div class="dash-pie-label">Total</div></div></div>
+            <div class="dash-pie-legend" id="leads-legend"></div>
           </div>
         </div>
         <div class="dash-chart-card">
           <h3>Leads by Source</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
-              <span style="color:var(--text-2)">Contact Form</span>
-              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:38%;height:4px;background:#6C5CE7;border-radius:2px"></div></div>
-              <span style="color:var(--text-3);min-width:28px;text-align:right">38%</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
-              <span style="color:var(--text-2)">LinkedIn</span>
-              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:24%;height:4px;background:#3b82f6;border-radius:2px"></div></div>
-              <span style="color:var(--text-3);min-width:28px;text-align:right">24%</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
-              <span style="color:var(--text-2)">Organic</span>
-              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:18%;height:4px;background:#22c55e;border-radius:2px"></div></div>
-              <span style="color:var(--text-3);min-width:28px;text-align:right">18%</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
-              <span style="color:var(--text-2)">Referral</span>
-              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:12%;height:4px;background:#f59e0b;border-radius:2px"></div></div>
-              <span style="color:var(--text-3);min-width:28px;text-align:right">12%</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
-              <span style="color:var(--text-2)">Instagram</span>
-              <div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:8%;height:4px;background:#ec4899;border-radius:2px"></div></div>
-              <span style="color:var(--text-3);min-width:28px;text-align:right">8%</span>
-            </div>
-          </div>
+          <div id="leads-sources" style="display:flex;flex-direction:column;gap:8px;margin-top:8px"></div>
         </div>
         <div class="dash-chart-card">
           <h3>Recent Activity <a href="#" style="font-size:10px;color:var(--brand);font-weight:400">View all</a></h3>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">SJ</div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">New lead: Sarah Johnson</div><div style="font-size:10px;color:var(--text-4)">2 min ago · Contact Form</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(16,185,129,.15);color:#10b981;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">AS</div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Arjun Singh converted</div><div style="font-size:10px;color:var(--text-4)">1 hr ago · ₹1,40,000</div></div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start">
-              <div style="width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,.15);color:#f59e0b;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700">PM</div>
-              <div><div style="font-size:11px;font-weight:600;color:var(--text-2)">Proposal sent to Priya</div><div style="font-size:10px;color:var(--text-4)">3 hrs ago</div></div>
-            </div>
-          </div>
+          <div id="leads-recent" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>
         </div>
       </div>
 
@@ -281,6 +236,34 @@
     fillStat('Qualified', n('qualified'));
     fillStat('Converted', won);
     fillStat('Conv. Rate', leads.length ? Math.round((won / leads.length) * 1000) / 10 + '%' : '0%');
+    // right rail — derived from the same leads array, so it can never drift
+    // from the table. ponytail: full-table scan per render; fine at CRM scale.
+    const SEGS = [['new', 'New', '#6C5CE7'], ['contacted', 'Contacted', '#3b82f6'], ['qualified', 'Qualified', '#22c55e'], ['proposal', 'Proposal Sent', '#f59e0b'], ['won', 'Converted', '#10b981'], ['lost', 'Lost', '#ef4444']];
+    const segN = SEGS.map(([k]) => leads.filter((l) => (l.status || 'new') === k).length);
+    const segTotal = segN.reduce((a, b) => a + b, 0);
+    const pie = document.getElementById('leads-pie');
+    if (pie && segTotal) {
+      let acc = 0;
+      pie.style.background = 'conic-gradient(' + SEGS.map(([, , c], i) => {
+        const from = (acc / segTotal) * 100; acc += segN[i];
+        return `${c} ${from.toFixed(1)}% ${((acc / segTotal) * 100).toFixed(1)}%`;
+      }).join(',') + ')';
+    }
+    const pieTotal = document.getElementById('leads-pie-total');
+    if (pieTotal) pieTotal.textContent = leads.length.toLocaleString('en-IN');
+    document.getElementById('leads-legend').innerHTML = SEGS.map(([, label, c], i) =>
+      `<div class="dash-pie-item"><div class="dash-pie-dot" style="background:${c}"></div> ${label} <b>${segN[i]}${segTotal ? ` (${Math.round(segN[i] / segTotal * 1000) / 10}%)` : ''}</b></div>`).join('');
+    const srcMap = new Map();
+    leads.forEach((l) => { const s = l.source || 'Contact Form'; srcMap.set(s, (srcMap.get(s) || 0) + 1); });
+    const PAL = ['#6C5CE7', '#3b82f6', '#22c55e', '#f59e0b', '#ec4899'];
+    const srcs = [...srcMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+    document.getElementById('leads-sources').innerHTML = srcs.length ? srcs.map(([s, c], i) => {
+      const pct = leads.length ? Math.round(c / leads.length * 1000) / 10 : 0;
+      return `<div style="display:flex;justify-content:space-between;align-items:center;font-size:12px"><span style="color:var(--text-2)">${esc(s)}</span><div style="flex:1;margin:0 10px;height:4px;background:var(--surface-3);border-radius:2px"><div style="width:${pct}%;height:4px;background:${PAL[i % PAL.length]};border-radius:2px"></div></div><span style="color:var(--text-3);min-width:28px;text-align:right">${pct}%</span></div>`;
+    }).join('') : '<p class="small">No leads yet.</p>';
+    const recent = [...leads].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 3);
+    document.getElementById('leads-recent').innerHTML = recent.map((l) =>
+      `<div style="display:flex;gap:8px;align-items:flex-start">${avatar(l.name)}<div><div style="font-size:11px;font-weight:600;color:var(--text-2)">New lead: ${esc(l.name)}</div><div style="font-size:10px;color:var(--text-4)">${dashAgo(l.created_at)} · ${esc(l.source || 'Contact Form')}</div></div></div>`).join('');
   };
   const load = async () => { try { leads = (await api('/api/leads')).data; render(); } catch (e) { toast(e.message, false); } };
   // status tabs
